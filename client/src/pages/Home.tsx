@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { Assessment } from "@/components/Assessment";
 import { RoiCalculator } from "@/components/RoiCalculator";
+import { AgentsSection } from "@/components/AgentsSection";
 
 export default function Home() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
@@ -118,6 +119,7 @@ export default function Home() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
+              <a href="#agents" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Agents</a>
               <a href="#services" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Services</a>
               <a href="#method" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Method</a>
               <a href="#results" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Results</a>
@@ -145,6 +147,7 @@ export default function Home() {
                   <SheetTitle className="text-left font-mono text-sm font-bold">MENU</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 mt-8">
+                  <a href="#agents" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Agents</a>
                   <a href="#services" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Services</a>
                   <a href="#method" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Method</a>
                   <a href="#results" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Results</a>
@@ -311,11 +314,14 @@ export default function Home() {
         {/* ROI Calculator Section */}
         <RoiCalculator />
 
+        {/* Agents Section */}
+        <AgentsSection />
+
         {/* Services Section */}
         <section id="services" className="py-24 md:py-32 bg-card border-y border-border">
           <div className="container">
             <div className="mb-16">
-              <div className="section-tag mb-4">[004] WHAT WE DO</div>
+              <div className="section-tag mb-4">[005] WHAT WE DO</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
                 FOUR PILLARS OF OPERATIONAL EXCELLENCE.
               </h2>
@@ -354,7 +360,7 @@ export default function Home() {
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="lg:sticky lg:top-32">
-                <div className="section-tag mb-4">[005] THE METHOD</div>
+                <div className="section-tag mb-4">[006] THE METHOD</div>
                 <h2 className="text-4xl md:text-5xl leading-tight mb-6">
                   FROM OVERWHELMED TO{" "}
                   <span className="text-primary">OPTIMISED.</span>
@@ -428,7 +434,7 @@ export default function Home() {
         <section id="results" className="py-24 md:py-32 bg-foreground text-background">
           <div className="container">
             <div className="mb-16">
-              <div className="font-mono text-xs text-primary tracking-widest mb-4">[006] RESULTS</div>
+              <div className="font-mono text-xs text-primary tracking-widest mb-4">[007] RESULTS</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
                 REAL OUTCOMES FROM REAL BUSINESSES.
               </h2>
@@ -469,7 +475,7 @@ export default function Home() {
         <section id="faq" className="py-24 md:py-32 bg-background">
           <div className="container max-w-3xl">
             <div className="text-center mb-16">
-              <div className="section-tag mb-4">[007] FAQ</div>
+              <div className="section-tag mb-4">[008] FAQ</div>
               <h2 className="text-4xl md:text-5xl">
                 COMMON QUESTIONS.
               </h2>
@@ -503,7 +509,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="section-tag mb-8"
             >
-              [008] GET STARTED
+              [009] GET STARTED
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
@@ -565,6 +571,7 @@ export default function Home() {
               <div>
                 <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Navigation</h4>
                 <ul className="space-y-3 font-mono text-xs text-muted-foreground">
+                  <li><a href="#agents" className="hover:text-foreground transition-colors">AGENTS</a></li>
                   <li><a href="#services" className="hover:text-foreground transition-colors">SERVICES</a></li>
                   <li><a href="#method" className="hover:text-foreground transition-colors">METHOD</a></li>
                   <li><a href="#results" className="hover:text-foreground transition-colors">RESULTS</a></li>
