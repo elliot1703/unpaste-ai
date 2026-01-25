@@ -208,5 +208,25 @@
       "subtext": "Automated responses and follow-ups while you sleep.",
       "buttonText": "LEARN MORE"
     }
+  ],
+  "og-image": [
+    {
+      "sectionTag": "[000] MAIN",
+      "headline": "STOP <span class=\"highlight\">COPY-PASTING.</span> START SCALING.",
+      "subtext": "AI automation for Brisbane businesses who are too busy to fix how they work.",
+      "tagline": "AI AUTOMATION FOR SMBs"
+    },
+    {
+      "sectionTag": "[001] ASSESSMENT",
+      "headline": "DISCOVER YOUR <span class=\"highlight\">EFFICIENCY</span> SCORE",
+      "subtext": "5 minutes. 15 questions. Find out exactly where automation can transform your operations.",
+      "tagline": "FREE EFFICIENCY ASSESSMENT"
+    },
+    {
+      "sectionTag": "[006] RESULTS",
+      "headline": "<span class=\"highlight\">97%</span> TIME SAVED ON ONBOARDING",
+      "subtext": "See what AI automation can do for your Brisbane business.",
+      "tagline": "REAL CLIENT RESULTS"
+    }
   ]
 }

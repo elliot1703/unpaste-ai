@@ -13,6 +13,8 @@
     "generate:service": "node generate.js --type=service",
     "generate:process": "node generate.js --type=process",
     "generate:philosophy": "node generate.js --type=philosophy",
+    "generate:story": "node generate.js --type=story",
+    "generate:og": "node generate.js --type=og-image",
     "generate:all": "node generate.js --all",
     "clean": "rm -rf output/*.png output/*.jpg"
   },

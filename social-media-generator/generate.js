@@ -76,6 +76,11 @@ const TEMPLATES = {
     file: 'story.html',
     format: 'story',
     fields: ['sectionTag', 'headline', 'subtext', 'buttonText']
+  },
+  'og-image': {
+    file: 'og-image.html',
+    format: 'landscape',
+    fields: ['sectionTag', 'headline', 'subtext', 'tagline']
   }
 };
 

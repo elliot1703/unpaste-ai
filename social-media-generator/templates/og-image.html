@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OG Image</title>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 80px;
+      position: relative;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: var(--primary);
+    }
+
+    .brand-text {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .headline {
+      font-family: var(--font-sans);
+      font-weight: 800;
+      font-size: 72px;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: var(--foreground);
+      max-width: 900px;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .subtext {
+      font-family: var(--font-mono);
+      font-size: 22px;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      max-width: 700px;
+      line-height: 1.4;
+    }
+
+    .accent-line {
+      width: 80px;
+      height: 6px;
+      background: var(--primary);
+      margin: 16px 0;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .url {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--foreground);
+      letter-spacing: 0.05em;
+    }
+
+    .tagline {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Grid decoration */
+    .grid-decoration {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100%;
+      background-image:
+        linear-gradient(90deg, var(--border) 1px, transparent 1px),
+        linear-gradient(180deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+    }
+
+    .corner-accent {
+      position: absolute;
+      bottom: 60px;
+      right: 80px;
+      width: 120px;
+      height: 120px;
+      border: 3px solid var(--primary);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas canvas-landscape grid-bg">
+    <div class="grid-decoration"></div>
+    <div class="corner-accent"></div>
+
+    <div class="header">
+      <div class="brand">
+        <div class="brand-logo"></div>
+        <span class="brand-text">UNPASTE.AI</span>
+      </div>
+      <div class="section-tag">{{sectionTag}}</div>
+    </div>
+
+    <div class="content">
+      <h1 class="headline">{{headline}}</h1>
+      <div class="accent-line"></div>
+      <p class="subtext">{{subtext}}</p>
+    </div>
+
+    <div class="footer">
+      <div class="url">UNPASTE.AI</div>
+      <div class="tagline">{{tagline}}</div>
+    </div>
+  </div>
+</body>
+</html>
