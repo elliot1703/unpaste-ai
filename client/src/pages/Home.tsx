@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { Assessment } from "@/components/Assessment";
 import { RoiCalculator } from "@/components/RoiCalculator";
+import { AgentShowcase } from "@/components/AgentShowcase";
 
 export default function Home() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
@@ -349,12 +350,15 @@ export default function Home() {
           </div>
         </section>
 
+        {/* AI Employees Section */}
+        <AgentShowcase onCtaClick={() => setIsAssessmentOpen(true)} />
+
         {/* Method Section */}
         <section id="method" className="py-24 md:py-32 bg-background">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-16 items-start">
               <div className="lg:sticky lg:top-32">
-                <div className="section-tag mb-4">[005] THE METHOD</div>
+                <div className="section-tag mb-4">[006] THE METHOD</div>
                 <h2 className="text-4xl md:text-5xl leading-tight mb-6">
                   FROM OVERWHELMED TO{" "}
                   <span className="text-primary">OPTIMISED.</span>
@@ -428,7 +432,7 @@ export default function Home() {
         <section id="results" className="py-24 md:py-32 bg-foreground text-background">
           <div className="container">
             <div className="mb-16">
-              <div className="font-mono text-xs text-primary tracking-widest mb-4">[006] RESULTS</div>
+              <div className="font-mono text-xs text-primary tracking-widest mb-4">[007] RESULTS</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
                 REAL OUTCOMES FROM REAL BUSINESSES.
               </h2>
@@ -469,7 +473,7 @@ export default function Home() {
         <section id="faq" className="py-24 md:py-32 bg-background">
           <div className="container max-w-3xl">
             <div className="text-center mb-16">
-              <div className="section-tag mb-4">[007] FAQ</div>
+              <div className="section-tag mb-4">[008] FAQ</div>
               <h2 className="text-4xl md:text-5xl">
                 COMMON QUESTIONS.
               </h2>
@@ -503,7 +507,7 @@ export default function Home() {
               viewport={{ once: true }}
               className="section-tag mb-8"
             >
-              [008] GET STARTED
+              [009] GET STARTED
             </motion.div>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
