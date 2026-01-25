@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Philosophy Post</title>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .canvas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .left-panel {
+      background: var(--background);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .right-panel {
+      background: var(--background-dark);
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .statement {
+      font-family: var(--font-sans);
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .definition-card {
+      background: var(--background-dark);
+      border: 1px solid var(--border-dark);
+      padding: 40px;
+    }
+
+    .word {
+      font-family: var(--font-sans);
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--foreground-light);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .pronunciation {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--muted-light);
+      margin-bottom: 4px;
+    }
+
+    .word-type {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-style: italic;
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    .definition {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: rgba(250, 250, 250, 0.7);
+      line-height: 1.6;
+    }
+
+    .accent-line {
+      width: 60px;
+      height: 4px;
+      background: var(--primary);
+      margin-bottom: 32px;
+    }
+
+    .brand-light {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--foreground-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas canvas-square">
+    <div class="left-panel grid-bg">
+      <div class="section-tag">{{sectionTag}}</div>
+
+      <div>
+        <div class="accent-line"></div>
+        <h1 class="statement">{{statement}}</h1>
+      </div>
+
+      <div class="brand">
+        <div class="red-square"></div>
+        <span class="brand-text">UNPASTE.AI</span>
+      </div>
+    </div>
+
+    <div class="right-panel grid-bg-dark">
+      <div class="definition-card">
+        <div class="word">{{word}}</div>
+        <div class="pronunciation">{{pronunciation}}</div>
+        <div class="word-type">{{wordType}}</div>
+        <p class="definition">{{definition}}</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

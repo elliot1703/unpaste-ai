@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process Post</title>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px;
+    }
+
+    .header {
+      margin-bottom: 40px;
+    }
+
+    .main-title {
+      font-family: var(--font-sans);
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      margin-top: 16px;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .steps {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 32px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step:last-child {
+      border-bottom: none;
+    }
+
+    .step-number {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--primary);
+      letter-spacing: 0.1em;
+      min-width: 60px;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-family: var(--font-sans);
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .step-description {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .step-time {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 40px;
+    }
+
+    .cta {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas canvas-square grid-bg">
+    <div class="header">
+      <div class="section-tag">{{sectionTag}}</div>
+      <h1 class="main-title">{{mainTitle}}</h1>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">[01]</div>
+        <div class="step-content">
+          <h3 class="step-title">{{step1Title}}</h3>
+          <p class="step-description">{{step1Description}}</p>
+        </div>
+        <div class="step-time">{{step1Time}}</div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">[02]</div>
+        <div class="step-content">
+          <h3 class="step-title">{{step2Title}}</h3>
+          <p class="step-description">{{step2Description}}</p>
+        </div>
+        <div class="step-time">{{step2Time}}</div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">[03]</div>
+        <div class="step-content">
+          <h3 class="step-title">{{step3Title}}</h3>
+          <p class="step-description">{{step3Description}}</p>
+        </div>
+        <div class="step-time">{{step3Time}}</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="cta">{{cta}} →</div>
+      <div class="brand">
+        <div class="red-square"></div>
+        <span class="brand-text">UNPASTE.AI</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonial Post</title>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px;
+      background: var(--background-dark);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+    }
+
+    .quote-mark {
+      font-family: var(--font-sans);
+      font-size: 200px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 0.5;
+      margin-bottom: 20px;
+    }
+
+    .quote {
+      font-family: var(--font-mono);
+      font-size: 36px;
+      font-weight: 400;
+      color: rgba(250, 250, 250, 0.8);
+      line-height: 1.4;
+      max-width: 800px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px solid var(--border-dark);
+      padding-top: 40px;
+    }
+
+    .author {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .author-name {
+      font-family: var(--font-sans);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--foreground-light);
+    }
+
+    .author-title {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--muted-light);
+    }
+
+    .metric {
+      text-align: right;
+    }
+
+    .metric-value {
+      font-family: var(--font-sans);
+      font-size: 72px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .metric-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--muted-light);
+      margin-top: 8px;
+    }
+
+    .brand {
+      color: var(--foreground-light);
+    }
+
+    .section-tag {
+      color: var(--primary-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas canvas-square grid-bg-dark">
+    <div class="header">
+      <div class="section-tag">{{sectionTag}}</div>
+      <div class="brand">
+        <div class="red-square"></div>
+        <span class="brand-text">UNPASTE.AI</span>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="quote-mark">"</div>
+      <p class="quote">{{quote}}</p>
+    </div>
+
+    <div class="footer">
+      <div class="author">
+        <div class="author-name">{{authorName}}</div>
+        <div class="author-title">{{authorTitle}}</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value">{{metricValue}}</div>
+        <div class="metric-label">{{metricLabel}}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

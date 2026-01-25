@@ -1,0 +1,212 @@
+{
+  "stats": [
+    {
+      "sectionTag": "[001] RESULTS",
+      "statValue": "97%",
+      "statLabel": "TIME SAVED ON ONBOARDING",
+      "subtext": "Our clients see dramatic improvements in operational efficiency within the first month."
+    },
+    {
+      "sectionTag": "[001] RESULTS",
+      "statValue": "10+",
+      "statLabel": "HOURS SAVED EVERY WEEK",
+      "subtext": "Stop doing repetitive tasks. Let automation handle the busy work."
+    },
+    {
+      "sectionTag": "[001] RESULTS",
+      "statValue": "$0",
+      "statLabel": "COST TO GET STARTED",
+      "subtext": "Take our free efficiency assessment and discover your biggest time-wasters."
+    },
+    {
+      "sectionTag": "[001] RESULTS",
+      "statValue": "85%",
+      "statLabel": "INQUIRIES AUTO-HANDLED",
+      "subtext": "AI assistants respond to customers instantly, 24/7."
+    },
+    {
+      "sectionTag": "[001] RESULTS",
+      "statValue": "25hrs",
+      "statLabel": "SAVED WEEKLY",
+      "subtext": "That's more than 3 full work days back in your calendar every week."
+    },
+    {
+      "sectionTag": "[001] RESULTS",
+      "statValue": "3min",
+      "statLabel": "AVERAGE RESPONSE TIME",
+      "subtext": "Down from 4 hours. Speed wins deals."
+    }
+  ],
+  "pain-point": [
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "STILL COPY-PASTING BETWEEN APPS?",
+      "subtext": "Every manual data transfer is a signal that your systems aren't connected. Time to fix that.",
+      "cta": "TAKE THE FREE ASSESSMENT"
+    },
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "YOUR TOOLS AREN'T TALKING.",
+      "subtext": "Disconnected software means disconnected workflows. And that means wasted hours every week.",
+      "cta": "DISCOVER YOUR EFFICIENCY SCORE"
+    },
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "DROWNING IN ADMIN?",
+      "subtext": "If you're working weekends just to catch up on paperwork, something is broken.",
+      "cta": "GET YOUR FREE AUDIT"
+    },
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "WORKING WEEKENDS TO CATCH UP?",
+      "subtext": "Your business should work for you, not the other way around.",
+      "cta": "FIX YOUR WORKFLOW"
+    },
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "CHASING FOLLOW-UPS MANUALLY?",
+      "subtext": "Every lead that falls through the cracks is money left on the table.",
+      "cta": "AUTOMATE YOUR FOLLOW-UPS"
+    },
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "HOW MUCH TIME DO YOU LOSE TO ADMIN?",
+      "subtext": "Most business owners underestimate by 50%. Let's find out the real number.",
+      "cta": "TAKE THE 5-MIN ASSESSMENT"
+    }
+  ],
+  "testimonial": [
+    {
+      "sectionTag": "[006] RESULTS",
+      "quote": "We went from 36 hours of client onboarding down to just 1. The automation handles everything.",
+      "authorName": "Sarah Chen",
+      "authorTitle": "Operations Director",
+      "metricValue": "97%",
+      "metricLabel": "TIME SAVED"
+    },
+    {
+      "sectionTag": "[006] RESULTS",
+      "quote": "Response time dropped from 4 hours to 3 minutes. We close deals faster now.",
+      "authorName": "James Mitchell",
+      "authorTitle": "Founder, Brisbane Property Co",
+      "metricValue": "85%",
+      "metricLabel": "AUTO-HANDLED"
+    },
+    {
+      "sectionTag": "[006] RESULTS",
+      "quote": "I was drowning in admin. Now I leave at 5pm and the business runs smoother than ever.",
+      "authorName": "Emma Rodriguez",
+      "authorTitle": "Creative Director",
+      "metricValue": "25hrs",
+      "metricLabel": "SAVED WEEKLY"
+    }
+  ],
+  "cta": [
+    {
+      "sectionTag": "[008] GET STARTED",
+      "headline": "READY TO GET YOUR <span class=\"highlight\">TIME</span> BACK?",
+      "buttonText": "TAKE FREE ASSESSMENT",
+      "subtext": "5 MINUTES · 15 QUESTIONS · INSTANT RESULTS"
+    },
+    {
+      "sectionTag": "[008] GET STARTED",
+      "headline": "STOP <span class=\"highlight\">DROWNING</span> IN ADMIN.",
+      "buttonText": "START YOUR AUDIT",
+      "subtext": "FREE · NO COMMITMENT · IMMEDIATE INSIGHTS"
+    },
+    {
+      "sectionTag": "[008] GET STARTED",
+      "headline": "DISCOVER YOUR <span class=\"highlight\">EFFICIENCY</span> SCORE",
+      "buttonText": "BEGIN NOW",
+      "subtext": "JOIN 100+ BRISBANE BUSINESSES"
+    },
+    {
+      "sectionTag": "[008] GET STARTED",
+      "headline": "WHAT'S YOUR <span class=\"highlight\">EFFICIENCY</span> SCORE?",
+      "buttonText": "FIND OUT FREE",
+      "subtext": "15 QUESTIONS · 5 MINUTES · INSTANT INSIGHTS"
+    }
+  ],
+  "service": [
+    {
+      "sectionTag": "[004] SERVICES",
+      "serviceNumber": "01",
+      "icon": "✦",
+      "serviceTitle": "AI ASSISTANTS",
+      "serviceDescription": "Automated responses, quote generation, and customer follow-ups that work around the clock."
+    },
+    {
+      "sectionTag": "[004] SERVICES",
+      "serviceNumber": "02",
+      "icon": "⚡",
+      "serviceTitle": "WORKFLOW AUTOMATION",
+      "serviceDescription": "Connect your scattered tools so information flows automatically. No more copy-paste."
+    },
+    {
+      "sectionTag": "[004] SERVICES",
+      "serviceNumber": "03",
+      "icon": "◈",
+      "serviceTitle": "PROCESS DESIGN",
+      "serviceDescription": "We map how your business runs, find the bottlenecks, and design workflows that work."
+    },
+    {
+      "sectionTag": "[004] SERVICES",
+      "serviceNumber": "04",
+      "icon": "✧",
+      "serviceTitle": "CUSTOM SOLUTIONS",
+      "serviceDescription": "When off-the-shelf doesn't fit, we build exactly what you need. Bespoke automation."
+    }
+  ],
+  "process": [
+    {
+      "sectionTag": "[005] THE METHOD",
+      "mainTitle": "FROM OVERWHELMED TO <span class=\"highlight\">OPTIMISED.</span>",
+      "step1Title": "TAKE THE ASSESSMENT",
+      "step1Description": "Answer 15 questions about how your business runs.",
+      "step1Time": "5 MIN",
+      "step2Title": "BOOK YOUR WORKSHOP",
+      "step2Description": "Free 30-minute call to review your results.",
+      "step2Time": "30 MIN",
+      "step3Title": "GET YOUR ROADMAP",
+      "step3Description": "Clear action plan for what to automate first.",
+      "step3Time": "INSTANT",
+      "cta": "START YOUR ASSESSMENT"
+    }
+  ],
+  "philosophy": [
+    {
+      "sectionTag": "[002] PHILOSOPHY",
+      "statement": "COPY-PASTE IS A <span class=\"highlight\">SIGNAL</span> THAT YOUR TOOLS AREN'T TALKING.",
+      "word": "UNPASTE",
+      "pronunciation": "/ʌnˈpeɪst/",
+      "wordType": "verb",
+      "definition": "To remove the need for manual data transfer by connecting your tools with automation—freeing humans to do higher-value work."
+    }
+  ],
+  "story": [
+    {
+      "sectionTag": "[001] FREE AUDIT",
+      "headline": "STOP <span class=\"highlight\">COPY-PASTING.</span>",
+      "subtext": "Discover your biggest operational bottleneck in 5 minutes.",
+      "buttonText": "TAKE FREE ASSESSMENT"
+    },
+    {
+      "sectionTag": "[006] RESULTS",
+      "headline": "<span class=\"highlight\">97%</span> TIME SAVED",
+      "subtext": "See what automation can do for your Brisbane business.",
+      "buttonText": "GET YOUR SCORE"
+    },
+    {
+      "sectionTag": "[001] THE PROBLEM",
+      "headline": "DROWNING IN <span class=\"highlight\">ADMIN?</span>",
+      "subtext": "Take our free assessment and discover how much time you're really losing.",
+      "buttonText": "START FREE AUDIT"
+    },
+    {
+      "sectionTag": "[004] SERVICES",
+      "headline": "AI THAT WORKS <span class=\"highlight\">24/7</span>",
+      "subtext": "Automated responses and follow-ups while you sleep.",
+      "buttonText": "LEARN MORE"
+    }
+  ]
+}

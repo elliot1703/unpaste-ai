@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pain Point Post</title>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .headline-container {
+      background: var(--background);
+      padding: 48px;
+      border: 2px solid var(--foreground);
+      box-shadow: 8px 8px 0 0 var(--foreground);
+      max-width: 900px;
+    }
+
+    .headline {
+      font-size: 72px;
+      line-height: 1.05;
+    }
+
+    .highlight {
+      color: var(--primary);
+    }
+
+    .subtext {
+      font-family: var(--font-mono);
+      font-size: 18px;
+      color: var(--muted);
+      margin-top: 32px;
+      line-height: 1.5;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .cta {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .arrow {
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas canvas-square grid-bg">
+    <div class="section-tag">{{sectionTag}}</div>
+
+    <div class="content">
+      <div class="headline-container">
+        <h1 class="headline">{{headline}}</h1>
+        <p class="subtext">{{subtext}}</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="cta">
+        {{cta}} <span class="arrow">→</span>
+      </div>
+      <div class="brand">
+        <div class="red-square"></div>
+        <span class="brand-text">UNPASTE.AI</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

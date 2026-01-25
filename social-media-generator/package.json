@@ -1,0 +1,26 @@
+{
+  "name": "unpaste-social-media-generator",
+  "version": "1.0.0",
+  "description": "Bulk social media image generator for Unpaste.ai",
+  "main": "generate.js",
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.js",
+    "generate:stats": "node generate.js --type=stats",
+    "generate:pain": "node generate.js --type=pain-point",
+    "generate:testimonial": "node generate.js --type=testimonial",
+    "generate:cta": "node generate.js --type=cta",
+    "generate:service": "node generate.js --type=service",
+    "generate:process": "node generate.js --type=process",
+    "generate:philosophy": "node generate.js --type=philosophy",
+    "generate:all": "node generate.js --all",
+    "clean": "rm -rf output/*.png output/*.jpg"
+  },
+  "dependencies": {
+    "puppeteer": "^22.0.0"
+  },
+  "devDependencies": {},
+  "keywords": ["social-media", "image-generator", "brutalist", "automation"],
+  "author": "Unpaste.ai",
+  "license": "MIT"
+}

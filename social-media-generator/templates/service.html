@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Post</title>
+  <link rel="stylesheet" href="base.css">
+  <style>
+    .canvas {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 80px;
+    }
+
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .service-number {
+      font-family: var(--font-sans);
+      font-size: 300px;
+      font-weight: 800;
+      color: rgba(9, 9, 11, 0.06);
+      line-height: 0.8;
+      margin-bottom: -60px;
+    }
+
+    .service-card {
+      background: var(--background);
+      border: 2px solid var(--foreground);
+      padding: 48px;
+      box-shadow: 8px 8px 0 0 var(--foreground);
+      max-width: 700px;
+    }
+
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      border: 2px solid var(--foreground);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .icon {
+      font-size: 28px;
+    }
+
+    .service-title {
+      font-family: var(--font-sans);
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .service-description {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .learn-more {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas canvas-square grid-bg">
+    <div class="section-tag">{{sectionTag}}</div>
+
+    <div class="content">
+      <div class="service-number">{{serviceNumber}}</div>
+      <div class="service-card">
+        <div class="icon-box">
+          <span class="icon">{{icon}}</span>
+        </div>
+        <h2 class="service-title">{{serviceTitle}}</h2>
+        <p class="service-description">{{serviceDescription}}</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="learn-more">
+        LEARN MORE →
+      </div>
+      <div class="brand">
+        <div class="red-square"></div>
+        <span class="brand-text">UNPASTE.AI</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
