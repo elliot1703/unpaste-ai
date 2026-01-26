@@ -1,6 +1,7 @@
 import { ArrowRight, ArrowUpRight, Clock, Zap, Link2, Sparkles, Menu } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { Link } from "wouter";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
   Accordion,
@@ -11,6 +12,7 @@ import {
 import { Assessment } from "@/components/Assessment";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { AgentsSection } from "@/components/AgentsSection";
+import { SEO } from "@/components/SEO";
 
 export default function Home() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
@@ -99,8 +101,21 @@ export default function Home() {
     },
   ];
 
+  // Words to cycle through in hero
+  const heroWords = ["COPY-PASTING", "MANUAL WORK", "BUSY-WORK", "WASTING TIME"];
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % heroWords.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <SEO />
+
       {/* Fixed Grid Background */}
       <div className="grid-background" />
 
@@ -119,11 +134,11 @@ export default function Home() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#agents" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Agents</a>
+              <Link href="/solutions" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Solutions</Link>
+              <Link href="/about" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">About</Link>
               <a href="#services" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Services</a>
               <a href="#method" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Method</a>
-              <a href="#results" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Results</a>
-              <a href="#faq" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">FAQ</a>
+              <Link href="/book" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Book Call</Link>
             </div>
 
             <div className="hidden md:flex items-center">
@@ -147,11 +162,11 @@ export default function Home() {
                   <SheetTitle className="text-left font-mono text-sm font-bold">MENU</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 mt-8">
-                  <a href="#agents" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Agents</a>
+                  <Link href="/solutions" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Solutions</Link>
+                  <Link href="/about" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>About</Link>
                   <a href="#services" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Services</a>
                   <a href="#method" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Method</a>
-                  <a href="#results" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Results</a>
-                  <a href="#faq" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>FAQ</a>
+                  <Link href="/book" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Book Call</Link>
                   <hr className="border-border" />
                   <button
                     onClick={() => { setIsAssessmentOpen(true); setMobileMenuOpen(false); }}
@@ -166,86 +181,236 @@ export default function Home() {
         </motion.nav>
 
         {/* Hero Section */}
-        <section className="pt-32 pb-20 md:pt-40 md:pb-28">
-          <div className="container">
+        <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {/* Floating gradient orbs */}
+            <motion.div
+              className="absolute top-20 right-[10%] w-72 h-72 bg-primary/5 rounded-full blur-3xl"
+              animate={{
+                y: [0, -30, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute bottom-20 left-[5%] w-96 h-96 bg-primary/3 rounded-full blur-3xl"
+              animate={{
+                y: [0, 20, 0],
+                scale: [1, 0.95, 1],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+            {/* Animated lines */}
+            <motion.div
+              className="absolute top-40 left-[20%] w-px h-32 bg-gradient-to-b from-transparent via-primary/20 to-transparent"
+              animate={{
+                opacity: [0, 1, 0],
+                y: [0, 100, 200],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+            <motion.div
+              className="absolute top-60 right-[30%] w-px h-24 bg-gradient-to-b from-transparent via-primary/15 to-transparent"
+              animate={{
+                opacity: [0, 1, 0],
+                y: [0, 80, 160],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 2,
+              }}
+            />
+          </div>
+
+          <div className="container relative">
             <div className="grid lg:grid-cols-2 gap-16 items-end">
               <div>
-                {/* Section Tag */}
+                {/* Section Tag with typing animation */}
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="section-tag mb-8"
+                  className="section-tag mb-8 flex items-center gap-2"
                 >
+                  <motion.span
+                    animate={{ opacity: [1, 0.5, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                    className="inline-block w-2 h-2 bg-primary"
+                  />
                   [001] FREE EFFICIENCY AUDIT
                 </motion.div>
 
-                {/* Main Headline */}
-                <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter mb-10"
-                >
-                  STOP<br />
-                  COPY-<br />
-                  PASTING.
-                </motion.h1>
+                {/* Main Headline with staggered letter animation */}
+                <div className="mb-10">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter"
+                  >
+                    <motion.span
+                      initial={{ opacity: 0, y: 50 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.1 }}
+                      className="block"
+                    >
+                      STOP
+                    </motion.span>
+                    <div className="relative h-[1.1em] overflow-hidden">
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={currentWordIndex}
+                          initial={{ opacity: 0, y: 50, rotateX: -90 }}
+                          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                          exit={{ opacity: 0, y: -50, rotateX: 90 }}
+                          transition={{ duration: 0.5 }}
+                          className="block text-primary"
+                        >
+                          {heroWords[currentWordIndex].split("-")[0]}-
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
+                    <div className="relative h-[1.1em] overflow-hidden">
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={currentWordIndex}
+                          initial={{ opacity: 0, y: 50, rotateX: -90 }}
+                          animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                          exit={{ opacity: 0, y: -50, rotateX: 90 }}
+                          transition={{ duration: 0.5, delay: 0.1 }}
+                          className="block"
+                        >
+                          {heroWords[currentWordIndex].split("-")[1] || heroWords[currentWordIndex].split(" ").pop()}.
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
+                  </motion.div>
+                </div>
 
-                {/* Subheadline */}
+                {/* Subheadline with reveal animation */}
                 <motion.p
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  Discover your biggest operational bottleneck in 5 minutes.
-                  See where automation can give you back 10+ hours every week.
+                  <motion.span
+                    initial={{ backgroundSize: "0% 100%" }}
+                    animate={{ backgroundSize: "100% 100%" }}
+                    transition={{ duration: 1, delay: 0.8 }}
+                    className="bg-gradient-to-r from-primary/10 to-transparent bg-no-repeat"
+                    style={{ backgroundPosition: "0 100%", paddingBottom: "2px" }}
+                  >
+                    Discover your biggest operational bottleneck in 5 minutes.
+                  </motion.span>
+                  {" "}See where automation can give you back 10+ hours every week.
                 </motion.p>
 
-                {/* CTA */}
+                {/* CTA with hover effects */}
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
                   className="flex flex-col sm:flex-row gap-4 items-start"
                 >
-                  <button
+                  <motion.button
                     onClick={() => setIsAssessmentOpen(true)}
-                    className="brutalist-button inline-flex items-center gap-3"
+                    className="brutalist-button inline-flex items-center gap-3 group"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     Take Free Assessment
-                    <ArrowRight className="h-4 w-4" />
-                  </button>
-                  <span className="font-mono text-xs text-muted-foreground pt-5">
-                    5 MIN · 15 QUESTIONS · INSTANT
-                  </span>
+                    <motion.span
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </motion.span>
+                  </motion.button>
+                  <motion.span
+                    className="font-mono text-xs text-muted-foreground pt-5 flex items-center gap-2"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                  >
+                    <span className="inline-flex gap-1">
+                      {["5 MIN", "15 QUESTIONS", "INSTANT"].map((text, i) => (
+                        <motion.span
+                          key={text}
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.9 + i * 0.1 }}
+                        >
+                          {text}{i < 2 && " · "}
+                        </motion.span>
+                      ))}
+                    </span>
+                  </motion.span>
                 </motion.div>
               </div>
 
-              {/* Stats Grid */}
+              {/* Stats Grid with staggered entrance */}
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="stats-grid grid-cols-2"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="stats-grid grid-cols-2 relative"
               >
-                <div className="p-6 md:p-8">
-                  <div className="display-number">{count.hours}+</div>
-                  <div className="mono-label mt-2">HOURS SAVED WEEKLY</div>
-                </div>
-                <div className="p-6 md:p-8">
-                  <div className="display-number">{count.businesses}</div>
-                  <div className="mono-label mt-2">MINUTE ASSESSMENT</div>
-                </div>
-                <div className="p-6 md:p-8">
-                  <div className="display-number">${count.cost}</div>
-                  <div className="mono-label mt-2">COST TO START</div>
-                </div>
-                <div className="p-6 md:p-8">
-                  <div className="display-number">{count.scale}</div>
-                  <div className="mono-label mt-2">SCALABILITY</div>
-                </div>
+                {/* Decorative corner accents */}
+                <motion.div
+                  className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-primary"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1, duration: 0.3 }}
+                />
+                <motion.div
+                  className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-primary"
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.1, duration: 0.3 }}
+                />
+
+                {[
+                  { value: `${count.hours}+`, label: "HOURS SAVED WEEKLY" },
+                  { value: count.businesses, label: "MINUTE ASSESSMENT" },
+                  { value: `$${count.cost}`, label: "COST TO START" },
+                  { value: count.scale, label: "SCALABILITY" },
+                ].map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + i * 0.1, duration: 0.4 }}
+                    className="p-6 md:p-8 group hover:bg-primary/5 transition-colors duration-300"
+                  >
+                    <motion.div
+                      className="display-number"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      {stat.value}
+                    </motion.div>
+                    <div className="mono-label mt-2 group-hover:text-primary transition-colors">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
               </motion.div>
             </div>
           </div>
@@ -571,11 +736,11 @@ export default function Home() {
               <div>
                 <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Navigation</h4>
                 <ul className="space-y-3 font-mono text-xs text-muted-foreground">
-                  <li><a href="#agents" className="hover:text-foreground transition-colors">AGENTS</a></li>
+                  <li><Link href="/solutions" className="hover:text-foreground transition-colors">SOLUTIONS</Link></li>
+                  <li><Link href="/about" className="hover:text-foreground transition-colors">ABOUT</Link></li>
                   <li><a href="#services" className="hover:text-foreground transition-colors">SERVICES</a></li>
                   <li><a href="#method" className="hover:text-foreground transition-colors">METHOD</a></li>
-                  <li><a href="#results" className="hover:text-foreground transition-colors">RESULTS</a></li>
-                  <li><a href="#faq" className="hover:text-foreground transition-colors">FAQ</a></li>
+                  <li><Link href="/book" className="hover:text-foreground transition-colors">BOOK CALL</Link></li>
                 </ul>
               </div>
               <div>

@@ -1,0 +1,12 @@
+# robots.txt for unpaste.ai
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://unpaste.ai/sitemap.xml
+
+# Disallow admin/internal paths
+Disallow: /styles
+
+# Crawl-delay (optional, for well-behaved bots)
+Crawl-delay: 1
