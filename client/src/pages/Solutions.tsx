@@ -1,5 +1,6 @@
-import { ArrowRight, ArrowUpRight, Clock, TrendingUp, Users, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Clock, TrendingUp, Users, Zap, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { SEO } from "@/components/SEO";
 
@@ -125,6 +126,8 @@ const industries = [
 ];
 
 export default function Solutions() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
@@ -168,12 +171,121 @@ export default function Solutions() {
 
             <Link
               href="/book"
-              className="font-mono text-xs font-bold uppercase tracking-wider bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
+              className="hidden md:block font-mono text-xs font-bold uppercase tracking-wider bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
             >
               Get Started
             </Link>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden p-2 border border-border hover:border-foreground transition-colors"
+              aria-label="Open menu"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
           </div>
         </nav>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-foreground/20 backdrop-blur-sm z-50 md:hidden"
+                onClick={() => setMobileMenuOpen(false)}
+              />
+
+              {/* Menu Panel */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "tween", duration: 0.3 }}
+                className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-background border-l-2 border-foreground z-50 md:hidden"
+              >
+                {/* Menu Header */}
+                <div className="flex items-center justify-between p-4 border-b-2 border-foreground">
+                  <span className="font-mono text-sm font-bold tracking-wider">[MENU]</span>
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 border-2 border-foreground hover:bg-foreground hover:text-background transition-colors"
+                    aria-label="Close menu"
+                  >
+                    <X className="h-5 w-5" />
+                  </button>
+                </div>
+
+                {/* Menu Links */}
+                <div className="p-6">
+                  <nav className="space-y-0">
+                    {[
+                      { href: "/", label: "HOME", active: false },
+                      { href: "/solutions", label: "SOLUTIONS", active: true },
+                      { href: "/about", label: "ABOUT", active: false },
+                      { href: "/book", label: "BOOK CALL", active: false },
+                    ].map((item, i) => (
+                      <motion.div
+                        key={item.href}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.1 + i * 0.05 }}
+                      >
+                        <Link
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`block py-4 border-b border-border font-mono text-lg tracking-wider transition-colors ${
+                            item.active
+                              ? "text-primary font-bold"
+                              : "text-foreground hover:text-primary"
+                          }`}
+                        >
+                          <span className="text-muted-foreground mr-3">[0{i + 1}]</span>
+                          {item.label}
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </nav>
+
+                  {/* Mobile CTA */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-8"
+                  >
+                    <Link
+                      href="/book"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block w-full py-4 bg-foreground text-background font-mono text-sm font-bold uppercase tracking-wider text-center hover:bg-primary transition-colors"
+                    >
+                      Get Started
+                      <ArrowRight className="inline-block ml-2 h-4 w-4" />
+                    </Link>
+                  </motion.div>
+
+                  {/* Contact Info */}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    className="mt-8 pt-8 border-t border-border"
+                  >
+                    <div className="font-mono text-xs text-muted-foreground space-y-2">
+                      <div>HELLO@UNPASTE.AI</div>
+                      <div>BRISBANE, AUSTRALIA</div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
 
         {/* Hero Section */}
         <section className="pt-32 pb-20 md:pt-40 md:pb-24">
