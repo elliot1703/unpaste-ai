@@ -109,36 +109,38 @@ export function AgentCard({ agent }: AgentCardProps) {
           ))}
         </div>
 
-        {/* Metrics - Circular gauges */}
-        <div className="grid grid-cols-4 gap-3">
-          {Object.entries(agent.metrics).map(([key, value]) => (
-            <div key={key} className="text-center">
-              <div className="relative w-12 h-12 mx-auto">
-                <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="#E4E4E7"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                    fill="none"
-                    stroke="#DC2626"
-                    strokeWidth="2"
-                    strokeDasharray={`${value}, 100`}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-[10px] font-bold text-[#09090B]">{value}</span>
+        {/* Metrics - Circular gauges (only show when real data exists) */}
+        {Object.values(agent.metrics).some(v => v > 0) && (
+          <div className="grid grid-cols-4 gap-3">
+            {Object.entries(agent.metrics).map(([key, value]) => (
+              <div key={key} className="text-center">
+                <div className="relative w-12 h-12 mx-auto">
+                  <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
+                    <path
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="#E4E4E7"
+                      strokeWidth="2"
+                    />
+                    <path
+                      d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none"
+                      stroke="#DC2626"
+                      strokeWidth="2"
+                      strokeDasharray={`${value}, 100`}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-[10px] font-bold text-[#09090B]">{value}</span>
+                  </div>
+                </div>
+                <div className="text-[8px] uppercase tracking-wider text-[#71717A] mt-1 font-mono">
+                  {key}
                 </div>
               </div>
-              <div className="text-[8px] uppercase tracking-wider text-[#71717A] mt-1 font-mono">
-                {key}
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Activity */}
         <div className="border-t border-dashed border-[#DC2626]/30 pt-3 space-y-1">

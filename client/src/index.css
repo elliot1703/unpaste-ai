@@ -38,13 +38,23 @@
   --animate-slide-up: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 
   @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   @keyframes marquee-reverse {
-    from { transform: translateX(-50%); }
-    to { transform: translateX(0); }
+    from {
+      transform: translateX(-50%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
   }
 
   @keyframes slide-up {
@@ -52,6 +62,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -70,7 +81,8 @@
   --popover: #FAFAFA;
   --popover-foreground: #09090B;
 
-  --primary: #DC2626; /* Bold Red */
+  --primary: #DC2626;
+  /* Bold Red */
   --primary-foreground: #FFFFFF;
 
   --secondary: #F4F4F5;
@@ -118,16 +130,24 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: var(--font-sans);
+    line-height: 1.6;
   }
-  h1, h2, h3 {
+
+  h1,
+  h2,
+  h3 {
     font-family: var(--font-display);
     font-weight: 800;
     letter-spacing: -0.04em;
   }
-  h4, h5, h6 {
+
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-mono);
     font-weight: 700;
     text-transform: uppercase;
@@ -169,6 +189,7 @@
       linear-gradient(90deg, var(--border) 1px, transparent 1px),
       linear-gradient(180deg, var(--border) 1px, transparent 1px);
     background-size: 60px 60px;
+    opacity: 0.05;
   }
 
   @media (max-width: 768px) {
@@ -280,7 +301,7 @@
     background: var(--border);
   }
 
-  .stats-grid > * {
+  .stats-grid>* {
     background: var(--background);
   }
 
@@ -290,11 +311,25 @@
     animation: slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  .text-reveal-delay-1 { animation-delay: 0.1s; }
-  .text-reveal-delay-2 { animation-delay: 0.2s; }
-  .text-reveal-delay-3 { animation-delay: 0.3s; }
-  .text-reveal-delay-4 { animation-delay: 0.4s; }
-  .text-reveal-delay-5 { animation-delay: 0.5s; }
+  .text-reveal-delay-1 {
+    animation-delay: 0.1s;
+  }
+
+  .text-reveal-delay-2 {
+    animation-delay: 0.2s;
+  }
+
+  .text-reveal-delay-3 {
+    animation-delay: 0.3s;
+  }
+
+  .text-reveal-delay-4 {
+    animation-delay: 0.4s;
+  }
+
+  .text-reveal-delay-5 {
+    animation-delay: 0.5s;
+  }
 
   /* Underline effect */
   .underline-effect {
@@ -333,6 +368,10 @@ html {
 }
 
 /* Remove default border-radius from all elements */
-button, input, textarea, select, [role="dialog"] {
+button,
+input,
+textarea,
+select,
+[role="dialog"] {
   border-radius: 0 !important;
 }

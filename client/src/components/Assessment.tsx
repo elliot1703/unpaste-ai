@@ -43,6 +43,11 @@ export interface AssessmentData {
   automateFirst: string;
   hourSavingsValue: string;
   industry: string;
+
+  // Contact (captured before results)
+  contactName: string;
+  contactEmail: string;
+  contactBusiness: string;
 }
 
 const initialData: AssessmentData = {
@@ -62,6 +67,9 @@ const initialData: AssessmentData = {
   automateFirst: "",
   hourSavingsValue: "",
   industry: "",
+  contactName: "",
+  contactEmail: "",
+  contactBusiness: "",
 };
 
 const frequencyOptions = [
@@ -130,10 +138,17 @@ export function Assessment({ open, onOpenChange }: AssessmentProps) {
     data.hourSavingsValue !== "" &&
     data.industry.trim() !== "";
 
+  const canProceedSection4 =
+    data.contactName.trim() !== "" &&
+    data.contactEmail.trim() !== "" &&
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.contactEmail);
+
   const handleNext = () => {
-    if (currentSection < 3) {
+    if (currentSection < 4) {
       setCurrentSection(currentSection + 1);
     } else {
+      // Submit lead data before showing results
+      submitAssessmentLead(data);
       setShowResults(true);
     }
   };
@@ -158,6 +173,7 @@ export function Assessment({ open, onOpenChange }: AssessmentProps) {
     { num: 1, title: "OPERATIONS", tag: "001" },
     { num: 2, title: "PAIN POINTS", tag: "002" },
     { num: 3, title: "READINESS", tag: "003" },
+    { num: 4, title: "YOUR RESULTS", tag: "004" },
   ];
 
   return (
@@ -254,6 +270,12 @@ export function Assessment({ open, onOpenChange }: AssessmentProps) {
                       updateData={updateData}
                     />
                   )}
+                  {currentSection === 4 && (
+                    <SectionContact
+                      data={data}
+                      updateData={updateData}
+                    />
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -275,11 +297,12 @@ export function Assessment({ open, onOpenChange }: AssessmentProps) {
                 disabled={
                   (currentSection === 1 && !canProceedSection1) ||
                   (currentSection === 2 && !canProceedSection2) ||
-                  (currentSection === 3 && !canProceedSection3)
+                  (currentSection === 3 && !canProceedSection3) ||
+                  (currentSection === 4 && !canProceedSection4)
                 }
                 className="brutalist-button flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {currentSection === 3 ? "SEE MY SCORE" : "NEXT"}
+                {currentSection === 4 ? "SEE MY SCORE" : "NEXT"}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -663,4 +686,94 @@ function Section3({
       </div>
     </div>
   );
+}
+
+// Section 4: Contact Details (email capture)
+function SectionContact({
+  data,
+  updateData,
+}: {
+  data: AssessmentData;
+  updateData: <K extends keyof AssessmentData>(key: K, value: AssessmentData[K]) => void;
+}) {
+  return (
+    <div className="space-y-8">
+      <div className="border-2 border-primary bg-primary/5 p-6">
+        <p className="font-mono text-sm text-foreground leading-relaxed">
+          Your Efficiency Score is ready. Enter your details below to see your personalised results — including your score, top bottlenecks, and estimated annual cost of manual work.
+        </p>
+      </div>
+
+      {/* Name */}
+      <div className="space-y-4">
+        <Label className="mono-label text-foreground">
+          YOUR NAME
+        </Label>
+        <input
+          type="text"
+          value={data.contactName}
+          onChange={(e) => updateData("contactName", e.target.value)}
+          placeholder="First and last name"
+          className="w-full h-12 px-4 border-2 border-border bg-background font-mono text-sm focus:border-primary focus:outline-none transition-colors"
+        />
+      </div>
+
+      {/* Email */}
+      <div className="space-y-4">
+        <Label className="mono-label text-foreground">
+          EMAIL ADDRESS
+        </Label>
+        <input
+          type="email"
+          value={data.contactEmail}
+          onChange={(e) => updateData("contactEmail", e.target.value)}
+          placeholder="you@yourbusiness.com"
+          className="w-full h-12 px-4 border-2 border-border bg-background font-mono text-sm focus:border-primary focus:outline-none transition-colors"
+        />
+        <p className="font-mono text-xs text-muted-foreground">
+          We'll send a copy of your results to this address. No spam, no newsletters.
+        </p>
+      </div>
+
+      {/* Business name (optional) */}
+      <div className="space-y-4">
+        <Label className="mono-label text-foreground">
+          BUSINESS NAME <span className="text-muted-foreground">(OPTIONAL)</span>
+        </Label>
+        <input
+          type="text"
+          value={data.contactBusiness}
+          onChange={(e) => updateData("contactBusiness", e.target.value)}
+          placeholder="Your company or trading name"
+          className="w-full h-12 px-4 border-2 border-border bg-background font-mono text-sm focus:border-primary focus:outline-none transition-colors"
+        />
+      </div>
+    </div>
+  );
+}
+
+// Submit assessment lead data
+async function submitAssessmentLead(data: AssessmentData) {
+  try {
+    // Send to server endpoint — will store or forward to Google Sheet / email
+    await fetch("/api/assessment-lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: data.contactName,
+        email: data.contactEmail,
+        business: data.contactBusiness,
+        industry: data.industry,
+        manualDataEntryHours: data.manualDataEntryHours,
+        softwareToolsCount: data.softwareToolsCount,
+        biggestBottleneck: data.biggestBottleneck,
+        automateFirst: data.automateFirst,
+        hourSavingsValue: data.hourSavingsValue,
+        submittedAt: new Date().toISOString(),
+      }),
+    });
+  } catch {
+    // Silently fail — don't block the user from seeing their results
+    console.warn("Failed to submit assessment lead — results still shown.");
+  }
 }

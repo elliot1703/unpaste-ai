@@ -6,11 +6,10 @@ import { HelmetProvider } from "react-helmet-async";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-import StyleExplorer from "./pages/StyleExplorer";
-import Solutions from "./pages/Solutions";
 import About from "./pages/About";
 import Book from "./pages/Book";
-
+import Solutions from "./pages/Solutions";
+import StyleExplorer from "./pages/StyleExplorer";
 
 function Router() {
   return (

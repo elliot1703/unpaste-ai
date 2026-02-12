@@ -1,8 +1,6 @@
-import { ArrowRight, ArrowUpRight, Clock, Zap, Link2, Sparkles, Menu } from "lucide-react";
+import { ArrowRight, Clock, Globe, Megaphone, Search, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { Link } from "wouter";
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -13,20 +11,18 @@ import { Assessment } from "@/components/Assessment";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { AgentsSection } from "@/components/AgentsSection";
 import { SEO } from "@/components/SEO";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const navBg = useTransform(scrollYProgress, [0, 0.02], ["rgba(250, 250, 250, 0)", "rgba(250, 250, 250, 0.95)"]);
-  const navBorder = useTransform(scrollYProgress, [0, 0.02], ["rgba(228, 228, 231, 0)", "rgba(228, 228, 231, 1)"]);
 
   // Animated counter for stats
-  const [count, setCount] = useState({ hours: 0, businesses: 0, cost: 0, scale: "—" });
+  const [count, setCount] = useState({ questions: 0, minutes: 0, cost: 0, scale: "—" });
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setCount({ hours: 10, businesses: 5, cost: 0, scale: "∞" });
+      setCount({ questions: 15, minutes: 5, cost: 0, scale: "∞" });
     }, 500);
     return () => clearTimeout(timer);
   }, []);
@@ -34,51 +30,45 @@ export default function Home() {
   const services = [
     {
       num: "01",
-      title: "AI Assistants",
-      description: "Automated responses, quote generation, and customer follow-ups that work around the clock.",
-      icon: Sparkles,
+      title: "Smart Websites",
+      description: "AI-native sites with built-in intelligence — assessments, chat, lead capture, dynamic content. Not brochures that are outdated on launch day.",
+      icon: Globe,
     },
     {
       num: "02",
-      title: "Workflow Automation",
-      description: "Connect your scattered tools so information flows automatically. No more copy-paste.",
-      icon: Zap,
+      title: "Marketing & Content",
+      description: "Brand strategy, social media, email sequences, ad creative, SEO, video briefs. Everything your business needs to be found and remembered.",
+      icon: Megaphone,
     },
     {
       num: "03",
-      title: "Process Design",
-      description: "We map how your business runs, find the bottlenecks, and design workflows that work.",
-      icon: Link2,
+      title: "Strategy & Audits",
+      description: "Where every engagement starts. Assessment, workshops, brand guidelines, personas, competitor analysis. Understand before you build.",
+      icon: Search,
     },
     {
       num: "04",
-      title: "Custom Solutions",
-      description: "When off-the-shelf doesn't fit, we build exactly what you need. Bespoke automation.",
-      icon: Sparkles,
+      title: "Automation",
+      description: "AI agents, workflow automation, tool connectors. Connect your scattered systems so information flows without copy-paste.",
+      icon: Zap,
     },
   ];
 
-  const testimonials = [
+  const proofPoints = [
     {
-      quote: "We went from 36 hours of client onboarding down to just 1. The automation handles everything.",
-      name: "Sarah Chen",
-      title: "Operations Director",
-      metric: "97%",
-      metricLabel: "TIME SAVED",
+      question: "How many hours do you lose to manual data entry each week?",
+      insight: "Most Brisbane SMBs we assess spend 8-15 hours weekly on copy-paste work between tools that should be connected.",
+      cta: "Find your number",
     },
     {
-      quote: "Response time dropped from 4 hours to 3 minutes. We close deals faster now.",
-      name: "James Mitchell",
-      title: "Founder, Brisbane Property Co",
-      metric: "85%",
-      metricLabel: "AUTO-HANDLED",
+      question: "What's your customer response time costing you?",
+      insight: "Businesses responding within 1 hour are 7x more likely to qualify leads than those responding after 2+ hours.",
+      cta: "Check your speed",
     },
     {
-      quote: "I was drowning in admin. Now I leave at 5pm and the business runs smoother than ever.",
-      name: "Emma Rodriguez",
-      title: "Creative Director",
-      metric: "25hrs",
-      metricLabel: "SAVED WEEKLY",
+      question: "Are your tools actually talking to each other?",
+      insight: "The average SMB uses 5-8 software tools daily. If they're not integrated, you're the integration — and that's expensive.",
+      cta: "Take the assessment",
     },
   ];
 
@@ -122,63 +112,7 @@ export default function Home() {
       {/* Content wrapper - sits above grid */}
       <div className="relative z-10">
         {/* Navigation */}
-        <motion.nav
-          style={{ backgroundColor: navBg, borderColor: navBorder }}
-          className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-sm"
-        >
-          <div className="container flex h-16 items-center justify-between">
-            <a href="/" className="flex items-center gap-2 group">
-              <div className="h-8 w-8 bg-primary" />
-              <span className="font-mono text-sm font-bold tracking-tight">UNPASTE</span>
-            </a>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              <Link href="/solutions" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Solutions</Link>
-              <Link href="/about" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">About</Link>
-              <a href="#services" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Services</a>
-              <a href="#method" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Method</a>
-              <Link href="/book" className="font-mono text-xs uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors">Book Call</Link>
-            </div>
-
-            <div className="hidden md:flex items-center">
-              <button
-                onClick={() => setIsAssessmentOpen(true)}
-                className="font-mono text-xs font-bold uppercase tracking-wider bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
-              >
-                Start Audit
-              </button>
-            </div>
-
-            {/* Mobile Menu */}
-            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-              <SheetTrigger asChild className="md:hidden">
-                <button className="p-2">
-                  <Menu className="h-5 w-5" />
-                </button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-full max-w-sm bg-background border-border">
-                <SheetHeader>
-                  <SheetTitle className="text-left font-mono text-sm font-bold">MENU</SheetTitle>
-                </SheetHeader>
-                <div className="flex flex-col gap-6 mt-8">
-                  <Link href="/solutions" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Solutions</Link>
-                  <Link href="/about" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>About</Link>
-                  <a href="#services" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Services</a>
-                  <a href="#method" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Method</a>
-                  <Link href="/book" className="font-mono text-lg uppercase tracking-wider" onClick={() => setMobileMenuOpen(false)}>Book Call</Link>
-                  <hr className="border-border" />
-                  <button
-                    onClick={() => { setIsAssessmentOpen(true); setMobileMenuOpen(false); }}
-                    className="brutalist-button w-full"
-                  >
-                    Start Audit
-                  </button>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </motion.nav>
+        <Navigation onAssessmentOpen={() => setIsAssessmentOpen(true)} />
 
         {/* Hero Section */}
         <section className="pt-32 pb-20 md:pt-40 md:pb-28 relative overflow-hidden">
@@ -310,16 +244,8 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  <motion.span
-                    initial={{ backgroundSize: "0% 100%" }}
-                    animate={{ backgroundSize: "100% 100%" }}
-                    transition={{ duration: 1, delay: 0.8 }}
-                    className="bg-gradient-to-r from-primary/10 to-transparent bg-no-repeat"
-                    style={{ backgroundPosition: "0 100%", paddingBottom: "2px" }}
-                  >
-                    Discover your biggest operational bottleneck in 5 minutes.
-                  </motion.span>
-                  {" "}See where automation can give you back 10+ hours every week.
+                  Discover your biggest operational bottleneck in 5 minutes.
+                  See exactly where your business is bleeding time — and what to fix first.
                 </motion.p>
 
                 {/* CTA with hover effects */}
@@ -372,23 +298,9 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="stats-grid grid-cols-2 relative"
               >
-                {/* Decorative corner accents */}
-                <motion.div
-                  className="absolute -top-2 -left-2 w-4 h-4 border-t-2 border-l-2 border-primary"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1, duration: 0.3 }}
-                />
-                <motion.div
-                  className="absolute -bottom-2 -right-2 w-4 h-4 border-b-2 border-r-2 border-primary"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.1, duration: 0.3 }}
-                />
-
                 {[
-                  { value: `${count.hours}+`, label: "HOURS SAVED WEEKLY" },
-                  { value: count.businesses, label: "MINUTE ASSESSMENT" },
+                  { value: count.questions, label: "QUESTIONS" },
+                  { value: count.minutes, label: "MINUTES" },
                   { value: `$${count.cost}`, label: "COST TO START" },
                   { value: count.scale, label: "SCALABILITY" },
                 ].map((stat, i) => (
@@ -422,7 +334,7 @@ export default function Home() {
             <div className="marquee-content">
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-12 px-6">
-                  {["WORKFLOW AUTOMATION", "AI ASSISTANTS", "PROCESS DESIGN", "CUSTOM SOLUTIONS", "BRISBANE BASED", "SMB FOCUSED"].map((text, j) => (
+                  {["SMART WEBSITES", "MARKETING", "CONTENT", "SEO", "AUTOMATION", "AI AGENTS", "BRAND STRATEGY", "BRISBANE BASED"].map((text, j) => (
                     <span key={j} className="flex items-center gap-6 font-mono text-sm uppercase tracking-wider whitespace-nowrap">
                       {text}
                       <span className="h-2 w-2 bg-primary" />
@@ -486,9 +398,10 @@ export default function Home() {
         <section id="services" className="py-24 md:py-32 bg-card border-y border-border">
           <div className="container">
             <div className="mb-16">
-              <div className="section-tag mb-4">[005] WHAT WE DO</div>
+              <div className="section-tag mb-4">[005] WHAT WE BUILD</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
-                FOUR PILLARS OF OPERATIONAL EXCELLENCE.
+                WEBSITES. MARKETING.{" "}
+                <span className="text-primary">AUTOMATION.</span>
               </h2>
             </div>
 
@@ -595,18 +508,19 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Results Section */}
+        {/* Proof Points Section */}
         <section id="results" className="py-24 md:py-32 bg-foreground text-background">
           <div className="container">
             <div className="mb-16">
-              <div className="font-mono text-xs text-primary tracking-widest mb-4">[007] RESULTS</div>
+              <div className="font-mono text-xs text-primary tracking-widest mb-4">[007] THE REAL QUESTIONS</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
-                REAL OUTCOMES FROM REAL BUSINESSES.
+                HOW MUCH TIME ARE YOU{" "}
+                <span className="text-primary">ACTUALLY</span> LOSING?
               </h2>
             </div>
 
             <div className="grid md:grid-cols-3 gap-px bg-background/20">
-              {testimonials.map((testimonial, i) => (
+              {proofPoints.map((point, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
@@ -616,19 +530,20 @@ export default function Home() {
                   className="bg-foreground p-8 md:p-10 flex flex-col"
                 >
                   <div className="flex-1">
+                    <h3 className="text-lg font-bold text-background mb-4 leading-tight">
+                      {point.question}
+                    </h3>
                     <p className="font-mono text-sm leading-relaxed text-background/70 mb-8">
-                      "{testimonial.quote}"
+                      {point.insight}
                     </p>
                   </div>
-                  <div className="flex items-end justify-between pt-6 border-t border-background/10">
-                    <div>
-                      <div className="font-bold text-background text-sm">{testimonial.name}</div>
-                      <div className="font-mono text-xs text-background/50">{testimonial.title}</div>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-3xl font-bold text-primary">{testimonial.metric}</div>
-                      <div className="mono-label text-background/50">{testimonial.metricLabel}</div>
-                    </div>
+                  <div className="pt-6 border-t border-background/10">
+                    <button
+                      onClick={() => setIsAssessmentOpen(true)}
+                      className="font-mono text-sm font-bold text-primary hover:text-background transition-colors uppercase tracking-wider"
+                    >
+                      {point.cta} →
+                    </button>
                   </div>
                 </motion.div>
               ))}
@@ -721,50 +636,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="py-12 border-t border-border bg-background">
-          <div className="container">
-            <div className="grid md:grid-cols-4 gap-12 mb-12">
-              <div className="md:col-span-2">
-                <a href="/" className="flex items-center gap-2 mb-4">
-                  <div className="h-8 w-8 bg-primary" />
-                  <span className="font-mono text-sm font-bold">UNPASTE</span>
-                </a>
-                <p className="font-mono text-xs text-muted-foreground max-w-sm leading-relaxed">
-                  AI automation for Brisbane businesses who are too busy to fix how they work.
-                </p>
-              </div>
-              <div>
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Navigation</h4>
-                <ul className="space-y-3 font-mono text-xs text-muted-foreground">
-                  <li><Link href="/solutions" className="hover:text-foreground transition-colors">SOLUTIONS</Link></li>
-                  <li><Link href="/about" className="hover:text-foreground transition-colors">ABOUT</Link></li>
-                  <li><a href="#services" className="hover:text-foreground transition-colors">SERVICES</a></li>
-                  <li><a href="#method" className="hover:text-foreground transition-colors">METHOD</a></li>
-                  <li><Link href="/book" className="hover:text-foreground transition-colors">BOOK CALL</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Contact</h4>
-                <ul className="space-y-3 font-mono text-xs text-muted-foreground">
-                  <li>
-                    <a href="mailto:hello@unpaste.ai" className="hover:text-foreground transition-colors flex items-center gap-1">
-                      HELLO@UNPASTE.AI
-                      <ArrowUpRight className="h-3 w-3" />
-                    </a>
-                  </li>
-                  <li>BRISBANE, AUSTRALIA</li>
-                </ul>
-              </div>
-            </div>
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-border font-mono text-xs text-muted-foreground">
-              <div>&copy; {new Date().getFullYear()} UNPASTE.AI. ALL RIGHTS RESERVED.</div>
-              <div className="flex gap-6">
-                <a href="#" className="hover:text-foreground transition-colors">PRIVACY</a>
-                <a href="#" className="hover:text-foreground transition-colors">TERMS</a>
-              </div>
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </div>
 
       {/* Assessment Modal */}
