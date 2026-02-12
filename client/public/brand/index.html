@@ -303,6 +303,14 @@
       transform: translate(-2px, -2px);
     }
 
+    /* --- Scroll-Lift Card --- */
+    .scroll-lift {
+      --lift: 0;
+      box-shadow: calc(var(--lift) * 6px) calc(var(--lift) * 6px) 0 var(--fg);
+      transform: translate(calc(var(--lift) * -3px), calc(var(--lift) * -3px));
+      transition: box-shadow 0.05s linear, transform 0.05s linear;
+    }
+
     /* --- Agent Card --- */
     .agent-card {
       border: 2px dashed var(--red);
@@ -1445,9 +1453,9 @@
       <!-- Cards -->
       <p class="mono-label" style="margin-bottom: var(--sp-2);">Cards</p>
       <div class="grid-3" style="margin-bottom: var(--sp-5);">
-        <div class="card">
+        <div class="card scroll-lift">
           <span class="section-tag" style="margin-bottom: var(--sp-1);">[001] Brutalist Card</span>
-          <p class="body-text" style="font-size: 14px;">White background, 1px border. Hover to see 4px shadow appear. No border radius.</p>
+          <p class="body-text" style="font-size: 14px;">White background, 1px border. Scroll to see it rise off the page. No border radius.</p>
         </div>
 
         <div class="agent-card">
@@ -2592,6 +2600,24 @@
     }, { threshold: 0.08 });
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ═══════════════════════════════════════════════════
+    // SCROLL-LIFT CARDS (scroll-driven raise effect)
+    // ═══════════════════════════════════════════════════
+    function updateScrollLift() {
+      document.querySelectorAll('.scroll-lift').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        const vh = window.innerHeight;
+        // Start lifting when card enters bottom 80% of viewport,
+        // fully lifted when it reaches the vertical centre
+        const start = vh * 0.85;
+        const end = vh * 0.4;
+        const progress = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+        el.style.setProperty('--lift', progress.toFixed(3));
+      });
+      requestAnimationFrame(updateScrollLift);
+    }
+    requestAnimationFrame(updateScrollLift);
 
     // ═══════════════════════════════════════════════════
     // CLICK-TO-COPY HEX VALUES
