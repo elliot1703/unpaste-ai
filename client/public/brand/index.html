@@ -901,6 +901,137 @@
       justify-content: space-between;
       gap: var(--sp-2);
     }
+    /* ═══════════════════════════════════════════════════════
+       CTA POPUP
+       ═══════════════════════════════════════════════════════ */
+    .cta-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 9, 11, 0.6);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .cta-overlay.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .cta-modal {
+      background: var(--bg);
+      border: 2px solid var(--fg);
+      box-shadow: 8px 8px 0 var(--fg);
+      max-width: 520px;
+      width: 100%;
+      padding: var(--sp-6) var(--sp-4);
+      position: relative;
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .cta-overlay.visible .cta-modal {
+      transform: translateY(0);
+    }
+    .cta-close {
+      position: absolute;
+      top: var(--sp-2);
+      right: var(--sp-2);
+      background: none;
+      border: 1px solid var(--muted);
+      width: 36px;
+      height: 36px;
+      font-family: 'Space Mono', monospace;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .cta-close:hover {
+      border-color: var(--fg);
+      box-shadow: 2px 2px 0 var(--fg);
+      transform: translate(-1px, -1px);
+    }
+    .cta-form-group {
+      margin-bottom: var(--sp-2);
+    }
+    .cta-label {
+      display: block;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted-text);
+      margin-bottom: 6px;
+    }
+    .cta-input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--muted);
+      background: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: var(--fg);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 0;
+      -webkit-appearance: none;
+    }
+    .cta-input:focus {
+      border-color: var(--red);
+      box-shadow: 2px 2px 0 var(--red);
+    }
+    .cta-input::placeholder {
+      color: var(--muted);
+    }
+    textarea.cta-input {
+      resize: vertical;
+      min-height: 70px;
+    }
+    .cta-submit {
+      width: 100%;
+      margin-top: var(--sp-2);
+      padding: 14px 24px;
+      background: var(--red);
+      color: white;
+      border: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 4px 4px 0 var(--fg);
+      transition: all 0.2s ease;
+    }
+    .cta-submit:hover {
+      box-shadow: 6px 6px 0 var(--fg);
+      transform: translate(-2px, -2px);
+    }
+    .cta-submit:active {
+      box-shadow: 2px 2px 0 var(--fg);
+      transform: translate(2px, 2px);
+    }
+    .cta-success {
+      text-align: center;
+      display: none;
+    }
+    .cta-success.show {
+      display: block;
+    }
+    .cta-form.hidden {
+      display: none;
+    }
+
+    @media print {
+      .cta-overlay { display: none !important; }
+    }
+
   </style>
 </head>
 <body>
@@ -2798,6 +2929,134 @@
         el.style.transition = 'none';
       });
     }
+  </script>
+
+  <!-- ═══════════════════════════════════════════════════
+       CTA POPUP
+       ═══════════════════════════════════════════════════ -->
+  <div class="cta-overlay" id="ctaOverlay">
+    <div class="cta-modal">
+      <button class="cta-close" id="ctaClose" aria-label="Close">&times;</button>
+
+      <div class="cta-form" id="ctaForm">
+        <span class="section-tag" style="margin-bottom: var(--sp-1);">[001] GET IN TOUCH</span>
+        <h2 class="display" style="font-size: 28px; margin-top: var(--sp-2); margin-bottom: var(--sp-1);">WANT THIS FOR <span class="red-accent">YOUR BRAND?</span></h2>
+        <p class="body-text muted" style="font-size: 14px; margin-bottom: var(--sp-3);">We build visual brand systems like this for businesses. Drop your details and we'll send you pricing.</p>
+
+        <hr class="divider-red" style="margin-bottom: var(--sp-3);">
+
+        <form action="https://formsubmit.co/elliot@unpaste.co" method="POST" id="ctaFormEl">
+          <!-- FormSubmit config -->
+          <input type="hidden" name="_subject" value="Brand Guide Enquiry — unpaste.ai/brand">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://unpaste.ai/brand#thanks">
+          <input type="text" name="_honey" style="display:none">
+
+          <div class="cta-form-group">
+            <label class="cta-label" for="ctaName">Name</label>
+            <input class="cta-input" type="text" id="ctaName" name="name" placeholder="Your name" required>
+          </div>
+
+          <div class="cta-form-group">
+            <label class="cta-label" for="ctaEmail">Email</label>
+            <input class="cta-input" type="email" id="ctaEmail" name="email" placeholder="you@company.com" required>
+          </div>
+
+          <div class="cta-form-group">
+            <label class="cta-label" for="ctaBusiness">Business</label>
+            <input class="cta-input" type="text" id="ctaBusiness" name="business" placeholder="Your business name">
+          </div>
+
+          <div class="cta-form-group">
+            <label class="cta-label" for="ctaMessage">Message <span style="font-weight: 400; text-transform: none; letter-spacing: normal;">(optional)</span></label>
+            <textarea class="cta-input" id="ctaMessage" name="message" placeholder="Tell us about your brand or what you're looking for"></textarea>
+          </div>
+
+          <button type="submit" class="cta-submit">SEND ENQUIRY</button>
+        </form>
+      </div>
+
+      <div class="cta-success" id="ctaSuccess">
+        <span class="section-tag" style="margin-bottom: var(--sp-2);">[001] RECEIVED</span>
+        <h2 class="display" style="font-size: 28px; margin-top: var(--sp-2); margin-bottom: var(--sp-2);">WE'LL BE <span class="red-accent">IN TOUCH.</span></h2>
+        <p class="body-text muted" style="font-size: 14px;">Thanks for reaching out. We'll send you pricing within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    // CTA POPUP LOGIC
+    // ═══════════════════════════════════════════════════
+    (function() {
+      const overlay = document.getElementById('ctaOverlay');
+      const closeBtn = document.getElementById('ctaClose');
+      const form = document.getElementById('ctaFormEl');
+      const formWrap = document.getElementById('ctaForm');
+      const success = document.getElementById('ctaSuccess');
+      let shown = false;
+
+      function showPopup() {
+        if (shown || sessionStorage.getItem('cta-dismissed')) return;
+        shown = true;
+        overlay.classList.add('visible');
+      }
+
+      function hidePopup() {
+        overlay.classList.remove('visible');
+        sessionStorage.setItem('cta-dismissed', '1');
+      }
+
+      // Show after scrolling 60% of the page
+      window.addEventListener('scroll', function() {
+        const scrollPct = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+        if (scrollPct > 0.6) showPopup();
+      });
+
+      // Close on button click
+      closeBtn.addEventListener('click', hidePopup);
+
+      // Close on overlay click (not modal)
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) hidePopup();
+      });
+
+      // Close on Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') hidePopup();
+      });
+
+      // Handle form submission via fetch to stay on page
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const data = new FormData(form);
+
+        fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        }).then(function(res) {
+          if (res.ok) {
+            formWrap.classList.add('hidden');
+            success.classList.add('show');
+            sessionStorage.setItem('cta-dismissed', '1');
+            setTimeout(hidePopup, 3000);
+          }
+        }).catch(function() {
+          // Fallback: submit normally if fetch fails
+          form.submit();
+        });
+      });
+
+      // Also show if URL has #thanks (redirect from FormSubmit)
+      if (window.location.hash === '#thanks') {
+        shown = true;
+        overlay.classList.add('visible');
+        formWrap.classList.add('hidden');
+        success.classList.add('show');
+        setTimeout(hidePopup, 3000);
+      }
+    })();
   </script>
 </body>
 </html>
