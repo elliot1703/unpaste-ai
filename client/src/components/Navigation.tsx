@@ -5,12 +5,13 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 interface NavigationProps {
-  onAssessmentOpen: () => void;
+  onAssessmentOpen?: () => void;
 }
 
 export function Navigation({ onAssessmentOpen }: NavigationProps) {
+  const [location, navigate] = useLocation();
+  const handleAssessmentOpen = onAssessmentOpen ?? (() => navigate("/assessment"));
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [location] = useLocation();
   const { scrollYProgress } = useScroll();
   const navBg = useTransform(scrollYProgress, [0, 0.02], ["rgba(250, 250, 250, 0)", "rgba(250, 250, 250, 0.95)"]);
   const navBorder = useTransform(scrollYProgress, [0, 0.02], ["rgba(228, 228, 231, 0)", "rgba(228, 228, 231, 1)"]);
@@ -69,7 +70,7 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
             Book Call
           </Link>
           <button
-            onClick={onAssessmentOpen}
+            onClick={handleAssessmentOpen}
             className="font-mono text-xs font-bold uppercase tracking-wider bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
           >
             Start Audit
@@ -118,7 +119,7 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
                 Book Call
               </Link>
               <button
-                onClick={() => { onAssessmentOpen(); setMobileMenuOpen(false); }}
+                onClick={() => { handleAssessmentOpen(); setMobileMenuOpen(false); }}
                 className="brutalist-button w-full"
               >
                 Start Audit

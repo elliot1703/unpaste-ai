@@ -178,7 +178,11 @@ export function Assessment({ open, onOpenChange }: AssessmentProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background border-2 border-foreground p-0 shadow-[8px_8px_0_0_var(--foreground)]">
+      <DialogContent
+        className="max-w-2xl max-h-[90vh] overflow-y-auto bg-background border-2 border-foreground p-0 shadow-[8px_8px_0_0_var(--foreground)]"
+        showCloseButton={false}
+        aria-label="Efficiency Score Assessment"
+      >
         {showResults ? (
           <AssessmentResults data={data} onClose={handleClose} onBookWorkshop={handleClose} />
         ) : (

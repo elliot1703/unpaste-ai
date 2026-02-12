@@ -11,6 +11,8 @@ import Book from "./pages/Book";
 import Solutions from "./pages/Solutions";
 import StyleExplorer from "./pages/StyleExplorer";
 import AssessmentPage from "./pages/AssessmentPage";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 function Router() {
   return (
@@ -20,6 +22,8 @@ function Router() {
       <Route path={"/solutions"} component={Solutions} />
       <Route path={"/about"} component={About} />
       <Route path={"/book"} component={Book} />
+      <Route path={"/privacy"} component={Privacy} />
+      <Route path={"/terms"} component={Terms} />
       <Route path={"/styles"} component={StyleExplorer} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

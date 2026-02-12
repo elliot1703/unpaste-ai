@@ -41,8 +41,8 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 border-t border-border font-mono text-xs text-muted-foreground">
           <div>&copy; {new Date().getFullYear()} UNPASTE.AI. ALL RIGHTS RESERVED.</div>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-foreground transition-colors">PRIVACY</a>
-            <a href="#" className="hover:text-foreground transition-colors">TERMS</a>
+            <Link href="/privacy" className="hover:text-foreground transition-colors">PRIVACY</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">TERMS</Link>
           </div>
         </div>
       </div>

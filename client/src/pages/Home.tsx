@@ -91,8 +91,13 @@ export default function Home() {
     },
   ];
 
-  // Words to cycle through in hero
-  const heroWords = ["COPY-PASTING", "MANUAL WORK", "BUSY-WORK", "WASTING TIME"];
+  // Words to cycle through in hero — each split into two lines
+  const heroWords = [
+    { top: "COPY-", bottom: "PASTING." },
+    { top: "MANUAL", bottom: "WORK." },
+    { top: "BUSY-", bottom: "WORK." },
+    { top: "WASTING", bottom: "TIME." },
+  ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   useEffect(() => {
@@ -196,7 +201,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="text-6xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter"
+                    className="text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter"
                   >
                     <motion.span
                       initial={{ opacity: 0, y: 50 }}
@@ -216,7 +221,7 @@ export default function Home() {
                           transition={{ duration: 0.5 }}
                           className="block text-primary"
                         >
-                          {heroWords[currentWordIndex].split("-")[0]}-
+                          {heroWords[currentWordIndex].top}
                         </motion.span>
                       </AnimatePresence>
                     </div>
@@ -230,7 +235,7 @@ export default function Home() {
                           transition={{ duration: 0.5, delay: 0.1 }}
                           className="block"
                         >
-                          {heroWords[currentWordIndex].split("-")[1] || heroWords[currentWordIndex].split(" ").pop()}.
+                          {heroWords[currentWordIndex].bottom}
                         </motion.span>
                       </AnimatePresence>
                     </div>
