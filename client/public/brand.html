@@ -1,0 +1,2776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNPASTE — Visual Brand Guidelines</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       RESET & BASE
+       ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Light palette */
+      --red: #DC2626;
+      --red-dark: #EF4444;
+      --fg: #09090B;
+      --bg: #FAFAFA;
+      --muted: #E4E4E7;
+      --muted-text: #71717A;
+      --card: #FAFAFA;
+      --secondary: #F4F4F5;
+      --agent-online: #22C55E;
+      --agent-learning: #F59E0B;
+
+      /* Dark palette */
+      --dark-fg: #FAFAFA;
+      --dark-bg: #09090B;
+      --dark-muted: #27272A;
+      --dark-muted-text: #A1A1AA;
+      --dark-card: #18181B;
+      --dark-secondary: #27272A;
+
+      /* Spacing grid (8px base) */
+      --sp-1: 8px;
+      --sp-2: 16px;
+      --sp-3: 24px;
+      --sp-4: 32px;
+      --sp-5: 40px;
+      --sp-6: 48px;
+      --sp-8: 64px;
+      --sp-10: 80px;
+      --sp-12: 96px;
+      --sp-15: 120px;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    ::selection {
+      background: var(--red);
+      color: white;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       LAYOUT
+       ═══════════════════════════════════════════════════════ */
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-3);
+    }
+
+    @media (min-width: 768px) {
+      .page { padding: var(--sp-10) var(--sp-4); }
+    }
+    @media (min-width: 1024px) {
+      .page { padding: var(--sp-10) var(--sp-8); }
+    }
+
+    section {
+      margin-bottom: var(--sp-15);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION TAG — [001] SECTION NAME
+       ═══════════════════════════════════════════════════════ */
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-bottom: var(--sp-3);
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TYPOGRAPHY CLASSES
+       ═══════════════════════════════════════════════════════ */
+    .display {
+      font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      color: var(--fg);
+    }
+
+    .display-xl { font-size: clamp(48px, 8vw, 96px); }
+    .display-lg { font-size: clamp(36px, 5vw, 64px); }
+    .display-md { font-size: clamp(28px, 3.5vw, 48px); }
+    .display-sm { font-size: clamp(22px, 2.5vw, 32px); }
+
+    .body-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--fg);
+      max-width: 680px;
+    }
+
+    .body-text.muted { color: var(--muted-text); }
+
+    .mono {
+      font-family: 'Space Mono', monospace;
+      font-weight: 400;
+    }
+
+    .mono-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+    }
+
+    .mono-bold {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .red-accent { color: var(--red); }
+
+    /* ═══════════════════════════════════════════════════════
+       DIVIDERS
+       ═══════════════════════════════════════════════════════ */
+    .divider-red {
+      border: none;
+      height: 2px;
+      background: var(--red);
+      margin: var(--sp-5) 0;
+    }
+
+    .divider-dashed {
+      border: none;
+      border-top: 1px dashed var(--muted);
+      margin: var(--sp-4) 0;
+    }
+
+    .divider-thin {
+      border: none;
+      height: 1px;
+      background: var(--muted);
+      margin: var(--sp-3) 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       GRID HELPERS
+       ═══════════════════════════════════════════════════════ */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-3);
+    }
+    @media (min-width: 640px) {
+      .grid-2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-3);
+    }
+    @media (min-width: 640px) {
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 900px) {
+      .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-2);
+    }
+    @media (min-width: 768px) {
+      .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       COMPONENTS
+       ═══════════════════════════════════════════════════════ */
+
+    /* --- Color Swatch --- */
+    .swatch {
+      border: 1px solid var(--muted);
+      overflow: hidden;
+    }
+    .swatch-color {
+      height: 80px;
+      position: relative;
+    }
+    .swatch-info {
+      padding: var(--sp-2);
+      background: white;
+    }
+    .swatch-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .swatch-hex {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--muted-text);
+    }
+    .swatch-usage {
+      font-size: 12px;
+      color: var(--muted-text);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* --- Buttons --- */
+    .btn {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 24px;
+      border: 2px solid var(--fg);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      border-radius: 0;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: white;
+      border-color: var(--fg);
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+    .btn-primary:hover {
+      box-shadow: 6px 6px 0 var(--fg);
+      transform: translate(-2px, -2px);
+    }
+    .btn-primary:active {
+      box-shadow: 2px 2px 0 var(--fg);
+      transform: translate(2px, 2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--fg);
+      border-color: var(--fg);
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+    .btn-outline:hover {
+      background: var(--fg);
+      color: var(--bg);
+      box-shadow: 6px 6px 0 var(--fg);
+      transform: translate(-2px, -2px);
+    }
+    .btn-outline:active {
+      box-shadow: 2px 2px 0 var(--fg);
+      transform: translate(2px, 2px);
+    }
+
+    /* --- Brutalist Card --- */
+    .card {
+      background: white;
+      border: 1px solid var(--fg);
+      padding: var(--sp-3);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      box-shadow: 4px 4px 0 var(--fg);
+      transform: translate(-2px, -2px);
+    }
+
+    /* --- Agent Card --- */
+    .agent-card {
+      border: 2px dashed var(--red);
+      padding: var(--sp-3);
+      position: relative;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .agent-card::before,
+    .agent-card::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      border-color: var(--red);
+      border-style: solid;
+    }
+    .agent-card::before {
+      top: -1px;
+      left: -1px;
+      border-width: 2px 0 0 2px;
+    }
+    .agent-card::after {
+      bottom: -1px;
+      right: -1px;
+      border-width: 0 2px 2px 0;
+    }
+
+    /* --- Data Label --- */
+    .data-label {
+      display: flex;
+      gap: var(--sp-2);
+      align-items: baseline;
+      padding: 6px 0;
+    }
+    .data-label-key {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+      min-width: 20px;
+    }
+    .data-label-value {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--fg);
+    }
+
+    /* --- Logo --- */
+    .logo-group {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+    }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--red);
+      box-shadow: 2px 2px 0 var(--fg);
+      flex-shrink: 0;
+    }
+    .logo-wordmark {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* --- Do / Don't --- */
+    .do-dont-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-3);
+    }
+    @media (min-width: 640px) {
+      .do-dont-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .do-box, .dont-box {
+      padding: var(--sp-3);
+      border: 2px solid;
+    }
+    .do-box {
+      border-color: var(--agent-online);
+      background: rgba(34, 197, 94, 0.04);
+    }
+    .dont-box {
+      border-color: var(--red);
+      background: rgba(220, 38, 38, 0.04);
+    }
+    .do-box-header, .dont-box-header {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--sp-2);
+    }
+    .do-box-header { color: var(--agent-online); }
+    .dont-box-header { color: var(--red); }
+
+    .example-text {
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--fg);
+    }
+
+    /* --- Spacing Demo --- */
+    .spacing-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-2);
+    }
+    .spacing-block {
+      background: var(--red);
+      opacity: 0.15;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .spacing-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--muted-text);
+      white-space: nowrap;
+      min-width: 90px;
+    }
+
+    /* --- Type Specimen --- */
+    .type-specimen {
+      margin-bottom: var(--sp-5);
+    }
+    .type-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      margin-top: var(--sp-1);
+    }
+    .type-meta-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-text);
+      border: 1px solid var(--muted);
+      padding: 2px 8px;
+    }
+
+    /* --- Dark Section Demo --- */
+    .dark-section {
+      background: var(--dark-bg);
+      color: var(--dark-fg);
+      padding: var(--sp-6) var(--sp-4);
+      margin-left: calc(var(--sp-3) * -1);
+      margin-right: calc(var(--sp-3) * -1);
+    }
+    @media (min-width: 768px) {
+      .dark-section {
+        margin-left: calc(var(--sp-4) * -1);
+        margin-right: calc(var(--sp-4) * -1);
+      }
+    }
+    @media (min-width: 1024px) {
+      .dark-section {
+        margin-left: calc(var(--sp-8) * -1);
+        margin-right: calc(var(--sp-8) * -1);
+      }
+    }
+    .dark-section .section-tag { color: var(--red-dark); }
+    .dark-section .mono-label { color: var(--dark-muted-text); }
+    .dark-section .swatch-info { background: var(--dark-card); }
+    .dark-section .swatch-name { color: var(--dark-fg); }
+    .dark-section .swatch-hex { color: var(--dark-muted-text); }
+    .dark-section .swatch { border-color: var(--dark-muted); }
+
+    /* --- Animation Demo --- */
+    .anim-demo {
+      overflow: hidden;
+      border: 1px solid var(--muted);
+      padding: var(--sp-4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+      gap: var(--sp-2);
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .anim-slide-up {
+      animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .anim-slide-up.delay-1 { animation-delay: 0.1s; }
+    .anim-slide-up.delay-2 { animation-delay: 0.2s; }
+    .anim-slide-up.delay-3 { animation-delay: 0.3s; }
+
+    .marquee-track {
+      display: flex;
+      white-space: nowrap;
+      animation: marquee 20s linear infinite;
+      gap: var(--sp-6);
+    }
+    .marquee-track span {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      font-size: 24px;
+      color: var(--muted);
+    }
+    .marquee-track span.red { color: var(--red); }
+
+    /* --- Grid overlay demo --- */
+    .grid-overlay-demo {
+      position: relative;
+      height: 200px;
+      border: 1px solid var(--muted);
+      overflow: hidden;
+    }
+    .grid-overlay-demo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .grid-overlay-demo .inner-content {
+      position: relative;
+      z-index: 1;
+      padding: var(--sp-4);
+    }
+
+    /* --- Status indicators --- */
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .status-dot.online { background: var(--agent-online); }
+    .status-dot.learning { background: var(--agent-learning); }
+
+    /* --- Scroll Progress Bar --- */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--red);
+      z-index: 1000;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* --- Floating Section Indicator --- */
+    .section-indicator {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted-text);
+      background: var(--bg);
+      border: 1px solid var(--muted);
+      padding: 8px 14px;
+      z-index: 999;
+      letter-spacing: 0.05em;
+      box-shadow: 2px 2px 0 var(--fg);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .section-indicator.visible { opacity: 1; }
+    .section-indicator span { color: var(--red); }
+
+    /* --- Copy Toast --- */
+    .copy-toast {
+      position: fixed;
+      bottom: 80px;
+      right: 32px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: white;
+      background: var(--fg);
+      padding: 8px 16px;
+      z-index: 1001;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transform: translateY(10px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .copy-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* --- Replay Button --- */
+    .replay-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted-text);
+      background: none;
+      border: 1px solid var(--muted);
+      padding: 5px 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .replay-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* --- Animation Stage --- */
+    .anim-stage {
+      border: 1px solid var(--muted);
+      background: white;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      padding: var(--sp-3);
+    }
+    .anim-stage.dark {
+      background: var(--dark-bg);
+      border-color: var(--dark-muted);
+    }
+
+    /* Specific animation keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes counterUp {
+      from { --num: 0; }
+      to { --num: 36; }
+    }
+    @keyframes shadowPulse {
+      0% { box-shadow: 4px 4px 0 var(--fg); transform: translate(0, 0); }
+      50% { box-shadow: 6px 6px 0 var(--fg); transform: translate(-2px, -2px); }
+      100% { box-shadow: 4px 4px 0 var(--fg); transform: translate(0, 0); }
+    }
+    @keyframes typewriter {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* --- Scroll Reveal --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* --- Clickable Swatch --- */
+    .swatch { cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .swatch:hover { transform: translate(-2px, -2px); box-shadow: 2px 2px 0 var(--fg); }
+
+    /* --- Smooth Scroll --- */
+    html { scroll-behavior: smooth; }
+
+    /* --- Asset Mockup Frame --- */
+    .mockup-frame {
+      border: 1px solid var(--muted);
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .mockup-label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+      background: var(--secondary);
+      padding: 4px 10px;
+      border-left: 1px solid var(--muted);
+      border-bottom: 1px solid var(--muted);
+    }
+
+    /* --- Business Card Mockup --- */
+    .biz-card {
+      width: 100%;
+      max-width: 350px;
+      aspect-ratio: 3.5 / 2;
+      border: 1.5px solid var(--fg);
+      box-shadow: 4px 4px 0 var(--fg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: white;
+    }
+
+    /* --- Social Media Mockup --- */
+    .social-frame {
+      background: white;
+      border: 1px solid var(--muted);
+      overflow: hidden;
+    }
+    .social-frame-inner {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- Letterhead Mockup --- */
+    .letterhead-frame {
+      width: 100%;
+      max-width: 500px;
+      aspect-ratio: 8.5 / 11;
+      border: 1px solid var(--muted);
+      background: white;
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+
+    /* --- Invoice Mockup --- */
+    .invoice-frame {
+      width: 100%;
+      max-width: 500px;
+      border: 1px solid var(--muted);
+      background: white;
+      padding: 36px;
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+
+    /* --- Print styles --- */
+    @media print {
+      .page { padding: 40px; }
+      section { break-inside: avoid; }
+      .dark-section { margin-left: 0; margin-right: 0; }
+      .scroll-progress, .section-indicator, .copy-toast { display: none; }
+    }
+
+    /* --- Table of contents --- */
+    .toc {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2px;
+      margin-top: var(--sp-4);
+    }
+    @media (min-width: 640px) {
+      .toc { grid-template-columns: 1fr 1fr; }
+    }
+    .toc-item {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-1) 0;
+      text-decoration: none;
+      color: var(--fg);
+      transition: color 0.2s;
+    }
+    .toc-item:hover { color: var(--red); }
+    .toc-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--red);
+      font-weight: 700;
+      min-width: 40px;
+    }
+    .toc-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* --- Meta bar at top --- */
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: var(--sp-3);
+      border-bottom: 2px solid var(--fg);
+      margin-bottom: var(--sp-6);
+      gap: var(--sp-2);
+    }
+    .meta-right {
+      display: flex;
+      gap: var(--sp-4);
+    }
+
+    /* --- Radius demo --- */
+    .radius-demo {
+      display: flex;
+      gap: var(--sp-3);
+      flex-wrap: wrap;
+    }
+    .radius-box {
+      width: 64px;
+      height: 64px;
+      border: 2px solid var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .radius-box.correct {
+      background: rgba(220, 38, 38, 0.08);
+    }
+    .radius-box.wrong {
+      border-radius: 12px;
+      opacity: 0.3;
+      position: relative;
+    }
+    .radius-box.wrong::after {
+      content: '✕';
+      color: var(--red);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* --- Shadow demo --- */
+    .shadow-demo {
+      display: flex;
+      gap: var(--sp-5);
+      flex-wrap: wrap;
+      align-items: end;
+    }
+    .shadow-item {
+      text-align: center;
+    }
+    .shadow-box {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border: 1px solid var(--fg);
+      margin-bottom: var(--sp-1);
+    }
+    .shadow-box.shadow-4 {
+      box-shadow: 4px 4px 0 var(--fg);
+    }
+    .shadow-box.shadow-2 {
+      box-shadow: 2px 2px 0 var(--fg);
+      width: 48px;
+      height: 48px;
+    }
+
+    /* --- Version footer --- */
+    .version-footer {
+      margin-top: var(--sp-15);
+      padding-top: var(--sp-4);
+      border-top: 2px solid var(--fg);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--sp-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  <div class="section-indicator" id="sectionIndicator">[ <span>001</span> / 016 ]</div>
+  <div class="copy-toast" id="copyToast">Copied</div>
+  <div class="page">
+
+    <!-- ═══════════════════════════════════════════════════
+         HEADER
+         ═══════════════════════════════════════════════════ -->
+    <header>
+      <div class="meta-bar">
+        <div class="logo-group">
+          <div class="logo-mark"></div>
+          <span class="logo-wordmark">UNPASTE</span>
+        </div>
+        <div class="meta-right">
+          <div class="data-label">
+            <span class="data-label-key">V</span>
+            <span class="data-label-value">2.0</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key">D</span>
+            <span class="data-label-value">2026-02-12</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key">S</span>
+            <span class="data-label-value"><span class="status"><span class="status-dot online"></span> Active</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: var(--sp-6);">
+        <h1 class="display display-xl" style="margin-bottom: var(--sp-3);">
+          VISUAL BRAND<br><span class="red-accent">GUIDELINES</span>
+        </h1>
+        <p class="body-text muted" style="max-width: 600px;">
+          The living visual identity system for Unpaste. Every touchpoint — website, social, email, ad — follows these rules. No exceptions.
+        </p>
+      </div>
+
+      <hr class="divider-red">
+
+      <!-- Table of Contents -->
+      <p class="mono-label" style="margin-bottom: var(--sp-1);">System</p>
+      <div class="toc" style="margin-bottom: var(--sp-3);">
+        <a href="#brand-essence" class="toc-item">
+          <span class="toc-number">[001]</span>
+          <span class="toc-label">Brand Essence</span>
+        </a>
+        <a href="#color-palette" class="toc-item">
+          <span class="toc-number">[002]</span>
+          <span class="toc-label">Colour Palette</span>
+        </a>
+        <a href="#typography" class="toc-item">
+          <span class="toc-number">[003]</span>
+          <span class="toc-label">Typography</span>
+        </a>
+        <a href="#spacing" class="toc-item">
+          <span class="toc-number">[004]</span>
+          <span class="toc-label">Spacing & Layout</span>
+        </a>
+        <a href="#components" class="toc-item">
+          <span class="toc-number">[005]</span>
+          <span class="toc-label">Components</span>
+        </a>
+        <a href="#logo" class="toc-item">
+          <span class="toc-number">[006]</span>
+          <span class="toc-label">Logo System</span>
+        </a>
+        <a href="#voice" class="toc-item">
+          <span class="toc-number">[007]</span>
+          <span class="toc-label">Voice & Tone</span>
+        </a>
+        <a href="#animation" class="toc-item">
+          <span class="toc-number">[008]</span>
+          <span class="toc-label">Motion & Animation</span>
+        </a>
+        <a href="#dark-mode" class="toc-item">
+          <span class="toc-number">[009]</span>
+          <span class="toc-label">Dark Mode</span>
+        </a>
+        <a href="#anti-slop" class="toc-item">
+          <span class="toc-number">[010]</span>
+          <span class="toc-label">Anti-Slop Checklist</span>
+        </a>
+      </div>
+      <p class="mono-label" style="margin-bottom: var(--sp-1);">Asset Templates</p>
+      <div class="toc">
+        <a href="#business-card" class="toc-item">
+          <span class="toc-number">[011]</span>
+          <span class="toc-label">Business Card</span>
+        </a>
+        <a href="#email-signature" class="toc-item">
+          <span class="toc-number">[012]</span>
+          <span class="toc-label">Email Signature</span>
+        </a>
+        <a href="#letterhead" class="toc-item">
+          <span class="toc-number">[013]</span>
+          <span class="toc-label">Letterhead</span>
+        </a>
+        <a href="#social-media" class="toc-item">
+          <span class="toc-number">[014]</span>
+          <span class="toc-label">Social Media</span>
+        </a>
+        <a href="#proposal" class="toc-item">
+          <span class="toc-number">[015]</span>
+          <span class="toc-label">Proposal / Invoice</span>
+        </a>
+        <a href="#brand-in-action" class="toc-item">
+          <span class="toc-number">[016]</span>
+          <span class="toc-label">Brand In Action</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════
+         001 — BRAND ESSENCE
+         ═══════════════════════════════════════════════════ -->
+    <section id="brand-essence" data-section="001" class="reveal">
+      <span class="section-tag">[001] Brand Essence</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-4);">
+        SWISS BRUTALIST.<br><span class="red-accent">BY DESIGN.</span>
+      </h2>
+
+      <div class="grid-2" style="margin-bottom: var(--sp-5);">
+        <div>
+          <p class="body-text" style="margin-bottom: var(--sp-3);">
+            Unpaste's visual identity is <strong>Swiss Brutalist</strong> — precision, engineering, and no-nonsense functionality. Every element says "we build systems, not brochures."
+          </p>
+          <p class="body-text muted">
+            A senior engineer who spent 10 years watching businesses drown in spreadsheets and manual processes, finally snapped, and built the tools to fix it.
+          </p>
+        </div>
+        <div>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--sp-1);">
+            <span class="type-meta-tag">Technical</span>
+            <span class="type-meta-tag">Direct</span>
+            <span class="type-meta-tag">Systematic</span>
+            <span class="type-meta-tag">Confident</span>
+            <span class="type-meta-tag">No-Bullshit</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <div class="data-label">
+        <span class="data-label-key">W</span>
+        <span class="data-label-value">unpaste.ai</span>
+      </div>
+      <div class="data-label">
+        <span class="data-label-key">L</span>
+        <span class="data-label-value">Brisbane, Australia</span>
+      </div>
+      <div class="data-label">
+        <span class="data-label-key">E</span>
+        <span class="data-label-value">elliot@unpaste.co</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         002 — COLOUR PALETTE
+         ═══════════════════════════════════════════════════ -->
+    <section id="color-palette" data-section="002" class="reveal">
+      <span class="section-tag">[002] Colour Palette</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        COLOUR <span class="red-accent">SYSTEM</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        Red is for interactive elements and structural dividers. Never for large backgrounds. High contrast always.
+      </p>
+
+      <!-- Primary colours -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Primary Palette</p>
+      <div class="grid-4" style="margin-bottom: var(--sp-5);">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #DC2626;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Primary Red</div>
+            <div class="swatch-hex">#DC2626</div>
+            <div class="swatch-usage">CTAs, links, accent text, tags</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #09090B;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Foreground</div>
+            <div class="swatch-hex">#09090B</div>
+            <div class="swatch-usage">Text, headings, shadows</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #FAFAFA; border-bottom: 1px solid #E4E4E7;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Background</div>
+            <div class="swatch-hex">#FAFAFA</div>
+            <div class="swatch-usage">Page background</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #F4F4F5; border-bottom: 1px solid #E4E4E7;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Secondary</div>
+            <div class="swatch-hex">#F4F4F5</div>
+            <div class="swatch-usage">Hover states, subtle BGs</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support colours -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Support Palette</p>
+      <div class="grid-4" style="margin-bottom: var(--sp-5);">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #E4E4E7;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Muted</div>
+            <div class="swatch-hex">#E4E4E7</div>
+            <div class="swatch-usage">Borders, grid overlay</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #71717A;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Muted Text</div>
+            <div class="swatch-hex">#71717A</div>
+            <div class="swatch-usage">Secondary text, labels</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #22C55E;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Agent Online</div>
+            <div class="swatch-hex">#22C55E</div>
+            <div class="swatch-usage">Active status indicators</div>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #F59E0B;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Agent Learning</div>
+            <div class="swatch-hex">#F59E0B</div>
+            <div class="swatch-usage">In-development status</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Colour Rules -->
+      <hr class="divider-dashed">
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Colour Rules</p>
+      <div class="grid-2">
+        <div>
+          <p class="body-text" style="font-size: 14px; margin-bottom: var(--sp-1);">
+            <strong>Selection highlight</strong> — red background, white text.
+            <span style="background: var(--red); color: white; padding: 0 4px;">Try selecting this text.</span>
+          </p>
+          <p class="body-text" style="font-size: 14px; margin-bottom: var(--sp-1);">
+            <strong>Dark sections</strong> use dark palette on light pages for contrast rhythm.
+          </p>
+        </div>
+        <div>
+          <p class="body-text" style="font-size: 14px; margin-bottom: var(--sp-1);">
+            <strong>Never</strong> use red for large background areas.
+          </p>
+          <p class="body-text" style="font-size: 14px;">
+            <strong>Never</strong> use low-contrast gray-on-gray text.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         003 — TYPOGRAPHY
+         ═══════════════════════════════════════════════════ -->
+    <section id="typography" data-section="003" class="reveal">
+      <span class="section-tag">[003] Typography</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-5);">
+        TYPE <span class="red-accent">SYSTEM</span>
+      </h2>
+
+      <!-- Display specimen -->
+      <div class="type-specimen">
+        <p class="mono-label" style="margin-bottom: var(--sp-1);">Display / Headlines</p>
+        <p class="display" style="font-size: clamp(36px, 6vw, 72px); margin-bottom: var(--sp-1);">
+          STOP COPY-PASTING.
+        </p>
+        <div class="type-meta">
+          <span class="type-meta-tag">System UI</span>
+          <span class="type-meta-tag">Weight 800</span>
+          <span class="type-meta-tag">Uppercase</span>
+          <span class="type-meta-tag">Tracking -0.04em</span>
+          <span class="type-meta-tag">Leading 0.95</span>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Body specimen -->
+      <div class="type-specimen">
+        <p class="mono-label" style="margin-bottom: var(--sp-1);">Body Text</p>
+        <p class="body-text" style="margin-bottom: var(--sp-1);">
+          You're losing hours every week to work a machine should be doing. We find it, we fix it, and you get your time back. Short. Declarative. Paragraphs are 1–3 sentences.
+        </p>
+        <div class="type-meta">
+          <span class="type-meta-tag">Inter</span>
+          <span class="type-meta-tag">Weight 400–600</span>
+          <span class="type-meta-tag">16px Base</span>
+          <span class="type-meta-tag">Leading 1.6</span>
+          <span class="type-meta-tag">Antialiased</span>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Monospace specimen -->
+      <div class="type-specimen">
+        <p class="mono-label" style="margin-bottom: var(--sp-1);">Monospace / Labels</p>
+        <p class="mono-bold" style="font-size: 14px; margin-bottom: var(--sp-1);">
+          [001] EFFICIENCY SCORE — BRISBANE SMB — 2026
+        </p>
+        <div class="type-meta">
+          <span class="type-meta-tag">Space Mono</span>
+          <span class="type-meta-tag">Weight 400 / 700</span>
+          <span class="type-meta-tag">Uppercase</span>
+          <span class="type-meta-tag">Tracking 0.05–0.1em</span>
+          <span class="type-meta-tag">10–12px</span>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Type Scale -->
+      <p class="mono-label" style="margin-bottom: var(--sp-3);">Type Scale</p>
+      <div style="display: flex; flex-direction: column; gap: var(--sp-2);">
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">96px</span>
+          <span class="display" style="font-size: 96px; line-height: 1;">Aa</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">64px</span>
+          <span class="display" style="font-size: 64px; line-height: 1;">Aa</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">48px</span>
+          <span class="display" style="font-size: 48px; line-height: 1;">Aa</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">32px</span>
+          <span class="display" style="font-size: 32px; line-height: 1;">Aa</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">16px</span>
+          <span class="body-text" style="font-size: 16px;">The quick brown fox jumps over the lazy dog.</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">12px</span>
+          <span class="mono-bold" style="font-size: 12px;">[001] SECTION TAG — MONOSPACE LABEL</span>
+        </div>
+        <div style="display: flex; align-items: baseline; gap: var(--sp-2);">
+          <span class="mono-label" style="min-width: 50px;">11px</span>
+          <span class="section-tag" style="margin: 0;">[002] RED SECTION TAG</span>
+        </div>
+      </div>
+
+      <hr class="divider-dashed" style="margin-top: var(--sp-5);">
+
+      <!-- Headline patterns -->
+      <p class="mono-label" style="margin-bottom: var(--sp-3);">Headline Patterns</p>
+      <div class="grid-2">
+        <div>
+          <p class="display display-sm" style="margin-bottom: var(--sp-1);">
+            FROM OVERWHELMED<br>TO <span class="red-accent">OPTIMISED.</span>
+          </p>
+          <p class="mono-label" style="margin-top: var(--sp-1);">Red accent on the key word</p>
+        </div>
+        <div>
+          <p class="display display-sm" style="margin-bottom: var(--sp-1);">
+            36 HOURS <span class="red-accent">&rarr;</span> 1 HOUR.
+          </p>
+          <p class="mono-label" style="margin-top: var(--sp-1);">Data-first proof format</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         004 — SPACING & LAYOUT
+         ═══════════════════════════════════════════════════ -->
+    <section id="spacing" data-section="004" class="reveal">
+      <span class="section-tag">[004] Spacing & Layout</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-5);">
+        8PX <span class="red-accent">GRID</span>
+      </h2>
+
+      <!-- Spacing scale -->
+      <p class="mono-label" style="margin-bottom: var(--sp-3);">Spacing Scale</p>
+      <div style="margin-bottom: var(--sp-5);">
+        <div class="spacing-row">
+          <span class="spacing-label">8px (1×)</span>
+          <div class="spacing-block" style="width: 8px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">16px (2×)</span>
+          <div class="spacing-block" style="width: 16px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">24px (3×)</span>
+          <div class="spacing-block" style="width: 24px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">32px (4×)</span>
+          <div class="spacing-block" style="width: 32px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">48px (6×)</span>
+          <div class="spacing-block" style="width: 48px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">64px (8×)</span>
+          <div class="spacing-block" style="width: 64px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">80px (10×)</span>
+          <div class="spacing-block" style="width: 80px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">96px (12×)</span>
+          <div class="spacing-block" style="width: 96px;"></div>
+        </div>
+        <div class="spacing-row">
+          <span class="spacing-label">120px (15×)</span>
+          <div class="spacing-block" style="width: 120px;"></div>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Border radius -->
+      <div class="grid-2" style="margin-bottom: var(--sp-5);">
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Border Radius</p>
+          <p class="body-text" style="margin-bottom: var(--sp-3);">
+            <strong>0px everywhere. Zero. Non-negotiable.</strong> Sharp corners are the brutalist identity.
+          </p>
+          <div class="radius-demo">
+            <div style="text-align: center;">
+              <div class="radius-box correct"></div>
+              <span class="mono-label" style="margin-top: 4px; display: block;">0px</span>
+            </div>
+            <div style="text-align: center;">
+              <div class="radius-box wrong"></div>
+              <span class="mono-label" style="margin-top: 4px; display: block;">Never</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Layout Constraints</p>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 80px;">Max Width</span>
+            <span class="data-label-value">1280px</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 80px;">Mobile Pad</span>
+            <span class="data-label-value">24px</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 80px;">Tablet Pad</span>
+            <span class="data-label-value">32px</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 80px;">Desktop Pad</span>
+            <span class="data-label-value">64px</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Grid overlay demo -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Grid Overlay — 60px Desktop / 40px Mobile</p>
+      <div class="grid-overlay-demo">
+        <div class="inner-content">
+          <span class="section-tag">[004] GRID DEMO</span>
+          <p class="display display-sm">STRUCTURAL TEXTURE</p>
+          <p class="body-text muted" style="font-size: 14px;">5% opacity grid overlay. Subtle structural texture that reinforces the engineering aesthetic.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         005 — COMPONENTS
+         ═══════════════════════════════════════════════════ -->
+    <section id="components" data-section="005" class="reveal">
+      <span class="section-tag">[005] Components</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-5);">
+        COMPONENT <span class="red-accent">LIBRARY</span>
+      </h2>
+
+      <!-- Buttons -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Buttons</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-5);">
+        <div style="text-align: center;">
+          <button class="btn btn-primary">Get Your Score</button>
+          <p class="mono-label" style="margin-top: var(--sp-2);">Primary CTA</p>
+        </div>
+        <div style="text-align: center;">
+          <button class="btn btn-outline">Learn More</button>
+          <p class="mono-label" style="margin-top: var(--sp-2);">Outline / Secondary</p>
+        </div>
+      </div>
+      <p class="body-text muted" style="font-size: 13px; margin-bottom: var(--sp-5);">
+        Hover to see shadow grow. Click to see shadow compress. Monospace, uppercase, 12px, bold, tracked. Never rounded.
+      </p>
+
+      <hr class="divider-dashed">
+
+      <!-- Shadow Hierarchy -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Shadow Hierarchy</p>
+      <div class="shadow-demo" style="margin-bottom: var(--sp-5);">
+        <div class="shadow-item">
+          <div class="shadow-box shadow-4"></div>
+          <span class="mono-label">4px — Containers</span>
+        </div>
+        <div class="shadow-item">
+          <div class="shadow-box shadow-2"></div>
+          <span class="mono-label">2px — Nested</span>
+        </div>
+      </div>
+      <p class="body-text muted" style="font-size: 13px; margin-bottom: var(--sp-5);">
+        Container shadow is always larger than nested children. Maintains visual hierarchy.
+      </p>
+
+      <hr class="divider-dashed">
+
+      <!-- Dividers -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Dividers</p>
+      <div style="margin-bottom: var(--sp-5);">
+        <p class="mono-label" style="font-size: 10px; margin-bottom: 4px;">Primary — 2px solid red</p>
+        <hr class="divider-red" style="margin: var(--sp-1) 0 var(--sp-3) 0;">
+        <p class="mono-label" style="font-size: 10px; margin-bottom: 4px;">Secondary — 1px dashed muted</p>
+        <hr class="divider-dashed" style="margin: var(--sp-1) 0 var(--sp-3) 0;">
+        <p class="body-text muted" style="font-size: 13px;">
+          Never use solid gray lines. Either red (bold) or dashed (subtle).
+        </p>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Cards -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Cards</p>
+      <div class="grid-3" style="margin-bottom: var(--sp-5);">
+        <div class="card">
+          <span class="section-tag" style="margin-bottom: var(--sp-1);">[001] Brutalist Card</span>
+          <p class="body-text" style="font-size: 14px;">White background, 1px border. Hover to see 4px shadow appear. No border radius.</p>
+        </div>
+
+        <div class="agent-card">
+          <span class="section-tag" style="margin-bottom: var(--sp-1);">[002] Agent Card</span>
+          <p class="body-text" style="font-size: 14px;">2px dashed red border. Corner bracket accents. 20px grid background at 3% opacity.</p>
+          <div style="margin-top: var(--sp-2);">
+            <span class="status"><span class="status-dot online"></span> Online</span>
+          </div>
+        </div>
+
+        <div style="border: 1px solid var(--fg); padding: var(--sp-3); box-shadow: 4px 4px 0 var(--fg);">
+          <span class="section-tag" style="margin-bottom: var(--sp-1);">[003] Shadow Card</span>
+          <p class="body-text" style="font-size: 14px;">Static shadow. For elements that need permanent elevation without hover state.</p>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Data Labels -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Data Labels — Key-Value Pattern</p>
+      <div class="grid-2" style="margin-bottom: var(--sp-5);">
+        <div style="border: 1px solid var(--muted); padding: var(--sp-3);">
+          <div class="data-label">
+            <span class="data-label-key">W</span>
+            <span class="data-label-value">unpaste.ai</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key">E</span>
+            <span class="data-label-value">elliot@unpaste.co</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key">L</span>
+            <span class="data-label-value">Brisbane, QLD 4000</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key">P</span>
+            <span class="data-label-value">+61 4XX XXX XXX</span>
+          </div>
+        </div>
+        <div>
+          <p class="body-text" style="font-size: 14px;">
+            Single-letter monospace labels paired with values. Use across business cards, documents, proposals, email signatures — anywhere structured data is displayed.
+          </p>
+          <p class="body-text muted" style="font-size: 13px; margin-top: var(--sp-1);">
+            Reinforces the engineering personality without being cold.
+          </p>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <!-- Section Tags -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Section Tags</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-5);">
+        <span class="section-tag" style="margin: 0;">[001] FOUNDER</span>
+        <span class="section-tag" style="margin: 0;">[002] SERVICES</span>
+        <span class="section-tag" style="margin: 0;">[003] EFFICIENCY SCORE</span>
+        <span class="section-tag" style="margin: 0;">[004] CASE STUDY</span>
+      </div>
+      <p class="body-text muted" style="font-size: 13px;">
+        Space Mono, 11px, bold, uppercase, red, tracked. General-purpose label pattern — not just for page sections. Use on business cards, documents, proposals.
+      </p>
+
+      <hr class="divider-dashed">
+
+      <!-- Status Indicators -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Status Indicators</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--sp-4);">
+        <span class="status"><span class="status-dot online"></span> Agent Online</span>
+        <span class="status"><span class="status-dot learning"></span> Agent Learning</span>
+        <span class="status"><span class="status-dot" style="background: var(--red);"></span> Agent Offline</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         006 — LOGO SYSTEM
+         ═══════════════════════════════════════════════════ -->
+    <section id="logo" data-section="006" class="reveal">
+      <span class="section-tag">[006] Logo System</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-5);">
+        LOGO <span class="red-accent">MARK</span>
+      </h2>
+
+      <div class="grid-2" style="margin-bottom: var(--sp-5);">
+        <!-- Logo large -->
+        <div style="border: 1px solid var(--muted); padding: var(--sp-6); display: flex; align-items: center; justify-content: center;">
+          <div style="display: flex; align-items: center; gap: var(--sp-3);">
+            <div style="width: 48px; height: 48px; background: var(--red); box-shadow: 2px 2px 0 var(--fg);"></div>
+            <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 28px; text-transform: uppercase; letter-spacing: 0.05em;">UNPASTE</span>
+          </div>
+        </div>
+        <!-- Logo specs -->
+        <div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 90px;">Mark</span>
+            <span class="data-label-value">32px red square (#DC2626)</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 90px;">Wordmark</span>
+            <span class="data-label-value">Space Mono, Bold, Uppercase</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 90px;">Clear Space</span>
+            <span class="data-label-value">Minimum 16px around mark</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 90px;">Min Size</span>
+            <span class="data-label-value">Mark 24px, Wordmark 14px</span>
+          </div>
+          <div class="data-label">
+            <span class="data-label-key" style="min-width: 90px;">Shadow</span>
+            <span class="data-label-value">2px offset when inside containers</span>
+          </div>
+          <hr class="divider-dashed">
+          <p class="body-text muted" style="font-size: 13px;">
+            Logo in copy: uppercase wordmark (UNPASTE). In body text: title case (Unpaste). Never "Unpaste team" or "our experts."
+          </p>
+        </div>
+      </div>
+
+      <!-- Logo variations -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Variations</p>
+      <div class="grid-3">
+        <div style="border: 1px solid var(--muted); padding: var(--sp-4); display: flex; align-items: center; justify-content: center; background: white;">
+          <div class="logo-group">
+            <div class="logo-mark"></div>
+            <span class="logo-wordmark">UNPASTE</span>
+          </div>
+        </div>
+        <div style="border: 1px solid var(--dark-muted); padding: var(--sp-4); display: flex; align-items: center; justify-content: center; background: var(--dark-bg);">
+          <div class="logo-group">
+            <div style="width: 32px; height: 32px; background: var(--red-dark); box-shadow: 2px 2px 0 var(--dark-fg);"></div>
+            <span class="logo-wordmark" style="color: var(--dark-fg);">UNPASTE</span>
+          </div>
+        </div>
+        <div style="border: 1px solid var(--muted); padding: var(--sp-4); display: flex; align-items: center; justify-content: center; background: white;">
+          <div style="width: 32px; height: 32px; background: var(--red); box-shadow: 2px 2px 0 var(--fg);"></div>
+        </div>
+      </div>
+      <div style="display: flex; gap: var(--sp-3); margin-top: var(--sp-1);">
+        <span class="mono-label" style="flex: 1; text-align: center;">Light Mode</span>
+        <span class="mono-label" style="flex: 1; text-align: center;">Dark Mode</span>
+        <span class="mono-label" style="flex: 1; text-align: center;">Mark Only</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         007 — VOICE & TONE
+         ═══════════════════════════════════════════════════ -->
+    <section id="voice" data-section="007" class="reveal">
+      <span class="section-tag">[007] Voice & Tone</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-5);">
+        LANGUAGE <span class="red-accent">RULES</span>
+      </h2>
+
+      <!-- Do / Don't: Headlines -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Headlines</p>
+      <div class="do-dont-grid" style="margin-bottom: var(--sp-5);">
+        <div class="do-box">
+          <div class="do-box-header">Use</div>
+          <p class="example-text" style="font-weight: 600;">"Stop Copy-Pasting."</p>
+          <p class="example-text" style="font-weight: 600; margin-top: 8px;">"36 Hours → 1 Hour. Here's How."</p>
+          <p class="example-text" style="font-weight: 600; margin-top: 8px;">"Your Website Should Work While You Sleep."</p>
+        </div>
+        <div class="dont-box">
+          <div class="dont-box-header">Never</div>
+          <p class="example-text">"Leveraging Cutting-Edge AI Solutions"</p>
+          <p class="example-text" style="margin-top: 8px;">"Your Digital Transformation Journey Starts Here"</p>
+          <p class="example-text" style="margin-top: 8px;">"Committed to Excellence in AI-Powered Innovation"</p>
+        </div>
+      </div>
+
+      <!-- Do / Don't: Describing what we do -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Describing What We Do</p>
+      <div class="do-dont-grid" style="margin-bottom: var(--sp-5);">
+        <div class="do-box">
+          <div class="do-box-header">Use</div>
+          <p class="example-text">"AI that generates your quotes" — specific</p>
+          <p class="example-text" style="margin-top: 8px;">"Connects your existing tools" — mechanical</p>
+          <p class="example-text" style="margin-top: 8px;">"Works 24/7" — concrete outcome</p>
+        </div>
+        <div class="dont-box">
+          <div class="dont-box-header">Never</div>
+          <p class="example-text">"AI-powered solution" — vague prefix</p>
+          <p class="example-text" style="margin-top: 8px;">"Seamless integration" — nothing is seamless</p>
+          <p class="example-text" style="margin-top: 8px;">"Revolutionising workflows" — we automate admin</p>
+        </div>
+      </div>
+
+      <!-- Sentence rhythm -->
+      <hr class="divider-dashed">
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Sentence Rhythm</p>
+      <div style="border-left: 2px solid var(--red); padding-left: var(--sp-3); margin-bottom: var(--sp-5);">
+        <p class="body-text" style="margin-bottom: var(--sp-2);">
+          Short. Declarative. We favour fragments over run-ons.
+        </p>
+        <p class="body-text" style="margin-bottom: var(--sp-2);">
+          Paragraphs are 1–3 sentences. When we use a longer sentence, it's for technical explanation, not decoration.
+        </p>
+        <p class="body-text">
+          The rhythm is: <strong>short punch, short punch, slightly longer explanation.</strong> Then back to punching.
+        </p>
+      </div>
+
+      <!-- Banned terms -->
+      <hr class="divider-dashed">
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Banned Words & Phrases</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--sp-3);">
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">leverage</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">synergy</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">holistic</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">trusted partner</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">cutting-edge</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">seamless</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">revolutionise</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">digital transformation</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">solution</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(220,38,38,0.08); color: var(--red); padding: 4px 10px; border: 1px solid rgba(220,38,38,0.2); text-decoration: line-through;">just</span>
+      </div>
+
+      <!-- Words we use -->
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Words We Use</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">smart website</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">automation</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">workflow</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">waste</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">fix</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">build</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">hours saved</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">Efficiency Score</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">Brisbane</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">copy-paste</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">bottleneck</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">AI-native</span>
+        <span style="font-family: 'Space Mono', monospace; font-size: 11px; background: rgba(34,197,94,0.06); color: var(--fg); padding: 4px 10px; border: 1px solid rgba(34,197,94,0.2);">grow online</span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         008 — ANIMATION SHOWCASE
+         ═══════════════════════════════════════════════════ -->
+    <section id="animation" data-section="008" class="reveal">
+      <span class="section-tag">[008] Motion & Animation</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        MOTION <span class="red-accent">SHOWCASE</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        Every animation has a purpose. Click the replay buttons to see each in action. Animations feel mechanical and precise — matching the engineering brand.
+      </p>
+
+      <!-- Row 1: Text Reveal + Staggered Fade -->
+      <div class="grid-2" style="margin-bottom: var(--sp-4);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">01 — Text Reveal (Slide Up)</p>
+            <button class="replay-btn" onclick="playSlideDemo()">Replay</button>
+          </div>
+          <div class="anim-stage" id="slide-demo"></div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">0.6s</span>
+            <span class="type-meta-tag">cubic-bezier(0.16, 1, 0.3, 1)</span>
+            <span class="type-meta-tag">stagger 0.1s</span>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">02 — Staggered Content Reveal</p>
+            <button class="replay-btn" onclick="playStaggerDemo()">Replay</button>
+          </div>
+          <div class="anim-stage" id="stagger-demo" style="align-items: flex-start; padding: var(--sp-4);"></div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">0.5s each</span>
+            <span class="type-meta-tag">ease-out</span>
+            <span class="type-meta-tag">0.12s delay increment</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: Marquee + Counter -->
+      <div class="grid-2" style="margin-bottom: var(--sp-4);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">03 — Marquee Ticker</p>
+            <span class="type-meta-tag" style="font-size: 9px;">Continuous</span>
+          </div>
+          <div class="anim-stage" style="padding: 0; min-height: 80px; overflow: hidden;">
+            <div class="marquee-track">
+              <span>COPY-PASTING</span><span class="red">&bull;</span>
+              <span>BUSY-WORK</span><span class="red">&bull;</span>
+              <span>MANUAL WORK</span><span class="red">&bull;</span>
+              <span>SPREADSHEETS</span><span class="red">&bull;</span>
+              <span>COPY-PASTING</span><span class="red">&bull;</span>
+              <span>BUSY-WORK</span><span class="red">&bull;</span>
+              <span>MANUAL WORK</span><span class="red">&bull;</span>
+              <span>SPREADSHEETS</span><span class="red">&bull;</span>
+            </div>
+          </div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">Infinite</span>
+            <span class="type-meta-tag">Linear</span>
+            <span class="type-meta-tag">20s loop</span>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">04 — Counter Animation</p>
+            <button class="replay-btn" onclick="playCounterDemo()">Replay</button>
+          </div>
+          <div class="anim-stage" id="counter-demo">
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 0.1em; margin-bottom: 8px;">[001] HOURS SAVED</span>
+            <span id="counter-value" style="font-weight: 800; font-size: 64px; letter-spacing: -0.04em; line-height: 1; font-family: system-ui, sans-serif;">0</span>
+            <span style="font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted-text); letter-spacing: 0.1em; margin-top: 4px;">PER WEEK</span>
+          </div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">1.2s</span>
+            <span class="type-meta-tag">ease-out</span>
+            <span class="type-meta-tag">requestAnimationFrame</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Button Hover + Card Hover (live interactive) -->
+      <div class="grid-2" style="margin-bottom: var(--sp-4);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">05 — Button Hover States</p>
+            <span class="type-meta-tag" style="font-size: 9px;">Interactive</span>
+          </div>
+          <div class="anim-stage" style="gap: var(--sp-3); flex-direction: row; flex-wrap: wrap;">
+            <div style="text-align: center;">
+              <button class="btn btn-primary" style="font-size: 11px; padding: 10px 18px;">Hover Me</button>
+              <p class="mono-label" style="margin-top: 8px; font-size: 9px;">Shadow grows, shifts -2px</p>
+            </div>
+            <div style="text-align: center;">
+              <button class="btn btn-outline" style="font-size: 11px; padding: 10px 18px;">Hover Me</button>
+              <p class="mono-label" style="margin-top: 8px; font-size: 9px;">Fill inverts, shadow grows</p>
+            </div>
+          </div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">0.2s</span>
+            <span class="type-meta-tag">ease</span>
+            <span class="type-meta-tag">transform + box-shadow</span>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">06 — Card Hover State</p>
+            <span class="type-meta-tag" style="font-size: 9px;">Interactive</span>
+          </div>
+          <div class="anim-stage" style="gap: var(--sp-2); flex-direction: row;">
+            <div class="card" style="flex: 1; padding: var(--sp-2);">
+              <span class="section-tag" style="margin-bottom: 4px; font-size: 10px;">[001]</span>
+              <p style="font-size: 12px;">Hover for shadow</p>
+            </div>
+            <div class="agent-card" style="flex: 1; padding: var(--sp-2);">
+              <span class="section-tag" style="margin-bottom: 4px; font-size: 10px;">[002]</span>
+              <p style="font-size: 12px;">Dashed border</p>
+            </div>
+          </div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">0.3s</span>
+            <span class="type-meta-tag">ease</span>
+            <span class="type-meta-tag">transform + box-shadow</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 4: Typewriter + Color Swatch Copy -->
+      <div class="grid-2" style="margin-bottom: var(--sp-5);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">07 — Typewriter Effect</p>
+            <button class="replay-btn" onclick="playTypewriterDemo()">Replay</button>
+          </div>
+          <div class="anim-stage dark" style="padding: var(--sp-4); align-items: flex-start;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 12px;">[001] TERMINAL</span>
+            <div id="typewriter-demo" style="font-family: 'Space Mono', monospace; font-size: 13px; color: var(--dark-fg); min-height: 60px; width: 100%;"></div>
+          </div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">40ms/char</span>
+            <span class="type-meta-tag">monospace only</span>
+            <span class="type-meta-tag">cursor blink 530ms</span>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-2);">
+            <p class="mono-label">08 — Colour Copy Feedback</p>
+            <span class="type-meta-tag" style="font-size: 9px;">Click swatches</span>
+          </div>
+          <div class="anim-stage" style="gap: 0; padding: 0; flex-direction: row; min-height: 140px;">
+            <div class="swatch" style="flex: 1; border-radius: 0; border-right: 0;">
+              <div class="swatch-color" style="background: #DC2626; height: 60px;"></div>
+              <div class="swatch-info" style="padding: 10px;">
+                <div class="swatch-name" style="font-size: 10px;">Red</div>
+                <div class="swatch-hex" style="font-size: 10px;">#DC2626</div>
+              </div>
+            </div>
+            <div class="swatch" style="flex: 1; border-radius: 0; border-right: 0;">
+              <div class="swatch-color" style="background: #09090B; height: 60px;"></div>
+              <div class="swatch-info" style="padding: 10px;">
+                <div class="swatch-name" style="font-size: 10px;">FG</div>
+                <div class="swatch-hex" style="font-size: 10px;">#09090B</div>
+              </div>
+            </div>
+            <div class="swatch" style="flex: 1; border-radius: 0;">
+              <div class="swatch-color" style="background: #22C55E; height: 60px;"></div>
+              <div class="swatch-info" style="padding: 10px;">
+                <div class="swatch-name" style="font-size: 10px;">Online</div>
+                <div class="swatch-hex" style="font-size: 10px;">#22C55E</div>
+              </div>
+            </div>
+          </div>
+          <div class="type-meta" style="margin-top: var(--sp-1);">
+            <span class="type-meta-tag">Click to copy</span>
+            <span class="type-meta-tag">toast 1.5s</span>
+            <span class="type-meta-tag">clipboard API</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Motion Rules -->
+      <hr class="divider-red">
+      <p class="mono-label" style="margin-bottom: var(--sp-3); margin-top: var(--sp-4);">Motion Rules</p>
+      <div class="do-dont-grid">
+        <div class="do-box">
+          <div class="do-box-header">Principles</div>
+          <p class="example-text">Smooth, intentional easing (never linear)</p>
+          <p class="example-text" style="margin-top: 4px;">Mechanical precision — engineering brand</p>
+          <p class="example-text" style="margin-top: 4px;">200–500ms micro, 500–1000ms transitions</p>
+          <p class="example-text" style="margin-top: 4px;">Respect prefers-reduced-motion always</p>
+          <p class="example-text" style="margin-top: 4px;">Max 2 animation techniques per page</p>
+        </div>
+        <div class="dont-box">
+          <div class="dont-box-header">Never</div>
+          <p class="example-text">Bounce or overshoot effects</p>
+          <p class="example-text" style="margin-top: 4px;">Animations exceeding 1 second</p>
+          <p class="example-text" style="margin-top: 4px;">Animation without purpose ("looks cool")</p>
+          <p class="example-text" style="margin-top: 4px;">Parallax + fade + zoom + float = overload</p>
+          <p class="example-text" style="margin-top: 4px;">Autoplay video with sound</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         009 — DARK MODE
+         ═══════════════════════════════════════════════════ -->
+    <div class="dark-section reveal" id="dark-mode" data-section="009">
+      <div style="max-width: 1280px; margin: 0 auto;">
+        <span class="section-tag">[009] Dark Mode</span>
+        <h2 class="display display-md" style="margin-bottom: var(--sp-2); color: var(--dark-fg);">
+          DARK <span style="color: var(--red-dark);">PALETTE</span>
+        </h2>
+        <p style="font-family: 'Inter', sans-serif; font-size: 16px; color: var(--dark-muted-text); max-width: 600px; line-height: 1.6; margin-bottom: var(--sp-5);">
+          Dark sections use the inverted palette on light-mode pages for contrast rhythm. Testimonials, calculators, and feature highlights.
+        </p>
+
+        <div class="grid-4">
+          <div class="swatch">
+            <div class="swatch-color" style="background: #EF4444;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Red (Dark)</div>
+              <div class="swatch-hex">#EF4444</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #FAFAFA;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Foreground</div>
+              <div class="swatch-hex">#FAFAFA</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #27272A;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Muted</div>
+              <div class="swatch-hex">#27272A</div>
+            </div>
+          </div>
+          <div class="swatch">
+            <div class="swatch-color" style="background: #18181B;"></div>
+            <div class="swatch-info">
+              <div class="swatch-name">Card</div>
+              <div class="swatch-hex">#18181B</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         010 — ANTI-SLOP CHECKLIST
+         ═══════════════════════════════════════════════════ -->
+    <section id="anti-slop" data-section="010" class="reveal" style="margin-top: var(--sp-15);">
+      <span class="section-tag">[010] Anti-Slop Checklist</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        QUALITY <span class="red-accent">GATE</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        Run every design through this before it ships. If any item is true, stop and fix it.
+      </p>
+
+      <div class="grid-3">
+        <!-- Visual -->
+        <div style="border: 1px solid var(--muted); padding: var(--sp-3);">
+          <p class="mono-bold" style="font-size: 11px; margin-bottom: var(--sp-2); color: var(--red);">Visual Red Flags</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Gradient soup (3+ colours)
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Font chaos (3+ families)
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Generic stock photos
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Mixed icon sets
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> The SaaS default look
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Centre-aligned body text
+            </label>
+          </div>
+        </div>
+
+        <!-- Structural -->
+        <div style="border: 1px solid var(--muted); padding: var(--sp-3);">
+          <p class="mono-bold" style="font-size: 11px; margin-bottom: var(--sp-2); color: var(--red);">Structural Red Flags</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> No clear hierarchy
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Competing CTAs
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Wall of text
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Cramped spacing
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Mobile afterthought
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Unreadable at feed size
+            </label>
+          </div>
+        </div>
+
+        <!-- Brand -->
+        <div style="border: 1px solid var(--muted); padding: var(--sp-3);">
+          <p class="mono-bold" style="font-size: 11px; margin-bottom: var(--sp-2); color: var(--red);">Brand Red Flags</p>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px;">
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Name-swap test failure
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> No distinctive element
+            </label>
+            <label style="display: flex; gap: 8px; cursor: pointer;">
+              <input type="checkbox" style="accent-color: var(--red);"> Tone mismatch
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         011 — BUSINESS CARD
+         ═══════════════════════════════════════════════════ -->
+    <section id="business-card" data-section="011" class="reveal">
+      <span class="section-tag">[011] Business Card</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        BUSINESS <span class="red-accent">CARD</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        90 x 55mm. The card IS the brand — brutalist shadow, section tags, data labels. No rounded corners, no gradients.
+      </p>
+
+      <div class="grid-2">
+        <!-- Front -->
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Front</p>
+          <div class="biz-card">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+                <div style="width: 24px; height: 24px; background: var(--red); box-shadow: 2px 2px 0 var(--fg);"></div>
+                <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em;">UNPASTE</span>
+              </div>
+              <div style="height: 2px; background: var(--red); margin-bottom: 14px;"></div>
+              <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 13px; margin-bottom: 3px;">Elliot Stone</p>
+              <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 1px;"><span style="color: var(--red);">[001]</span> <span style="color: var(--muted-text);">FOUNDER</span></p>
+            </div>
+            <div>
+              <div style="border-top: 1px dashed var(--muted); padding-top: 10px;">
+                <table style="font-size: 11px; border-collapse: collapse; width: 100%;">
+                  <tr>
+                    <td style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 1px; padding: 2px 8px 2px 0; vertical-align: top;" width="20">W</td>
+                    <td style="font-size: 11px; padding: 2px 0;"><span style="color: var(--red); font-weight: 600;">unpaste.ai</span></td>
+                  </tr>
+                  <tr>
+                    <td style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 1px; padding: 2px 8px 2px 0; vertical-align: top;">E</td>
+                    <td style="font-size: 11px; color: var(--muted-text); padding: 2px 0;">elliot@unpaste.co</td>
+                  </tr>
+                  <tr>
+                    <td style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 1px; padding: 2px 8px 2px 0; vertical-align: top;">L</td>
+                    <td style="font-size: 11px; color: var(--muted-text); padding: 2px 0;">Brisbane, Australia</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Back -->
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Back</p>
+          <div class="biz-card" style="background: var(--dark-bg); align-items: center; justify-content: center; position: relative;">
+            <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 20px 20px;"></div>
+            <div style="position: relative; text-align: center;">
+              <div style="width: 40px; height: 40px; background: var(--red-dark); box-shadow: 2px 2px 0 var(--dark-fg); margin: 0 auto 12px;"></div>
+              <p style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 16px; letter-spacing: 0.1em; color: var(--dark-fg);">UNPASTE</p>
+              <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--dark-muted-text); letter-spacing: 1.5px; margin-top: 6px;">STOP COPY-PASTING.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider-dashed" style="margin-top: var(--sp-5);">
+      <div class="grid-3" style="margin-top: var(--sp-2);">
+        <div class="data-label"><span class="data-label-key" style="min-width: 60px;">Size</span><span class="data-label-value">90 x 55mm (AU standard)</span></div>
+        <div class="data-label"><span class="data-label-key" style="min-width: 60px;">Stock</span><span class="data-label-value">350gsm uncoated</span></div>
+        <div class="data-label"><span class="data-label-key" style="min-width: 60px;">Finish</span><span class="data-label-value">Matte, no lamination</span></div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         012 — EMAIL SIGNATURE
+         ═══════════════════════════════════════════════════ -->
+    <section id="email-signature" data-section="012" class="reveal">
+      <span class="section-tag">[012] Email Signature</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        EMAIL <span class="red-accent">SIGNATURE</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        Gmail-compatible. Brutalist card with box-shadow. All components map directly to the design system — section tags, data labels, red divider.
+      </p>
+
+      <div class="grid-2">
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Live Preview</p>
+          <div style="background: var(--secondary); padding: var(--sp-5); border: 1px solid var(--muted);">
+            <!-- Rendered signature -->
+            <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;">
+              <tr><td>
+                <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse; border: 1.5px solid #09090B; box-shadow: 4px 4px 0px #09090B;">
+                  <tr><td style="padding: 20px 24px;">
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                      <tr>
+                        <td style="vertical-align: middle;"><table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="width: 26px; height: 26px; background-color: #DC2626; box-shadow: 2px 2px 0px #09090B; font-size: 0;" width="26" height="26">&nbsp;</td></tr></table></td>
+                        <td style="padding-left: 12px; font-family: 'Courier New', Courier, monospace; font-size: 15px; font-weight: bold; letter-spacing: 3px; color: #09090B; vertical-align: middle;">UNPASTE</td>
+                      </tr>
+                    </table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="height: 14px; font-size: 0;" height="14">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;"><tr><td style="height: 2px; background-color: #DC2626; font-size: 0;" height="2">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="height: 14px; font-size: 0;" height="14">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="font-size: 14px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #09090B;">Elliot Stone</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="height: 4px; font-size: 0;" height="4">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="font-family: 'Courier New', monospace; font-size: 10px; color: #DC2626; letter-spacing: 1px;">[001]</td><td style="padding-left: 6px; font-family: 'Courier New', monospace; font-size: 10px; color: #71717A; text-transform: uppercase; letter-spacing: 1.5px;">FOUNDER</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="height: 12px; font-size: 0;" height="12">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;"><tr><td style="border-top: 1px dashed #E4E4E7; font-size: 0;">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;"><tr><td style="height: 12px; font-size: 0;" height="12">&nbsp;</td></tr></table>
+                    <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                      <tr><td style="font-family: 'Courier New', monospace; font-size: 10px; color: #A1A1AA; letter-spacing: 1px; padding-bottom: 4px;" width="28">W</td><td style="font-size: 12px; padding-bottom: 4px; padding-left: 8px;"><span style="color: #DC2626; font-weight: 600;">unpaste.ai</span></td></tr>
+                      <tr><td style="font-family: 'Courier New', monospace; font-size: 10px; color: #A1A1AA; letter-spacing: 1px; padding-bottom: 4px;" width="28">E</td><td style="font-size: 12px; color: #71717A; padding-bottom: 4px; padding-left: 8px;">elliot@unpaste.co</td></tr>
+                      <tr><td style="font-family: 'Courier New', monospace; font-size: 10px; color: #A1A1AA; letter-spacing: 1px;" width="28">L</td><td style="font-size: 12px; color: #A1A1AA; padding-left: 8px;">Brisbane, Australia</td></tr>
+                    </table>
+                  </td></tr>
+                </table>
+              </td></tr>
+            </table>
+          </div>
+        </div>
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Design System Mapping</p>
+          <div style="display: flex; flex-direction: column; gap: var(--sp-2);">
+            <div style="display: flex; align-items: center; gap: var(--sp-2);">
+              <div style="width: 8px; height: 8px; background: var(--red); flex-shrink: 0;"></div>
+              <span style="font-size: 13px;"><strong>Logo mark</strong> — 26px red square, 2px shadow</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--sp-2);">
+              <div style="width: 8px; height: 8px; background: var(--red); flex-shrink: 0;"></div>
+              <span style="font-size: 13px;"><strong>Red divider</strong> — 2px solid, full width</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--sp-2);">
+              <div style="width: 8px; height: 8px; background: var(--red); flex-shrink: 0;"></div>
+              <span style="font-size: 13px;"><strong>Section tag</strong> — [001] FOUNDER pattern</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--sp-2);">
+              <div style="width: 8px; height: 8px; background: var(--red); flex-shrink: 0;"></div>
+              <span style="font-size: 13px;"><strong>Dashed separator</strong> — agent card reference</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--sp-2);">
+              <div style="width: 8px; height: 8px; background: var(--red); flex-shrink: 0;"></div>
+              <span style="font-size: 13px;"><strong>Data labels</strong> — W / E / L key-value</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: var(--sp-2);">
+              <div style="width: 8px; height: 8px; background: var(--red); flex-shrink: 0;"></div>
+              <span style="font-size: 13px;"><strong>Card shadow</strong> — 4px container, 2px nested</span>
+            </div>
+          </div>
+          <hr class="divider-dashed">
+          <p class="body-text muted" style="font-size: 13px;">
+            Gmail-compatible (table-based layout). Courier New replaces Space Mono for email client support.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         013 — LETTERHEAD
+         ═══════════════════════════════════════════════════ -->
+    <section id="letterhead" data-section="013" class="reveal">
+      <span class="section-tag">[013] Letterhead & Documents</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        LETTER<span class="red-accent">HEAD</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        A4 format. The header/footer pattern carries across all formal documents — proposals, contracts, reports.
+      </p>
+
+      <div class="grid-2">
+        <div class="letterhead-frame">
+          <!-- Header -->
+          <div style="margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 20px; height: 20px; background: var(--red); box-shadow: 1px 1px 0 var(--fg);"></div>
+                <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.05em;">UNPASTE</span>
+              </div>
+              <div style="text-align: right;">
+                <p style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted-text); letter-spacing: 1px;">12 FEBRUARY 2026</p>
+              </div>
+            </div>
+            <div style="height: 2px; background: var(--red);"></div>
+          </div>
+
+          <!-- Body placeholder -->
+          <div style="flex: 1;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--red); letter-spacing: 1px; margin-bottom: 12px;">[001] SUBJECT</p>
+            <p style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">DOCUMENT TITLE HERE</p>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <div style="height: 6px; background: var(--secondary); width: 100%;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 92%;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 88%;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 95%;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 70%;"></div>
+              <div style="height: 16px;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 100%;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 96%;"></div>
+              <div style="height: 6px; background: var(--secondary); width: 82%;"></div>
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div style="margin-top: 24px;">
+            <div style="border-top: 1px dashed var(--muted); padding-top: 10px; display: flex; justify-content: space-between;">
+              <div style="display: flex; gap: 16px;">
+                <span style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted-text); letter-spacing: 0.5px;"><span style="color: var(--muted-text);">W</span> <span style="color: var(--red);">unpaste.ai</span></span>
+                <span style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted-text); letter-spacing: 0.5px;">E elliot@unpaste.co</span>
+              </div>
+              <span style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted-text);">1 / 1</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Structure Rules</p>
+          <div style="display: flex; flex-direction: column; gap: var(--sp-2); font-size: 14px;">
+            <p><strong>Header:</strong> Logo + date, red divider underneath. Always present.</p>
+            <p><strong>Section tags:</strong> Use [001], [002] for document sections, same as website.</p>
+            <p><strong>Body:</strong> Inter 11pt, 1.5 leading. Left-aligned. Max width 160mm.</p>
+            <p><strong>Footer:</strong> Dashed separator, data labels (W/E), page numbers in monospace.</p>
+            <p><strong>Margins:</strong> 25mm top/bottom, 20mm sides.</p>
+          </div>
+          <hr class="divider-dashed">
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Applies To</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span class="type-meta-tag">Proposals</span>
+            <span class="type-meta-tag">Contracts</span>
+            <span class="type-meta-tag">Reports</span>
+            <span class="type-meta-tag">Audit Outputs</span>
+            <span class="type-meta-tag">Workshop Decks</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         014 — SOCIAL MEDIA
+         ═══════════════════════════════════════════════════ -->
+    <section id="social-media" data-section="014" class="reveal">
+      <span class="section-tag">[014] Social Media Templates</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        SOCIAL <span class="red-accent">MEDIA</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        Every platform, same system. The grid background, section tags, and sharp corners make Unpaste posts instantly recognisable at feed size.
+      </p>
+
+      <div class="grid-3" style="align-items: start;">
+        <!-- Instagram Post 1080x1080 -->
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Instagram Post — 1080 x 1080</p>
+          <div class="social-frame" style="aspect-ratio: 1; position: relative;">
+            <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <div style="position: relative; padding: 32px; display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+              <div>
+                <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: var(--red); letter-spacing: 0.1em;">[001] HOT TAKE</span>
+              </div>
+              <div>
+                <p style="font-weight: 800; font-size: 28px; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 12px;">YOUR WEBSITE<br>IS A <span style="color: var(--red);">BROCHURE.</span></p>
+                <p style="font-size: 12px; color: var(--muted-text); line-height: 1.4; max-width: 240px;">It should be working 24/7 — qualifying leads, answering questions, booking meetings.</p>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 16px; height: 16px; background: var(--red);"></div>
+                <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em;">UNPASTE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instagram Story 1080x1920 -->
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Story — 1080 x 1920</p>
+          <div class="social-frame" style="aspect-ratio: 9/16; background: var(--dark-bg); position: relative; max-height: 400px;">
+            <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 30px 30px;"></div>
+            <div style="position: relative; padding: 24px; display: flex; flex-direction: column; justify-content: center; height: 100%; text-align: center;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 16px;">[001] STAT</span>
+              <p style="font-weight: 800; font-size: 48px; color: var(--dark-fg); letter-spacing: -0.04em; line-height: 1;">36</p>
+              <p style="font-family: 'Space Mono', monospace; font-size: 10px; color: var(--dark-muted-text); letter-spacing: 0.1em; margin-top: 4px;">HOURS / WEEK</p>
+              <div style="height: 2px; background: var(--red-dark); width: 48px; margin: 16px auto;"></div>
+              <p style="font-size: 11px; color: var(--dark-muted-text); line-height: 1.4;">Average time Brisbane SMBs<br>lose to manual processes</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- LinkedIn / Facebook Banner -->
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Facebook Cover — 820 x 312</p>
+          <div class="social-frame" style="aspect-ratio: 820/312; position: relative;">
+            <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <div style="position: relative; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; height: 100%;">
+              <div>
+                <p style="font-weight: 800; font-size: 18px; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05;">STOP<br><span style="color: var(--red);">COPY-PASTING.</span></p>
+              </div>
+              <div style="text-align: right;">
+                <div style="display: flex; align-items: center; gap: 6px; justify-content: flex-end; margin-bottom: 6px;">
+                  <div style="width: 14px; height: 14px; background: var(--red);"></div>
+                  <span style="font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.05em;">UNPASTE</span>
+                </div>
+                <p style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--muted-text); letter-spacing: 0.5px;">AI AUTOMATION — BRISBANE</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="height: var(--sp-4);"></div>
+
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">LinkedIn Banner — 1584 x 396</p>
+          <div class="social-frame" style="aspect-ratio: 1584/396; background: var(--dark-bg); position: relative;">
+            <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px); background-size: 40px 40px;"></div>
+            <div style="position: relative; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; height: 100%;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 20px; height: 20px; background: var(--red-dark);"></div>
+                <span style="font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.05em; color: var(--dark-fg);">UNPASTE</span>
+              </div>
+              <p style="font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: -0.02em; color: var(--dark-fg);">SMART WEBSITES <span style="color: var(--red-dark);">&</span> AI AUTOMATION</p>
+              <span style="font-family: 'Space Mono', monospace; font-size: 8px; color: var(--dark-muted-text); letter-spacing: 0.5px;">BRISBANE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider-dashed" style="margin-top: var(--sp-5);">
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Common Elements Across All Formats</p>
+      <div class="grid-2">
+        <div class="do-box" style="border-color: var(--fg); background: transparent;">
+          <div class="do-box-header" style="color: var(--fg);">Always Include</div>
+          <p class="example-text">Grid background texture (40px, 3-5% opacity)</p>
+          <p class="example-text" style="margin-top: 4px;">Section tag label [001]</p>
+          <p class="example-text" style="margin-top: 4px;">Logo mark (red square) at minimum 14px</p>
+          <p class="example-text" style="margin-top: 4px;">Text minimum 48px on 1080px canvas</p>
+        </div>
+        <div class="dont-box">
+          <div class="dont-box-header">Never</div>
+          <p class="example-text">Rounded corners on frames or images</p>
+          <p class="example-text" style="margin-top: 4px;">Gradient backgrounds or gradient text</p>
+          <p class="example-text" style="margin-top: 4px;">Stock photography overlays</p>
+          <p class="example-text" style="margin-top: 4px;">More than 2 font sizes per graphic</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         015 — PROPOSAL / INVOICE
+         ═══════════════════════════════════════════════════ -->
+    <section id="proposal" data-section="015" class="reveal">
+      <span class="section-tag">[015] Proposal / Invoice</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        PROPOSAL <span class="red-accent">& INVOICE</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-5);">
+        Client-facing financial documents. Same system — but data-heavy layouts use the monospace data label pattern extensively.
+      </p>
+
+      <div class="grid-2">
+        <div class="invoice-frame">
+          <!-- Invoice header -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <div style="width: 20px; height: 20px; background: var(--red); box-shadow: 1px 1px 0 var(--fg);"></div>
+              <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 11px; letter-spacing: 0.05em;">UNPASTE</span>
+            </div>
+            <div style="text-align: right;">
+              <p style="font-weight: 800; text-transform: uppercase; letter-spacing: 1px; font-size: 14px;">INVOICE</p>
+              <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 0.5px; margin-top: 2px;">#INV-2026-001</p>
+            </div>
+          </div>
+          <div style="height: 2px; background: var(--red); margin-bottom: 20px;"></div>
+
+          <!-- Invoice meta -->
+          <div style="display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 11px;">
+            <div>
+              <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red); letter-spacing: 1px; margin-bottom: 6px;">[001] BILLED TO</p>
+              <p style="font-weight: 600;">Client Name Pty Ltd</p>
+              <p style="color: var(--muted-text);">123 Business St</p>
+              <p style="color: var(--muted-text);">Brisbane QLD 4000</p>
+            </div>
+            <div style="text-align: right;">
+              <div style="margin-bottom: 4px;"><span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 0.5px;">DATE</span> <span style="margin-left: 8px;">12 Feb 2026</span></div>
+              <div><span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 0.5px;">DUE</span> <span style="margin-left: 8px;">26 Feb 2026</span></div>
+            </div>
+          </div>
+
+          <!-- Line items -->
+          <div style="border-top: 1px dashed var(--muted); border-bottom: 1px dashed var(--muted); padding: 12px 0; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 11px;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 0.5px;">DESCRIPTION</span>
+              <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 0.5px;">AMOUNT</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
+              <span>Smart Website Build</span>
+              <span style="font-family: 'Space Mono', monospace;">$4,500.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px;">
+              <span>Workflow Automation (CRM)</span>
+              <span style="font-family: 'Space Mono', monospace;">$2,800.00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 12px;">
+              <span>Monthly Marketing System</span>
+              <span style="font-family: 'Space Mono', monospace;">$1,500.00</span>
+            </div>
+          </div>
+
+          <!-- Total -->
+          <div style="display: flex; justify-content: space-between; align-items: baseline;">
+            <span style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--muted-text); letter-spacing: 0.5px;">TOTAL (AUD)</span>
+            <span style="font-weight: 800; font-size: 20px; letter-spacing: -0.02em;">$8,800<span style="font-size: 14px; color: var(--muted-text);">.00</span></span>
+          </div>
+        </div>
+        <div>
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Design Rules</p>
+          <div style="display: flex; flex-direction: column; gap: var(--sp-2); font-size: 14px;">
+            <p><strong>Header:</strong> Same as letterhead — logo, red divider, document type.</p>
+            <p><strong>Numbers:</strong> Monospace (Space Mono / Courier New). Right-aligned. Totals get weight 800 at larger size.</p>
+            <p><strong>Line items:</strong> Separated by dashed borders, not solid lines.</p>
+            <p><strong>Section tags:</strong> [001] BILLED TO, [002] LINE ITEMS, [003] PAYMENT DETAILS.</p>
+            <p><strong>No colour in data:</strong> Numbers stay foreground or muted-text. Red is only for structural elements and tags.</p>
+          </div>
+          <hr class="divider-dashed">
+          <p class="mono-label" style="margin-bottom: var(--sp-2);">Applies To</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+            <span class="type-meta-tag">Invoices</span>
+            <span class="type-meta-tag">Quotes</span>
+            <span class="type-meta-tag">Proposals</span>
+            <span class="type-meta-tag">Receipts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         016 — BRAND IN ACTION
+         ═══════════════════════════════════════════════════ -->
+    <div class="dark-section reveal" id="brand-in-action" data-section="016" style="margin-bottom: 0;">
+      <div style="max-width: 1280px; margin: 0 auto;">
+        <span class="section-tag" style="color: var(--red-dark);">[016] Brand In Action</span>
+        <h2 class="display display-md" style="margin-bottom: var(--sp-2); color: var(--dark-fg);">
+          THE FULL <span style="color: var(--red-dark);">SYSTEM</span>
+        </h2>
+        <p style="font-family: 'Inter', sans-serif; font-size: 16px; color: var(--dark-muted-text); max-width: 600px; line-height: 1.6; margin-bottom: var(--sp-6);">
+          Every element — colours, type, spacing, components, voice — composing together. This is what Unpaste looks like when the full system is applied.
+        </p>
+
+        <!-- Mini hero mockup -->
+        <div style="border: 1px solid var(--dark-muted); background: var(--bg); position: relative; overflow: hidden;">
+          <div class="mockup-label" style="background: var(--dark-secondary); border-color: var(--dark-muted); color: var(--dark-muted-text);">HERO SECTION</div>
+          <!-- Grid texture -->
+          <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none;"></div>
+          <div style="position: relative; padding: 48px 40px;">
+            <!-- Nav bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 48px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 24px; height: 24px; background: var(--red); box-shadow: 2px 2px 0 var(--fg);"></div>
+                <span style="font-family: 'Space Mono', monospace; font-weight: 700; font-size: 13px; letter-spacing: 0.05em; color: var(--fg);">UNPASTE</span>
+              </div>
+              <div style="display: flex; gap: 24px; align-items: center;">
+                <span style="font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-text);">Services</span>
+                <span style="font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted-text);">About</span>
+                <span style="display: inline-block; font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: var(--red); color: white; padding: 8px 14px; box-shadow: 3px 3px 0 var(--fg);">Get Your Score</span>
+              </div>
+            </div>
+
+            <!-- Hero content -->
+            <div style="max-width: 600px;">
+              <span style="font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: var(--red); letter-spacing: 0.1em; display: block; margin-bottom: 16px;">[001] YOUR PROBLEM</span>
+              <h1 style="font-family: system-ui, sans-serif; font-weight: 800; font-size: clamp(32px, 5vw, 52px); text-transform: uppercase; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 20px; color: var(--fg);">
+                STOP<br><span style="color: var(--red);">COPY-PASTING.</span>
+              </h1>
+              <p style="font-size: 15px; color: var(--muted-text); line-height: 1.6; margin-bottom: 24px; max-width: 480px;">
+                You're losing hours every week to work a machine should be doing. We find it, we fix it, and you get your time back.
+              </p>
+              <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                <span style="display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: var(--red); color: white; padding: 12px 20px; border: 2px solid var(--fg); box-shadow: 4px 4px 0 var(--fg);">Get Your Efficiency Score</span>
+                <span style="display: inline-block; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; background: transparent; color: var(--fg); padding: 12px 20px; border: 2px solid var(--fg); box-shadow: 4px 4px 0 var(--fg);">See How It Works</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Component callouts -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1px; margin-top: var(--sp-3); background: var(--dark-muted);">
+          <div style="background: var(--dark-card); padding: 16px; text-align: center;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 4px;">[A]</p>
+            <p style="font-size: 11px; color: var(--dark-muted-text);">Grid texture</p>
+          </div>
+          <div style="background: var(--dark-card); padding: 16px; text-align: center;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 4px;">[B]</p>
+            <p style="font-size: 11px; color: var(--dark-muted-text);">Section tag</p>
+          </div>
+          <div style="background: var(--dark-card); padding: 16px; text-align: center;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 4px;">[C]</p>
+            <p style="font-size: 11px; color: var(--dark-muted-text);">Red accent word</p>
+          </div>
+          <div style="background: var(--dark-card); padding: 16px; text-align: center;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 4px;">[D]</p>
+            <p style="font-size: 11px; color: var(--dark-muted-text);">Shadow buttons</p>
+          </div>
+          <div style="background: var(--dark-card); padding: 16px; text-align: center;">
+            <p style="font-family: 'Space Mono', monospace; font-size: 9px; color: var(--red-dark); letter-spacing: 0.1em; margin-bottom: 4px;">[E]</p>
+            <p style="font-size: 11px; color: var(--dark-muted-text);">Mono nav labels</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════ -->
+    <footer class="version-footer" style="margin-top: var(--sp-15);">
+      <div>
+        <div class="logo-group">
+          <div class="logo-mark"></div>
+          <span class="logo-wordmark">UNPASTE</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: var(--sp-4);">
+        <div class="data-label">
+          <span class="data-label-key">V</span>
+          <span class="data-label-value">1.0</span>
+        </div>
+        <div class="data-label">
+          <span class="data-label-key">D</span>
+          <span class="data-label-value">2026-02-12</span>
+        </div>
+      </div>
+      <div>
+        <p class="mono-label">
+          Living document. Updates as brand evolves.
+        </p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT — Minimal, for animation demos
+       ═══════════════════════════════════════════════════ -->
+  <script>
+    // ═══════════════════════════════════════════════════
+    // SCROLL PROGRESS BAR
+    // ═══════════════════════════════════════════════════
+    const progressBar = document.getElementById('scrollProgress');
+    const indicator = document.getElementById('sectionIndicator');
+    const sections = document.querySelectorAll('[data-section]');
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+
+      // Show/hide section indicator after scrolling past header
+      if (scrollTop > 400) {
+        indicator.classList.add('visible');
+      } else {
+        indicator.classList.remove('visible');
+      }
+
+      // Update current section number
+      let current = '001';
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.4) {
+          current = section.dataset.section;
+        }
+      });
+      indicator.innerHTML = '[ <span>' + current + '</span> / 016 ]';
+    });
+
+    // ═══════════════════════════════════════════════════
+    // SCROLL REVEAL (IntersectionObserver)
+    // ═══════════════════════════════════════════════════
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ═══════════════════════════════════════════════════
+    // CLICK-TO-COPY HEX VALUES
+    // ═══════════════════════════════════════════════════
+    const toast = document.getElementById('copyToast');
+    let toastTimeout;
+
+    document.querySelectorAll('.swatch').forEach(swatch => {
+      swatch.addEventListener('click', () => {
+        const hex = swatch.querySelector('.swatch-hex');
+        if (hex) {
+          const val = hex.textContent.trim();
+          navigator.clipboard.writeText(val).then(() => {
+            toast.textContent = 'Copied ' + val;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => toast.classList.remove('show'), 1500);
+          });
+        }
+      });
+    });
+
+    // ═══════════════════════════════════════════════════
+    // 01 — SLIDE-UP TEXT REVEAL
+    // ═══════════════════════════════════════════════════
+    const slideDemo = document.getElementById('slide-demo');
+    function playSlideDemo() {
+      const lines = ['STOP', 'COPY-PASTING.', 'WE FIX IT.'];
+      slideDemo.innerHTML = '';
+      lines.forEach((line, i) => {
+        const el = document.createElement('span');
+        el.className = `display display-sm anim-slide-up delay-${i + 1}`;
+        el.style.display = 'block';
+        el.style.textAlign = 'center';
+        if (i === lines.length - 1) el.classList.add('red-accent');
+        el.textContent = line;
+        slideDemo.appendChild(el);
+      });
+    }
+    playSlideDemo();
+
+    // ═══════════════════════════════════════════════════
+    // 02 — STAGGERED CONTENT REVEAL
+    // ═══════════════════════════════════════════════════
+    function playStaggerDemo() {
+      const stage = document.getElementById('stagger-demo');
+      stage.innerHTML = '';
+      const items = [
+        { tag: '[001] SECTION', type: 'tag' },
+        { text: 'HEADLINE TEXT', type: 'heading' },
+        { text: 'Body copy that explains the value proposition clearly and directly.', type: 'body' },
+        { text: 'GET YOUR SCORE', type: 'button' }
+      ];
+      items.forEach((item, i) => {
+        const el = document.createElement('div');
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(16px)';
+        el.style.transition = `opacity 0.5s ease, transform 0.5s ease`;
+        el.style.transitionDelay = (i * 0.12) + 's';
+        if (item.type === 'tag') {
+          el.className = 'section-tag';
+          el.style.marginBottom = '4px';
+          el.textContent = item.tag;
+        } else if (item.type === 'heading') {
+          el.className = 'display display-sm';
+          el.style.marginBottom = '8px';
+          el.textContent = item.text;
+        } else if (item.type === 'body') {
+          el.className = 'body-text muted';
+          el.style.fontSize = '13px';
+          el.style.marginBottom = '12px';
+          el.textContent = item.text;
+        } else if (item.type === 'button') {
+          el.className = 'btn btn-primary';
+          el.style.fontSize = '10px';
+          el.style.padding = '8px 16px';
+          el.style.display = 'inline-block';
+          el.style.width = 'fit-content';
+          el.textContent = item.text;
+        }
+        stage.appendChild(el);
+        // Trigger animation
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          });
+        });
+      });
+    }
+    playStaggerDemo();
+
+    // ═══════════════════════════════════════════════════
+    // 04 — COUNTER ANIMATION
+    // ═══════════════════════════════════════════════════
+    function playCounterDemo() {
+      const el = document.getElementById('counter-value');
+      const target = 36;
+      const duration = 1200;
+      const start = performance.now();
+      el.textContent = '0';
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // Ease-out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+    playCounterDemo();
+
+    // ═══════════════════════════════════════════════════
+    // 07 — TYPEWRITER EFFECT
+    // ═══════════════════════════════════════════════════
+    function playTypewriterDemo() {
+      const container = document.getElementById('typewriter-demo');
+      container.innerHTML = '';
+      const lines = [
+        { text: '$ unpaste audit --target brisbane-smb', color: 'var(--dark-muted-text)' },
+        { text: '', pause: 300 },
+        { text: 'Scanning 12 workflows...', color: 'var(--dark-muted-text)' },
+        { text: 'Found 36 hrs/week manual work', color: '#22C55E' },
+        { text: 'Efficiency Score: 34/100', color: 'var(--red-dark)' },
+      ];
+      let lineIndex = 0;
+      let charIndex = 0;
+      let currentLine = null;
+      let cursor = null;
+
+      function addCursor() {
+        if (cursor) cursor.remove();
+        cursor = document.createElement('span');
+        cursor.style.cssText = 'border-right: 2px solid var(--dark-fg); animation: blink 1.06s step-end infinite; margin-left: 1px;';
+        cursor.innerHTML = '&nbsp;';
+        if (currentLine) currentLine.appendChild(cursor);
+      }
+
+      function typeLine() {
+        if (lineIndex >= lines.length) return;
+        const line = lines[lineIndex];
+        if (line.pause) {
+          lineIndex++;
+          setTimeout(typeLine, line.pause);
+          return;
+        }
+        if (charIndex === 0) {
+          currentLine = document.createElement('div');
+          currentLine.style.cssText = `color: ${line.color}; min-height: 18px; font-size: 12px; line-height: 1.5;`;
+          container.appendChild(currentLine);
+        }
+        if (charIndex < line.text.length) {
+          if (cursor) cursor.remove();
+          currentLine.textContent = line.text.substring(0, charIndex + 1);
+          addCursor();
+          charIndex++;
+          setTimeout(typeLine, 35 + Math.random() * 25);
+        } else {
+          charIndex = 0;
+          lineIndex++;
+          setTimeout(typeLine, 400);
+        }
+      }
+      typeLine();
+    }
+    playTypewriterDemo();
+
+    // ═══════════════════════════════════════════════════
+    // REDUCED MOTION RESPECT
+    // ═══════════════════════════════════════════════════
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('.marquee-track').forEach(el => {
+        el.style.animationPlayState = 'paused';
+      });
+      document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('revealed');
+        el.style.transition = 'none';
+      });
+    }
+  </script>
+</body>
+</html>
