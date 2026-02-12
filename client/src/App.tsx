@@ -10,11 +10,13 @@ import About from "./pages/About";
 import Book from "./pages/Book";
 import Solutions from "./pages/Solutions";
 import StyleExplorer from "./pages/StyleExplorer";
+import AssessmentPage from "./pages/AssessmentPage";
 
 function Router() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={"/assessment"} component={AssessmentPage} />
       <Route path={"/solutions"} component={Solutions} />
       <Route path={"/about"} component={About} />
       <Route path={"/book"} component={Book} />
