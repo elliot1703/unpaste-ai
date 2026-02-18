@@ -16,7 +16,7 @@ const defaultSEO = {
     "Discover where your business is bleeding time. Take our free 5-minute Efficiency Score assessment and see exactly where automation can transform your operations.",
   keywords:
     "AI automation, workflow automation, efficiency assessment, Brisbane AI, business automation, SMB automation, process automation, AI agents",
-  image: "/images/og-image.png",
+  image: "https://unpaste.ai/images/og-image.png",
   url: "https://unpaste.ai",
   type: "website",
 };
