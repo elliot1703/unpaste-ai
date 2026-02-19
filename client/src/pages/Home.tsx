@@ -109,7 +109,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <SEO />
+      <SEO
+        faqItems={faqs.map((faq) => ({
+          question: faq.q,
+          answer: faq.a,
+        }))}
+      />
 
       {/* Fixed Grid Background */}
       <div className="grid-background" />
@@ -197,7 +202,7 @@ export default function Home() {
 
                 {/* Main Headline with staggered letter animation */}
                 <div className="mb-10">
-                  <motion.div
+                  <motion.h1
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.3 }}
@@ -239,7 +244,7 @@ export default function Home() {
                         </motion.span>
                       </AnimatePresence>
                     </div>
-                  </motion.div>
+                  </motion.h1>
                 </div>
 
                 {/* Subheadline with reveal animation */}

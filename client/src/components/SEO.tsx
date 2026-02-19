@@ -1,5 +1,10 @@
 import { Helmet } from "react-helmet-async";
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 interface SEOProps {
   title?: string;
   description?: string;
@@ -8,6 +13,7 @@ interface SEOProps {
   url?: string;
   type?: string;
   noIndex?: boolean;
+  faqItems?: FAQItem[];
 }
 
 const defaultSEO = {
@@ -29,6 +35,7 @@ export function SEO({
   url,
   type,
   noIndex = false,
+  faqItems,
 }: SEOProps) {
   const seo = {
     title: title ? `${title} | unpaste.ai` : defaultSEO.title,
@@ -44,7 +51,7 @@ export function SEO({
     "@type": "Organization",
     name: "unpaste.ai",
     url: "https://unpaste.ai",
-    logo: "https://unpaste.ai/images/logo.png",
+    logo: "https://unpaste.ai/images/og-image.png",
     description: "AI automation solutions for Brisbane businesses",
     address: {
       "@type": "PostalAddress",
@@ -57,8 +64,25 @@ export function SEO({
       email: "hello@unpaste.ai",
       contactType: "customer service",
     },
-    sameAs: [],
+    sameAs: [
+      "https://www.linkedin.com/company/unpaste-ai",
+    ],
   };
+
+  const faqSchema = faqItems?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }
+    : null;
 
   const localBusinessData = {
     "@context": "https://schema.org",
@@ -115,6 +139,9 @@ export function SEO({
       {/* Structured Data */}
       <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       <script type="application/ld+json">{JSON.stringify(localBusinessData)}</script>
+      {faqSchema && (
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+      )}
     </Helmet>
   );
 }
