@@ -53,18 +53,27 @@
     }
 
     .top-nav .brand {
-      font-family: system-ui, -apple-system, sans-serif;
-      font-weight: 800;
-      font-size: 16px;
-      text-transform: uppercase;
-      letter-spacing: -0.03em;
-      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       text-decoration: none;
       padding: var(--sp-2) 0;
       flex-shrink: 0;
     }
 
-    .top-nav .brand .dot { color: var(--red); }
+    .top-nav .brand .logo-square {
+      width: 24px;
+      height: 24px;
+      background: var(--red);
+    }
+
+    .top-nav .brand span {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: white;
+    }
 
     .top-nav .demo-badge {
       font-family: 'Space Mono', monospace;
@@ -113,7 +122,7 @@
     }
 
     .section-tabs a.active {
-      background: var(--fg);
+      background: var(--red);
       color: white;
     }
 
@@ -512,7 +521,7 @@
 
   <!-- Top Navigation -->
   <nav class="top-nav">
-    <a href="https://unpaste.ai" class="brand">UNPASTE<span class="dot">.</span></a>
+    <a href="https://unpaste.ai" class="brand"><div class="logo-square"></div><span>UNPASTE</span></a>
     <span class="demo-badge">Content Demo</span>
   </nav>
 
