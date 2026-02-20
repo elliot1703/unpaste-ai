@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNPASTE — Social Media Templates Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #DC2626;
+      --fg: #09090B;
+      --bg: #FAFAFA;
+      --muted: #E4E4E7;
+      --muted-text: #71717A;
+      --card: #FFFFFF;
+      --secondary: #F4F4F5;
+      --sp-1: 8px;
+      --sp-2: 16px;
+      --sp-3: 24px;
+      --sp-4: 32px;
+      --sp-5: 40px;
+      --sp-6: 48px;
+      --sp-8: 64px;
+      --sp-10: 80px;
+    }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    ::selection { background: var(--red); color: white; }
+
+    /* Page Layout */
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: var(--sp-8) var(--sp-3);
+    }
+
+    @media (min-width: 768px) { .page { padding: var(--sp-10) var(--sp-4); } }
+
+    /* Header */
+    .page-header {
+      margin-bottom: var(--sp-8);
+    }
+
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-bottom: var(--sp-3);
+      display: block;
+    }
+
+    .page-title {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: clamp(36px, 5vw, 64px);
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin-bottom: var(--sp-3);
+    }
+
+    .page-subtitle {
+      font-size: 18px;
+      color: var(--muted-text);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: var(--sp-4);
+      margin-top: var(--sp-4);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: baseline;
+      gap: var(--sp-1);
+    }
+
+    .stat-item .value {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-item .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-text);
+    }
+
+    /* Dividers */
+    .divider-red {
+      border: none;
+      height: 2px;
+      background: var(--red);
+      margin: var(--sp-5) 0;
+    }
+
+    /* Template Grid */
+    .template-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--sp-5);
+    }
+
+    @media (min-width: 768px) {
+      .template-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Template Card */
+    .template-card {
+      border: 2px solid var(--fg);
+      background: var(--card);
+    }
+
+    .template-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--sp-2);
+      border-bottom: 1px solid var(--muted);
+    }
+
+    .platform-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--fg);
+      color: white;
+      padding: 4px 12px;
+    }
+
+    .format-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-text);
+    }
+
+    .dimensions-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted-text);
+    }
+
+    /* Template Preview */
+    .template-preview {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    /* Each preview is a self-contained visual */
+    .preview-inner {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* LinkedIn Text Post */
+    .linkedin-text {
+      background: white;
+      padding: var(--sp-4);
+      width: 100%;
+    }
+
+    .linkedin-text .author-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: var(--sp-2);
+    }
+
+    .linkedin-text .avatar {
+      width: 48px;
+      height: 48px;
+      background: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .linkedin-text .author-info .name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .linkedin-text .author-info .handle {
+      font-size: 12px;
+      color: var(--muted-text);
+    }
+
+    .linkedin-text .post-body {
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .linkedin-text .post-body strong { font-weight: 700; }
+    .linkedin-text .post-body .red { color: var(--red); font-weight: 700; }
+
+    /* Square Post (LinkedIn Carousel / Instagram) */
+    .square-post {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--sp-4);
+      position: relative;
+    }
+
+    .square-post.dark {
+      background: var(--fg);
+      color: white;
+    }
+
+    .square-post.light {
+      background: white;
+      color: var(--fg);
+      border-top: 1px solid var(--muted);
+      border-bottom: 1px solid var(--muted);
+    }
+
+    .square-post.red-bg {
+      background: var(--red);
+      color: white;
+    }
+
+    .square-post .slide-number {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+      margin-bottom: var(--sp-2);
+    }
+
+    .square-post .big-text {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: clamp(22px, 4vw, 32px);
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: var(--sp-2);
+    }
+
+    .square-post .sub-text {
+      font-size: 14px;
+      opacity: 0.7;
+      line-height: 1.5;
+      max-width: 85%;
+    }
+
+    .square-post .brand-corner {
+      position: absolute;
+      bottom: var(--sp-2);
+      right: var(--sp-2);
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+    }
+
+    .square-post .stat-giant {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(48px, 10vw, 80px);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+
+    .square-post .stat-giant .accent { color: var(--red); }
+    .square-post.red-bg .stat-giant .accent { color: white; }
+
+    .square-post .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: var(--sp-1);
+      opacity: 0.7;
+    }
+
+    /* Story Format */
+    .story-post {
+      aspect-ratio: 9 / 16;
+      width: 100%;
+      max-height: 500px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--sp-4);
+      background: var(--fg);
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-post .top-section {
+      text-align: center;
+      padding-top: var(--sp-4);
+    }
+
+    .story-post .top-section .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      margin-bottom: var(--sp-2);
+    }
+
+    .story-post .top-section .headline {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(20px, 3.5vw, 28px);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: var(--sp-2);
+    }
+
+    .story-post .top-section .body {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    .story-post .bottom-section {
+      text-align: center;
+      padding-bottom: var(--sp-3);
+    }
+
+    .story-post .swipe-cta {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 12px 28px;
+      margin-bottom: var(--sp-2);
+    }
+
+    .story-post .swipe-hint {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* Landscape Post (Facebook / Twitter) */
+    .landscape-post {
+      width: 100%;
+      aspect-ratio: 1200 / 628;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--sp-4);
+      position: relative;
+    }
+
+    .landscape-post.dark {
+      background: var(--fg);
+      color: white;
+    }
+
+    .landscape-post.split {
+      flex-direction: row;
+      padding: 0;
+    }
+
+    .landscape-post.split .left-panel {
+      flex: 1;
+      background: var(--red);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--sp-3);
+    }
+
+    .landscape-post.split .right-panel {
+      flex: 1;
+      background: var(--fg);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--sp-3);
+    }
+
+    .landscape-post .big-text {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: clamp(18px, 3vw, 28px);
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      margin-bottom: var(--sp-1);
+    }
+
+    .landscape-post .sub-text {
+      font-size: 13px;
+      opacity: 0.6;
+      line-height: 1.5;
+    }
+
+    .landscape-post .brand-corner {
+      position: absolute;
+      bottom: var(--sp-2);
+      right: var(--sp-2);
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+    }
+
+    /* Twitter-specific landscape */
+    .twitter-post {
+      width: 100%;
+      aspect-ratio: 1200 / 675;
+      background: var(--fg);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: var(--sp-4);
+      position: relative;
+    }
+
+    .twitter-post .content {
+      max-width: 80%;
+    }
+
+    .twitter-post .tip-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      margin-bottom: var(--sp-1);
+    }
+
+    .twitter-post .tip-text {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(18px, 3vw, 26px);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .twitter-post .brand-corner {
+      position: absolute;
+      bottom: var(--sp-2);
+      right: var(--sp-2);
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.4;
+    }
+
+    /* Template Meta */
+    .template-meta {
+      padding: var(--sp-3);
+      border-top: 1px solid var(--muted);
+    }
+
+    .template-meta .caption {
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: var(--sp-2);
+      color: var(--fg);
+    }
+
+    .template-meta .hashtags {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--red);
+      margin-bottom: var(--sp-2);
+      line-height: 1.6;
+    }
+
+    .template-meta .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+      padding: 4px 10px;
+      border: 1px dashed var(--muted);
+    }
+
+    /* Demo Navigation */
+    .demo-nav {
+      display: flex;
+      gap: var(--sp-1);
+      margin-top: var(--sp-8);
+      flex-wrap: wrap;
+    }
+
+    .demo-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid var(--muted);
+      transition: all 0.15s ease;
+    }
+
+    .demo-nav a:hover {
+      border-color: var(--fg);
+      background: var(--fg);
+      color: white;
+    }
+
+    .demo-nav a.active {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+    }
+
+    /* Expand overlay */
+    .template-preview:hover::after {
+      content: 'CLICK TO EXPAND';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(9,9,11,0.7);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(9,9,11,0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-3);
+      cursor: pointer;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal-content {
+      max-width: 600px;
+      max-height: 90vh;
+      width: 100%;
+      overflow: auto;
+    }
+
+    .modal-close {
+      position: fixed;
+      top: var(--sp-2);
+      right: var(--sp-3);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      z-index: 1001;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <!-- Header -->
+    <header class="page-header">
+      <span class="section-tag">[Demo] Content Creation</span>
+      <h1 class="page-title">Social Media<br>Templates</h1>
+      <p class="page-subtitle">Platform-ready content generated automatically. Each template is sized, formatted, and branded for immediate posting — no design team required.</p>
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="value">6</span>
+          <span class="label">Templates</span>
+        </div>
+        <div class="stat-item">
+          <span class="value">4</span>
+          <span class="label">Platforms</span>
+        </div>
+        <div class="stat-item">
+          <span class="value">&lt;30s</span>
+          <span class="label">Generation Time</span>
+        </div>
+      </div>
+    </header>
+
+    <hr class="divider-red">
+
+    <!-- Template Grid -->
+    <div class="template-grid">
+
+      <!-- Template 1: LinkedIn Text Post -->
+      <div class="template-card">
+        <div class="template-card-header">
+          <span class="platform-badge">LinkedIn</span>
+          <span class="format-badge">Text Post</span>
+          <span class="dimensions-badge">Card Preview</span>
+        </div>
+        <div class="template-preview" onclick="expandTemplate(this)">
+          <div class="preview-inner">
+            <div class="linkedin-text">
+              <div class="author-row">
+                <div class="avatar">U</div>
+                <div class="author-info">
+                  <div class="name">Unpaste.ai</div>
+                  <div class="handle">AI Automation for Brisbane SMBs</div>
+                </div>
+              </div>
+              <div class="post-body">
+                <p>I asked 50 Brisbane business owners one question:</p>
+                <p><br><strong>"What task do you hate most?"</strong></p>
+                <p><br>The top 3 answers:</p>
+                <p>1. Manual data entry between systems</p>
+                <p>2. Chasing invoices and quotes</p>
+                <p>3. Updating spreadsheets nobody reads</p>
+                <p><br>All three can be <span class="red">fully automated</span> in under a week.</p>
+                <p><br>The cost of <em>not</em> automating? About $47K/year in wasted time.</p>
+                <p><br>The cost of automating? A fraction of that.</p>
+                <p><br>→ Link in comments to our free efficiency assessment.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="template-meta">
+          <p class="caption">Thought leadership post driving assessment signups. Uses specific local data and direct CTA.</p>
+          <p class="hashtags">#BrisbaneBusinesss #Automation #SMB #Efficiency #UnpasteAI</p>
+          <span class="ai-badge">⚡ Generated by AI</span>
+        </div>
+      </div>
+
+      <!-- Template 2: LinkedIn Carousel -->
+      <div class="template-card">
+        <div class="template-card-header">
+          <span class="platform-badge">LinkedIn</span>
+          <span class="format-badge">Carousel — Slide 1</span>
+          <span class="dimensions-badge">1080 × 1080</span>
+        </div>
+        <div class="template-preview" onclick="expandTemplate(this)">
+          <div class="preview-inner">
+            <div class="square-post dark">
+              <div class="slide-number">Slide 01 / 05</div>
+              <div class="big-text">5 Signs Your Business Needs Automation</div>
+              <div class="sub-text">You're growing. But your processes aren't keeping up. Swipe to find out if it's time to automate →</div>
+              <div class="brand-corner">unpaste.ai</div>
+            </div>
+          </div>
+        </div>
+        <div class="template-meta">
+          <p class="caption">Carousel cover slide. Designed to stop the scroll with a relatable hook. Full carousel is 5 slides — each sign gets its own card with a stat.</p>
+          <p class="hashtags">#AutomationTips #BusinessGrowth #Brisbane #ProcessImprovement</p>
+          <span class="ai-badge">⚡ Generated by AI</span>
+        </div>
+      </div>
+
+      <!-- Template 3: Instagram Square -->
+      <div class="template-card">
+        <div class="template-card-header">
+          <span class="platform-badge">Instagram</span>
+          <span class="format-badge">Square Post</span>
+          <span class="dimensions-badge">1080 × 1080</span>
+        </div>
+        <div class="template-preview" onclick="expandTemplate(this)">
+          <div class="preview-inner">
+            <div class="square-post red-bg">
+              <div class="slide-number">Data Point</div>
+              <div class="stat-giant"><span class="accent">15</span>hrs</div>
+              <div class="stat-label">per week wasted on manual tasks</div>
+              <div class="big-text" style="font-size: clamp(14px, 2.5vw, 18px); margin-top: var(--sp-3); opacity: 0.8;">The average Brisbane SMB loses 15 hours every week to copy-paste workflows.</div>
+              <div class="brand-corner">unpaste.ai</div>
+            </div>
+          </div>
+        </div>
+        <div class="template-meta">
+          <p class="caption">Bold stat-driven post for Instagram feed. High contrast, easy to read at small sizes, shareable.</p>
+          <p class="hashtags">#DataDriven #TimeIsMoney #SmallBusiness #Brisbane #Automation</p>
+          <span class="ai-badge">⚡ Generated by AI</span>
+        </div>
+      </div>
+
+      <!-- Template 4: Instagram Story -->
+      <div class="template-card">
+        <div class="template-card-header">
+          <span class="platform-badge">Instagram</span>
+          <span class="format-badge">Story</span>
+          <span class="dimensions-badge">1080 × 1920</span>
+        </div>
+        <div class="template-preview" onclick="expandTemplate(this)">
+          <div class="preview-inner">
+            <div class="story-post">
+              <div class="top-section">
+                <div class="label">Free Assessment</div>
+                <div class="headline">How efficient is your business?</div>
+                <div class="body">Answer 15 questions. Get your Efficiency Score. See exactly where you're losing time and money.</div>
+              </div>
+              <div class="bottom-section">
+                <div class="swipe-cta">Take the Assessment →</div>
+                <div class="swipe-hint">Swipe up — 5 minutes</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="template-meta">
+          <p class="caption">Story CTA driving traffic to the efficiency assessment. Clear value prop, urgency-free, low commitment.</p>
+          <p class="hashtags">#FreeAssessment #BusinessEfficiency #Unpaste</p>
+          <span class="ai-badge">⚡ Generated by AI</span>
+        </div>
+      </div>
+
+      <!-- Template 5: Facebook Image Post -->
+      <div class="template-card">
+        <div class="template-card-header">
+          <span class="platform-badge">Facebook</span>
+          <span class="format-badge">Image Post</span>
+          <span class="dimensions-badge">1200 × 628</span>
+        </div>
+        <div class="template-preview" onclick="expandTemplate(this)">
+          <div class="preview-inner">
+            <div class="landscape-post split">
+              <div class="left-panel">
+                <div style="font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; opacity: 0.7; margin-bottom: 8px;">Quick Poll</div>
+                <div style="font-family: system-ui, sans-serif; font-weight: 800; font-size: clamp(16px, 2.5vw, 24px); text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.1;">What's your biggest time-waster?</div>
+              </div>
+              <div class="right-panel">
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  <div style="padding: 10px 16px; border: 1px solid rgba(255,255,255,0.2); font-size: 13px; font-weight: 500;">A. Data entry between apps</div>
+                  <div style="padding: 10px 16px; border: 1px solid rgba(255,255,255,0.2); font-size: 13px; font-weight: 500;">B. Chasing invoices & quotes</div>
+                  <div style="padding: 10px 16px; border: 1px solid rgba(255,255,255,0.2); font-size: 13px; font-weight: 500;">C. Scheduling & follow-ups</div>
+                  <div style="padding: 10px 16px; border: 1px solid rgba(255,255,255,0.2); font-size: 13px; font-weight: 500;">D. All of the above 😅</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="template-meta">
+          <p class="caption">Engagement-focused poll graphic. Drives comments (algorithm boost) and identifies pain points for retargeting.</p>
+          <p class="hashtags">#Poll #BusinessOwners #BrisbaneBiz #Automation #WorkSmarter</p>
+          <span class="ai-badge">⚡ Generated by AI</span>
+        </div>
+      </div>
+
+      <!-- Template 6: X/Twitter -->
+      <div class="template-card">
+        <div class="template-card-header">
+          <span class="platform-badge">X / Twitter</span>
+          <span class="format-badge">Image Post</span>
+          <span class="dimensions-badge">1200 × 675</span>
+        </div>
+        <div class="template-preview" onclick="expandTemplate(this)">
+          <div class="preview-inner">
+            <div class="twitter-post">
+              <div class="content">
+                <div class="tip-label">Quick Tip #047</div>
+                <div class="tip-text">Stop copy-pasting between tabs. Connect your tools. That's it. That's the automation strategy.</div>
+              </div>
+              <div class="brand-corner">unpaste.ai</div>
+            </div>
+          </div>
+        </div>
+        <div class="template-meta">
+          <p class="caption">Punchy, quotable tip format. Designed for reposts and bookmarks. The "that's it" pattern performs well on X.</p>
+          <p class="hashtags">#AutomationTip #NoCode #Efficiency #WorkflowAutomation</p>
+          <span class="ai-badge">⚡ Generated by AI</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Demo Navigation -->
+    <nav class="demo-nav">
+      <a href="content-calendar.html">Content Calendar</a>
+      <a href="social-templates.html" class="active">Social Templates</a>
+      <a href="newsletter.html">Newsletter</a>
+    </nav>
+  </div>
+
+  <!-- Modal for expanded view -->
+  <div class="modal-overlay" id="modal" onclick="closeModal()">
+    <div class="modal-close">ESC to close</div>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+
+  <script>
+    function expandTemplate(el) {
+      const preview = el.querySelector('.preview-inner');
+      if (preview) {
+        const modal = document.getElementById('modal');
+        const content = document.getElementById('modalContent');
+        content.innerHTML = preview.innerHTML;
+        modal.classList.add('active');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+
+</body>
+</html>

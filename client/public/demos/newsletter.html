@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNPASTE — Weekly Intelligence Newsletter Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #DC2626;
+      --fg: #09090B;
+      --bg: #FAFAFA;
+      --muted: #E4E4E7;
+      --muted-text: #71717A;
+      --card: #FFFFFF;
+      --secondary: #F4F4F5;
+      --sp-1: 8px;
+      --sp-2: 16px;
+      --sp-3: 24px;
+      --sp-4: 32px;
+      --sp-5: 40px;
+      --sp-6: 48px;
+      --sp-8: 64px;
+    }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #E4E4E7;
+      color: var(--fg);
+      line-height: 1.6;
+      padding: var(--sp-4) var(--sp-2);
+    }
+
+    ::selection { background: var(--red); color: white; }
+
+    /* Demo wrapper — shows the newsletter in context */
+    .demo-banner {
+      max-width: 640px;
+      margin: 0 auto var(--sp-3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-2);
+      background: var(--fg);
+      color: white;
+    }
+
+    .demo-banner span {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .demo-banner .tag {
+      background: var(--red);
+      color: white;
+      padding: 4px 12px;
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    /* Email container */
+    .email {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 2px solid var(--fg);
+    }
+
+    /* Header */
+    .email-header {
+      background: var(--fg);
+      color: white;
+      padding: var(--sp-4) var(--sp-4) var(--sp-3);
+    }
+
+    .email-header .logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--sp-3);
+    }
+
+    .email-header .logo {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+    }
+
+    .email-header .logo .dot {
+      color: var(--red);
+    }
+
+    .email-header .issue-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .email-header .title {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      margin-bottom: var(--sp-1);
+    }
+
+    .email-header .meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.05em;
+    }
+
+    .email-header .meta span {
+      margin-right: var(--sp-2);
+    }
+
+    /* Section shared */
+    .email-section {
+      padding: var(--sp-4);
+      border-bottom: 1px solid var(--muted);
+    }
+
+    .email-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      margin-bottom: var(--sp-2);
+      display: block;
+    }
+
+    /* Hero / Featured Article */
+    .hero-article {
+      border: 2px solid var(--fg);
+      padding: var(--sp-3);
+      margin-bottom: var(--sp-2);
+    }
+
+    .hero-article .category {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+      margin-bottom: var(--sp-1);
+    }
+
+    .hero-article h2 {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: var(--sp-2);
+    }
+
+    .hero-article p {
+      font-size: 15px;
+      color: var(--muted-text);
+      line-height: 1.6;
+      margin-bottom: var(--sp-3);
+    }
+
+    .cta-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.2s ease;
+    }
+
+    .cta-link:hover { gap: 12px; }
+
+    .read-time {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted-text);
+      margin-left: var(--sp-2);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Quick Wins */
+    .quick-wins { list-style: none; }
+
+    .quick-win {
+      display: flex;
+      gap: var(--sp-2);
+      padding: var(--sp-2) 0;
+      border-bottom: 1px dashed var(--muted);
+      align-items: flex-start;
+    }
+
+    .quick-win:last-child { border-bottom: none; }
+
+    .quick-win .icon {
+      width: 40px;
+      height: 40px;
+      background: var(--secondary);
+      border: 1px solid var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    .quick-win .content h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .quick-win .content p {
+      font-size: 13px;
+      color: var(--muted-text);
+      line-height: 1.5;
+    }
+
+    .quick-win .time-saved {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--red);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    /* Stat of the Week */
+    .stat-block {
+      background: var(--fg);
+      color: white;
+      padding: var(--sp-4);
+      text-align: center;
+    }
+
+    .stat-block .number {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: var(--red);
+      margin-bottom: var(--sp-1);
+    }
+
+    .stat-block .unit {
+      font-family: 'Space Mono', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: white;
+      margin-bottom: var(--sp-2);
+    }
+
+    .stat-block .description {
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 400px;
+      margin: 0 auto var(--sp-2);
+      line-height: 1.5;
+    }
+
+    .stat-block .source {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* Social Recap */
+    .social-posts {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+
+    .social-post {
+      border: 1px solid var(--muted);
+      padding: var(--sp-2);
+      display: flex;
+      gap: var(--sp-2);
+    }
+
+    .social-post .platform {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted-text);
+      width: 80px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    .social-post .post-content {
+      flex: 1;
+    }
+
+    .social-post .post-content p {
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: var(--sp-1);
+    }
+
+    .social-post .engagement {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: var(--muted-text);
+      letter-spacing: 0.05em;
+    }
+
+    .social-post .engagement span {
+      margin-right: var(--sp-2);
+    }
+
+    .social-post .engagement .top {
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    /* Upcoming */
+    .upcoming-items {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+
+    .upcoming-item {
+      display: flex;
+      gap: var(--sp-2);
+      padding: var(--sp-2);
+      background: var(--secondary);
+      align-items: center;
+    }
+
+    .upcoming-item .date-box {
+      width: 56px;
+      height: 56px;
+      background: var(--fg);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .upcoming-item .date-box .month {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red);
+    }
+
+    .upcoming-item .date-box .day {
+      font-family: system-ui, sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .upcoming-item .info h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .upcoming-item .info p {
+      font-size: 12px;
+      color: var(--muted-text);
+    }
+
+    .upcoming-item .info .type-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: var(--red);
+      color: white;
+      padding: 2px 8px;
+      display: inline-block;
+      margin-top: 4px;
+    }
+
+    /* CTA Footer */
+    .cta-footer {
+      background: var(--fg);
+      color: white;
+      padding: var(--sp-5) var(--sp-4);
+      text-align: center;
+    }
+
+    .cta-footer h3 {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--sp-1);
+    }
+
+    .cta-footer p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: var(--sp-3);
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 14px 32px;
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .cta-button:hover { background: #B91C1C; }
+
+    .footer-links {
+      margin-top: var(--sp-4);
+      padding-top: var(--sp-3);
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.3);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0 var(--sp-1);
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.6); }
+
+    .footer-copyright {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      color: rgba(255,255,255,0.2);
+      margin-top: var(--sp-2);
+      letter-spacing: 0.05em;
+    }
+
+    /* Divider */
+    .red-line {
+      height: 3px;
+      background: var(--red);
+    }
+
+    /* Demo navigation */
+    .demo-nav {
+      max-width: 640px;
+      margin: var(--sp-3) auto 0;
+      display: flex;
+      gap: var(--sp-1);
+      flex-wrap: wrap;
+    }
+
+    .demo-nav a {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--fg);
+      text-decoration: none;
+      padding: 8px 16px;
+      border: 1px solid var(--muted);
+      background: white;
+      transition: all 0.15s ease;
+    }
+
+    .demo-nav a:hover {
+      border-color: var(--fg);
+      background: var(--fg);
+      color: white;
+    }
+
+    .demo-nav a.active {
+      background: var(--red);
+      color: white;
+      border-color: var(--red);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Demo Banner -->
+  <div class="demo-banner">
+    <span>Unpaste.ai — Distribution Demo</span>
+    <div class="tag">Automated Newsletter</div>
+  </div>
+
+  <!-- Email Container -->
+  <div class="email">
+    <div class="red-line"></div>
+
+    <!-- Header -->
+    <div class="email-header">
+      <div class="logo-row">
+        <div class="logo">UNPASTE<span class="dot">.</span></div>
+        <div class="issue-badge">Issue #012 — Feb 20, 2026</div>
+      </div>
+      <div class="title">Weekly Intelligence</div>
+      <div class="meta">
+        <span>1,247 subscribers</span>
+        <span>5 min read</span>
+        <span>Brisbane, AU</span>
+      </div>
+    </div>
+
+    <!-- Featured Article -->
+    <div class="email-section">
+      <span class="section-label">[001] Featured Article</span>
+      <div class="hero-article">
+        <div class="category">Automation Insights — SEO Content</div>
+        <h2>Why Brisbane SMBs Still Copy-Paste in 2026</h2>
+        <p>Most small businesses are sitting on 15–20 hours per week of manual work that could be automated. We surveyed 200 Brisbane businesses to find out why — and the answers surprised us.</p>
+        <a href="#" class="cta-link">Read Full Article <span>→</span></a>
+        <span class="read-time">8 min read</span>
+      </div>
+    </div>
+
+    <!-- Quick Wins -->
+    <div class="email-section">
+      <span class="section-label">[002] Quick Wins — Automate This Week</span>
+      <ul class="quick-wins">
+        <li class="quick-win">
+          <div class="icon">⚡</div>
+          <div class="content">
+            <h4>Connect Your CRM to Email</h4>
+            <p>Sync new contacts automatically. No more manual entry between platforms — new lead comes in, CRM updates instantly.</p>
+            <span class="time-saved">Save 3 hrs/week</span>
+          </div>
+        </li>
+        <li class="quick-win">
+          <div class="icon">📄</div>
+          <div class="content">
+            <h4>Auto-Generate Invoices on Project Completion</h4>
+            <p>Trigger invoice creation when a project status changes to "complete." Xero + your PM tool, zero manual steps.</p>
+            <span class="time-saved">Save 2 hrs/week</span>
+          </div>
+        </li>
+        <li class="quick-win">
+          <div class="icon">🔔</div>
+          <div class="content">
+            <h4>Slack Alerts for New Form Submissions</h4>
+            <p>Website form filled out? Your team knows within seconds. Route to the right channel based on form type.</p>
+            <span class="time-saved">Save 1.5 hrs/week</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Stat of the Week -->
+    <div class="email-section" style="padding: 0;">
+      <div class="stat-block">
+        <span class="section-label" style="color: rgba(255,255,255,0.3); text-align: left; padding: 0 0 var(--sp-2) 0;">[003] Stat of the Week</span>
+        <div class="number">73%</div>
+        <div class="unit">of SMBs</div>
+        <div class="description">spend 10+ hours per week on manual data entry that could be fully automated with existing tools.</div>
+        <div class="source">Source: Australian Small Business Report 2025</div>
+      </div>
+    </div>
+
+    <!-- This Week on Social -->
+    <div class="email-section">
+      <span class="section-label">[004] This Week on Social</span>
+      <div class="social-posts">
+        <div class="social-post">
+          <div class="platform">LinkedIn</div>
+          <div class="post-content">
+            <p>"The average Brisbane SMB wastes $47,000/year on tasks a $200/month automation could handle. That's not a tech problem — that's a visibility problem."</p>
+            <div class="engagement">
+              <span class="top">2,847 impressions</span>
+              <span>142 reactions</span>
+              <span>23 comments</span>
+            </div>
+          </div>
+        </div>
+        <div class="social-post">
+          <div class="platform">Instagram</div>
+          <div class="post-content">
+            <p>Carousel: "5 Signs Your Business Needs Automation" — swipe-through with bold stats and real client examples.</p>
+            <div class="engagement">
+              <span class="top">1,203 reach</span>
+              <span>89 saves</span>
+              <span>34 shares</span>
+            </div>
+          </div>
+        </div>
+        <div class="social-post">
+          <div class="platform">X / Twitter</div>
+          <div class="post-content">
+            <p>Quick tip: "Stop copy-pasting between tabs. Connect your tools. That's it. That's the automation strategy."</p>
+            <div class="engagement">
+              <span class="top">4,100 impressions</span>
+              <span>67 likes</span>
+              <span>12 reposts</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upcoming -->
+    <div class="email-section">
+      <span class="section-label">[005] Coming Up</span>
+      <div class="upcoming-items">
+        <div class="upcoming-item">
+          <div class="date-box">
+            <span class="month">Feb</span>
+            <span class="day">27</span>
+          </div>
+          <div class="info">
+            <h4>Free Workshop: Automate Your First Workflow</h4>
+            <p>Live walkthrough — connect 3 tools in 30 minutes. No code required.</p>
+            <span class="type-badge">Workshop — Free</span>
+          </div>
+        </div>
+        <div class="upcoming-item">
+          <div class="date-box">
+            <span class="month">Mar</span>
+            <span class="day">03</span>
+          </div>
+          <div class="info">
+            <h4>New Blog: The Hidden Cost of Manual Data Entry</h4>
+            <p>Deep dive into where Brisbane businesses lose the most time — with benchmarks.</p>
+            <span class="type-badge">Blog Post</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Footer -->
+    <div class="cta-footer">
+      <h3>Still doing it manually?</h3>
+      <p>Take our free 5-minute assessment and find out how much time you're wasting.</p>
+      <a href="https://unpaste.ai" class="cta-button">Take the Efficiency Assessment →</a>
+      <div class="footer-links">
+        <a href="#">Website</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Instagram</a>
+        <a href="#">Unsubscribe</a>
+        <a href="#">Manage Preferences</a>
+      </div>
+      <div class="footer-copyright">© 2026 Unpaste.ai — Brisbane, Australia</div>
+    </div>
+  </div>
+
+  <!-- Demo Navigation -->
+  <nav class="demo-nav">
+    <a href="content-calendar.html">Content Calendar</a>
+    <a href="social-templates.html">Social Templates</a>
+    <a href="newsletter.html" class="active">Newsletter</a>
+  </nav>
+
+</body>
+</html>
