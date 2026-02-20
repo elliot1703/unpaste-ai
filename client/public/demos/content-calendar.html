@@ -66,37 +66,6 @@
 
     .top-nav .brand .dot { color: var(--red); }
 
-    .top-nav .tabs {
-      display: flex;
-      gap: 0;
-      margin-left: var(--sp-4);
-    }
-
-    .top-nav .tabs a {
-      font-family: 'Space Mono', monospace;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: rgba(255,255,255,0.4);
-      text-decoration: none;
-      padding: var(--sp-2) var(--sp-3);
-      border-bottom: 3px solid transparent;
-      margin-bottom: -3px;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-
-    .top-nav .tabs a:hover {
-      color: rgba(255,255,255,0.8);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .top-nav .tabs a.active {
-      color: white;
-      border-bottom-color: var(--red);
-    }
-
     .top-nav .demo-badge {
       font-family: 'Space Mono', monospace;
       font-size: 9px;
@@ -107,14 +76,60 @@
       padding: 4px 10px;
       font-weight: 700;
       flex-shrink: 0;
-      margin-left: var(--sp-2);
     }
 
+    /* Section Tabs */
+    .section-tabs {
+      display: flex;
+      gap: 0;
+      border: 2px solid var(--fg);
+      margin-bottom: var(--sp-5);
+    }
+
+    .section-tabs a {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--sp-3) var(--sp-2);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+      text-decoration: none;
+      border-right: 1px solid var(--muted);
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+
+    .section-tabs a:last-child { border-right: none; }
+
+    .section-tabs a:hover {
+      background: var(--secondary);
+      color: var(--fg);
+    }
+
+    .section-tabs a.active {
+      background: var(--fg);
+      color: white;
+    }
+
+    .section-tabs a .tab-label {
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      margin-top: 4px;
+    }
+
+    .section-tabs a.active .tab-label { opacity: 0.6; }
+
     @media (max-width: 640px) {
-      .top-nav { flex-wrap: wrap; padding: 0 var(--sp-2); }
-      .top-nav .tabs { width: 100%; order: 3; margin-left: 0; }
-      .top-nav .tabs a { font-size: 10px; padding: var(--sp-1) var(--sp-2); flex: 1; text-align: center; }
-      .top-nav .demo-badge { display: none; }
+      .section-tabs a { font-size: 11px; padding: var(--sp-2) var(--sp-1); }
+      .section-tabs a .tab-label { font-size: 9px; }
     }
 
     .page {
@@ -498,11 +513,6 @@
   <!-- Top Navigation -->
   <nav class="top-nav">
     <a href="https://unpaste.ai" class="brand">UNPASTE<span class="dot">.</span></a>
-    <div class="tabs">
-      <a href="content-calendar.html" class="active">Calendar</a>
-      <a href="social-templates.html">Templates</a>
-      <a href="newsletter.html">Newsletter</a>
-    </div>
     <span class="demo-badge">Content Demo</span>
   </nav>
 
@@ -537,6 +547,13 @@
         <div class="number"><span class="accent">1</span></div>
         <div class="label">Month Planned</div>
       </div>
+    </div>
+
+    <!-- Section Tabs -->
+    <div class="section-tabs">
+      <a href="content-calendar.html" class="active">Calendar<span class="tab-label">Planning</span></a>
+      <a href="social-templates.html">Templates<span class="tab-label">Creation</span></a>
+      <a href="newsletter.html">Newsletter<span class="tab-label">Distribution</span></a>
     </div>
 
     <!-- Legend -->
