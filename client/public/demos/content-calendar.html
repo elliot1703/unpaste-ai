@@ -39,6 +39,84 @@
 
     ::selection { background: var(--red); color: white; }
 
+    /* Top Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--fg);
+      border-bottom: 3px solid var(--red);
+      padding: 0 var(--sp-3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .top-nav .brand {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      color: white;
+      text-decoration: none;
+      padding: var(--sp-2) 0;
+      flex-shrink: 0;
+    }
+
+    .top-nav .brand .dot { color: var(--red); }
+
+    .top-nav .tabs {
+      display: flex;
+      gap: 0;
+      margin-left: var(--sp-4);
+    }
+
+    .top-nav .tabs a {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      padding: var(--sp-2) var(--sp-3);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -3px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    .top-nav .tabs a:hover {
+      color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .top-nav .tabs a.active {
+      color: white;
+      border-bottom-color: var(--red);
+    }
+
+    .top-nav .demo-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: var(--red);
+      color: white;
+      padding: 4px 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-left: var(--sp-2);
+    }
+
+    @media (max-width: 640px) {
+      .top-nav { flex-wrap: wrap; padding: 0 var(--sp-2); }
+      .top-nav .tabs { width: 100%; order: 3; margin-left: 0; }
+      .top-nav .tabs a { font-size: 10px; padding: var(--sp-1) var(--sp-2); flex: 1; text-align: center; }
+      .top-nav .demo-badge { display: none; }
+    }
+
     .page {
       max-width: 1400px;
       margin: 0 auto;
@@ -417,6 +495,17 @@
 </head>
 <body>
 
+  <!-- Top Navigation -->
+  <nav class="top-nav">
+    <a href="https://unpaste.ai" class="brand">UNPASTE<span class="dot">.</span></a>
+    <div class="tabs">
+      <a href="content-calendar.html" class="active">Calendar</a>
+      <a href="social-templates.html">Templates</a>
+      <a href="newsletter.html">Newsletter</a>
+    </div>
+    <span class="demo-badge">Content Demo</span>
+  </nav>
+
   <div class="page">
 
     <!-- Header -->
@@ -690,13 +779,6 @@
       <p>AI-powered content planning. From strategy to scheduled posts — across every channel, every week.</p>
       <a href="https://unpaste.ai" class="cta-button">See How It Works →</a>
     </div>
-
-    <!-- Demo Navigation -->
-    <nav class="demo-nav">
-      <a href="content-calendar.html" class="active">Content Calendar</a>
-      <a href="social-templates.html">Social Templates</a>
-      <a href="newsletter.html">Newsletter</a>
-    </nav>
 
   </div>
 
