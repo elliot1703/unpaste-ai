@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Router, Switch } from "wouter";
 import { HelmetProvider } from "react-helmet-async";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -14,7 +14,7 @@ import AssessmentPage from "./pages/AssessmentPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 
-function Router() {
+function AppRoutes() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
@@ -37,9 +37,14 @@ function Router() {
 //   to keep consistent foreground/background color across components
 // - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
 
-function App() {
-  return (
-    <HelmetProvider>
+interface AppProps {
+  ssrPath?: string;
+  helmetContext?: { helmet?: any };
+}
+
+function App({ ssrPath, helmetContext }: AppProps = {}) {
+  const content = (
+    <HelmetProvider context={helmetContext}>
       <ErrorBoundary>
         <ThemeProvider
           defaultTheme="light"
@@ -47,12 +52,17 @@ function App() {
         >
           <TooltipProvider>
             <Toaster />
-            <Router />
+            <AppRoutes />
           </TooltipProvider>
         </ThemeProvider>
       </ErrorBoundary>
     </HelmetProvider>
   );
+
+  if (ssrPath) {
+    return <Router ssrPath={ssrPath}>{content}</Router>;
+  }
+  return content;
 }
 
 export default App;
