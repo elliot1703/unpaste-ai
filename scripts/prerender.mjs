@@ -11,6 +11,7 @@ const routes = [
   "/solutions",
   "/about",
   "/book",
+  "/training",
   "/privacy",
   "/terms",
 ];
