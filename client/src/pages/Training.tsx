@@ -125,26 +125,22 @@ const audiences = [
   {
     icon: Building2,
     label: "Trades & services",
-    description:
-      "Plasterers, builders, sparkies, civil contractors. Admin-overloaded teams who want AI inside the business without becoming engineers.",
+    description: "Plasterers, builders, sparkies, contractors. AI without becoming engineers.",
   },
   {
     icon: FileText,
     label: "Professional services",
-    description:
-      "Accountants, lawyers, agencies, consultants. Document-heavy work that's prime for agentic drafting, research, and review.",
+    description: "Accountants, lawyers, agencies. Document-heavy work prime for agentic drafting.",
   },
   {
     icon: Workflow,
     label: "Ops & admin teams",
-    description:
-      "Inside any growing 20–50 person business: ops, HR, finance, exec assistants. Cross-industry, repeatable workflows.",
+    description: "Ops, HR, finance, EAs inside a 20–50 person business. Repeatable workflows.",
   },
   {
     icon: Rocket,
-    label: "Startups with technical founders",
-    description:
-      "Teams that already ‘get it’ — shorter sales cycle, faster path to a full AI Department engagement.",
+    label: "Tech-led startups",
+    description: "Teams that already get it. Fastest path to a full AI Department engagement.",
   },
 ];
 
@@ -153,43 +149,37 @@ const curriculum = [
     step: "01",
     title: "Why a workspace",
     duration: "30 min",
-    detail:
-      "Tour of a real (anonymised) workspace. Show how Claude Code reads it. Contrast scattered Drive vs structured workspace.",
+    detail: "Tour a real workspace. Show how an agent reads it.",
   },
   {
     step: "02",
     title: "Map your domains",
     duration: "60 min",
-    detail:
-      "Whiteboard with the team. Identify the 4-6 numbered top-level domains specific to your business.",
+    detail: "Whiteboard with your team. Identify 4–6 top-level folders.",
   },
   {
     step: "03",
     title: "Build the structure",
     duration: "60 min",
-    detail:
-      "Live: create folders, write the READMEs together. Each team member writes one.",
+    detail: "Create folders. Each team member writes one README.",
   },
   {
     step: "04",
     title: "Write your COMPANY.md",
     duration: "45 min",
-    detail:
-      "The Agent Instructions doc — tone, vocabulary, confidentiality, scope. In your team’s voice.",
+    detail: "Agent Instructions doc — tone, vocabulary, confidentiality.",
   },
   {
     step: "05",
     title: "Install the agent",
     duration: "30 min",
-    detail:
-      "Claude Code (or Codex/Cowork) installed, pointed at your workspace, first agentic task run live.",
+    detail: "Claude Code installed. First agentic task run live.",
   },
   {
     step: "06",
     title: "Recipes + handoff",
     duration: "15 min",
-    detail:
-      "Document 2-3 recipes the team runs themselves. AI Champion nominated. Recording delivered.",
+    detail: "Document recipes. Nominate AI Champion. Recording delivered.",
   },
 ];
 
@@ -284,9 +274,8 @@ export default function Training() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto"
               >
-                We architect the workspace, install the agents, and train your team.
-                So Claude Code, Codex, and Cowork can actually do work for you &mdash;
-                consistently, predictably, every day.
+                We architect the workspace, install the agents, and train your team
+                &mdash; so Claude Code, Codex, and Cowork actually do work for you.
               </motion.p>
 
               <motion.div
@@ -379,27 +368,28 @@ export default function Training() {
                   </div>
                 </div>
 
-                <div className="border-t border-border pt-4 font-mono text-sm text-muted-foreground space-y-1">
-                  <div>Everyone reinvents the wheel.</div>
-                  <div>Knowledge stays personal.</div>
-                  <div className="text-foreground font-bold">Nothing compounds.</div>
+                <div className="border-t border-border pt-4 font-mono text-sm text-muted-foreground">
+                  <span>Personal productivity. </span>
+                  <span className="text-foreground font-bold">
+                    Nothing compounds.
+                  </span>
                 </div>
               </div>
 
               {/* AFTER */}
-              <div className="bg-foreground text-background p-8 md:p-10">
-                <div className="mono-label text-background/60 mb-3">[AFTER]</div>
-                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-6">
+              <div className="bg-zinc-900 text-zinc-100 p-8 md:p-10">
+                <div className="mono-label text-zinc-400 mb-3">[AFTER]</div>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-6 text-white">
                   AI with an Operating Manual
                 </h3>
 
                 {/* Workspace diagram */}
-                <div className="border border-background/20 p-5 mb-6">
+                <div className="border border-zinc-700 p-5 mb-6">
                   {/* Team members feeding in */}
                   <div className="grid grid-cols-4 gap-2 mb-2">
                     {["Sarah", "Tom", "Jess", "Founder"].map((name) => (
                       <div key={name} className="text-center">
-                        <div className="font-mono text-xs text-background/80 mb-1">
+                        <div className="font-mono text-xs text-zinc-200 mb-1">
                           {name}
                         </div>
                         <div className="text-primary text-sm leading-none">↓</div>
@@ -408,9 +398,9 @@ export default function Training() {
                   </div>
 
                   {/* Workspace center */}
-                  <div className="border border-primary p-3 mb-3 flex items-center justify-center gap-2 bg-background/5">
+                  <div className="border border-primary p-3 mb-3 flex items-center justify-center gap-2 bg-white/5">
                     <Folder className="h-4 w-4 text-primary" />
-                    <span className="font-mono text-xs font-bold tracking-wider">
+                    <span className="font-mono text-xs font-bold tracking-wider text-white">
                       SHARED WORKSPACE
                     </span>
                   </div>
@@ -418,13 +408,13 @@ export default function Training() {
                   {/* Arrows out to agents */}
                   <div className="text-center mb-3">
                     <div className="text-primary text-sm leading-none">↓</div>
-                    <div className="font-mono text-[10px] text-background/60 uppercase tracking-wider mt-1">
+                    <div className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider mt-1">
                       read by agents
                     </div>
                   </div>
 
                   {/* Running agents */}
-                  <div className="space-y-2 border-t border-background/20 pt-3">
+                  <div className="space-y-2 border-t border-zinc-700 pt-3">
                     {[
                       "Weekly brief agent",
                       "Quote drafts agent",
@@ -434,7 +424,7 @@ export default function Training() {
                         key={agent}
                         className="flex items-center justify-between font-mono text-xs"
                       >
-                        <span className="text-background/80">{agent}</span>
+                        <span className="text-zinc-100">{agent}</span>
                         <span className="flex items-center gap-1.5 text-primary">
                           <span className="inline-block w-2 h-2 bg-primary"></span>
                           <span className="tracking-wider">RUNNING</span>
@@ -444,12 +434,11 @@ export default function Training() {
                   </div>
                 </div>
 
-                <div className="border-t border-background/20 pt-4 font-mono text-sm space-y-1">
-                  <div className="text-background/80">One source of truth.</div>
-                  <div className="text-background/80">Agents read it.</div>
-                  <div className="font-bold text-primary">
+                <div className="border-t border-zinc-700 pt-4 font-mono text-sm">
+                  <span className="text-zinc-100">Shared infrastructure. </span>
+                  <span className="font-bold text-primary">
                     Everyone benefits from everyone&rsquo;s work.
-                  </div>
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -473,19 +462,12 @@ export default function Training() {
                 </h2>
                 <div className="space-y-4 font-mono text-sm text-muted-foreground leading-relaxed">
                   <p>
-                    Every team member uses AI differently. Different tools, different
-                    prompts, no shared context. One person becomes an enthusiast.
-                    The rest forget what the workshop taught.
-                  </p>
-                  <p>
-                    Meanwhile the tools change every week. New models. New agentic
-                    capabilities. New integrations. You can&rsquo;t keep up alone, and
-                    your team can&rsquo;t either.
+                    Tools change every week. Each team member uses AI differently.
+                    Workshops don&rsquo;t stick.
                   </p>
                   <p className="text-foreground font-bold">
-                    The fix isn&rsquo;t more training. It&rsquo;s building the
-                    workspace agents read from, so the whole team operates from one
-                    source of truth.
+                    Build the workspace agents read from, and the whole team
+                    operates from one source of truth.
                   </p>
                 </div>
               </motion.div>
@@ -495,29 +477,28 @@ export default function Training() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="brutalist-card bg-foreground text-background"
+                className="brutalist-card bg-zinc-900 text-zinc-100"
               >
-                <div className="p-4 border-b border-background/20 flex items-center gap-2">
+                <div className="p-4 border-b border-zinc-700 flex items-center gap-2">
                   <Folder className="h-4 w-4 text-primary" />
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
                     Anatomy of an AI workspace
                   </span>
                 </div>
-                <pre className="p-6 font-mono text-xs md:text-sm leading-relaxed text-background/90 overflow-x-auto whitespace-pre">
+                <pre className="p-6 font-mono text-xs md:text-sm leading-relaxed text-zinc-100 overflow-x-auto whitespace-pre">
                   {workspaceTree}
                 </pre>
-                <div className="p-4 border-t border-background/20 font-mono text-xs text-background/60">
-                  <div className="mb-2">Numbered folders. Plain-English READMEs. One source of truth.</div>
-                  <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-background/10">
-                    <span className="text-background/40">READ BY:</span>
+                <div className="p-4 border-t border-zinc-700 font-mono text-xs">
+                  <div className="flex items-center gap-2 flex-wrap text-zinc-300">
+                    <span className="text-zinc-400">READ BY</span>
                     <span className="text-primary">●</span>
-                    <span className="text-background/80">Claude Code</span>
-                    <span className="text-background/40">·</span>
+                    <span>Claude Code</span>
+                    <span className="text-zinc-500">·</span>
                     <span className="text-primary">●</span>
-                    <span className="text-background/80">Codex</span>
-                    <span className="text-background/40">·</span>
+                    <span>Codex</span>
+                    <span className="text-zinc-500">·</span>
                     <span className="text-primary">●</span>
-                    <span className="text-background/80">Cowork</span>
+                    <span>Cowork</span>
                   </div>
                 </div>
               </motion.div>
@@ -782,8 +763,7 @@ export default function Training() {
                 <span className="text-primary">every Monday at 9am.</span>
               </h2>
               <p className="font-mono text-sm text-muted-foreground">
-                Once the workspace is set up, agents run on schedule. Real workflow,
-                real timing, zero human time.
+                Once the workspace exists, agents run on schedule. Zero human time.
               </p>
             </div>
 
@@ -794,20 +774,20 @@ export default function Training() {
               transition={{ duration: 0.6 }}
               className="max-w-3xl mx-auto"
             >
-              <div className="brutalist-card bg-foreground text-background p-6 md:p-10">
+              <div className="brutalist-card bg-zinc-900 text-zinc-100 p-6 md:p-10 shadow-[8px_8px_0_0_rgba(0,0,0,0.08)]">
                 {/* Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-6 border-b border-background/20 mb-6">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-6 border-b border-zinc-700 mb-6">
                   <div>
-                    <div className="mono-label text-background/60 mb-1">
+                    <div className="mono-label text-zinc-400 mb-1">
                       SCHEDULED TASK
                     </div>
-                    <h3 className="font-bold text-xl md:text-2xl tracking-tight">
+                    <h3 className="font-bold text-xl md:text-2xl tracking-tight text-white">
                       Monday Morning Brief
                     </h3>
                   </div>
                   <div className="sm:text-right">
-                    <div className="mono-label text-background/60 mb-1">TRIGGER</div>
-                    <div className="font-mono text-sm">Monday · 09:00 AEST</div>
+                    <div className="mono-label text-zinc-400 mb-1">TRIGGER</div>
+                    <div className="font-mono text-sm text-zinc-200">Monday · 09:00 AEST</div>
                   </div>
                 </div>
 
@@ -816,34 +796,30 @@ export default function Training() {
                   {[
                     {
                       time: "09:00:00",
-                      title: "Read workspace context",
-                      detail:
-                        "Agent reads /03_operations/weekly-brief-template.md, /05_team/last-week-notes/, COMPANY.md for tone.",
+                      title: "Read context",
+                      detail: "Pulls last week's notes and the brief template from the workspace.",
                     },
                     {
                       time: "09:00:12",
-                      title: "Draft brief",
-                      detail:
-                        "Pulls highlights, blockers, decisions needed. Drafts in markdown, in your company voice.",
+                      title: "Draft",
+                      detail: "Writes the brief in your company voice.",
                     },
                     {
                       time: "09:00:43",
-                      title: "Post + archive",
-                      detail:
-                        "Posted to Slack #leadership. Archived to /09_archive/briefs/2026-W20.md.",
+                      title: "Post",
+                      detail: "Posts to Slack #leadership and archives a copy.",
                     },
                     {
                       time: "09:00:47",
                       title: "Done",
-                      detail:
-                        "Brief is live. Leadership reads with their morning coffee.",
+                      detail: "Leadership reads with their morning coffee.",
                     },
                   ].map((step, i, arr) => (
                     <div key={i} className="flex gap-4">
                       <div className="flex flex-col items-center flex-shrink-0">
                         <div className="w-3 h-3 bg-primary mt-2"></div>
                         {i < arr.length - 1 && (
-                          <div className="w-px flex-1 bg-background/20"></div>
+                          <div className="w-px flex-1 bg-zinc-700"></div>
                         )}
                       </div>
                       <div className="flex-1 pb-6">
@@ -851,11 +827,11 @@ export default function Training() {
                           <span className="font-mono text-xs text-primary">
                             {step.time}
                           </span>
-                          <span className="font-bold text-sm tracking-tight uppercase">
+                          <span className="font-bold text-sm tracking-tight uppercase text-white">
                             {step.title}
                           </span>
                         </div>
-                        <div className="font-mono text-xs text-background/70 leading-relaxed">
+                        <div className="font-mono text-sm text-zinc-200 leading-relaxed">
                           {step.detail}
                         </div>
                       </div>
@@ -864,15 +840,15 @@ export default function Training() {
                 </div>
 
                 {/* Footer stats */}
-                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-background/20">
+                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-zinc-700">
                   <div>
-                    <div className="mono-label text-background/60 mb-1">RUN TIME</div>
+                    <div className="mono-label text-zinc-400 mb-1">RUN TIME</div>
                     <div className="font-bold text-xl md:text-2xl text-primary">
                       47s
                     </div>
                   </div>
                   <div>
-                    <div className="mono-label text-background/60 mb-1">
+                    <div className="mono-label text-zinc-400 mb-1">
                       HUMAN TIME
                     </div>
                     <div className="font-bold text-xl md:text-2xl text-primary">
@@ -880,7 +856,7 @@ export default function Training() {
                     </div>
                   </div>
                   <div>
-                    <div className="mono-label text-background/60 mb-1">
+                    <div className="mono-label text-zinc-400 mb-1">
                       RECURRENCE
                     </div>
                     <div className="font-bold text-xl md:text-2xl text-primary">
@@ -897,10 +873,8 @@ export default function Training() {
                   <h4 className="font-bold tracking-tight mb-2">
                     Quote drafts from inbox
                   </h4>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
-                    Triggered by client enquiry. Reads
-                    /01_business_rules/pricing-rules.md, drafts the quote, sends to
-                    ops for human review before going out.
+                  <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                    Client enquiry comes in. Agent drafts the quote and sends it to ops for review.
                   </p>
                 </div>
                 <div className="brutalist-card bg-background p-6">
@@ -908,10 +882,8 @@ export default function Training() {
                   <h4 className="font-bold tracking-tight mb-2">
                     Client onboarding pack
                   </h4>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
-                    Triggered by deal-won. Generates welcome pack, kickoff agenda,
-                    and billing setup from your workspace templates. Ready in under
-                    a minute.
+                  <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                    Deal won. Welcome pack, kickoff agenda, and billing setup ready in under a minute.
                   </p>
                 </div>
               </div>
@@ -946,8 +918,8 @@ export default function Training() {
                       <li>Chat-based help only</li>
                     </ul>
                   </div>
-                  <div className="p-6 md:p-8 bg-foreground text-background">
-                    <div className="mono-label text-background/60 mb-4">
+                  <div className="p-6 md:p-8 bg-zinc-900 text-zinc-100">
+                    <div className="mono-label text-zinc-400 mb-4">
                       Unpaste AI Operating Manual
                     </div>
                     <ul className="space-y-3 font-mono text-sm">
@@ -1076,9 +1048,9 @@ export default function Training() {
                 book a date. No commitment.
               </p>
 
-              <div className="brutalist-card bg-foreground text-background p-8 md:p-12 max-w-2xl mx-auto">
+              <div className="brutalist-card bg-zinc-900 text-zinc-100 p-8 md:p-12 max-w-2xl mx-auto">
                 <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
-                <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-2">
+                <p className="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2">
                   Email to book
                 </p>
                 <a
@@ -1087,9 +1059,8 @@ export default function Training() {
                 >
                   hello@unpaste.ai
                 </a>
-                <p className="font-mono text-xs text-background/70 max-w-md mx-auto">
-                  Click to open a draft with the right subject and a few prompts to
-                  fill in. We&rsquo;ll reply within 24 hours with a calendar link.
+                <p className="font-mono text-sm text-zinc-200 max-w-md mx-auto">
+                  Click to open a draft with the right subject already filled in. We&rsquo;ll reply within 24 hours.
                 </p>
               </div>
             </div>
