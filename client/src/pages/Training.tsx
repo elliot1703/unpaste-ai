@@ -1,7 +1,15 @@
-import { ArrowRight, Calendar, User, Users, CheckCircle2, MapPin, Clock } from "lucide-react";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Folder,
+  FileText,
+  Workflow,
+  Building2,
+  Rocket,
+  Clock,
+  Mail,
+} from "lucide-react";
 import { motion } from "framer-motion";
-import { Link } from "wouter";
-import { useEffect } from "react";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -15,85 +23,232 @@ const fadeUp = {
   }),
 };
 
-interface TrainingFormat {
+const MAILTO_DISCOVERY =
+  "mailto:hello@unpaste.ai?subject=AI%20Operating%20Manual%20%E2%80%94%20Discovery%20Call&body=Hi%20Elliot%2C%0A%0AWe%27d%20like%20to%20talk%20about%20setting%20up%20an%20AI%20workspace%20for%20our%20team.%0A%0ATeam%20size%3A%20%0AIndustry%3A%20%0AWhich%20package%20we%27re%20interested%20in%3A%20%0AAvailability%20for%20a%20call%3A%20%0A%0AThanks%2C";
+
+const mailtoForPackage = (pkg: string) =>
+  `mailto:hello@unpaste.ai?subject=${encodeURIComponent(`AI ${pkg} — Discovery Call`)}&body=${encodeURIComponent(
+    `Hi Elliot,\n\nWe'd like to talk about the AI ${pkg} package.\n\nTeam size: \nIndustry: \nAvailability for a call: \n\nThanks,`,
+  )}`;
+
+interface Package {
   tag: string;
   name: string;
-  icon: typeof User;
-  duration: string;
-  format: string;
-  bestFor: string;
-  outcomes: string[];
+  positioning: string;
+  setupPrice: string;
+  monthlyPrice?: string;
+  term: string;
+  includesTitle: string;
+  includes: string[];
+  recurringTitle?: string;
+  recurring?: string[];
+  forWhom: string;
+  cta: string;
   highlighted?: boolean;
 }
 
-const formats: TrainingFormat[] = [
+const packages: Package[] = [
   {
     tag: "[001]",
-    name: "1-ON-1 DAY SESSION",
-    icon: User,
-    duration: "Full day (6 hours)",
-    format: "In-person or remote",
-    bestFor: "Founders, executives, and individual operators who want to skip months of YouTube tutorials and get fluent fast.",
-    outcomes: [
-      "Hands-on with the AI tools relevant to your work",
-      "Custom prompts and workflows built for your daily tasks",
-      "A personalised AI playbook you keep after the session",
-      "Direct answers to your real questions, no generic theory",
+    name: "AI KICKSTART",
+    positioning: "The foundation, built in a day.",
+    setupPrice: "$2,500",
+    term: "One-off",
+    includesTitle: "Half-day on-site (4 hrs) — you leave with:",
+    includes: [
+      "4-6 numbered domain folders mapped to your business",
+      "Per-folder README docs your team and agents can both read",
+      "COMPANY.md with Agent Instructions (tone, vocabulary, confidentiality)",
+      "One agentic tool installed (Claude Code, Codex, or Cowork)",
+      "2-3 starter recipes the team can run themselves",
+      "Session recording for new hires",
     ],
+    forWhom: "SMBs who want to see how this looks before a bigger commitment.",
+    cta: "Book Kickstart",
   },
   {
     tag: "[002]",
-    name: "TEAM SESSION",
-    icon: Users,
-    duration: "2 hours",
-    format: "On-site at your office",
-    bestFor: "Teams of 5–25 who need to get on the same page about AI — what to use, when to use it, and how to use it well.",
-    outcomes: [
-      "Live demos tailored to your team's industry",
-      "Practical exercises everyone walks through together",
-      "Q&A on the tools and use cases your team is curious about",
-      "A shared baseline so your team stops guessing about AI",
+    name: "AI OPERATIONS",
+    positioning: "Workspace, agents, and ongoing evolution.",
+    setupPrice: "$4,500",
+    monthlyPrice: "$1,500/mo",
+    term: "3-month minimum, then month-to-month",
+    includesTitle: "Full-day on-site (6 hrs) — everything in Kickstart, plus:",
+    includes: [
+      "8-12 numbered domains for full operational coverage",
+      "Per-role context (sales, ops, marketing, admin)",
+      "3-5 deployed agentic workflows doing real recurring work",
+      "Safety policies and human-in-loop checkpoints",
+      "Workspace deployed where your team works (Drive, Notion, repo)",
     ],
+    recurringTitle: "Then every week:",
+    recurring: [
+      "45-min team office hours (Zoom or in-person)",
+      "Async Slack/email Q&A during the week",
+      "Monthly “what’s new in agents” briefing",
+      "Quarterly workspace audit and refresh",
+    ],
+    forWhom: "Teams who want AI baked into how they operate, not bolted on.",
+    cta: "Book Operations",
     highlighted: true,
   },
+  {
+    tag: "[003]",
+    name: "AI DEPARTMENT",
+    positioning: "We architect, build, and run your AI operating system.",
+    setupPrice: "$9,500",
+    monthlyPrice: "$3,500/mo",
+    term: "6-month minimum",
+    includesTitle: "2-day intensive — everything in Operations, plus:",
+    includes: [
+      "Workspace architecture across every business function",
+      "8-12 deployed agentic workflows",
+      "MCP connections to your real tools (CRM, calendar, email)",
+      "Governance + audit framework",
+      "Baseline metrics dashboard",
+      "90-day rollout plan",
+    ],
+    recurringTitle: "Then every week:",
+    recurring: [
+      "60-min leadership/strategy check-in",
+      "30-min team office hours",
+      "4 hrs/mo included build work for new agents",
+      "Monthly KPI report (time saved, tools adopted)",
+      "Quarterly strategy review + AI landscape update",
+    ],
+    forWhom: "SMBs treating AI as a strategic function, not a tool.",
+    cta: "Book Department",
+  },
 ];
 
-const audience = [
+const audiences = [
   {
-    icon: MapPin,
-    label: "SMBs & SMEs",
-    description: "Small and medium businesses that want practical AI literacy, not vendor pitches.",
+    icon: Building2,
+    label: "Trades & services",
+    description:
+      "Plasterers, builders, sparkies, civil contractors. Admin-overloaded teams who want AI inside the business without becoming engineers.",
   },
   {
-    icon: Users,
+    icon: FileText,
     label: "Professional services",
-    description: "Law firms, accountants, agencies, and consultants whose work is being reshaped by AI.",
+    description:
+      "Accountants, lawyers, agencies, consultants. Document-heavy work that's prime for agentic drafting, research, and review.",
   },
   {
-    icon: User,
-    label: "Founders & operators",
-    description: "Individual leaders who want to get genuinely fluent with the tools, not just hear about them.",
+    icon: Workflow,
+    label: "Ops & admin teams",
+    description:
+      "Inside any growing 20–50 person business: ops, HR, finance, exec assistants. Cross-industry, repeatable workflows.",
+  },
+  {
+    icon: Rocket,
+    label: "Startups with technical founders",
+    description:
+      "Teams that already ‘get it’ — shorter sales cycle, faster path to a full AI Department engagement.",
   },
 ];
+
+const curriculum = [
+  {
+    step: "01",
+    title: "Why a workspace",
+    duration: "30 min",
+    detail:
+      "Tour of a real (anonymised) workspace. Show how Claude Code reads it. Contrast scattered Drive vs structured workspace.",
+  },
+  {
+    step: "02",
+    title: "Map your domains",
+    duration: "60 min",
+    detail:
+      "Whiteboard with the team. Identify the 4-6 numbered top-level domains specific to your business.",
+  },
+  {
+    step: "03",
+    title: "Build the structure",
+    duration: "60 min",
+    detail:
+      "Live: create folders, write the READMEs together. Each team member writes one.",
+  },
+  {
+    step: "04",
+    title: "Write your COMPANY.md",
+    duration: "45 min",
+    detail:
+      "The Agent Instructions doc — tone, vocabulary, confidentiality, scope. In your team’s voice.",
+  },
+  {
+    step: "05",
+    title: "Install the agent",
+    duration: "30 min",
+    detail:
+      "Claude Code (or Codex/Cowork) installed, pointed at your workspace, first agentic task run live.",
+  },
+  {
+    step: "06",
+    title: "Recipes + handoff",
+    duration: "15 min",
+    detail:
+      "Document 2-3 recipes the team runs themselves. AI Champion nominated. Recording delivered.",
+  },
+];
+
+const faqs = [
+  {
+    q: "Do we need to be technical?",
+    a: "No. The whole point is that the workspace is plain-English markdown your team writes and reads. The agentic tools install in minutes and we set them up for you. If you can edit a Google Doc, you can maintain this.",
+  },
+  {
+    q: "Which AI tools do we need to pay for?",
+    a: "Usually one team subscription to Claude Team or ChatGPT Team (~$25/user/mo), plus Claude Code or Codex (free CLI tools). Cowork has its own pricing. We pick what fits your team in the first hour — we don’t lock you into anything.",
+  },
+  {
+    q: "What if a new model or tool comes out?",
+    a: "That’s exactly why Operations and Department include monthly briefings and quarterly refreshes. The landscape moves — you don’t have to keep up alone. We do, and bring you along.",
+  },
+  {
+    q: "Can we cancel the monthly retainer?",
+    a: "After the 3-month minimum on Operations (6-month on Department), it’s month-to-month. Cancel anytime with 30 days’ notice. The workspace and agents are yours — you keep them.",
+  },
+  {
+    q: "Do you travel for on-site sessions?",
+    a: "Yes. Based in Brisbane, comfortable across SE Queensland at no extra charge. Interstate or remote teams: we run sessions remotely or quote travel at cost.",
+  },
+  {
+    q: "What’s the minimum team size?",
+    a: "Kickstart works from 3 people. Operations and Department are designed for 5-25 person teams. If you’re smaller or solo, the AI Kickstart still delivers a working workspace.",
+  },
+];
+
+const workspaceTree = `your-business/
+├── 01_business_rules/
+│   ├── README.md
+│   ├── service-types.md
+│   └── pricing-rules.md
+├── 02_clients/
+│   ├── README.md
+│   └── active/
+├── 03_operations/
+│   ├── README.md
+│   └── workflows/
+├── 04_sales_marketing/
+│   ├── README.md
+│   └── pipeline.md
+├── 05_team/
+│   ├── README.md
+│   └── roles.md
+├── 06_agents/
+│   ├── README.md
+│   ├── quote-assistant.md
+│   └── weekly-brief.md
+└── COMPANY.md  ← Agent Instructions`;
 
 export default function Training() {
-  // Load Calendly widget script
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
-        title="In-Person AI Training"
-        description="Hands-on AI training for individuals and teams. 1-on-1 day sessions and on-site team workshops to get you and your people genuinely productive with AI."
+        title="AI Training & Workspace Setup"
+        description="We build your business an AI operating manual — a structured workspace that agents like Claude Code, Codex, and Cowork can read and operate inside. Three packages from $2,500."
         url="https://unpaste.ai/training"
       />
 
@@ -102,7 +257,7 @@ export default function Training() {
       <div className="grid-background" />
 
       <div className="relative z-10">
-        {/* Hero Section */}
+        {/* Hero */}
         <section className="pt-32 pb-12 md:pt-40 md:pb-16">
           <div className="container">
             <div className="text-center max-w-3xl mx-auto">
@@ -112,7 +267,7 @@ export default function Training() {
                 transition={{ duration: 0.5 }}
                 className="section-tag mb-6"
               >
-                [IN-PERSON AI TRAINING]
+                [AI OPERATING MANUAL]
               </motion.div>
 
               <motion.h1
@@ -121,194 +276,429 @@ export default function Training() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6"
               >
-                GET YOUR TEAM{" "}
-                <span className="text-primary">PRODUCTIVE WITH AI.</span>
+                BUILD THE WORKSPACE{" "}
+                <span className="text-primary">YOUR AGENTS NEED.</span>
               </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8"
+                className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto"
               >
-                Hands-on AI workshops for individuals and teams. Skip the theory, the
-                hype, and the YouTube rabbit hole &mdash; learn the tools that are
-                actually reshaping work.
+                We architect the workspace, install the agents, and train your team.
+                So Claude Code, Codex, and Cowork can actually do work for you &mdash;
+                consistently, predictably, every day.
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center"
               >
                 <a
-                  href="#book"
-                  className="brutalist-button inline-flex items-center gap-2"
+                  href="#packages"
+                  className="brutalist-button inline-flex items-center justify-center gap-2"
                 >
-                  Book a discovery call
+                  See the packages
                   <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href={MAILTO_DISCOVERY}
+                  className="brutalist-button-outline inline-flex items-center justify-center gap-2"
+                >
+                  <Mail className="h-4 w-4" />
+                  Book a discovery call
                 </a>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Two-Format Cards */}
-        <section className="py-16 md:py-20">
+        {/* Problem / Why a workspace */}
+        <section className="py-16 md:py-20 border-t border-border">
+          <div className="container">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <div className="section-tag mb-4">[THE PROBLEM]</div>
+                <h2 className="text-3xl md:text-4xl tracking-tighter mb-6">
+                  Workshops don&rsquo;t fix this.{" "}
+                  <span className="text-primary">Infrastructure does.</span>
+                </h2>
+                <div className="space-y-4 font-mono text-sm text-muted-foreground leading-relaxed">
+                  <p>
+                    Every team member uses AI differently. Different tools, different
+                    prompts, no shared context. One person becomes an enthusiast.
+                    The rest forget what the workshop taught.
+                  </p>
+                  <p>
+                    Meanwhile the tools change every week. New models. New agentic
+                    capabilities. New integrations. You can&rsquo;t keep up alone, and
+                    your team can&rsquo;t either.
+                  </p>
+                  <p className="text-foreground font-bold">
+                    The fix isn&rsquo;t more training. It&rsquo;s building the
+                    workspace agents read from, so the whole team operates from one
+                    source of truth.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="brutalist-card bg-foreground text-background"
+              >
+                <div className="p-4 border-b border-background/20 flex items-center gap-2">
+                  <Folder className="h-4 w-4 text-primary" />
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider">
+                    Anatomy of an AI workspace
+                  </span>
+                </div>
+                <pre className="p-6 font-mono text-xs md:text-sm leading-relaxed text-background/90 overflow-x-auto whitespace-pre">
+                  {workspaceTree}
+                </pre>
+                <div className="p-4 border-t border-background/20 font-mono text-xs text-background/60">
+                  Numbered folders. Plain-English READMEs. One source of truth your
+                  agents read.
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Packages */}
+        <section
+          id="packages"
+          className="py-16 md:py-24 border-t border-border bg-card scroll-mt-20"
+        >
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="section-tag mb-4">[TWO FORMATS]</div>
-              <h2 className="text-3xl md:text-4xl tracking-tighter">
-                Choose the session{" "}
-                <span className="text-primary">that fits.</span>
+              <div className="section-tag mb-4">[PACKAGES]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                Three ways to get{" "}
+                <span className="text-primary">your workspace running.</span>
               </h2>
+              <p className="font-mono text-sm text-muted-foreground">
+                Start with Kickstart to see the pattern. Most teams choose Operations
+                for the ongoing relationship.
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-              {formats.map((format, i) => {
-                const Icon = format.icon;
-                return (
-                  <motion.div
-                    key={format.tag}
-                    custom={i}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeUp}
-                    className={`brutalist-card flex flex-col ${
-                      format.highlighted ? "bg-foreground text-background" : "bg-card"
-                    }`}
-                  >
-                    <div className="p-6 md:p-8 flex-1 flex flex-col">
-                      <div className="flex items-center justify-between mb-6">
-                        <span
-                          className={`mono-label ${
-                            format.highlighted ? "text-background/60" : ""
-                          }`}
-                        >
-                          {format.tag}
-                        </span>
-                        <Icon
-                          className={`h-5 w-5 ${
-                            format.highlighted ? "text-primary" : "text-primary"
-                          }`}
-                        />
-                      </div>
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+              {packages.map((pkg, i) => (
+                <motion.div
+                  key={pkg.tag}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className={`brutalist-card flex flex-col relative ${
+                    pkg.highlighted
+                      ? "bg-foreground text-background"
+                      : "bg-background"
+                  }`}
+                >
+                  {pkg.highlighted && (
+                    <div className="absolute -top-3 left-6 px-3 py-1 bg-primary text-white font-mono text-xs font-bold uppercase tracking-wider">
+                      Most Popular
+                    </div>
+                  )}
 
-                      <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-4">
-                        {format.name}
-                      </h3>
-
-                      <div className="space-y-2 mb-6 pb-6 border-b border-border/40">
-                        <div className="flex items-center gap-2">
-                          <Clock
-                            className={`h-3.5 w-3.5 ${
-                              format.highlighted ? "text-background/60" : "text-muted-foreground"
-                            }`}
-                          />
-                          <span
-                            className={`font-mono text-xs uppercase tracking-wider ${
-                              format.highlighted ? "text-background/80" : "text-muted-foreground"
-                            }`}
-                          >
-                            {format.duration}
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <MapPin
-                            className={`h-3.5 w-3.5 ${
-                              format.highlighted ? "text-background/60" : "text-muted-foreground"
-                            }`}
-                          />
-                          <span
-                            className={`font-mono text-xs uppercase tracking-wider ${
-                              format.highlighted ? "text-background/80" : "text-muted-foreground"
-                            }`}
-                          >
-                            {format.format}
-                          </span>
-                        </div>
-                      </div>
-
-                      <p
-                        className={`font-mono text-sm leading-relaxed mb-6 ${
-                          format.highlighted ? "text-background/80" : "text-muted-foreground"
+                  <div className="p-6 md:p-8 flex-1 flex flex-col">
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-4">
+                      <span
+                        className={`mono-label ${
+                          pkg.highlighted ? "text-background/60" : ""
                         }`}
                       >
-                        <span
-                          className={`block mono-label mb-2 ${
-                            format.highlighted ? "text-background/60" : ""
-                          }`}
-                        >
-                          Best for
-                        </span>
-                        {format.bestFor}
-                      </p>
+                        {pkg.tag}
+                      </span>
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-2">
+                      {pkg.name}
+                    </h3>
+                    <p
+                      className={`font-mono text-sm mb-6 ${
+                        pkg.highlighted ? "text-background/80" : "text-muted-foreground"
+                      }`}
+                    >
+                      {pkg.positioning}
+                    </p>
 
-                      <div className="mt-auto">
+                    {/* Price */}
+                    <div
+                      className={`pb-6 mb-6 border-b ${
+                        pkg.highlighted ? "border-background/20" : "border-border"
+                      }`}
+                    >
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-3xl md:text-4xl font-bold tracking-tight">
+                          {pkg.setupPrice}
+                        </span>
                         <span
-                          className={`block mono-label mb-3 ${
-                            format.highlighted ? "text-background/60" : ""
+                          className={`font-mono text-xs uppercase tracking-wider ${
+                            pkg.highlighted ? "text-background/60" : "text-muted-foreground"
                           }`}
                         >
-                          What you get
+                          setup
                         </span>
+                      </div>
+                      {pkg.monthlyPrice && (
+                        <div className="mt-1 flex items-baseline gap-2">
+                          <span
+                            className={`font-mono text-lg font-bold ${
+                              pkg.highlighted ? "text-primary" : "text-primary"
+                            }`}
+                          >
+                            + {pkg.monthlyPrice}
+                          </span>
+                          <span
+                            className={`font-mono text-xs uppercase tracking-wider ${
+                              pkg.highlighted ? "text-background/60" : "text-muted-foreground"
+                            }`}
+                          >
+                            retainer
+                          </span>
+                        </div>
+                      )}
+                      <div
+                        className={`mt-3 font-mono text-xs ${
+                          pkg.highlighted ? "text-background/60" : "text-muted-foreground"
+                        }`}
+                      >
+                        {pkg.term}
+                      </div>
+                    </div>
+
+                    {/* Includes */}
+                    <div className="mb-6">
+                      <div
+                        className={`mono-label mb-3 ${
+                          pkg.highlighted ? "text-background/60" : ""
+                        }`}
+                      >
+                        {pkg.includesTitle}
+                      </div>
+                      <ul className="space-y-3">
+                        {pkg.includes.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3">
+                            <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                            <span
+                              className={`font-mono text-sm leading-relaxed ${
+                                pkg.highlighted ? "text-background/90" : "text-foreground"
+                              }`}
+                            >
+                              {item}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Recurring */}
+                    {pkg.recurring && (
+                      <div
+                        className={`mb-6 pt-6 border-t ${
+                          pkg.highlighted ? "border-background/20" : "border-border"
+                        }`}
+                      >
+                        <div
+                          className={`mono-label mb-3 ${
+                            pkg.highlighted ? "text-background/60" : ""
+                          }`}
+                        >
+                          {pkg.recurringTitle}
+                        </div>
                         <ul className="space-y-3">
-                          {format.outcomes.map((outcome, idx) => (
+                          {pkg.recurring.map((item, idx) => (
                             <li key={idx} className="flex items-start gap-3">
-                              <CheckCircle2
-                                className={`h-4 w-4 flex-shrink-0 mt-0.5 ${
-                                  format.highlighted ? "text-primary" : "text-primary"
-                                }`}
-                              />
+                              <Clock className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
                               <span
                                 className={`font-mono text-sm leading-relaxed ${
-                                  format.highlighted ? "text-background/90" : "text-foreground"
+                                  pkg.highlighted ? "text-background/90" : "text-foreground"
                                 }`}
                               >
-                                {outcome}
+                                {item}
                               </span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                    )}
+
+                    {/* For whom */}
+                    <p
+                      className={`font-mono text-xs italic mb-6 ${
+                        pkg.highlighted ? "text-background/70" : "text-muted-foreground"
+                      }`}
+                    >
+                      <span
+                        className={`mono-label not-italic mr-2 ${
+                          pkg.highlighted ? "text-background/50" : ""
+                        }`}
+                      >
+                        For:
+                      </span>
+                      {pkg.forWhom}
+                    </p>
+
+                    {/* CTA */}
+                    <a
+                      href={mailtoForPackage(pkg.name.replace("AI ", ""))}
+                      className={`mt-auto inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors ${
+                        pkg.highlighted
+                          ? "bg-primary text-white hover:bg-primary/90"
+                          : "bg-foreground text-background hover:bg-foreground/90"
+                      }`}
+                    >
+                      {pkg.cta}
+                      <ArrowRight className="h-4 w-4" />
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* Pricing Strip */}
-        <section className="py-12 md:py-16 border-y border-border bg-card">
-          <div className="container">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="section-tag mb-4">[PRICING]</div>
-              <div className="font-mono text-2xl md:text-4xl font-bold tracking-tight mb-3">
-                FROM <span className="text-primary">$500</span>
-              </div>
-              <p className="font-mono text-sm text-muted-foreground">
-                Final scope and pricing discussed on the call. Travel costs for
-                on-site team sessions are billed at cost.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Who It's For */}
-        <section className="py-16 md:py-20">
+        {/* Curriculum */}
+        <section className="py-16 md:py-24 border-t border-border">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="section-tag mb-4">[WHO IT'S FOR]</div>
+              <div className="section-tag mb-4">[WHAT HAPPENS]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                What we actually do{" "}
+                <span className="text-primary">on day one.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground">
+                The half-day Kickstart curriculum. Operations and Department layer
+                more on top.
+              </p>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="space-y-4">
+                {curriculum.map((block, i) => (
+                  <motion.div
+                    key={block.step}
+                    custom={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    className="brutalist-card bg-card p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8"
+                  >
+                    <div className="md:w-32 flex-shrink-0">
+                      <div className="mono-label text-primary mb-1">
+                        {block.step}
+                      </div>
+                      <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                        {block.duration}
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-lg tracking-tight mb-2">
+                        {block.title}
+                      </h3>
+                      <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                        {block.detail}
+                      </p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* What makes it different */}
+        <section className="py-16 md:py-24 border-t border-border bg-card">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="section-tag mb-4">[WHY THIS WORKS]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                Not another{" "}
+                <span className="text-primary">ChatGPT workshop.</span>
+              </h2>
+            </div>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="brutalist-card bg-background overflow-hidden">
+                <div className="grid grid-cols-2 divide-x divide-border">
+                  <div className="p-6 md:p-8">
+                    <div className="mono-label text-muted-foreground mb-4">
+                      Commodity AI training
+                    </div>
+                    <ul className="space-y-3 font-mono text-sm text-muted-foreground">
+                      <li>Teaches prompt engineering</li>
+                      <li>Generic intro to ChatGPT</li>
+                      <li>Trainer leaves, nothing sticks</li>
+                      <li>Static deliverable</li>
+                      <li>Personal productivity for enthusiasts</li>
+                      <li>Chat-based help only</li>
+                    </ul>
+                  </div>
+                  <div className="p-6 md:p-8 bg-foreground text-background">
+                    <div className="mono-label text-background/60 mb-4">
+                      Unpaste AI Operating Manual
+                    </div>
+                    <ul className="space-y-3 font-mono text-sm">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>Builds the workspace agents read</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>Tool selection mapped to your work</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>Weekly office hours keep it alive</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>Quarterly refresh as agents evolve</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>Shared org-level infrastructure</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span>Agentic tools doing autonomous work</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Who it's for */}
+        <section className="py-16 md:py-24 border-t border-border">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="section-tag mb-4">[WHO IT&rsquo;S FOR]</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter">
-                Built for the people{" "}
+                Built for teams{" "}
                 <span className="text-primary">doing the work.</span>
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-              {audience.map((item, i) => {
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              {audiences.map((item, i) => {
                 const Icon = item.icon;
                 return (
                   <motion.div
@@ -336,64 +726,73 @@ export default function Training() {
           </div>
         </section>
 
-        {/* Booking Section with Calendly Embed */}
-        <section id="book" className="py-16 md:py-24 border-t border-border bg-card scroll-mt-20">
+        {/* FAQ */}
+        <section className="py-16 md:py-24 border-t border-border bg-card">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="section-tag mb-4">[NEXT STEP]</div>
-              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
-                Book a discovery call.
+              <div className="section-tag mb-4">[FAQ]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter">
+                Things people{" "}
+                <span className="text-primary">actually ask.</span>
               </h2>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                15&ndash;30 minutes to scope the right format, dates, and pricing for
-                your situation. No commitment.
-              </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="bg-background border border-border overflow-hidden">
-                <div className="p-4 border-b border-border">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-primary" />
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider">
-                      Select a Time
+            <div className="max-w-3xl mx-auto space-y-4">
+              {faqs.map((faq, i) => (
+                <motion.details
+                  key={i}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="brutalist-card bg-background p-6 group"
+                >
+                  <summary className="cursor-pointer list-none flex items-center justify-between gap-4">
+                    <span className="font-bold text-base md:text-lg tracking-tight">
+                      {faq.q}
                     </span>
-                  </div>
-                </div>
+                    <span className="font-mono text-primary text-xl group-open:rotate-45 transition-transform">
+                      +
+                    </span>
+                  </summary>
+                  <p className="font-mono text-sm text-muted-foreground leading-relaxed mt-4 pt-4 border-t border-border">
+                    {faq.a}
+                  </p>
+                </motion.details>
+              ))}
+            </div>
+          </div>
+        </section>
 
-                <div
-                  className="calendly-inline-widget"
-                  data-url="https://calendly.com/unpaste-ai/consultation?hide_gdpr_banner=1&primary_color=dc2626"
-                  style={{ minWidth: "320px", height: "700px" }}
-                />
+        {/* Final CTA */}
+        <section className="py-16 md:py-24 border-t border-border">
+          <div className="container">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="section-tag mb-4">[NEXT STEP]</div>
+              <h2 className="text-3xl md:text-5xl tracking-tighter mb-6">
+                Book a{" "}
+                <span className="text-primary">discovery call.</span>
+              </h2>
+              <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-10 max-w-xl mx-auto">
+                15&ndash;30 minutes to scope your team, pick the right package, and
+                book a date. No commitment.
+              </p>
 
-                <noscript>
-                  <div className="p-8 text-center">
-                    <p className="font-mono text-sm text-muted-foreground mb-4">
-                      Please enable JavaScript to use the booking calendar.
-                    </p>
-                    <a
-                      href="https://calendly.com/unpaste-ai/consultation"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="brutalist-button inline-flex items-center gap-2"
-                    >
-                      Book via Calendly
-                      <ArrowRight className="h-4 w-4" />
-                    </a>
-                  </div>
-                </noscript>
-              </div>
-
-              <div className="mt-6 text-center">
-                <p className="font-mono text-xs text-muted-foreground">
-                  Prefer email?{" "}
-                  <a
-                    href="mailto:hello@unpaste.ai?subject=AI%20Training%20Enquiry"
-                    className="text-primary hover:underline"
-                  >
-                    hello@unpaste.ai
-                  </a>
+              <div className="brutalist-card bg-foreground text-background p-8 md:p-12 max-w-2xl mx-auto">
+                <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
+                <p className="font-mono text-xs uppercase tracking-wider text-background/60 mb-2">
+                  Email to book
+                </p>
+                <a
+                  href={MAILTO_DISCOVERY}
+                  className="inline-block font-bold text-2xl md:text-3xl tracking-tight text-primary hover:underline mb-4"
+                >
+                  hello@unpaste.ai
+                </a>
+                <p className="font-mono text-xs text-background/70 max-w-md mx-auto">
+                  Click to open a draft with the right subject and a few prompts to
+                  fill in. We&rsquo;ll reply within 24 hours with a calendar link.
                 </p>
               </div>
             </div>
