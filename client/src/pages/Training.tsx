@@ -221,27 +221,25 @@ const faqs = [
 ];
 
 const workspaceTree = `your-business/
-├── 01_business_rules/
-│   ├── README.md
+├── 01_business_rules/         ─→  Rules every agent must follow
+│   ├── README.md              ─→  How an agent reads this folder
 │   ├── service-types.md
 │   └── pricing-rules.md
-├── 02_clients/
+├── 02_clients/                ─→  Numbered for dependency order
 │   ├── README.md
 │   └── active/
 ├── 03_operations/
 │   ├── README.md
-│   └── workflows/
+│   └── workflows/             ─→  Where recipes live
 ├── 04_sales_marketing/
-│   ├── README.md
 │   └── pipeline.md
 ├── 05_team/
-│   ├── README.md
 │   └── roles.md
-├── 06_agents/
-│   ├── README.md
+├── 06_agents/                 ─→  Reusable agent definitions
 │   ├── quote-assistant.md
 │   └── weekly-brief.md
-└── COMPANY.md  ← Agent Instructions`;
+└── COMPANY.md  ◀──────────────────  Tone · Vocabulary · Confidentiality
+                                     Every agent reads this first.`;
 
 export default function Training() {
   return (
@@ -316,6 +314,148 @@ export default function Training() {
           </div>
         </section>
 
+        {/* Before / After */}
+        <section className="py-16 md:py-24 border-t border-border bg-card">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="section-tag mb-4">[THE SHIFT]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                AI as personal tools{" "}
+                <span className="text-primary">vs. shared infrastructure.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground">
+                Most teams are in the left column. They don&rsquo;t need more
+                training. They need this.
+              </p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="grid md:grid-cols-2 max-w-6xl mx-auto brutalist-card overflow-hidden"
+            >
+              {/* BEFORE */}
+              <div className="bg-background p-8 md:p-10 border-b md:border-b-0 md:border-r border-border">
+                <div className="mono-label text-muted-foreground mb-3">[BEFORE]</div>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-6">
+                  AI today, in most businesses
+                </h3>
+
+                <div className="space-y-2 mb-6">
+                  {/* Fake browser tabs scattered */}
+                  <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2">
+                    <span className="text-primary">●</span>
+                    <span className="truncate">chat.openai.com &mdash; <span className="italic">Sarah&rsquo;s account</span></span>
+                  </div>
+                  <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2 ml-6">
+                    <span className="text-primary">●</span>
+                    <span className="truncate">claude.ai &mdash; <span className="italic">Tom&rsquo;s tab</span></span>
+                  </div>
+                  <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2 ml-2">
+                    <span className="text-primary">●</span>
+                    <span className="truncate">copilot.microsoft.com &mdash; <span className="italic">Jess tried it once</span></span>
+                  </div>
+                  <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2 ml-8">
+                    <span className="text-primary">●</span>
+                    <span className="truncate">perplexity.ai &mdash; <span className="italic">Founder uses this</span></span>
+                  </div>
+
+                  {/* Slack ping */}
+                  <div className="mt-5 border-l-2 border-muted-foreground/30 pl-3 font-mono text-xs text-muted-foreground italic">
+                    &ldquo;hey, what&rsquo;s the prompt for the client brief
+                    again?&rdquo;
+                    <div className="not-italic text-[10px] text-muted-foreground/60 mt-1">
+                      &mdash; #general · 9:47am
+                    </div>
+                  </div>
+
+                  {/* File chaos */}
+                  <div className="mt-5 font-mono text-xs text-muted-foreground space-y-1">
+                    <div className="truncate">↳ Quote-FINAL-v3-USE-THIS-ONE.docx</div>
+                    <div className="truncate">↳ Quote-FINAL-v3-USE-THIS-ONE-edited.docx</div>
+                    <div className="truncate">↳ Marketing-prompts (my version).txt</div>
+                  </div>
+                </div>
+
+                <div className="border-t border-border pt-4 font-mono text-sm text-muted-foreground space-y-1">
+                  <div>Everyone reinvents the wheel.</div>
+                  <div>Knowledge stays personal.</div>
+                  <div className="text-foreground font-bold">Nothing compounds.</div>
+                </div>
+              </div>
+
+              {/* AFTER */}
+              <div className="bg-foreground text-background p-8 md:p-10">
+                <div className="mono-label text-background/60 mb-3">[AFTER]</div>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-6">
+                  AI with an Operating Manual
+                </h3>
+
+                {/* Workspace diagram */}
+                <div className="border border-background/20 p-5 mb-6">
+                  {/* Team members feeding in */}
+                  <div className="grid grid-cols-4 gap-2 mb-2">
+                    {["Sarah", "Tom", "Jess", "Founder"].map((name) => (
+                      <div key={name} className="text-center">
+                        <div className="font-mono text-xs text-background/80 mb-1">
+                          {name}
+                        </div>
+                        <div className="text-primary text-sm leading-none">↓</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Workspace center */}
+                  <div className="border border-primary p-3 mb-3 flex items-center justify-center gap-2 bg-background/5">
+                    <Folder className="h-4 w-4 text-primary" />
+                    <span className="font-mono text-xs font-bold tracking-wider">
+                      SHARED WORKSPACE
+                    </span>
+                  </div>
+
+                  {/* Arrows out to agents */}
+                  <div className="text-center mb-3">
+                    <div className="text-primary text-sm leading-none">↓</div>
+                    <div className="font-mono text-[10px] text-background/60 uppercase tracking-wider mt-1">
+                      read by agents
+                    </div>
+                  </div>
+
+                  {/* Running agents */}
+                  <div className="space-y-2 border-t border-background/20 pt-3">
+                    {[
+                      "Weekly brief agent",
+                      "Quote drafts agent",
+                      "Inbox triage agent",
+                    ].map((agent) => (
+                      <div
+                        key={agent}
+                        className="flex items-center justify-between font-mono text-xs"
+                      >
+                        <span className="text-background/80">{agent}</span>
+                        <span className="flex items-center gap-1.5 text-primary">
+                          <span className="inline-block w-2 h-2 bg-primary"></span>
+                          <span className="tracking-wider">RUNNING</span>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="border-t border-background/20 pt-4 font-mono text-sm space-y-1">
+                  <div className="text-background/80">One source of truth.</div>
+                  <div className="text-background/80">Agents read it.</div>
+                  <div className="font-bold text-primary">
+                    Everyone benefits from everyone&rsquo;s work.
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
         {/* Problem / Why a workspace */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
@@ -367,8 +507,18 @@ export default function Training() {
                   {workspaceTree}
                 </pre>
                 <div className="p-4 border-t border-background/20 font-mono text-xs text-background/60">
-                  Numbered folders. Plain-English READMEs. One source of truth your
-                  agents read.
+                  <div className="mb-2">Numbered folders. Plain-English READMEs. One source of truth.</div>
+                  <div className="flex items-center gap-2 flex-wrap pt-2 border-t border-background/10">
+                    <span className="text-background/40">READ BY:</span>
+                    <span className="text-primary">●</span>
+                    <span className="text-background/80">Claude Code</span>
+                    <span className="text-background/40">·</span>
+                    <span className="text-primary">●</span>
+                    <span className="text-background/80">Codex</span>
+                    <span className="text-background/40">·</span>
+                    <span className="text-primary">●</span>
+                    <span className="text-background/80">Cowork</span>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -622,8 +772,155 @@ export default function Training() {
           </div>
         </section>
 
-        {/* What makes it different */}
+        {/* Agent at Work */}
         <section className="py-16 md:py-24 border-t border-border bg-card">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="section-tag mb-4">[AN AGENT AT WORK]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                Here&rsquo;s what runs{" "}
+                <span className="text-primary">every Monday at 9am.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground">
+                Once the workspace is set up, agents run on schedule. Real workflow,
+                real timing, zero human time.
+              </p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-3xl mx-auto"
+            >
+              <div className="brutalist-card bg-foreground text-background p-6 md:p-10">
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 pb-6 border-b border-background/20 mb-6">
+                  <div>
+                    <div className="mono-label text-background/60 mb-1">
+                      SCHEDULED TASK
+                    </div>
+                    <h3 className="font-bold text-xl md:text-2xl tracking-tight">
+                      Monday Morning Brief
+                    </h3>
+                  </div>
+                  <div className="sm:text-right">
+                    <div className="mono-label text-background/60 mb-1">TRIGGER</div>
+                    <div className="font-mono text-sm">Monday · 09:00 AEST</div>
+                  </div>
+                </div>
+
+                {/* Timeline steps */}
+                <div className="mb-2">
+                  {[
+                    {
+                      time: "09:00:00",
+                      title: "Read workspace context",
+                      detail:
+                        "Agent reads /03_operations/weekly-brief-template.md, /05_team/last-week-notes/, COMPANY.md for tone.",
+                    },
+                    {
+                      time: "09:00:12",
+                      title: "Draft brief",
+                      detail:
+                        "Pulls highlights, blockers, decisions needed. Drafts in markdown, in your company voice.",
+                    },
+                    {
+                      time: "09:00:43",
+                      title: "Post + archive",
+                      detail:
+                        "Posted to Slack #leadership. Archived to /09_archive/briefs/2026-W20.md.",
+                    },
+                    {
+                      time: "09:00:47",
+                      title: "Done",
+                      detail:
+                        "Brief is live. Leadership reads with their morning coffee.",
+                    },
+                  ].map((step, i, arr) => (
+                    <div key={i} className="flex gap-4">
+                      <div className="flex flex-col items-center flex-shrink-0">
+                        <div className="w-3 h-3 bg-primary mt-2"></div>
+                        {i < arr.length - 1 && (
+                          <div className="w-px flex-1 bg-background/20"></div>
+                        )}
+                      </div>
+                      <div className="flex-1 pb-6">
+                        <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-3 mb-1">
+                          <span className="font-mono text-xs text-primary">
+                            {step.time}
+                          </span>
+                          <span className="font-bold text-sm tracking-tight uppercase">
+                            {step.title}
+                          </span>
+                        </div>
+                        <div className="font-mono text-xs text-background/70 leading-relaxed">
+                          {step.detail}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer stats */}
+                <div className="grid grid-cols-3 gap-4 pt-6 border-t border-background/20">
+                  <div>
+                    <div className="mono-label text-background/60 mb-1">RUN TIME</div>
+                    <div className="font-bold text-xl md:text-2xl text-primary">
+                      47s
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mono-label text-background/60 mb-1">
+                      HUMAN TIME
+                    </div>
+                    <div className="font-bold text-xl md:text-2xl text-primary">
+                      0min
+                    </div>
+                  </div>
+                  <div>
+                    <div className="mono-label text-background/60 mb-1">
+                      RECURRENCE
+                    </div>
+                    <div className="font-bold text-xl md:text-2xl text-primary">
+                      Weekly
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Other examples */}
+              <div className="mt-6 grid md:grid-cols-2 gap-4">
+                <div className="brutalist-card bg-background p-6">
+                  <div className="mono-label text-primary mb-2">+ ALSO RUNNING</div>
+                  <h4 className="font-bold tracking-tight mb-2">
+                    Quote drafts from inbox
+                  </h4>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                    Triggered by client enquiry. Reads
+                    /01_business_rules/pricing-rules.md, drafts the quote, sends to
+                    ops for human review before going out.
+                  </p>
+                </div>
+                <div className="brutalist-card bg-background p-6">
+                  <div className="mono-label text-primary mb-2">+ ALSO RUNNING</div>
+                  <h4 className="font-bold tracking-tight mb-2">
+                    Client onboarding pack
+                  </h4>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                    Triggered by deal-won. Generates welcome pack, kickoff agenda,
+                    and billing setup from your workspace templates. Ready in under
+                    a minute.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* What makes it different */}
+        <section className="py-16 md:py-24 border-t border-border">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <div className="section-tag mb-4">[WHY THIS WORKS]</div>
@@ -634,7 +931,7 @@ export default function Training() {
             </div>
 
             <div className="max-w-4xl mx-auto">
-              <div className="brutalist-card bg-background overflow-hidden">
+              <div className="brutalist-card bg-card overflow-hidden">
                 <div className="grid grid-cols-2 divide-x divide-border">
                   <div className="p-6 md:p-8">
                     <div className="mono-label text-muted-foreground mb-4">
