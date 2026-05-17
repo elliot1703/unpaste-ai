@@ -10,6 +10,7 @@ import {
   Mail,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
@@ -71,7 +72,7 @@ const packages: Package[] = [
     name: "AI OPERATIONS",
     positioning: "AI built into how your team works every week.",
     setupPrice: "$4,500",
-    monthlyPrice: "$1,500/mo",
+    monthlyPrice: "$1,900/mo",
     term: "3-month minimum, then month-to-month",
     includesTitle: "Full day on-site (6 hrs). Everything in Kickstart, plus:",
     includes: [
@@ -96,9 +97,9 @@ const packages: Package[] = [
     tag: "[003]",
     name: "AI DEPARTMENT",
     positioning: "Your AI department, run for you.",
-    setupPrice: "$9,500",
-    monthlyPrice: "$3,500/mo",
-    term: "6-month minimum",
+    setupPrice: "From $9,500",
+    monthlyPrice: "Retainer per scope",
+    term: "Scoped engagement",
     includesTitle: "2-day intensive. Everything in Operations, plus:",
     includes: [
       "AI mapped across every part of your business",
@@ -144,7 +145,7 @@ const audiences = [
   },
 ];
 
-const curriculum = [
+const curriculumHuman = [
   {
     step: "01",
     title: "Why this works",
@@ -183,6 +184,45 @@ const curriculum = [
   },
 ];
 
+const curriculumTech = [
+  {
+    step: "01",
+    title: "Architecture walkthrough",
+    duration: "30 min",
+    detail: "Reference implementation tour. Folder taxonomy, context windows, agent tool-calls.",
+  },
+  {
+    step: "02",
+    title: "Domain decomposition",
+    duration: "60 min",
+    detail: "Workshop to identify top-level entities for workspace partitioning.",
+  },
+  {
+    step: "03",
+    title: "Scaffold the repo",
+    duration: "60 min",
+    detail: "Create folder structure. Author per-folder READMEs as agent context.",
+  },
+  {
+    step: "04",
+    title: "Author system prompt + policy",
+    duration: "45 min",
+    detail: "Org-level system prompt with persona, scope, safety boundaries.",
+  },
+  {
+    step: "05",
+    title: "Provision first agent",
+    duration: "30 min",
+    detail: "Install Claude Code (or equivalent). Bind to workspace context. Execute first task.",
+  },
+  {
+    step: "06",
+    title: "Define initial recipe set",
+    duration: "15 min",
+    detail: "2–3 reusable agent recipes as markdown specs. Assign workspace maintainer.",
+  },
+];
+
 const faqs = [
   {
     q: "Do we need to be technical?",
@@ -210,7 +250,7 @@ const faqs = [
   },
 ];
 
-const workspaceTree = `your-business/
+const workspaceTreeHuman = `your-business/
 ├── 01_business_rules/      ─→  How decisions get made
 │   ├── what-we-quote
 │   └── pricing
@@ -227,7 +267,28 @@ const workspaceTree = `your-business/
 │   └── monday-brief
 └── YOUR_RULES   ◀──────────  The rules every assistant follows.`;
 
+const workspaceTreeTech = `your-business/
+├── 01_business_rules/      ─→  Domain context, agent-readable
+│   ├── what-we-quote
+│   └── pricing
+├── 02_clients/             ─→  Per-client READMEs scope agent context
+│   └── active/
+├── 03_operations/
+│   └── shortcuts/          ─→  Markdown recipe library
+├── 04_sales_marketing/
+│   └── pipeline
+├── 05_team/
+│   └── roles
+├── 06_ai_assistants/       ─→  Agent specs (model, tools, scope)
+│   ├── quote-drafter
+│   └── monday-brief
+└── YOUR_RULES   ◀──────────  Org-level system prompt + safety rails.`;
+
 export default function Training() {
+  const [techMode, setTechMode] = useState(false);
+  const workspaceTree = techMode ? workspaceTreeTech : workspaceTreeHuman;
+  const curriculum = techMode ? curriculumTech : curriculumHuman;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SEO
@@ -294,6 +355,48 @@ export default function Training() {
                   <Mail className="h-4 w-4" />
                   Book a discovery call
                 </a>
+              </motion.div>
+
+              {/* Tech jargon toggle */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="mt-10 flex flex-col items-center gap-2"
+              >
+                <div className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+                  Reading this with your IT person?
+                </div>
+                <div
+                  role="group"
+                  aria-label="Toggle tech jargon"
+                  className="inline-flex border border-border bg-background"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setTechMode(false)}
+                    aria-pressed={!techMode}
+                    className={`px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors ${
+                      !techMode
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    No tech jargon
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTechMode(true)}
+                    aria-pressed={techMode}
+                    className={`px-4 py-2 font-mono text-xs uppercase tracking-wider transition-colors border-l border-border ${
+                      techMode
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Tech jargon
+                  </button>
+                </div>
               </motion.div>
             </div>
           </div>
@@ -581,21 +684,21 @@ export default function Training() {
                         </span>
                       </div>
                       {pkg.monthlyPrice && (
-                        <div className="mt-1 flex items-baseline gap-2">
+                        <div className="mt-1 flex items-baseline gap-2 flex-wrap">
                           <span
-                            className={`font-mono text-lg font-bold ${
-                              pkg.highlighted ? "text-primary" : "text-primary"
-                            }`}
+                            className={`font-mono text-lg font-bold text-primary`}
                           >
-                            + {pkg.monthlyPrice}
+                            {pkg.monthlyPrice.endsWith("/mo") ? `+ ${pkg.monthlyPrice}` : pkg.monthlyPrice}
                           </span>
-                          <span
-                            className={`font-mono text-xs uppercase tracking-wider ${
-                              pkg.highlighted ? "text-background/60" : "text-muted-foreground"
-                            }`}
-                          >
-                            retainer
-                          </span>
+                          {pkg.monthlyPrice.endsWith("/mo") && (
+                            <span
+                              className={`font-mono text-xs uppercase tracking-wider ${
+                                pkg.highlighted ? "text-background/60" : "text-muted-foreground"
+                              }`}
+                            >
+                              retainer
+                            </span>
+                          )}
                         </div>
                       )}
                       <div
