@@ -232,7 +232,7 @@ export default function Training() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="AI Training & Workspace Setup"
-        description="We build your business an AI operating manual — a structured workspace that agents like Claude Code, Codex, and Cowork can read and operate inside. Three packages from $2,500."
+        description="We set up your team's AI workspace, install the assistants, and train everyone — so AI actually does the work for you. Three packages from $2,400."
         url="https://unpaste.ai/training"
       />
 
