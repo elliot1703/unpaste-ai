@@ -51,72 +51,72 @@ const packages: Package[] = [
   {
     tag: "[001]",
     name: "AI KICKSTART",
-    positioning: "The foundation, built in a day.",
-    setupPrice: "$2,500",
+    positioning: "Get your team's AI off the ground in a day.",
+    setupPrice: "$2,400",
     term: "One-off",
-    includesTitle: "Half-day on-site (4 hrs) — you leave with:",
+    includesTitle: "Half-day on-site (4 hrs). You walk away with:",
     includes: [
-      "4-6 numbered domain folders mapped to your business",
-      "Per-folder README docs your team and agents can both read",
-      "COMPANY.md with Agent Instructions (tone, vocabulary, confidentiality)",
-      "One agentic tool installed (Claude Code, Codex, or Cowork)",
-      "2-3 starter recipes the team can run themselves",
-      "Session recording for new hires",
+      "A shared AI setup your whole team uses the same way",
+      "The 4–6 main areas of your business mapped (quoting, jobs, clients, ops, etc.)",
+      "A one-page playbook of your AI rules — anyone you hire next week can pick it up",
+      "One AI assistant installed and running on real work",
+      "2–3 ready-to-use AI shortcuts for things your team does every week",
+      "Recording of the day for anyone who couldn't make it",
     ],
-    forWhom: "SMBs who want to see how this looks before a bigger commitment.",
+    forWhom: "small teams who want to dip a toe in before a longer commitment.",
     cta: "Book Kickstart",
   },
   {
     tag: "[002]",
     name: "AI OPERATIONS",
-    positioning: "Workspace, agents, and ongoing evolution.",
+    positioning: "AI built into how your team works every week.",
     setupPrice: "$4,500",
     monthlyPrice: "$1,500/mo",
     term: "3-month minimum, then month-to-month",
-    includesTitle: "Full-day on-site (6 hrs) — everything in Kickstart, plus:",
+    includesTitle: "Full day on-site (6 hrs). Everything in Kickstart, plus:",
     includes: [
-      "8-12 numbered domains for full operational coverage",
-      "Per-role context (sales, ops, marketing, admin)",
-      "3-5 deployed agentic workflows doing real recurring work",
-      "Safety policies and human-in-loop checkpoints",
-      "Workspace deployed where your team works (Drive, Notion, repo)",
+      "Every part of your business mapped so AI can help across the board",
+      "Tailored setup for each role (admin, sales, ops, etc.)",
+      "3–5 AI assistants doing real recurring work — e.g. draft your weekly client update, draft quote letters, sort your inbox",
+      "Clear safety rules: what AI does on its own, what you check first",
+      "Set up where your team already works (Drive, Notion, etc.)",
     ],
     recurringTitle: "Then every week:",
     recurring: [
-      "45-min team office hours (Zoom or in-person)",
-      "Async Slack/email Q&A during the week",
-      "Monthly “what’s new in agents” briefing",
-      "Quarterly workspace audit and refresh",
+      "45-min team call — bring questions, see what's new",
+      "Q&A in between via Slack or email",
+      "Monthly 'what's new in AI' update so you don't fall behind",
+      "Quarterly tune-up of your AI setup",
     ],
-    forWhom: "Teams who want AI baked into how they operate, not bolted on.",
+    forWhom: "teams that want AI built into their week, not bolted on the side.",
     cta: "Book Operations",
     highlighted: true,
   },
   {
     tag: "[003]",
     name: "AI DEPARTMENT",
-    positioning: "We architect, build, and run your AI operating system.",
+    positioning: "Your AI department, run for you.",
     setupPrice: "$9,500",
     monthlyPrice: "$3,500/mo",
     term: "6-month minimum",
-    includesTitle: "2-day intensive — everything in Operations, plus:",
+    includesTitle: "2-day intensive. Everything in Operations, plus:",
     includes: [
-      "Workspace architecture across every business function",
-      "8-12 deployed agentic workflows",
-      "MCP connections to your real tools (CRM, calendar, email)",
-      "Governance + audit framework",
-      "Baseline metrics dashboard",
-      "90-day rollout plan",
+      "AI mapped across every part of your business",
+      "8–12 AI assistants set up and running real work",
+      "AI connected to the tools you already use (CRM, calendar, email)",
+      "A clear set of rules for what AI can and can't do in your business",
+      "Monthly numbers — hours saved, tools adopted, value back",
+      "A 90-day plan to get the whole team across it",
     ],
     recurringTitle: "Then every week:",
     recurring: [
-      "60-min leadership/strategy check-in",
-      "30-min team office hours",
-      "4 hrs/mo included build work for new agents",
-      "Monthly KPI report (time saved, tools adopted)",
-      "Quarterly strategy review + AI landscape update",
+      "1-hour leadership call to keep AI on strategy",
+      "30-min team Q&A",
+      "4 hrs/month of us building new AI assistants for you",
+      "Monthly progress report",
+      "Quarterly strategy review — what to add, what to drop",
     ],
-    forWhom: "SMBs treating AI as a strategic function, not a tool.",
+    forWhom: "businesses that want AI run for them, with someone owning it end-to-end.",
     cta: "Book Department",
   },
 ];
@@ -147,46 +147,46 @@ const audiences = [
 const curriculum = [
   {
     step: "01",
-    title: "Why a workspace",
+    title: "Why this works",
     duration: "30 min",
-    detail: "Tour a real workspace. Show how an agent reads it.",
+    detail: "Tour a real example. See what changes when AI knows where things live.",
   },
   {
     step: "02",
-    title: "Map your domains",
+    title: "Map your business",
     duration: "60 min",
-    detail: "Whiteboard with your team. Identify 4–6 top-level folders.",
+    detail: "Whiteboard with your team. Identify the 4–6 main areas of how your business runs.",
   },
   {
     step: "03",
-    title: "Build the structure",
+    title: "Set it up together",
     duration: "60 min",
-    detail: "Create folders. Each team member writes one README.",
+    detail: "Create the folders. Each team member writes one 'what's this for' note.",
   },
   {
     step: "04",
-    title: "Write your COMPANY.md",
+    title: "Write your AI playbook",
     duration: "45 min",
-    detail: "Agent Instructions doc — tone, vocabulary, confidentiality.",
+    detail: "The one-pager every AI assistant in your business follows.",
   },
   {
     step: "05",
-    title: "Install the agent",
+    title: "Install your first AI assistant",
     duration: "30 min",
-    detail: "Claude Code installed. First agentic task run live.",
+    detail: "Set it up. Run a real task with your team watching.",
   },
   {
     step: "06",
-    title: "Recipes + handoff",
+    title: "Save your shortcuts",
     duration: "15 min",
-    detail: "Document recipes. Nominate AI Champion. Recording delivered.",
+    detail: "Document the 2–3 things your team will use this week. Pick your AI champion. Recording delivered.",
   },
 ];
 
 const faqs = [
   {
     q: "Do we need to be technical?",
-    a: "No. The whole point is that the workspace is plain-English markdown your team writes and reads. The agentic tools install in minutes and we set them up for you. If you can edit a Google Doc, you can maintain this.",
+    a: "No. Everything is plain-English documents your team writes and reads. The AI tools install in minutes and we set them up for you. If you can edit a Google Doc, you can maintain this.",
   },
   {
     q: "Which AI tools do we need to pay for?",
@@ -211,25 +211,21 @@ const faqs = [
 ];
 
 const workspaceTree = `your-business/
-├── 01_business_rules/         ─→  Rules every agent must follow
-│   ├── README.md              ─→  How an agent reads this folder
-│   ├── service-types.md
-│   └── pricing-rules.md
-├── 02_clients/                ─→  Numbered for dependency order
-│   ├── README.md
+├── 01_business_rules/      ─→  How decisions get made
+│   ├── what-we-quote
+│   └── pricing
+├── 02_clients/             ─→  Active and past clients
 │   └── active/
 ├── 03_operations/
-│   ├── README.md
-│   └── workflows/             ─→  Where recipes live
+│   └── shortcuts/          ─→  Your AI shortcuts
 ├── 04_sales_marketing/
-│   └── pipeline.md
+│   └── pipeline
 ├── 05_team/
-│   └── roles.md
-├── 06_agents/                 ─→  Reusable agent definitions
-│   ├── quote-assistant.md
-│   └── weekly-brief.md
-└── COMPANY.md  ◀──────────────────  Tone · Vocabulary · Confidentiality
-                                     Every agent reads this first.`;
+│   └── roles
+├── 06_ai_assistants/       ─→  Your AI assistants
+│   ├── quote-drafter
+│   └── monday-brief
+└── YOUR_RULES   ◀──────────  The rules every assistant follows.`;
 
 export default function Training() {
   return (
@@ -274,8 +270,8 @@ export default function Training() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto"
               >
-                We architect the workspace, install the agents, and train your team
-                &mdash; so Claude Code, Codex, and Cowork actually do work for you.
+                We set up your team&rsquo;s AI workspace, install the assistants,
+                and train everyone &mdash; so AI actually does the work for you.
               </motion.p>
 
               <motion.div
@@ -409,16 +405,16 @@ export default function Training() {
                   <div className="text-center mb-3">
                     <div className="text-primary text-sm leading-none">↓</div>
                     <div className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider mt-1">
-                      read by agents
+                      AI assistants run from this
                     </div>
                   </div>
 
                   {/* Running agents */}
                   <div className="space-y-2 border-t border-zinc-700 pt-3">
                     {[
-                      "Weekly brief agent",
-                      "Quote drafts agent",
-                      "Inbox triage agent",
+                      "Weekly brief",
+                      "Quote drafts",
+                      "Inbox sort",
                     ].map((agent) => (
                       <div
                         key={agent}
@@ -462,12 +458,11 @@ export default function Training() {
                 </h2>
                 <div className="space-y-4 font-mono text-sm text-muted-foreground leading-relaxed">
                   <p>
-                    Tools change every week. Each team member uses AI differently.
+                    Tools change every week. Each person uses AI differently.
                     Workshops don&rsquo;t stick.
                   </p>
                   <p className="text-foreground font-bold">
-                    Build the workspace agents read from, and the whole team
-                    operates from one source of truth.
+                    Build one AI setup the whole team works from, and it sticks.
                   </p>
                 </div>
               </motion.div>
@@ -490,7 +485,7 @@ export default function Training() {
                 </pre>
                 <div className="p-4 border-t border-zinc-700 font-mono text-xs">
                   <div className="flex items-center gap-2 flex-wrap text-zinc-300">
-                    <span className="text-zinc-400">READ BY</span>
+                    <span className="text-zinc-400">WORKS WITH</span>
                     <span className="text-primary">●</span>
                     <span>Claude Code</span>
                     <span className="text-zinc-500">·</span>
@@ -763,7 +758,8 @@ export default function Training() {
                 <span className="text-primary">every Monday at 9am.</span>
               </h2>
               <p className="font-mono text-sm text-muted-foreground">
-                Once the workspace exists, agents run on schedule. Zero human time.
+                Once the setup&rsquo;s in place, AI assistants run on schedule.
+                Zero human time.
               </p>
             </div>
 
@@ -796,8 +792,8 @@ export default function Training() {
                   {[
                     {
                       time: "09:00:00",
-                      title: "Read context",
-                      detail: "Pulls last week's notes and the brief template from the workspace.",
+                      title: "Read the week",
+                      detail: "Pulls last week's notes and your brief template.",
                     },
                     {
                       time: "09:00:12",
@@ -907,45 +903,45 @@ export default function Training() {
                 <div className="grid grid-cols-2 divide-x divide-border">
                   <div className="p-6 md:p-8">
                     <div className="mono-label text-muted-foreground mb-4">
-                      Commodity AI training
+                      A typical AI workshop
                     </div>
                     <ul className="space-y-3 font-mono text-sm text-muted-foreground">
-                      <li>Teaches prompt engineering</li>
+                      <li>Teaches everyone to write better prompts</li>
                       <li>Generic intro to ChatGPT</li>
                       <li>Trainer leaves, nothing sticks</li>
-                      <li>Static deliverable</li>
-                      <li>Personal productivity for enthusiasts</li>
-                      <li>Chat-based help only</li>
+                      <li>One-off — no support after</li>
+                      <li>Helps the enthusiasts, not the team</li>
+                      <li>You ask AI things, that's it</li>
                     </ul>
                   </div>
                   <div className="p-6 md:p-8 bg-zinc-900 text-zinc-100">
                     <div className="mono-label text-zinc-400 mb-4">
-                      Unpaste AI Operating Manual
+                      What you get with Unpaste
                     </div>
                     <ul className="space-y-3 font-mono text-sm">
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>Builds the workspace agents read</span>
+                        <span>A real AI setup, built for your business</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>Tool selection mapped to your work</span>
+                        <span>We pick the AI tools that fit your work</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>Weekly office hours keep it alive</span>
+                        <span>Weekly check-ins keep it alive</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>Quarterly refresh as agents evolve</span>
+                        <span>Quarterly refresh as AI keeps changing</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>Shared org-level infrastructure</span>
+                        <span>Shared by the whole team, not just one person</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>Agentic tools doing autonomous work</span>
+                        <span>AI assistants doing real work for you</span>
                       </li>
                     </ul>
                   </div>
