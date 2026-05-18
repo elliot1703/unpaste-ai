@@ -32,26 +32,10 @@ const values = [
 
 const team = [
   {
-    name: "Alex Chen",
-    role: "Founder & Lead Architect",
-    bio: "Former tech lead at major SaaS company. Obsessed with eliminating busy-work through intelligent automation.",
-    image: "/images/team-alex.jpg",
-    linkedin: "#",
-    twitter: "#",
-  },
-  {
-    name: "Sarah Mitchell",
-    role: "Operations Director",
-    bio: "10+ years in operations consulting. Knows exactly where businesses bleed time before they even tell her.",
-    image: "/images/team-sarah.jpg",
-    linkedin: "#",
-    twitter: "#",
-  },
-  {
-    name: "James Wong",
-    role: "AI Solutions Engineer",
-    bio: "Machine learning specialist with a passion for practical AI applications that work in the real world.",
-    image: "/images/team-james.jpg",
+    name: "Elliot Stone",
+    role: "Founder",
+    bio: "Brisbane-based. I help small businesses set up AI workspaces that actually stick — so AI does the grunt work and your team stays in control. I work hands-on with trades, professional services, and ops teams across South East Queensland.",
+    image: "/images/team-elliot.jpg",
     linkedin: "#",
     twitter: "#",
   },
@@ -83,7 +67,7 @@ export default function About() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="About Us"
-        description="Meet the team behind unpaste.ai. We're Brisbane-based automation specialists on a mission to eliminate copy-paste culture from business operations."
+        description="Meet Elliot Stone, the Brisbane-based AI consultant behind unpaste.ai. Hands-on AI workspace setup for small business teams across South East Queensland."
         url="https://unpaste.ai/about"
       />
 
@@ -160,9 +144,10 @@ export default function About() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md leading-relaxed"
                 >
-                  We're a Brisbane-based team of automation specialists, AI engineers, and
-                  operations experts united by one mission: eliminate the copy-paste culture
-                  that's holding businesses back.
+                  I&rsquo;m a Brisbane-based AI consultant. I work hands-on with
+                  small business teams to set up AI workspaces that actually stick
+                  &mdash; so the team gets time back and your business keeps
+                  control of what ships out the door.
                 </motion.p>
               </div>
 
@@ -263,13 +248,19 @@ export default function About() {
         <section className="py-20 md:py-28 border-y border-border bg-card">
           <div className="container">
             <div className="mb-16">
-              <div className="section-tag mb-4">[003] THE TEAM</div>
+              <div className="section-tag mb-4">[003] WHO YOU&rsquo;RE WORKING WITH</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
-                MEET THE HUMANS BEHIND THE AUTOMATION.
+                IT&rsquo;S JUST ME &mdash;{" "}
+                <span className="text-primary">AND THAT&rsquo;S THE POINT.</span>
               </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl mt-6">
+                When you hire Unpaste, you get me &mdash; not a junior, not an
+                offshore team, not a sales rep. SMB AI doesn&rsquo;t need a
+                department. It needs one person who actually knows your business.
+              </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="max-w-md mx-auto">
               {team.map((member, i) => (
                 <motion.div
                   key={i}
