@@ -734,7 +734,9 @@ export default function QuickWins() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="mailto:hello@unpaste.ai?subject=Discovery%20call%20%E2%80%94%20AI%20workspace&body=Hi%20Elliot%2C%0A%0AI%27d%20like%20to%20book%20a%2030-min%20discovery%20call.%0A%0ATeam%20size%3A%20%0AIndustry%3A%20%0A%0AThanks%2C"
+                  href="https://calendly.com/elliot-unpaste/30min?utm_source=quick_wins"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="brutalist-button-outline inline-flex items-center justify-center gap-2"
                 >
                   <Mail className="h-4 w-4" />

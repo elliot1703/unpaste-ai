@@ -196,7 +196,7 @@ export default function Book() {
                   {/* Calendly Inline Widget */}
                   <div
                     className="calendly-inline-widget"
-                    data-url="https://calendly.com/unpaste-ai/consultation?hide_gdpr_banner=1&primary_color=dc2626"
+                    data-url="https://calendly.com/elliot-unpaste/30min?hide_gdpr_banner=1&primary_color=dc2626"
                     style={{ minWidth: "320px", height: "700px" }}
                   />
 
@@ -207,7 +207,7 @@ export default function Book() {
                         Please enable JavaScript to use the booking calendar.
                       </p>
                       <a
-                        href="https://calendly.com/unpaste-ai/consultation"
+                        href="https://calendly.com/elliot-unpaste/30min"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="brutalist-button inline-flex items-center gap-2"

@@ -8,6 +8,7 @@ import {
   Rocket,
   Clock,
   Mail,
+  Calendar,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
@@ -24,13 +25,11 @@ const fadeUp = {
   }),
 };
 
-const MAILTO_DISCOVERY =
-  "mailto:hello@unpaste.ai?subject=AI%20Operating%20Manual%20%E2%80%94%20Discovery%20Call&body=Hi%20Elliot%2C%0A%0AWe%27d%20like%20to%20talk%20about%20setting%20up%20an%20AI%20workspace%20for%20our%20team.%0A%0ATeam%20size%3A%20%0AIndustry%3A%20%0AWhich%20package%20we%27re%20interested%20in%3A%20%0AAvailability%20for%20a%20call%3A%20%0A%0AThanks%2C";
+const CALENDLY_BASE = "https://calendly.com/elliot-unpaste/30min";
+const calendlyUrl = (source: string) =>
+  `${CALENDLY_BASE}?utm_source=training_${source}`;
 
-const mailtoForPackage = (pkg: string) =>
-  `mailto:hello@unpaste.ai?subject=${encodeURIComponent(`AI ${pkg} — Discovery Call`)}&body=${encodeURIComponent(
-    `Hi Elliot,\n\nWe'd like to talk about the AI ${pkg} package.\n\nTeam size: \nIndustry: \nAvailability for a call: \n\nThanks,`,
-  )}`;
+const CONTACT_EMAIL = "hello@unpaste.ai";
 
 interface Package {
   tag: string;
@@ -350,10 +349,12 @@ export default function Training() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
-                  href={MAILTO_DISCOVERY}
+                  href={calendlyUrl("hero")}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="brutalist-button-outline inline-flex items-center justify-center gap-2"
                 >
-                  <Mail className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" />
                   Book a discovery call
                 </a>
               </motion.div>
@@ -1010,7 +1011,9 @@ export default function Training() {
 
                     {/* CTA */}
                     <a
-                      href={mailtoForPackage(pkg.name.replace("AI ", ""))}
+                      href={calendlyUrl(pkg.name.toLowerCase().replace(/ /g, "_"))}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`mt-auto inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors ${
                         pkg.highlighted
                           ? "bg-primary text-white hover:bg-primary/90"
@@ -1461,18 +1464,34 @@ export default function Training() {
               </p>
 
               <div className="brutalist-card bg-zinc-900 text-zinc-100 p-8 md:p-12 max-w-2xl mx-auto">
-                <Mail className="h-8 w-8 text-primary mx-auto mb-4" />
-                <p className="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-2">
-                  Email to book
+                <Calendar className="h-8 w-8 text-primary mx-auto mb-4" />
+                <p className="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-4">
+                  Pick a time that suits
                 </p>
+
                 <a
-                  href={MAILTO_DISCOVERY}
-                  className="inline-block font-bold text-2xl md:text-3xl tracking-tight text-primary hover:underline mb-4"
+                  href={calendlyUrl("final")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-base md:text-lg tracking-tight px-8 py-4 hover:bg-primary/90 transition-colors mb-4"
                 >
-                  hello@unpaste.ai
+                  Book a 30-min discovery call
+                  <ArrowRight className="h-4 w-4" />
                 </a>
-                <p className="font-mono text-sm text-zinc-200 max-w-md mx-auto">
-                  Click to open a draft with the right subject already filled in. We&rsquo;ll reply within 24 hours.
+
+                <p className="font-mono text-xs text-zinc-300 max-w-md mx-auto">
+                  No pitch, just a chat. We&rsquo;ll scope your team, pick the right
+                  package, and book a workshop date.
+                </p>
+
+                <p className="font-mono text-xs text-zinc-500 mt-6 pt-6 border-t border-zinc-700">
+                  Prefer email?{" "}
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="text-zinc-300 hover:text-primary transition-colors underline"
+                  >
+                    {CONTACT_EMAIL}
+                  </a>
                 </p>
               </div>
             </div>
