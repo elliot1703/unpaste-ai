@@ -1168,6 +1168,50 @@ export default function Training() {
 
         <Footer />
       </div>
+
+      {/* Persistent floating tech-jargon toggle */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.4 }}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 pointer-events-none"
+      >
+        <div className="brutalist-card bg-background p-2 pointer-events-auto">
+          <div className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground mb-1.5 text-center">
+            Jargon
+          </div>
+          <div
+            role="group"
+            aria-label="Toggle tech jargon"
+            className="inline-flex border border-border"
+          >
+            <button
+              type="button"
+              onClick={() => setTechMode(false)}
+              aria-pressed={!techMode}
+              className={`px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
+                !techMode
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Plain
+            </button>
+            <button
+              type="button"
+              onClick={() => setTechMode(true)}
+              aria-pressed={techMode}
+              className={`px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors border-l border-border ${
+                techMode
+                  ? "bg-foreground text-background"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Tech
+            </button>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }
