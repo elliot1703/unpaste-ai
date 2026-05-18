@@ -332,7 +332,8 @@ export default function Training() {
                 className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto"
               >
                 We set up your team&rsquo;s AI workspace, install the assistants,
-                and train everyone &mdash; so AI actually does the work for you.
+                and train everyone &mdash; so AI does the grunt work and you
+                decide what ships.
               </motion.p>
 
               <motion.div
@@ -1101,7 +1102,7 @@ export default function Training() {
                     Client onboarding pack
                   </h4>
                   <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                    Deal won. Welcome pack, kickoff agenda, and billing setup ready in under a minute.
+                    Deal won. Welcome pack and kickoff agenda assembled. Quick review, then you send.
                   </p>
                 </div>
               </div>
@@ -1109,8 +1110,201 @@ export default function Training() {
           </div>
         </section>
 
-        {/* What makes it different */}
+        {/* Single Pane of Glass — After the workshop */}
         <section className="py-16 md:py-24 border-t border-border">
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="section-tag mb-4">[AFTER THE WORKSHOP]</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                Less doing.{" "}
+                <span className="text-primary">More deciding.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground">
+                AI does the grunt work. You review and ship what matters. This is
+                what Monday morning starts to look like.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-5 gap-6 lg:gap-8 max-w-6xl mx-auto">
+              {/* UI Mockup — Single Pane of Glass */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="md:col-span-3 brutalist-card bg-background overflow-hidden"
+              >
+                {/* Window chrome */}
+                <div className="flex items-center gap-1.5 px-4 py-3 bg-card border-b border-border">
+                  <span className="w-2.5 h-2.5 bg-red-500"></span>
+                  <span className="w-2.5 h-2.5 bg-yellow-500"></span>
+                  <span className="w-2.5 h-2.5 bg-green-500"></span>
+                  <span className="ml-3 font-mono text-xs text-muted-foreground">
+                    your business &middot; monday 8:55am
+                  </span>
+                </div>
+
+                {/* Title */}
+                <div className="px-6 py-4 border-b border-border">
+                  <div className="mono-label text-primary mb-1">
+                    [MORNING QUEUE]
+                  </div>
+                  <div className="font-bold text-base md:text-lg tracking-tight">
+                    AI ran overnight. Here&rsquo;s what&rsquo;s waiting.
+                  </div>
+                </div>
+
+                {/* Inbox items */}
+                <div className="divide-y divide-border">
+                  {[
+                    {
+                      title: "Weekly leadership brief",
+                      detail: "Drafted from last week's notes. Ready to send.",
+                      action: "REVIEW",
+                      time: "2 min",
+                    },
+                    {
+                      title: "4 quote drafts from enquiries",
+                      detail: "Built from your pricing rules. Awaiting your sign-off.",
+                      action: "REVIEW",
+                      time: "8 min",
+                      highlight: true,
+                    },
+                    {
+                      title: "Inbox triage: 23 emails",
+                      detail: "18 auto-sorted &middot; 5 drafted replies for you to send.",
+                      action: "REVIEW",
+                      time: "5 min",
+                    },
+                    {
+                      title: "Q1 KPI snapshot",
+                      detail: "Numbers refreshed. One variance flagged for a look.",
+                      action: "CHECK",
+                      time: "3 min",
+                      flag: true,
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="px-6 py-4 flex items-start gap-4 hover:bg-card/50 transition-colors"
+                    >
+                      <span
+                        className={`w-2 h-2 mt-2 flex-shrink-0 ${
+                          item.flag
+                            ? "bg-primary"
+                            : item.highlight
+                              ? "bg-primary"
+                              : "bg-foreground"
+                        }`}
+                      ></span>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-sm tracking-tight">
+                          {item.title}
+                        </div>
+                        <div
+                          className="font-mono text-xs text-muted-foreground mt-1"
+                          dangerouslySetInnerHTML={{ __html: item.detail }}
+                        />
+                      </div>
+                      <div className="text-right flex-shrink-0">
+                        <div className="font-mono text-[10px] font-bold uppercase tracking-wider text-primary">
+                          {item.action}
+                        </div>
+                        <div className="font-mono text-xs text-muted-foreground">
+                          {item.time}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Footer */}
+                <div className="px-6 py-3 bg-card border-t border-border flex items-center justify-between font-mono text-xs">
+                  <span className="text-muted-foreground">
+                    Your total morning review:
+                  </span>
+                  <span className="text-foreground font-bold">~18 min</span>
+                </div>
+              </motion.div>
+
+              {/* Time Returned panel */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="md:col-span-2 brutalist-card bg-zinc-900 text-zinc-100 p-6 md:p-8 flex flex-col"
+              >
+                <div className="mono-label text-zinc-400 mb-3">
+                  [TIME RETURNED &mdash; WEEKLY]
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-white mb-6">
+                  What your team gets back.
+                </h3>
+
+                <div className="space-y-4 flex-1">
+                  {[
+                    {
+                      task: "Writing weekly client brief",
+                      before: "4 hrs",
+                      after: "5 min sign-off",
+                    },
+                    {
+                      task: "Drafting quote letters",
+                      before: "6 hrs",
+                      after: "20 min reviewing",
+                    },
+                    {
+                      task: "Email triage + drafts",
+                      before: "3 hrs",
+                      after: "25 min reviewing",
+                    },
+                    {
+                      task: "Monthly KPI assembly",
+                      before: "8 hrs/mo",
+                      after: "auto + 10 min",
+                    },
+                  ].map((item, i) => (
+                    <div
+                      key={i}
+                      className="pb-4 border-b border-zinc-700 last:border-0 last:pb-0"
+                    >
+                      <div className="font-mono text-xs text-zinc-300 mb-1.5">
+                        {item.task}
+                      </div>
+                      <div className="flex items-baseline gap-2 font-mono text-sm">
+                        <span className="text-zinc-500 line-through">
+                          {item.before}
+                        </span>
+                        <span className="text-zinc-400">&rarr;</span>
+                        <span className="text-primary font-bold">
+                          {item.after}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 pt-6 border-t border-zinc-700">
+                  <div className="mono-label text-zinc-400 mb-1">
+                    Per team member, per week
+                  </div>
+                  <div className="flex items-baseline gap-2 flex-wrap">
+                    <span className="text-3xl md:text-4xl font-bold text-primary">
+                      ~6 hrs
+                    </span>
+                    <span className="font-mono text-xs text-zinc-400">
+                      back to the work that matters
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* What makes it different */}
+        <section className="py-16 md:py-24 border-t border-border bg-card">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
               <div className="section-tag mb-4">[WHY THIS WORKS]</div>
@@ -1163,7 +1357,7 @@ export default function Training() {
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>AI assistants doing real work for you</span>
+                        <span>AI does the grunt work, your team stays in control</span>
                       </li>
                     </ul>
                   </div>
