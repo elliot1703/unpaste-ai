@@ -577,11 +577,43 @@ export default function Training() {
                 transition={{ duration: 0.6 }}
                 className="brutalist-card bg-zinc-900 text-zinc-100"
               >
-                <div className="p-4 border-b border-zinc-700 flex items-center gap-2">
-                  <Folder className="h-4 w-4 text-primary" />
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
-                    Anatomy of an AI workspace
-                  </span>
+                <div className="p-4 border-b border-zinc-700 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <Folder className="h-4 w-4 text-primary" />
+                    <span className="font-mono text-xs font-bold uppercase tracking-wider text-white">
+                      Anatomy of an AI workspace
+                    </span>
+                  </div>
+                  <div
+                    role="group"
+                    aria-label="Toggle tech jargon"
+                    className="inline-flex border border-zinc-700"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setTechMode(false)}
+                      aria-pressed={!techMode}
+                      className={`px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors ${
+                        !techMode
+                          ? "bg-primary text-white"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      No jargon
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setTechMode(true)}
+                      aria-pressed={techMode}
+                      className={`px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider transition-colors border-l border-zinc-700 ${
+                        techMode
+                          ? "bg-primary text-white"
+                          : "text-zinc-400 hover:text-white"
+                      }`}
+                    >
+                      Tech
+                    </button>
+                  </div>
                 </div>
                 <pre className="p-6 font-mono text-xs md:text-sm leading-relaxed text-zinc-100 overflow-x-auto whitespace-pre">
                   {workspaceTree}
@@ -804,7 +836,7 @@ export default function Training() {
         {/* Curriculum */}
         <section className="py-16 md:py-24 border-t border-border">
           <div className="container">
-            <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-center max-w-2xl mx-auto mb-8">
               <div className="section-tag mb-4">[WHAT HAPPENS]</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
                 What we actually do{" "}
@@ -817,6 +849,38 @@ export default function Training() {
             </div>
 
             <div className="max-w-4xl mx-auto">
+              <div className="mb-6 flex justify-end">
+                <div
+                  role="group"
+                  aria-label="Toggle tech jargon"
+                  className="inline-flex border border-border bg-background"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setTechMode(false)}
+                    aria-pressed={!techMode}
+                    className={`px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
+                      !techMode
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    No jargon
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTechMode(true)}
+                    aria-pressed={techMode}
+                    className={`px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors border-l border-border ${
+                      techMode
+                        ? "bg-foreground text-background"
+                        : "text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    Tech
+                  </button>
+                </div>
+              </div>
               <div className="space-y-4">
                 {curriculum.map((block, i) => (
                   <motion.div
@@ -1168,50 +1232,6 @@ export default function Training() {
 
         <Footer />
       </div>
-
-      {/* Persistent floating tech-jargon toggle */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.4 }}
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-40 pointer-events-none"
-      >
-        <div className="brutalist-card bg-background p-2 pointer-events-auto">
-          <div className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground mb-1.5 text-center">
-            Jargon
-          </div>
-          <div
-            role="group"
-            aria-label="Toggle tech jargon"
-            className="inline-flex border border-border"
-          >
-            <button
-              type="button"
-              onClick={() => setTechMode(false)}
-              aria-pressed={!techMode}
-              className={`px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors ${
-                !techMode
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Plain
-            </button>
-            <button
-              type="button"
-              onClick={() => setTechMode(true)}
-              aria-pressed={techMode}
-              className={`px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider transition-colors border-l border-border ${
-                techMode
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              Tech
-            </button>
-          </div>
-        </div>
-      </motion.div>
     </div>
   );
 }
