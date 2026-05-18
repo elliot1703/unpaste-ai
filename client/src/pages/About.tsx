@@ -41,27 +41,6 @@ const team = [
   },
 ];
 
-const timeline = [
-  {
-    year: "2023",
-    title: "The Frustration",
-    description:
-      "After years of watching businesses drown in manual processes, we decided to do something about it.",
-  },
-  {
-    year: "2024",
-    title: "The Solution",
-    description:
-      "Launched unpaste.ai with a simple mission: eliminate copy-paste culture from Brisbane businesses.",
-  },
-  {
-    year: "2025",
-    title: "The Growth",
-    description:
-      "50+ businesses transformed. 10,000+ hours saved monthly. Now expanding our impact across Australia.",
-  },
-];
-
 export default function About() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -202,44 +181,39 @@ export default function About() {
           </div>
         </section>
 
-        {/* Story Timeline */}
+        {/* Story */}
         <section className="py-20 md:py-28 bg-background">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-16">
-              <div className="lg:sticky lg:top-32 lg:self-start">
-                <div className="section-tag mb-4">[002] OUR STORY</div>
-                <h2 className="text-4xl md:text-5xl leading-tight mb-6">
-                  FROM FRUSTRATION TO{" "}
-                  <span className="text-primary">SOLUTION.</span>
-                </h2>
-                <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-md">
-                  Every great company starts with a problem that needed solving. Ours started
-                  with watching talented people waste their potential on repetitive tasks.
-                </p>
-              </div>
+            <div className="max-w-3xl mx-auto">
+              <div className="section-tag mb-4">[002] WHY I STARTED THIS</div>
+              <h2 className="text-4xl md:text-5xl leading-tight mb-10">
+                AI WORKS.{" "}
+                <span className="text-primary">MOST TEAMS DON&rsquo;T USE IT.</span>
+              </h2>
 
-              <div className="space-y-0">
-                {timeline.map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.15 }}
-                    className="border-b border-border py-8 first:pt-0 last:border-none"
-                  >
-                    <div className="flex items-start gap-6">
-                      <span className="text-4xl font-bold text-primary">{item.year}</span>
-                      <div>
-                        <h3 className="text-lg font-bold tracking-tight mb-2">{item.title}</h3>
-                        <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="space-y-5 font-mono text-sm md:text-base text-foreground leading-relaxed"
+              >
+                <p>
+                  I started Unpaste.ai after meeting too many small business owners
+                  who&rsquo;d &ldquo;tried ChatGPT&rdquo; but it never quite landed.
+                  The owner uses it. Maybe one team member dabbles. The rest of the
+                  business carries on the same.
+                </p>
+                <p>
+                  The tools are powerful. Nobody&rsquo;s helping teams actually use
+                  them together.
+                </p>
+                <p>
+                  So that&rsquo;s what I do. I come on-site, sit with your specialist
+                  team members in their actual work, and help build a shared AI setup
+                  the whole team uses. Hands-on, local, Brisbane and surrounds.
+                </p>
+              </motion.div>
             </div>
           </div>
         </section>
