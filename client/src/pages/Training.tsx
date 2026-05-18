@@ -46,6 +46,7 @@ interface Package {
   monthlyPrice?: string;
   term: string;
   youGet?: string;
+  narrative?: string;
   includesTitle: string;
   includes: IncludeEntry[];
   recurringTitle?: string;
@@ -66,8 +67,8 @@ const packages: Package[] = [
     includesTitle: "Half day on-site · 4 hrs",
     includes: [
       {
-        lead: "Shared AI workspace",
-        detail: "Whole team uses the same way",
+        lead: "Your team on the same page about AI",
+        detail: "One shared workspace + clear rules, not scattered personal accounts",
       },
       {
         lead: "Your business mapped",
@@ -89,6 +90,8 @@ const packages: Package[] = [
         lead: "Recording for new hires",
       },
     ],
+    narrative:
+      "Short interactive session with the team — practical metaphors, real visuals, no tech jargon. Then we sit with your specialist team members and workshop the AI opportunities mainstream tools haven't touched yet.",
     forWhom: "small teams who want to dip a toe in before a longer commitment.",
     cta: "Book Kickstart",
   },
@@ -1094,6 +1097,32 @@ export default function Training() {
                             );
                           })}
                         </ul>
+                      </div>
+                    )}
+
+                    {/* Narrative — what this looks like in real life */}
+                    {pkg.narrative && (
+                      <div
+                        className={`mb-6 p-4 border-l-2 ${
+                          pkg.highlighted
+                            ? "bg-background/5 border-primary"
+                            : "bg-card border-primary"
+                        }`}
+                      >
+                        <div
+                          className={`mono-label mb-2 ${
+                            pkg.highlighted ? "text-background/60" : "text-muted-foreground"
+                          }`}
+                        >
+                          What this looks like in real life
+                        </div>
+                        <p
+                          className={`font-mono text-xs leading-relaxed ${
+                            pkg.highlighted ? "text-background/90" : "text-foreground"
+                          }`}
+                        >
+                          {pkg.narrative}
+                        </p>
                       </div>
                     )}
 
