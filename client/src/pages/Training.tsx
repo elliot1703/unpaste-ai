@@ -102,21 +102,51 @@ const packages: Package[] = [
     setupPrice: "$4,500",
     monthlyPrice: "$1,900/mo",
     term: "3-month minimum, then month-to-month",
-    includesTitle: "Full day on-site (6 hrs). Everything in Kickstart, plus:",
+    youGet: "Full workspace · per-role setup · 3–5 AI assistants · weekly check-ins · ongoing tune-ups",
+    includesTitle: "Full day on-site · 6 hrs (everything in Kickstart, plus)",
     includes: [
-      "Every part of your business mapped so AI can help across the board",
-      "Tailored setup for each role (admin, sales, ops, etc.)",
-      "3–5 AI assistants doing real recurring work — e.g. draft your weekly client update, draft quote letters, sort your inbox",
-      "Clear safety rules: what AI does on its own, what you check first",
-      "Set up where your team already works (Drive, Notion, etc.)",
+      {
+        lead: "Your whole team aligned, every role configured",
+        detail: "Admin, sales, ops — each role has the AI setup that fits how they work",
+      },
+      {
+        lead: "Every part of your business mapped",
+        detail: "AI helps across the board, not just one corner",
+      },
+      {
+        lead: "3–5 AI assistants doing recurring work",
+        detail: "Weekly client updates, quote drafts, inbox triage — the stuff that eats time",
+      },
+      {
+        lead: "Clear safety rules",
+        detail: "What AI does on its own, what you check first",
+      },
+      {
+        lead: "Set up where your team already works",
+        detail: "Drive, Notion, wherever the work happens — no new dashboards",
+      },
     ],
-    recurringTitle: "Then every week:",
+    recurringTitle: "Then every week",
     recurring: [
-      "45-min team call — bring questions, see what's new",
-      "Q&A in between via Slack or email",
-      "Monthly 'what's new in AI' update so you don't fall behind",
-      "Quarterly tune-up of your AI setup",
+      {
+        lead: "45-min team call",
+        detail: "Bring questions, see what's new, dig into what's working",
+      },
+      {
+        lead: "Q&A in between",
+        detail: "Slack or email — we don't disappear between sessions",
+      },
+      {
+        lead: "Monthly 'what's new in AI' update",
+        detail: "So you don't fall behind as the tools evolve",
+      },
+      {
+        lead: "Quarterly tune-up",
+        detail: "Refresh your setup as your team grows into it",
+      },
     ],
+    narrative:
+      "Full day on-site to start. Workshop with each role's specialists to find the recurring work AI can take off their plate, then set those assistants up live with your team watching. After the day, we stay with you — Tuesday 10am office hours every week so the setup actually beds in and evolves with your team.",
     forWhom: "teams that want AI built into their week, not bolted on the side.",
     cta: "Book Operations",
     highlighted: true,
@@ -128,23 +158,63 @@ const packages: Package[] = [
     setupPrice: "From $9,500",
     monthlyPrice: "Retainer per scope",
     term: "Scoped engagement",
-    includesTitle: "2-day intensive. Everything in Operations, plus:",
+    youGet: "Full architecture · 8–12 assistants · CRM/email/calendar wired in · weekly leadership + team · ongoing build hours",
+    includesTitle: "2-day intensive · everything in Operations, plus",
     includes: [
-      "AI mapped across every part of your business",
-      "8–12 AI assistants set up and running real work",
-      "AI connected to the tools you already use (CRM, calendar, email)",
-      "A clear set of rules for what AI can and can't do in your business",
-      "Monthly numbers — hours saved, tools adopted, value back",
-      "A 90-day plan to get the whole team across it",
+      {
+        lead: "Leadership aligned on AI strategy",
+        detail: "Day one with you and the decision-makers — what to bet on, what to govern",
+      },
+      {
+        lead: "AI architecture across the whole business",
+        detail: "Mapped from sales to ops to finance to admin — nothing left out",
+      },
+      {
+        lead: "8–12 AI assistants running real work",
+        detail: "Replacing the most expensive repetitive tasks in the business",
+      },
+      {
+        lead: "AI wired into the tools you already use",
+        detail: "CRM, calendar, email — no separate dashboards to learn",
+      },
+      {
+        lead: "Clear governance rules",
+        detail: "What AI can and can't do, who approves what",
+      },
+      {
+        lead: "Monthly numbers showing value back",
+        detail: "Hours saved, tools adopted, ROI per assistant",
+      },
+      {
+        lead: "90-day rollout plan",
+        detail: "So the whole team comes up to speed in a structured way",
+      },
     ],
-    recurringTitle: "Then every week:",
+    recurringTitle: "Then every week",
     recurring: [
-      "1-hour leadership call to keep AI on strategy",
-      "30-min team Q&A",
-      "4 hrs/month of us building new AI assistants for you",
-      "Monthly progress report",
-      "Quarterly strategy review — what to add, what to drop",
+      {
+        lead: "1-hour leadership call",
+        detail: "Keep AI on strategy, not just tactics",
+      },
+      {
+        lead: "30-min team Q&A",
+        detail: "Plus Slack/email through the week — we're embedded",
+      },
+      {
+        lead: "4 hrs/month of build work",
+        detail: "We build new assistants as needs emerge",
+      },
+      {
+        lead: "Monthly progress report",
+        detail: "What's working, what's not, what to add next",
+      },
+      {
+        lead: "Quarterly strategy review",
+        detail: "What to add, what to drop, what's changing in AI",
+      },
     ],
+    narrative:
+      "Two full days on-site to start. Day one with leadership — strategy, governance, what you're betting on. Day two with the whole team — workshop with each function's specialists to find their AI opportunities. Then we run as your fractional AI department: weekly leadership and team time, monthly build hours, quarterly strategy. You direct, we build.",
     forWhom: "businesses that want AI run for them, with someone owning it end-to-end.",
     cta: "Book Department",
   },
