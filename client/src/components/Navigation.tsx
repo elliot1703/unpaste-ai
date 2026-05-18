@@ -26,7 +26,6 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
     { label: "Services", href: "#services", type: "hash" as const },
     { label: "Method", href: "#method", type: "hash" as const },
     { label: "Training", href: "/training", type: "route" as const },
-    { label: "Pricing", href: "/pricing", type: "route" as const },
     { label: "About", href: "/about", type: "route" as const },
   ];
 

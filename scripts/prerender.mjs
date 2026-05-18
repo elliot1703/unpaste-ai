@@ -12,15 +12,32 @@ const routes = [
   "/about",
   "/book",
   "/training",
+  "/quick-wins",
+  "/pricing",
+  "/styles",
   "/privacy",
   "/terms",
 ];
 
 async function prerender() {
-  const template = readFileSync(
+  const rawTemplate = readFileSync(
     resolve(root, "dist/public/index.html"),
     "utf-8"
   );
+
+  // Strip helmet-managed default meta tags from the template so per-page
+  // values from react-helmet-async don't end up as duplicates (crawlers
+  // typically honor the first occurrence). Preserves charset, viewport,
+  // and google-site-verification.
+  const template = rawTemplate
+    .replace(/[\t ]*<meta\s+name="description"[^>]*\/?>\n?/gi, "")
+    .replace(/[\t ]*<meta\s+name="keywords"[^>]*\/?>\n?/gi, "")
+    .replace(/[\t ]*<meta\s+name="robots"[^>]*\/?>\n?/gi, "")
+    .replace(/[\t ]*<meta\s+name="title"[^>]*\/?>\n?/gi, "")
+    .replace(/[\t ]*<meta\s+property="og:[^"]*"[^>]*\/?>\n?/gi, "")
+    .replace(/[\t ]*<meta\s+property="twitter:[^"]*"[^>]*\/?>\n?/gi, "")
+    .replace(/[\t ]*<meta\s+name="twitter:[^"]*"[^>]*\/?>\n?/gi, "");
+
   const { render } = await import(
     resolve(root, "dist/server/entry-server.js")
   );
@@ -35,42 +52,25 @@ async function prerender() {
       `<div id="root">${html}</div>`
     );
 
-    // Inject Helmet head tags (per-page title, meta, etc.)
+    // Inject Helmet head tags (per-page title, meta, link, script)
     if (helmet) {
-      // Replace the default <title> with Helmet's per-page title
       if (helmet.title) {
         page = page.replace(/<title>[^<]*<\/title>/, helmet.title.toString());
       }
 
-      // Replace the default meta description with Helmet's per-page description
-      if (helmet.meta) {
-        const metaStr = helmet.meta.toString();
-        // Extract just the description meta from helmet output
-        const descMatch = metaStr.match(
-          /<meta[^>]*name="description"[^>]*\/?>|<meta[^>]*name="description"[^>]*>[^<]*<\/meta>/
-        );
-        if (descMatch) {
-          page = page.replace(
-            /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/,
-            descMatch[0]
-          );
-        }
+      const metaStr = helmet.meta?.toString() ?? "";
+      if (metaStr) {
+        page = page.replace("</head>", `  ${metaStr}\n</head>`);
       }
 
-      // Add link tags (canonical URLs) before </head>
-      if (helmet.link) {
-        const linkStr = helmet.link.toString();
-        if (linkStr) {
-          page = page.replace("</head>", `  ${linkStr}\n</head>`);
-        }
+      const linkStr = helmet.link?.toString() ?? "";
+      if (linkStr) {
+        page = page.replace("</head>", `  ${linkStr}\n</head>`);
       }
 
-      // Add script tags (JSON-LD structured data) before </head>
-      if (helmet.script) {
-        const scriptStr = helmet.script.toString();
-        if (scriptStr) {
-          page = page.replace("</head>", `  ${scriptStr}\n</head>`);
-        }
+      const scriptStr = helmet.script?.toString() ?? "";
+      if (scriptStr) {
+        page = page.replace("</head>", `  ${scriptStr}\n</head>`);
       }
     }
 
