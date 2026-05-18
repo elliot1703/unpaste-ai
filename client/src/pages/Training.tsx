@@ -881,36 +881,91 @@ export default function Training() {
                   </button>
                 </div>
               </div>
-              <div className="space-y-4">
-                {curriculum.map((block, i) => (
-                  <motion.div
-                    key={block.step}
-                    custom={i}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    variants={fadeUp}
-                    className="brutalist-card bg-card p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8"
-                  >
-                    <div className="md:w-32 flex-shrink-0">
-                      <div className="mono-label text-primary mb-1">
-                        {block.step}
-                      </div>
-                      <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
-                        {block.duration}
-                      </div>
+              {techMode ? (
+                /* Terminal-style render */
+                <motion.div
+                  key="terminal"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="brutalist-card bg-zinc-950 overflow-hidden font-mono"
+                >
+                  {/* Terminal window chrome */}
+                  <div className="flex items-center gap-1.5 px-4 py-3 bg-zinc-900 border-b border-zinc-800">
+                    <span className="w-2.5 h-2.5 bg-red-500"></span>
+                    <span className="w-2.5 h-2.5 bg-yellow-500"></span>
+                    <span className="w-2.5 h-2.5 bg-green-500"></span>
+                    <span className="ml-3 font-mono text-xs text-zinc-400">
+                      unpaste — workshop@day-one
+                    </span>
+                  </div>
+                  {/* Terminal body */}
+                  <div className="p-6 md:p-8 text-sm leading-relaxed">
+                    <div className="text-zinc-500 mb-1">
+                      <span className="text-green-400">$</span>{" "}
+                      ./workshop start --tier kickstart --duration 4h
                     </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-lg tracking-tight mb-2">
-                        {block.title}
-                      </h3>
-                      <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                        {block.detail}
-                      </p>
+                    <div className="text-green-400 mb-1">✓ workspace initialized</div>
+                    <div className="text-green-400 mb-6">✓ 6 modules loaded</div>
+
+                    {curriculum.map((block) => (
+                      <div key={block.step} className="mb-5">
+                        <div className="flex items-baseline gap-3 flex-wrap">
+                          <span className="text-primary font-bold">
+                            [{block.step}]
+                          </span>
+                          <span className="text-white uppercase tracking-tight font-bold">
+                            {block.title}
+                          </span>
+                          <span className="text-zinc-500 text-xs ml-auto">
+                            {block.duration}
+                          </span>
+                        </div>
+                        <div className="text-zinc-300 pl-10 text-xs leading-relaxed mt-1.5">
+                          ↳ {block.detail}
+                        </div>
+                      </div>
+                    ))}
+
+                    <div className="text-zinc-500 mt-6 flex items-center gap-1">
+                      <span className="text-green-400">$</span>
+                      <span className="inline-block w-2 h-4 bg-zinc-300 animate-pulse ml-1" />
                     </div>
-                  </motion.div>
-                ))}
-              </div>
+                  </div>
+                </motion.div>
+              ) : (
+                /* Standard brutalist-card render */
+                <div className="space-y-4">
+                  {curriculum.map((block, i) => (
+                    <motion.div
+                      key={block.step}
+                      custom={i}
+                      initial="hidden"
+                      whileInView="visible"
+                      viewport={{ once: true }}
+                      variants={fadeUp}
+                      className="brutalist-card bg-card p-6 md:p-8 flex flex-col md:flex-row gap-4 md:gap-8"
+                    >
+                      <div className="md:w-32 flex-shrink-0">
+                        <div className="mono-label text-primary mb-1">
+                          {block.step}
+                        </div>
+                        <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">
+                          {block.duration}
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-bold text-lg tracking-tight mb-2">
+                          {block.title}
+                        </h3>
+                        <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                          {block.detail}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>
