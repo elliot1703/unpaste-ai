@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Unpaste — FB Quote Graphic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FAFAFA;
+    --fg: #0A0A0A;
+    --muted: #71717A;
+    --primary: #DC2626;
+    --border: #E4E4E7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: #E4E4E7;
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--fg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Instructions bar (will not appear in screenshot) */
+  .instructions {
+    background: #18181b;
+    color: #fafafa;
+    padding: 16px 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  .instructions strong { color: #DC2626; }
+  .instructions code {
+    background: rgba(255,255,255,0.1);
+    padding: 2px 6px;
+    border-radius: 0;
+  }
+
+  /* Centring container */
+  .canvas-wrap {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+  }
+
+  /* The exact-pixel design surface */
+  .canvas {
+    width: 1080px;
+    height: 1080px;
+    background: var(--bg);
+    position: relative;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 12px 12px 0 0 rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+
+  /* Subtle grid background */
+  .canvas::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+
+  /* Header: logo + label */
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .logo {
+    width: 56px;
+    height: 56px;
+    background: var(--primary);
+  }
+  .brand-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  /* Section tag */
+  .section-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    color: var(--primary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 100px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* The quote */
+  .quote {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 92px;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-top: 32px;
+    position: relative;
+    z-index: 1;
+  }
+  .quote .accent {
+    color: var(--primary);
+  }
+
+  /* Spacer pushes attribution to bottom */
+  .spacer { flex: 1; }
+
+  /* Attribution */
+  .attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .attribution .who {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+  }
+  .attribution .where {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    color: var(--muted);
+  }
+
+  /* Bottom-right corner marker */
+  .corner-mark {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    z-index: 1;
+  }
+  .corner-mark .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<div class="instructions">
+  <strong>To screenshot:</strong> Open this file in Chrome → press <code>Cmd+Shift+4</code> → drag a box around the white card.
+  Or use Chrome DevTools → right-click the <code>.canvas</code> div → "Capture node screenshot" for an exact 1080×1080 export.
+</div>
+
+<div class="canvas-wrap">
+  <div class="canvas">
+
+    <div class="header">
+      <div class="logo"></div>
+      <div class="brand-label">UNPASTE</div>
+    </div>
+
+    <div class="section-tag">[ON AI]</div>
+
+    <div class="quote">
+      The tool is the<br>
+      easy part.<br><br>
+      The <span class="accent">workspace</span> is<br>
+      where AI actually<br>
+      works.
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="attribution">
+      <div class="who">— Elliot Stone</div>
+      <div class="where">unpaste.ai · Brisbane</div>
+    </div>
+
+    <div class="corner-mark">
+      <span class="dot"></span>FB POST · 2026
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
