@@ -31,6 +31,13 @@ const calendlyUrl = (source: string) =>
 
 const CONTACT_EMAIL = "hello@unpaste.ai";
 
+interface IncludeItem {
+  lead: string;
+  detail?: string;
+}
+
+type IncludeEntry = string | IncludeItem;
+
 interface Package {
   tag: string;
   name: string;
@@ -38,10 +45,11 @@ interface Package {
   setupPrice: string;
   monthlyPrice?: string;
   term: string;
+  youGet?: string;
   includesTitle: string;
-  includes: string[];
+  includes: IncludeEntry[];
   recurringTitle?: string;
-  recurring?: string[];
+  recurring?: IncludeEntry[];
   forWhom: string;
   cta: string;
   highlighted?: boolean;
@@ -54,14 +62,32 @@ const packages: Package[] = [
     positioning: "Get your team's AI off the ground in a day.",
     setupPrice: "$2,400",
     term: "One-off",
-    includesTitle: "Half-day on-site (4 hrs). You walk away with:",
+    youGet: "1 workspace · 4–6 areas mapped · 1 AI assistant · 2–3 shortcuts · 1 playbook",
+    includesTitle: "Half day on-site · 4 hrs",
     includes: [
-      "A shared AI setup your whole team uses the same way",
-      "The 4–6 main areas of your business mapped (quoting, jobs, clients, ops, etc.)",
-      "A one-page playbook of your AI rules — anyone you hire next week can pick it up",
-      "One AI assistant installed and running on real work",
-      "2–3 ready-to-use AI shortcuts for things your team does every week",
-      "Recording of the day for anyone who couldn't make it",
+      {
+        lead: "Shared AI workspace",
+        detail: "Whole team uses the same way",
+      },
+      {
+        lead: "Your business mapped",
+        detail: "4–6 main areas — quoting, jobs, clients, ops",
+      },
+      {
+        lead: "AI playbook (one-pager)",
+        detail: "Anyone you hire next week can pick it up",
+      },
+      {
+        lead: "AI assistant installed",
+        detail: "Running on real work, day one",
+      },
+      {
+        lead: "2–3 starter shortcuts",
+        detail: "For the things your team does every week",
+      },
+      {
+        lead: "Recording for new hires",
+      },
     ],
     forWhom: "small teams who want to dip a toe in before a longer commitment.",
     cta: "Book Kickstart",
@@ -937,28 +963,79 @@ export default function Training() {
                       </div>
                     </div>
 
+                    {/* YOU GET — at-a-glance summary */}
+                    {pkg.youGet && (
+                      <div
+                        className={`mb-6 pb-6 border-b ${
+                          pkg.highlighted ? "border-background/20" : "border-border"
+                        }`}
+                      >
+                        <div
+                          className={`mono-label mb-2 ${
+                            pkg.highlighted ? "text-background/60" : "text-muted-foreground"
+                          }`}
+                        >
+                          You get
+                        </div>
+                        <div
+                          className={`font-mono text-xs md:text-sm leading-relaxed ${
+                            pkg.highlighted ? "text-background/90" : "text-foreground"
+                          }`}
+                        >
+                          {pkg.youGet}
+                        </div>
+                      </div>
+                    )}
+
                     {/* Includes */}
                     <div className="mb-6">
                       <div
-                        className={`mono-label mb-3 ${
-                          pkg.highlighted ? "text-background/60" : ""
+                        className={`mono-label mb-4 ${
+                          pkg.highlighted ? "text-background/60" : "text-muted-foreground"
                         }`}
                       >
                         {pkg.includesTitle}
                       </div>
-                      <ul className="space-y-3">
-                        {pkg.includes.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-3">
-                            <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                            <span
-                              className={`font-mono text-sm leading-relaxed ${
-                                pkg.highlighted ? "text-background/90" : "text-foreground"
-                              }`}
-                            >
-                              {item}
-                            </span>
-                          </li>
-                        ))}
+                      <ul className="space-y-4">
+                        {pkg.includes.map((item, idx) => {
+                          if (typeof item === "string") {
+                            return (
+                              <li key={idx} className="flex items-start gap-3">
+                                <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                                <span
+                                  className={`font-mono text-sm leading-relaxed ${
+                                    pkg.highlighted ? "text-background/90" : "text-foreground"
+                                  }`}
+                                >
+                                  {item}
+                                </span>
+                              </li>
+                            );
+                          }
+                          return (
+                            <li key={idx} className="flex items-start gap-3">
+                              <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
+                              <div className="flex-1">
+                                <div
+                                  className={`font-bold text-sm tracking-tight ${
+                                    pkg.highlighted ? "text-white" : "text-foreground"
+                                  }`}
+                                >
+                                  {item.lead}
+                                </div>
+                                {item.detail && (
+                                  <div
+                                    className={`font-mono text-xs leading-relaxed mt-1 ${
+                                      pkg.highlighted ? "text-background/70" : "text-muted-foreground"
+                                    }`}
+                                  >
+                                    {item.detail}
+                                  </div>
+                                )}
+                              </div>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
 
@@ -977,18 +1054,45 @@ export default function Training() {
                           {pkg.recurringTitle}
                         </div>
                         <ul className="space-y-3">
-                          {pkg.recurring.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-3">
-                              <Clock className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                              <span
-                                className={`font-mono text-sm leading-relaxed ${
-                                  pkg.highlighted ? "text-background/90" : "text-foreground"
-                                }`}
-                              >
-                                {item}
-                              </span>
-                            </li>
-                          ))}
+                          {pkg.recurring.map((item, idx) => {
+                            if (typeof item === "string") {
+                              return (
+                                <li key={idx} className="flex items-start gap-3">
+                                  <Clock className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                                  <span
+                                    className={`font-mono text-sm leading-relaxed ${
+                                      pkg.highlighted ? "text-background/90" : "text-foreground"
+                                    }`}
+                                  >
+                                    {item}
+                                  </span>
+                                </li>
+                              );
+                            }
+                            return (
+                              <li key={idx} className="flex items-start gap-3">
+                                <Clock className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
+                                <div className="flex-1">
+                                  <div
+                                    className={`font-bold text-sm tracking-tight ${
+                                      pkg.highlighted ? "text-white" : "text-foreground"
+                                    }`}
+                                  >
+                                    {item.lead}
+                                  </div>
+                                  {item.detail && (
+                                    <div
+                                      className={`font-mono text-xs leading-relaxed mt-1 ${
+                                        pkg.highlighted ? "text-background/70" : "text-muted-foreground"
+                                      }`}
+                                    >
+                                      {item.detail}
+                                    </div>
+                                  )}
+                                </div>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     )}
