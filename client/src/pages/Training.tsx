@@ -1234,6 +1234,81 @@ export default function Training() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Also available — one-on-one + custom training */}
+            <div className="max-w-6xl mx-auto mt-16 pt-12 border-t border-border">
+              <div className="text-center max-w-2xl mx-auto mb-10">
+                <div className="section-tag mb-3">[ALSO AVAILABLE]</div>
+                <h3 className="text-2xl md:text-3xl tracking-tight">
+                  For when the three packages aren&rsquo;t{" "}
+                  <span className="text-primary">quite the right shape.</span>
+                </h3>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4 }}
+                  className="brutalist-card bg-background p-6 md:p-8 flex flex-col"
+                >
+                  <div className="mono-label text-primary mb-3">[A]</div>
+                  <h4 className="font-bold text-lg md:text-xl tracking-tight mb-3">
+                    One-on-one executive coaching
+                  </h4>
+                  <p className="font-mono text-sm text-foreground leading-relaxed mb-4">
+                    For founders, CEOs, and team leaders who want to lead AI
+                    adoption instead of react to it. Strategy, tooling decisions,
+                    what to delegate to AI vs. keep human.
+                  </p>
+                  <p className="font-mono text-xs text-muted-foreground italic mb-5 flex-1">
+                    Run as ongoing monthly sessions or focused short sprints.
+                    Pricing depends on scope &mdash; book a chat to discuss.
+                  </p>
+                  <a
+                    href={calendlyUrl("coaching")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline self-start"
+                  >
+                    Book a chat
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.1 }}
+                  className="brutalist-card bg-background p-6 md:p-8 flex flex-col"
+                >
+                  <div className="mono-label text-primary mb-3">[B]</div>
+                  <h4 className="font-bold text-lg md:text-xl tracking-tight mb-3">
+                    Custom training sessions
+                  </h4>
+                  <p className="font-mono text-sm text-foreground leading-relaxed mb-4">
+                    Refreshers as tools evolve. Onboarding for new hires.
+                    Deep-dives on specific workflows. Training when you adopt new
+                    tools. Booked as one-offs or added on top of any package.
+                  </p>
+                  <p className="font-mono text-xs text-muted-foreground italic mb-5 flex-1">
+                    Available standalone or as add-ons to the packages above.
+                    Pricing depends on scope.
+                  </p>
+                  <a
+                    href={calendlyUrl("custom_training")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline self-start"
+                  >
+                    Book a chat
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </section>
 
