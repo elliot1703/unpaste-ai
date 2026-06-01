@@ -33,8 +33,8 @@ const values = [
 const team = [
   {
     name: "Elliot Stone",
-    role: "Founder",
-    bio: "Brisbane-based. I help small businesses set up AI workspaces that actually stick — so AI does the grunt work and your team stays in control. I work hands-on with trades, professional services, and ops teams across South East Queensland.",
+    role: "Founder · Unpaste.ai",
+    bio: "Brisbane-based AI consultant focused on small and medium businesses. I work hands-on with trades, professional services, and operations teams across South East Queensland — practical AI training and on-site workspace setup, built around how your business actually runs. Twelve months building and testing AI systems for SMBs has taught me one thing: the tool isn't the bottleneck. The setup around it is. That's the gap I fill.",
     image: "/images/team-elliot.jpg",
     linkedin: "#",
     twitter: "#",
@@ -185,10 +185,10 @@ export default function About() {
         <section className="py-20 md:py-28 bg-background">
           <div className="container">
             <div className="max-w-3xl mx-auto">
-              <div className="section-tag mb-4">[002] WHY I STARTED THIS</div>
+              <div className="section-tag mb-4">[002] WHAT I DO</div>
               <h2 className="text-4xl md:text-5xl leading-tight mb-10">
-                AI WORKS.{" "}
-                <span className="text-primary">MOST TEAMS DON&rsquo;T USE IT.</span>
+                PRACTICAL AI TRAINING{" "}
+                <span className="text-primary">FOR SMALL TEAMS.</span>
               </h2>
 
               <motion.div
@@ -199,19 +199,21 @@ export default function About() {
                 className="space-y-5 font-mono text-sm md:text-base text-foreground leading-relaxed"
               >
                 <p>
-                  I started Unpaste.ai after meeting too many small business owners
-                  who&rsquo;d &ldquo;tried ChatGPT&rdquo; but it never quite landed.
-                  The owner uses it. Maybe one team member dabbles. The rest of the
-                  business carries on the same.
+                  I work with small and medium businesses across South East
+                  Queensland &mdash; trades, professional services, and operations
+                  teams &mdash; to help them get real value from AI in their
+                  day-to-day work.
                 </p>
                 <p>
-                  The tools are powerful. Nobody&rsquo;s helping teams actually use
-                  them together.
+                  Most teams I meet have tried one or two AI tools but haven&rsquo;t
+                  figured out how to use them consistently across the business. I
+                  come on-site and work directly with your team in their actual
+                  workflows &mdash; quoting, scheduling, client communication,
+                  documentation, reporting &mdash; and help them build setups
+                  they&rsquo;ll actually use.
                 </p>
                 <p>
-                  So that&rsquo;s what I do. I come on-site, sit with your specialist
-                  team members in their actual work, and help build a shared AI setup
-                  the whole team uses. Hands-on, local, Brisbane and surrounds.
+                  Hands-on, practical, and built around how your business runs today.
                 </p>
               </motion.div>
             </div>
@@ -223,14 +225,15 @@ export default function About() {
           <div className="container">
             <div className="mb-16">
               <div className="section-tag mb-4">[003] WHO YOU&rsquo;RE WORKING WITH</div>
-              <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
-                IT&rsquo;S JUST ME &mdash;{" "}
-                <span className="text-primary">AND THAT&rsquo;S THE POINT.</span>
+              <h2 className="text-4xl md:text-5xl max-w-2xl leading-tight">
+                THE PERSON IN THE ROOM{" "}
+                <span className="text-primary">WITH YOUR TEAM.</span>
               </h2>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl mt-6">
-                When you hire Unpaste, you get me &mdash; not a junior, not an
-                offshore team, not a sales rep. SMB AI doesn&rsquo;t need a
-                department. It needs one person who actually knows your business.
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-2xl mt-6">
+                Hands-on AI consulting for small and medium businesses across
+                South East Queensland. Workshops, training, and on-site workspace
+                setup &mdash; with someone who&rsquo;ll work alongside your
+                specialists in the actual work.
               </p>
             </div>
 
