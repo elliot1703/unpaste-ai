@@ -150,7 +150,7 @@ const packages: Package[] = [
       },
     ],
     narrative:
-      "Full day on-site. I spend time with each role individually — sales, ops, admin, finance — mapping the specific workflows they do day-to-day. Then we build AI and automation into those workflows using the tools you already use (OneDrive, Google Drive, SharePoint, your CRM, email). After the day, Tuesday 10am office hours every week so the setup beds in and evolves as you spot new opportunities.",
+      "Full day on-site. I spend time with each role individually — sales, ops, admin, finance — mapping the specific workflows they do day-to-day. Then we build AI and automation into those workflows using the tools you already use (OneDrive, Google Drive, SharePoint, your CRM, email). After the day, we set a weekly office-hours slot that suits your team so the setup beds in and evolves as you spot new opportunities.",
     forWhom: "teams who want AI woven into how they already work, not bolted on the side.",
     cta: "Book Operations",
     highlighted: true,
