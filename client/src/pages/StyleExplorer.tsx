@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Monitor, Smartphone } from "lucide-react";
+import { SEO } from "@/components/SEO";
 
 type StyleOption = "A" | "B" | "C" | "D";
 type ViewMode = "desktop" | "mobile";
@@ -17,7 +18,14 @@ export default function StyleExplorer() {
   const [viewMode, setViewMode] = useState<ViewMode>("desktop");
 
   return (
-    <div className="min-h-screen bg-[#18181B] p-6 md:p-8">
+    <>
+      <SEO
+        title="Style Explorer"
+        description="Internal style exploration page for unpaste.ai design directions."
+        url="https://unpaste.ai/styles"
+        noIndex
+      />
+      <div className="min-h-screen bg-[#18181B] p-6 md:p-8">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-8">
         <motion.div
@@ -101,6 +109,7 @@ export default function StyleExplorer() {
         </AnimatePresence>
       </div>
     </div>
+    </>
   );
 }
 

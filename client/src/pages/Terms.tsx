@@ -122,10 +122,10 @@ export default function Terms() {
             <p>
               Questions about these terms? Email{" "}
               <a
-                href="mailto:hello@unpaste.ai"
+                href="mailto:elliot@unpaste.co"
                 className="text-foreground underline underline-offset-4 hover:text-primary"
               >
-                hello@unpaste.ai
+                elliot@unpaste.co
               </a>.
             </p>
           </section>

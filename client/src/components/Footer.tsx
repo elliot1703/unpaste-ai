@@ -30,7 +30,7 @@ export function Footer() {
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Contact</h4>
             <ul className="space-y-3 font-mono text-xs text-muted-foreground">
               <li>
-                <a href="mailto:hello@unpaste.ai" className="hover:text-foreground transition-colors flex items-center gap-1">
+                <a href="mailto:elliot@unpaste.co" className="hover:text-foreground transition-colors flex items-center gap-1">
                   HELLO@UNPASTE.AI
                   <ArrowUpRight className="h-3 w-3" />
                 </a>

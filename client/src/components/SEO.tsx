@@ -61,7 +61,7 @@ export function SEO({
     },
     contactPoint: {
       "@type": "ContactPoint",
-      email: "hello@unpaste.ai",
+      email: "elliot@unpaste.co",
       contactType: "customer service",
     },
     sameAs: [

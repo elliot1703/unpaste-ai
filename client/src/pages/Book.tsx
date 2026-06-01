@@ -167,10 +167,10 @@ export default function Book() {
                     Not ready for a call? Send us a message and we'll get back to you within 24 hours.
                   </p>
                   <a
-                    href="mailto:hello@unpaste.ai"
+                    href="mailto:elliot@unpaste.co"
                     className="inline-flex items-center gap-2 font-mono text-sm text-primary hover:underline"
                   >
-                    hello@unpaste.ai
+                    elliot@unpaste.co
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>

@@ -106,10 +106,10 @@ export default function Privacy() {
             <p className="mt-3">
               To exercise any of these rights, email{" "}
               <a
-                href="mailto:hello@unpaste.ai"
+                href="mailto:elliot@unpaste.co"
                 className="text-foreground underline underline-offset-4 hover:text-primary"
               >
-                hello@unpaste.ai
+                elliot@unpaste.co
               </a>.
             </p>
           </section>
@@ -138,10 +138,10 @@ export default function Privacy() {
             <p>
               Questions about this policy? Email{" "}
               <a
-                href="mailto:hello@unpaste.ai"
+                href="mailto:elliot@unpaste.co"
                 className="text-foreground underline underline-offset-4 hover:text-primary"
               >
-                hello@unpaste.ai
+                elliot@unpaste.co
               </a>.
             </p>
           </section>

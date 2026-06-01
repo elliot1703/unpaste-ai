@@ -335,7 +335,7 @@ export default function Pricing() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
-        title="Pricing | unpaste.ai"
+        title="Pricing"
         description="Transparent pricing for branding, web design, and ongoing marketing. Brisbane-built packages for businesses that want results, not invoices full of surprises."
         url="https://unpaste.ai/pricing"
       />

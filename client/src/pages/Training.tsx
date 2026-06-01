@@ -29,7 +29,7 @@ const CALENDLY_BASE = "https://calendly.com/elliot-unpaste/30min";
 const calendlyUrl = (source: string) =>
   `${CALENDLY_BASE}?utm_source=training_${source}`;
 
-const CONTACT_EMAIL = "hello@unpaste.ai";
+const CONTACT_EMAIL = "elliot@unpaste.co";
 
 interface IncludeItem {
   lead: string;
@@ -159,68 +159,36 @@ const packages: Package[] = [
     tag: "[003]",
     name: "AI DEPARTMENT",
     positioning: "Your AI department, run for you.",
-    setupPrice: "From $9,500",
-    monthlyPrice: "Retainer per scope",
-    term: "Scoped engagement",
-    youGet: "Full architecture · 8–12 assistants · CRM/email/calendar wired in · weekly leadership + team · ongoing build hours",
-    includesTitle: "2-day intensive · everything in Operations, plus",
+    setupPrice: "Price on enquiry",
+    term: "After a discovery session",
+    youGet: "Scoped to your business — discussed on a discovery call",
+    includesTitle: "What we cover (high-level)",
     includes: [
       {
-        lead: "Leadership aligned on AI strategy",
-        detail: "Day one with directors, ops manager, head estimator — strategy, governance, what to bet on",
+        lead: "Strategic AI direction across the business",
+        detail: "Where AI fits, what to bet on, what to govern",
       },
       {
-        lead: "AI architecture across the whole business",
-        detail: "Mapped from sales to ops to finance to admin — nothing left out",
+        lead: "Custom AI built around your workflows",
+        detail: "Designed and delivered to fit how your business actually runs",
       },
       {
-        lead: "8–12 AI assistants running real work",
-        detail: "Replacing the most expensive repetitive tasks in the business",
+        lead: "Integration with the tools you already use",
+        detail: "AI lives in your existing stack, not a separate dashboard",
       },
       {
-        lead: "AI wired into the tools you already use",
-        detail: "CRM, calendar, email — no separate dashboards to learn",
-      },
-      {
-        lead: "Clear governance rules",
+        lead: "Governance, safety, and review frameworks",
         detail: "What AI can and can't do, who approves what",
       },
       {
-        lead: "Monthly numbers showing value back",
-        detail: "Hours saved, tools adopted, ROI per assistant",
-      },
-      {
-        lead: "90-day rollout plan",
-        detail: "So the whole team comes up to speed in a structured way",
-      },
-    ],
-    recurringTitle: "Then every week",
-    recurring: [
-      {
-        lead: "1-hour leadership call",
-        detail: "Keep AI on strategy, not just tactics",
-      },
-      {
-        lead: "30-min team Q&A",
-        detail: "Plus Slack/email through the week — we're embedded",
-      },
-      {
-        lead: "4 hrs/month of build work",
-        detail: "We build new assistants as needs emerge",
-      },
-      {
-        lead: "Monthly progress report",
-        detail: "What's working, what's not, what to add next",
-      },
-      {
-        lead: "Quarterly strategy review",
-        detail: "What to add, what to drop, what's changing in AI",
+        lead: "Ongoing build, refinement, and team support",
+        detail: "We evolve together as the work changes",
       },
     ],
     narrative:
-      "Two full days on-site to start. Day one with directors, ops manager, head estimator — strategy, governance, what you're betting on. Day two with the wider team — workshop with each function's specialists to find their AI opportunities. Then I run as your fractional AI department: weekly leadership and team time, monthly build hours, quarterly strategy. You direct, I build.",
-    forWhom: "businesses that want AI run for them, with someone owning it end-to-end.",
-    cta: "Book Department",
+      "A scoped, ongoing engagement. We'll figure out the right shape for your business in a discovery session, then design and run an AI department around that — strategy, build, governance, and team support. Specifics depend on the engagement.",
+    forWhom: "businesses ready to treat AI as a strategic function, with someone owning it end-to-end.",
+    cta: "Book Discovery",
   },
 ];
 
@@ -1014,13 +982,15 @@ export default function Training() {
                         <span className="text-3xl md:text-4xl font-bold tracking-tight">
                           {pkg.setupPrice}
                         </span>
-                        <span
-                          className={`font-mono text-xs uppercase tracking-wider ${
-                            pkg.highlighted ? "text-background/60" : "text-muted-foreground"
-                          }`}
-                        >
-                          setup
-                        </span>
+                        {pkg.setupPrice.includes("$") && (
+                          <span
+                            className={`font-mono text-xs uppercase tracking-wider ${
+                              pkg.highlighted ? "text-background/60" : "text-muted-foreground"
+                            }`}
+                          >
+                            setup
+                          </span>
+                        )}
                       </div>
                       {pkg.monthlyPrice && (
                         <div className="mt-1 flex items-baseline gap-2 flex-wrap">

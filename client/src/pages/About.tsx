@@ -310,10 +310,10 @@ export default function About() {
                     </div>
                     <div>
                       <a
-                        href="mailto:hello@unpaste.ai"
+                        href="mailto:elliot@unpaste.co"
                         className="font-bold text-sm hover:text-primary transition-colors flex items-center gap-1"
                       >
-                        hello@unpaste.ai
+                        elliot@unpaste.co
                         <ArrowUpRight className="h-3 w-3" />
                       </a>
                       <div className="mono-label">Get in touch</div>
