@@ -352,7 +352,7 @@ const faqs = [
   },
   {
     q: "Do you know construction-specific tools like Procore, Aconex, Hammertech, BuildXact?",
-    a: "Yes. I'll integrate with whatever you're already using — the whole point is AI lives in your existing stack, not a separate tool. If there's a platform I haven't worked with directly, learning it is part of the engagement.",
+    a: "Yes — I'll help you integrate AI with the tools you already use. How deep that integration goes depends on what each platform exposes (APIs, CLIs, MCP servers). Some construction tools have rich, accessible APIs; others are more locked down. It's case-by-case, so I'll be upfront about what's realistic with your specific stack before we commit. We'll do what we can with the access available.",
   },
   {
     q: "How does this fit with our existing safety and compliance processes?",
