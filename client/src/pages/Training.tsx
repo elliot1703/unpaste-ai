@@ -92,7 +92,7 @@ const packages: Package[] = [
     ],
     narrative:
       "Short interactive session with the team — practical metaphors, real visuals, no tech jargon. Then we sit with your specialist team members and workshop the AI opportunities mainstream tools haven't touched yet.",
-    forWhom: "small teams who want to dip a toe in before a longer commitment.",
+    forWhom: "trade businesses with 5–15 staff who want to see AI in action before a bigger commitment.",
     cta: "Book Kickstart",
   },
   {
@@ -107,7 +107,7 @@ const packages: Package[] = [
     includes: [
       {
         lead: "Time with each role, one-on-one",
-        detail: "Sales, ops, admin, finance — separate sessions mapping how each person actually works",
+        detail: "Estimators, project managers, site supervisors, admin — separate sessions mapping how each role actually works",
       },
       {
         lead: "Workflows mapped at the role level",
@@ -150,7 +150,7 @@ const packages: Package[] = [
       },
     ],
     narrative:
-      "Full day on-site. I spend time with each role individually — sales, ops, admin, finance — mapping the specific workflows they do day-to-day. Then we build AI and automation into those workflows using the tools you already use (OneDrive, Google Drive, SharePoint, your CRM, email). After the day, we set a weekly office-hours slot that suits your team so the setup beds in and evolves as you spot new opportunities.",
+      "Full day on-site. I spend time with each role individually — estimators, project managers, site supervisors, admin — mapping the specific workflows they do day-to-day. Then we build AI and automation into those workflows using the tools you already use (OneDrive, Google Drive, SharePoint, your CRM, email). After the day, we set a weekly office-hours slot that suits your team so the setup beds in and evolves as you spot new opportunities.",
     forWhom: "teams who want AI woven into how they already work, not bolted on the side.",
     cta: "Book Operations",
     highlighted: true,
@@ -167,7 +167,7 @@ const packages: Package[] = [
     includes: [
       {
         lead: "Leadership aligned on AI strategy",
-        detail: "Day one with you and the decision-makers — what to bet on, what to govern",
+        detail: "Day one with directors, ops manager, head estimator — strategy, governance, what to bet on",
       },
       {
         lead: "AI architecture across the whole business",
@@ -218,7 +218,7 @@ const packages: Package[] = [
       },
     ],
     narrative:
-      "Two full days on-site to start. Day one with leadership — strategy, governance, what you're betting on. Day two with the whole team — workshop with each function's specialists to find their AI opportunities. Then we run as your fractional AI department: weekly leadership and team time, monthly build hours, quarterly strategy. You direct, we build.",
+      "Two full days on-site to start. Day one with directors, ops manager, head estimator — strategy, governance, what you're betting on. Day two with the wider team — workshop with each function's specialists to find their AI opportunities. Then I run as your fractional AI department: weekly leadership and team time, monthly build hours, quarterly strategy. You direct, I build.",
     forWhom: "businesses that want AI run for them, with someone owning it end-to-end.",
     cta: "Book Department",
   },
@@ -227,23 +227,27 @@ const packages: Package[] = [
 const audiences = [
   {
     icon: Building2,
-    label: "Trades & services",
-    description: "Plasterers, builders, sparkies, contractors. AI without becoming engineers.",
+    label: "Trades & commercial",
+    description:
+      "Construction, electrical, mechanical, civil. Multi-trade businesses with estimators, project managers, site teams, and contracts admin. Project-based work where setup quality compounds.",
   },
   {
     icon: FileText,
-    label: "Professional services",
-    description: "Accountants, lawyers, agencies. Document-heavy work prime for agentic drafting.",
+    label: "Project-based pro services",
+    description:
+      "Engineering consultancies, building surveyors, project management firms. Document-heavy work prime for agentic drafting and review.",
   },
   {
     icon: Workflow,
-    label: "Ops & admin teams",
-    description: "Ops, HR, finance, EAs inside a 20–50 person business. Repeatable workflows.",
+    label: "Operations & admin teams",
+    description:
+      "Ops, contracts, finance, EAs inside a 20–80 person business. Repeatable workflows ready for AI.",
   },
   {
     icon: Rocket,
-    label: "Tech-led startups",
-    description: "Teams that already get it. Fastest path to a full AI Department engagement.",
+    label: "Distribution & wholesale",
+    description:
+      "Trade supply, plant & equipment hire, materials distribution. Quoting, order processing, supplier comms — all daily work AI can take a chunk of.",
   },
 ];
 
@@ -344,47 +348,53 @@ const faqs = [
   },
   {
     q: "Do you travel for on-site sessions?",
-    a: "Yes. Based in Brisbane, comfortable across SE Queensland at no extra charge. Interstate or remote teams: we run sessions remotely or quote travel at cost.",
+    a: "Yes. Based in Brisbane, comfortable across SE Queensland at no extra charge. Interstate or remote teams: I run sessions remotely or quote travel at cost.",
   },
   {
-    q: "What’s the minimum team size?",
-    a: "Kickstart works from 3 people. Operations and Department are designed for 5-25 person teams. If you’re smaller or solo, the AI Kickstart still delivers a working workspace.",
+    q: "Do you know construction-specific tools like Procore, Aconex, Hammertech, BuildXact?",
+    a: "Yes. I'll integrate with whatever you're already using — the whole point is AI lives in your existing stack, not a separate tool. If there's a platform I haven't worked with directly, learning it is part of the engagement.",
+  },
+  {
+    q: "How does this fit with our existing safety and compliance processes?",
+    a: "It enhances them, never replaces them. AI drafts SWMS, JSAs, and toolbox-talk material from job specifics — your safety lead reviews and approves before anything goes to site. Compliance stays owned by humans, just faster to assemble.",
   },
 ];
 
 const workspaceTreeHuman = `your-business/
-├── 01_business_rules/      ─→  How decisions get made
-│   ├── what-we-quote
-│   └── pricing
-├── 02_clients/             ─→  Active and past clients
+├── 01_safety_compliance/   ─→  SWMS, JSAs, inductions
+│   ├── swms-templates
+│   └── compliance-docs
+├── 02_clients_projects/    ─→  Per-project context
 │   └── active/
-├── 03_operations/
-│   └── shortcuts/          ─→  Your AI shortcuts
-├── 04_sales_marketing/
-│   └── pipeline
-├── 05_team/
-│   └── roles
+├── 03_estimating/          ─→  Rate sheets, historical jobs
+│   ├── rate-sheets
+│   └── past-projects
+├── 04_site_operations/     ─→  Daily reports, progress
+│   └── daily-pack
+├── 05_subcontractors/      ─→  Subbie scheduling, performance
+│   └── active-subbies
 ├── 06_ai_assistants/       ─→  Your AI assistants
 │   ├── quote-drafter
-│   └── monday-brief
-└── YOUR_RULES   ◀──────────  The rules every assistant follows.`;
+│   └── site-pack
+└── COMPANY_RULES   ◀──────  The rules every assistant follows.`;
 
 const workspaceTreeTech = `your-business/
-├── 01_business_rules/      ─→  Domain context, agent-readable
-│   ├── what-we-quote
-│   └── pricing
-├── 02_clients/             ─→  Per-client READMEs scope agent context
+├── 01_safety_compliance/   ─→  Domain context — agent-readable policies
+│   ├── swms-templates
+│   └── compliance-docs
+├── 02_clients_projects/    ─→  Per-project READMEs scope agent context
 │   └── active/
-├── 03_operations/
-│   └── shortcuts/          ─→  Markdown recipe library
-├── 04_sales_marketing/
-│   └── pipeline
-├── 05_team/
-│   └── roles
+├── 03_estimating/          ─→  Pricing rules + historical comparators
+│   ├── rate-sheets
+│   └── past-projects
+├── 04_site_operations/
+│   └── daily-pack          ─→  Markdown recipe library
+├── 05_subcontractors/
+│   └── active-subbies
 ├── 06_ai_assistants/       ─→  Agent specs (model, tools, scope)
 │   ├── quote-drafter
-│   └── monday-brief
-└── YOUR_RULES   ◀──────────  Org-level system prompt + safety rails.`;
+│   └── site-pack
+└── COMPANY_RULES   ◀──────  Org-level system prompt + safety rails.`;
 
 export default function Training() {
   const [techMode, setTechMode] = useState(false);
@@ -540,25 +550,24 @@ export default function Training() {
                   {/* Fake browser tabs scattered */}
                   <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2">
                     <span className="text-primary">●</span>
-                    <span className="truncate">chat.openai.com &mdash; <span className="italic">Sarah&rsquo;s account</span></span>
+                    <span className="truncate">chat.openai.com &mdash; <span className="italic">Sarah from admin</span></span>
                   </div>
                   <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2 ml-6">
                     <span className="text-primary">●</span>
-                    <span className="truncate">claude.ai &mdash; <span className="italic">Tom&rsquo;s tab</span></span>
+                    <span className="truncate">claude.ai &mdash; <span className="italic">Tom in estimating</span></span>
                   </div>
                   <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2 ml-2">
                     <span className="text-primary">●</span>
-                    <span className="truncate">copilot.microsoft.com &mdash; <span className="italic">Jess tried it once</span></span>
+                    <span className="truncate">copilot.microsoft.com &mdash; <span className="italic">Jess (PM) tried it once</span></span>
                   </div>
                   <div className="font-mono text-xs flex items-center gap-2 text-muted-foreground border border-border p-2 ml-8">
                     <span className="text-primary">●</span>
-                    <span className="truncate">perplexity.ai &mdash; <span className="italic">Founder uses this</span></span>
+                    <span className="truncate">perplexity.ai &mdash; <span className="italic">the Director uses this</span></span>
                   </div>
 
                   {/* Slack ping */}
                   <div className="mt-5 border-l-2 border-muted-foreground/30 pl-3 font-mono text-xs text-muted-foreground italic">
-                    &ldquo;hey, what&rsquo;s the prompt for the client brief
-                    again?&rdquo;
+                    &ldquo;hey, what&rsquo;s the prompt for SWMS again?&rdquo;
                     <div className="not-italic text-[10px] text-muted-foreground/60 mt-1">
                       &mdash; #general · 9:47am
                     </div>
@@ -591,7 +600,7 @@ export default function Training() {
                 <div className="border border-zinc-700 p-5 mb-6">
                   {/* Team members feeding in */}
                   <div className="grid grid-cols-4 gap-2 mb-2">
-                    {["Sarah", "Tom", "Jess", "Founder"].map((name) => (
+                    {["Sarah", "Tom", "Jess", "Director"].map((name) => (
                       <div key={name} className="text-center">
                         <div className="font-mono text-xs text-zinc-200 mb-1">
                           {name}
@@ -620,9 +629,9 @@ export default function Training() {
                   {/* Running agents */}
                   <div className="space-y-2 border-t border-zinc-700 pt-3">
                     {[
-                      "Weekly brief",
+                      "Site pack",
                       "Quote drafts",
-                      "Inbox sort",
+                      "SWMS drafts",
                     ].map((agent) => (
                       <div
                         key={agent}
@@ -697,29 +706,29 @@ export default function Training() {
                 <div className="divide-y divide-border">
                   {[
                     {
-                      title: "Weekly leadership brief",
-                      detail: "Drafted from last week's notes. Ready to send.",
+                      title: "3 SWMS drafted for today's jobs",
+                      detail: "Job-specific safety method statements ready for site sup sign-off.",
                       action: "REVIEW",
-                      time: "2 min",
+                      time: "5 min",
                     },
                     {
-                      title: "4 quote drafts from enquiries",
-                      detail: "Built from your pricing rules. Awaiting your sign-off.",
+                      title: "6 quote drafts from new enquiries",
+                      detail: "Built from your rate sheet and historical projects.",
                       action: "REVIEW",
                       time: "8 min",
                       highlight: true,
                     },
                     {
-                      title: "Inbox triage: 23 emails",
-                      detail: "18 auto-sorted &middot; 5 drafted replies for you to send.",
+                      title: "Inbox triage: 31 emails",
+                      detail: "23 auto-sorted &middot; 8 drafted replies for you to send.",
                       action: "REVIEW",
                       time: "5 min",
                     },
                     {
-                      title: "Q1 KPI snapshot",
-                      detail: "Numbers refreshed. One variance flagged for a look.",
+                      title: "Estimate flagged: $185k tender",
+                      detail: "Compared to 8 similar past jobs &mdash; 12% over historical avg. Review margins.",
                       action: "CHECK",
-                      time: "3 min",
+                      time: "4 min",
                       flag: true,
                     },
                   ].map((item, i) => (
@@ -784,9 +793,9 @@ export default function Training() {
                 <div className="space-y-4 flex-1">
                   {[
                     {
-                      task: "Writing weekly client brief",
-                      before: "4 hrs",
-                      after: "5 min sign-off",
+                      task: "Daily site reports + progress updates",
+                      before: "5 hrs/wk",
+                      after: "30 min reviewing",
                     },
                     {
                       task: "Drafting quote letters",
@@ -799,9 +808,9 @@ export default function Training() {
                       after: "25 min reviewing",
                     },
                     {
-                      task: "Monthly KPI assembly",
-                      before: "8 hrs/mo",
-                      after: "auto + 10 min",
+                      task: "SWMS + safety docs",
+                      before: "4 hrs/wk",
+                      after: "15 min reviewing",
                     },
                   ].map((item, i) => (
                     <div
@@ -1456,11 +1465,11 @@ export default function Training() {
               <div className="section-tag mb-4">[AN AGENT AT WORK]</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
                 Here&rsquo;s what runs{" "}
-                <span className="text-primary">every Monday at 9am.</span>
+                <span className="text-primary">every weekday at 6am.</span>
               </h2>
               <p className="font-mono text-sm text-muted-foreground">
                 Once the setup&rsquo;s in place, AI assistants run on schedule.
-                Zero human time.
+                Site supervisors get their day&rsquo;s pack before crews leave.
               </p>
             </div>
 
@@ -1479,12 +1488,12 @@ export default function Training() {
                       SCHEDULED TASK
                     </div>
                     <h3 className="font-bold text-xl md:text-2xl tracking-tight text-white">
-                      Monday Morning Brief
+                      Daily Site Pack
                     </h3>
                   </div>
                   <div className="sm:text-right">
                     <div className="mono-label text-zinc-400 mb-1">TRIGGER</div>
-                    <div className="font-mono text-sm text-zinc-200">Monday · 09:00 AEST</div>
+                    <div className="font-mono text-sm text-zinc-200">Weekdays · 06:00 AEST</div>
                   </div>
                 </div>
 
@@ -1492,24 +1501,24 @@ export default function Training() {
                 <div className="mb-2">
                   {[
                     {
-                      time: "09:00:00",
-                      title: "Read the week",
-                      detail: "Pulls last week's notes and your brief template.",
+                      time: "06:00:00",
+                      title: "Read project data",
+                      detail: "Pulls live job list, weather forecast, crew assignments, flagged variations.",
                     },
                     {
-                      time: "09:00:12",
-                      title: "Draft",
-                      detail: "Writes the brief in your company voice.",
+                      time: "06:00:14",
+                      title: "Draft pack",
+                      detail: "Per-job scope, crew names, deliveries expected, safety call-outs.",
                     },
                     {
-                      time: "09:00:43",
-                      title: "Post",
-                      detail: "Posts to Slack #leadership and archives a copy.",
+                      time: "06:00:36",
+                      title: "Distribute",
+                      detail: "Sent to each supervisor via SMS + email. Archived to /04_site_operations/.",
                     },
                     {
-                      time: "09:00:47",
+                      time: "06:00:42",
                       title: "Done",
-                      detail: "Leadership reads with their morning coffee.",
+                      detail: "Each sup walks onto site with the day's pack ready.",
                     },
                   ].map((step, i, arr) => (
                     <div key={i} className="flex gap-4">
@@ -1541,7 +1550,7 @@ export default function Training() {
                   <div>
                     <div className="mono-label text-zinc-400 mb-1">RUN TIME</div>
                     <div className="font-bold text-xl md:text-2xl text-primary">
-                      47s
+                      42s
                     </div>
                   </div>
                   <div>
@@ -1557,7 +1566,7 @@ export default function Training() {
                       RECURRENCE
                     </div>
                     <div className="font-bold text-xl md:text-2xl text-primary">
-                      Weekly
+                      Daily
                     </div>
                   </div>
                 </div>
@@ -1571,16 +1580,16 @@ export default function Training() {
                     Quote drafts from inbox
                   </h4>
                   <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                    Client enquiry comes in. Agent drafts the quote and sends it to ops for review.
+                    Enquiry comes in. Agent drafts the quote from your rate sheet and historical projects, sends it to estimating for review.
                   </p>
                 </div>
                 <div className="brutalist-card bg-background p-6">
                   <div className="mono-label text-primary mb-2">+ ALSO RUNNING</div>
                   <h4 className="font-bold tracking-tight mb-2">
-                    Client onboarding pack
+                    Variation order assembly
                   </h4>
                   <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                    Deal won. Welcome pack and kickoff agenda assembled. Quick review, then you send.
+                    Site sup flags a variation. Agent drafts the variation doc using your template, rate sheet, and the project&rsquo;s variation register. Ready for review in 90 seconds.
                   </p>
                 </div>
               </div>
