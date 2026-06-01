@@ -1603,8 +1603,11 @@ export default function Training() {
               <div className="brutalist-card bg-card overflow-hidden">
                 <div className="grid grid-cols-2 divide-x divide-border">
                   <div className="p-6 md:p-8">
-                    <div className="mono-label text-muted-foreground mb-4">
-                      A typical AI workshop
+                    <div className="mono-label text-muted-foreground mb-1">
+                      What you usually get
+                    </div>
+                    <div className="font-bold text-lg md:text-xl tracking-tight mb-5">
+                      Most AI training
                     </div>
                     <ul className="space-y-3 font-mono text-sm text-muted-foreground">
                       <li>Teaches everyone to write better prompts</li>
@@ -1616,8 +1619,11 @@ export default function Training() {
                     </ul>
                   </div>
                   <div className="p-6 md:p-8 bg-zinc-900 text-zinc-100">
-                    <div className="mono-label text-zinc-400 mb-4">
-                      What you get with Unpaste
+                    <div className="mono-label text-zinc-400 mb-1">
+                      What you get here
+                    </div>
+                    <div className="font-bold text-lg md:text-xl tracking-tight mb-5 text-white">
+                      Working with Unpaste
                     </div>
                     <ul className="space-y-3 font-mono text-sm">
                       <li className="flex items-start gap-2">
@@ -1626,7 +1632,7 @@ export default function Training() {
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
-                        <span>We pick the AI tools that fit your work</span>
+                        <span>I pick the AI tools that fit your work</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
