@@ -12,18 +12,18 @@ export function Footer() {
               <span className="font-mono text-sm font-bold">UNPASTE</span>
             </Link>
             <p className="font-mono text-xs text-muted-foreground max-w-sm leading-relaxed">
-              Websites, marketing, and automation for Brisbane businesses who want to grow online — not manage tools.
+              AI coaching, training, workshops, and custom development for Brisbane businesses. Learn it or have it built — either way, you own the system.
             </p>
           </div>
           <div>
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Navigation</h4>
             <ul className="space-y-3 font-mono text-xs text-muted-foreground">
+              <li><Link href="/coaching" className="hover:text-foreground transition-colors">COACHING & DEV DAYS</Link></li>
+              <li><Link href="/training" className="hover:text-foreground transition-colors">TRAINING</Link></li>
               <li><Link href="/solutions" className="hover:text-foreground transition-colors">SOLUTIONS</Link></li>
-              <li><Link href="/pricing" className="hover:text-foreground transition-colors">PRICING</Link></li>
               <li><Link href="/about" className="hover:text-foreground transition-colors">ABOUT</Link></li>
+              <li><Link href="/pricing" className="hover:text-foreground transition-colors">PRICING</Link></li>
               <li><Link href="/book" className="hover:text-foreground transition-colors">BOOK A CALL</Link></li>
-              <li><a href="/#services" className="hover:text-foreground transition-colors">SERVICES</a></li>
-              <li><a href="/#method" className="hover:text-foreground transition-colors">METHOD</a></li>
             </ul>
           </div>
           <div>
@@ -31,7 +31,7 @@ export function Footer() {
             <ul className="space-y-3 font-mono text-xs text-muted-foreground">
               <li>
                 <a href="mailto:elliot@unpaste.co" className="hover:text-foreground transition-colors flex items-center gap-1">
-                  HELLO@UNPASTE.AI
+                  ELLIOT@UNPASTE.CO
                   <ArrowUpRight className="h-3 w-3" />
                 </a>
               </li>

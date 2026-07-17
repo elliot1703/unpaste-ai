@@ -1,4 +1,4 @@
-import { ArrowRight, Clock, Globe, Megaphone, Search, Zap } from "lucide-react";
+import { ArrowRight, Clock, Code2, Compass, GraduationCap, Users } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -30,27 +30,31 @@ export default function Home() {
   const services = [
     {
       num: "01",
-      title: "Smart Websites",
-      description: "AI-native sites with built-in intelligence — assessments, chat, lead capture, dynamic content. Not brochures that are outdated on launch day.",
-      icon: Globe,
+      title: "AI Coaching",
+      description: "One-on-one, on your real work. A 3-week sprint that ends with automations running in your business and a roadmap you own. $750 + GST.",
+      icon: Compass,
+      href: "/coaching",
     },
     {
       num: "02",
-      title: "Marketing & Content",
-      description: "Brand strategy, social media, email sequences, ad creative, SEO, video briefs. Everything your business needs to be found and remembered.",
-      icon: Megaphone,
+      title: "AI Training",
+      description: "Your team's AI workspace set up, assistants installed, everyone trained on the work they already do — and one person owning it internally.",
+      icon: GraduationCap,
+      href: "/training",
     },
     {
       num: "03",
-      title: "Strategy & Audits",
-      description: "Where every engagement starts. Assessment, workshops, brand guidelines, personas, competitor analysis. Understand before you build.",
-      icon: Search,
+      title: "AI Workshops",
+      description: "One day in a Brisbane room. Claude Code set up on your laptop, workspace skills installed, frameworks that stick. $399 + GST a seat.",
+      icon: Users,
+      href: "/coaching#workshop",
     },
     {
       num: "04",
-      title: "Automation",
-      description: "AI agents, workflow automation, tool connectors. Connect your scattered systems so information flows without copy-paste.",
-      icon: Zap,
+      title: "Custom Development",
+      description: "Done-with-you dev days at your office ($3,500), or scoped builds from $5,000. Built on your stack, handed over running, owned by you.",
+      icon: Code2,
+      href: "/coaching#dev-day",
     },
   ];
 
@@ -197,7 +201,7 @@ export default function Home() {
                     transition={{ duration: 1.5, repeat: Infinity }}
                     className="inline-block w-2 h-2 bg-primary"
                   />
-                  [001] FREE EFFICIENCY AUDIT
+                  [001] AI COACHING · TRAINING · CUSTOM DEV
                 </motion.div>
 
                 {/* Main Headline with staggered letter animation */}
@@ -254,8 +258,9 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  Discover your biggest operational bottleneck in 5 minutes.
-                  See exactly where your business is bleeding time — and what to fix first.
+                  AI coaching, workshops, and custom development for Brisbane
+                  businesses. Learn to run your business on AI — or have it
+                  built with you. Either way, you own the system.
                 </motion.p>
 
                 {/* CTA with hover effects */}
@@ -265,40 +270,37 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="flex flex-col sm:flex-row gap-4 items-start"
                 >
-                  <motion.button
-                    onClick={() => setIsAssessmentOpen(true)}
+                  <motion.a
+                    href="/coaching"
                     className="brutalist-button inline-flex items-center gap-3 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Take Free Assessment
+                    Coaching & Dev Days
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
                       <ArrowRight className="h-4 w-4" />
                     </motion.span>
-                  </motion.button>
-                  <motion.span
-                    className="font-mono text-xs text-muted-foreground pt-5 flex items-center gap-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.8 }}
+                  </motion.a>
+                  <motion.button
+                    onClick={() => setIsAssessmentOpen(true)}
+                    className="brutalist-button-outline inline-flex items-center gap-3"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <span className="inline-flex gap-1">
-                      {["5 MIN", "15 QUESTIONS", "INSTANT"].map((text, i) => (
-                        <motion.span
-                          key={text}
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.9 + i * 0.1 }}
-                        >
-                          {text}{i < 2 && " · "}
-                        </motion.span>
-                      ))}
-                    </span>
-                  </motion.span>
+                    Or take the free audit
+                  </motion.button>
                 </motion.div>
+                <motion.span
+                  className="font-mono text-xs text-muted-foreground mt-5 flex items-center gap-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  AUDIT: 5 MIN · 15 QUESTIONS · INSTANT
+                </motion.span>
               </div>
 
               {/* Stats Grid with staggered entrance */}
@@ -344,7 +346,7 @@ export default function Home() {
             <div className="marquee-content">
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-12 px-6">
-                  {["SMART WEBSITES", "MARKETING", "CONTENT", "SEO", "AUTOMATION", "AI AGENTS", "BRAND STRATEGY", "BRISBANE BASED"].map((text, j) => (
+                  {["AI COACHING", "AI TRAINING", "WORKSHOPS", "DEV DAYS", "CLAUDE CODE", "AUTOMATION", "AI AGENTS", "BRISBANE BASED"].map((text, j) => (
                     <span key={j} className="flex items-center gap-6 font-mono text-sm uppercase tracking-wider whitespace-nowrap">
                       {text}
                       <span className="h-2 w-2 bg-primary" />
@@ -408,22 +410,23 @@ export default function Home() {
         <section id="services" className="py-24 md:py-32 bg-card border-y border-border">
           <div className="container">
             <div className="mb-16">
-              <div className="section-tag mb-4">[005] WHAT WE BUILD</div>
+              <div className="section-tag mb-4">[005] WHAT WE DO</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
-                WEBSITES. MARKETING.{" "}
-                <span className="text-primary">AUTOMATION.</span>
+                LEARN IT.{" "}
+                <span className="text-primary">OR HAVE IT BUILT.</span>
               </h2>
             </div>
 
             <div className="stats-grid md:grid-cols-2">
               {services.map((service, i) => (
-                <motion.div
+                <motion.a
                   key={i}
+                  href={service.href}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="p-8 md:p-12 group cursor-default"
+                  className="p-8 md:p-12 group block"
                 >
                   <div className="flex items-start justify-between mb-6">
                     <span className="text-6xl font-bold text-foreground/10">{service.num}</span>
@@ -434,10 +437,13 @@ export default function Home() {
                   <h3 className="text-xl font-bold mb-4 group-hover:text-primary transition-colors tracking-tight">
                     {service.title.toUpperCase()}
                   </h3>
-                  <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                  <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-4">
                     {service.description}
                   </p>
-                </motion.div>
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-primary opacity-0 group-hover:opacity-100 transition-opacity inline-flex items-center gap-2">
+                    See it <ArrowRight className="h-3 w-3" />
+                  </span>
+                </motion.a>
               ))}
             </div>
           </div>

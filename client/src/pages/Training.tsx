@@ -15,6 +15,7 @@ import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -25,11 +26,7 @@ const fadeUp = {
   }),
 };
 
-const CALENDLY_BASE = "https://calendly.com/elliot-unpaste/30min";
-const calendlyUrl = (source: string) =>
-  `${CALENDLY_BASE}?utm_source=training_${source}`;
-
-const CONTACT_EMAIL = "elliot@unpaste.co";
+const calendlyUrl = (source: string) => baseCalendlyUrl(`training_${source}`);
 
 interface IncludeItem {
   lead: string;
@@ -54,141 +51,97 @@ interface Package {
   forWhom: string;
   cta: string;
   highlighted?: boolean;
+  href?: string;
 }
 
 const packages: Package[] = [
   {
     tag: "[001]",
-    name: "AI KICKSTART",
-    positioning: "Get your team's AI off the ground in a day.",
-    setupPrice: "$2,400",
-    term: "One-off",
-    youGet: "1 workspace · 4–6 areas mapped · 1 AI assistant · 2–3 shortcuts · 1 playbook",
-    includesTitle: "Half day on-site · 4 hrs",
+    name: "TEAM DEV DAY",
+    positioning: "One day at your office. Your team trained, your system running.",
+    setupPrice: "$3,500",
+    term: "One day · 9:00–3:00 · your office",
+    youGet:
+      "Claude Code on every machine · workflows built on live work · a skill library installed · an internal AI champion assigned",
+    includesTitle: "The day, hour by hour",
     includes: [
       {
-        lead: "Your team on the same page about AI",
-        detail: "One shared workspace + clear rules, not scattered personal accounts",
+        lead: "9:00 — Set up",
+        detail: "Claude Code on your machines, your workspace mapped",
       },
       {
-        lead: "Your business mapped",
-        detail: "4–6 main areas — quoting, jobs, clients, ops",
+        lead: "10:30 — First workflow",
+        detail: "Built on live work, your team on the keyboard",
       },
       {
-        lead: "AI playbook (one-pager)",
-        detail: "Anyone you hire next week can pick it up",
+        lead: "12:30 — Skill library",
+        detail: "Installed and walked through — the shortcuts your team runs weekly",
       },
       {
-        lead: "AI assistant installed",
-        detail: "Running on real work, day one",
+        lead: "1:30 — Second workflow + frameworks",
+        detail: "Another build, plus the thinking that makes it stick",
       },
       {
-        lead: "2–3 starter shortcuts",
-        detail: "For the things your team does every week",
-      },
-      {
-        lead: "Recording for new hires",
+        lead: "2:30 — Your AI champion",
+        detail: "One person assigned, briefed, and owning it from here",
       },
     ],
     narrative:
-      "Short interactive session with the team — practical metaphors, real visuals, no tech jargon. Then we sit with your specialist team members and workshop the AI opportunities mainstream tools haven't touched yet.",
-    forWhom: "trade businesses with 5–15 staff who want to see AI in action before a bigger commitment.",
-    cta: "Book Kickstart",
-  },
-  {
-    tag: "[002]",
-    name: "AI OPERATIONS",
-    positioning: "Deep AI built into your team's actual workflows.",
-    setupPrice: "$5,800",
-    monthlyPrice: "$1,900/mo",
-    term: "3-month minimum, then month-to-month",
-    youGet: "Per-role workflow mapping · AI built into your existing tools · custom assistants · weekly check-ins",
-    includesTitle: "Two days on-site · 12 hrs (everything in Kickstart, plus)",
-    includes: [
-      {
-        lead: "Time with each role, one-on-one",
-        detail: "Estimators, project managers, site supervisors, admin — separate sessions mapping how each role actually works",
-      },
-      {
-        lead: "Workflows mapped at the role level",
-        detail: "Specific tasks, specific tools, specific stuck-points — not just 'sales' as a category",
-      },
-      {
-        lead: "AI built into your existing tools",
-        detail: "OneDrive, Google Drive, SharePoint, your CRM, email — AI lives where the work already happens",
-      },
-      {
-        lead: "Custom AI assistants per workflow",
-        detail: "Built for the specific work each role does, not generic team assistants",
-      },
-      {
-        lead: "Process streamlining beyond AI",
-        detail: "Where automation fits and AI doesn't, we connect the apps you already pay for",
-      },
-      {
-        lead: "Clear safety + review checkpoints",
-        detail: "Per workflow — what AI does on its own, what you sign off on first",
-      },
-    ],
-    recurringTitle: "Then every week",
-    recurring: [
-      {
-        lead: "45-min team call",
-        detail: "Bring questions, see what's new, dig into what's working",
-      },
-      {
-        lead: "Q&A in between",
-        detail: "Slack or email — we don't disappear between sessions",
-      },
-      {
-        lead: "Monthly 'what's new in AI' update",
-        detail: "So you don't fall behind as the tools evolve",
-      },
-      {
-        lead: "Quarterly tune-up",
-        detail: "Refresh your setup as your team grows into it",
-      },
-    ],
-    narrative:
-      "Two full days on-site. I spend time with each role individually — estimators, project managers, site supervisors, admin — mapping the specific workflows they do day-to-day. Then we build AI and automation into those workflows using the tools you already use (OneDrive, Google Drive, SharePoint, your CRM, email). After the on-site days, we set a weekly office-hours slot that suits your team so the setup beds in and evolves as you spot new opportunities.",
-    forWhom: "teams who want AI woven into how they already work, not bolted on the side.",
-    cta: "Book Operations",
+      "Done with you, not for you. We build at your desks, on the work your team already does, and hand it over running.",
+    forWhom: "teams who want the whole crew on one system, same week.",
+    cta: "See the dev day",
+    href: "/coaching#dev-day",
     highlighted: true,
   },
   {
+    tag: "[002]",
+    name: "BRISBANE WORKSHOP",
+    positioning: "One seat, one day, one working setup on your laptop.",
+    setupPrice: "$399",
+    term: "Per seat · one day · Brisbane",
+    youGet:
+      "Claude Code installed · the workspace skills set up · the frameworks in plain English",
+    includesTitle: "What happens in the room",
+    includes: [
+      { lead: "Claude Code set up on your laptop" },
+      { lead: "The workspace skills, installed" },
+      { lead: "The frameworks that make it stick" },
+      { lead: "Hands-on all day — no slides" },
+    ],
+    narrative:
+      "The lowest-cost way to learn the system properly. Come yourself, or send the person who'll champion it internally.",
+    forWhom: "owners and team members who want hands-on skills before a team-wide rollout.",
+    cta: "See the workshop",
+    href: "/coaching#workshop",
+  },
+  {
     tag: "[003]",
-    name: "AI DEPARTMENT",
-    positioning: "Your AI department, run for you.",
-    setupPrice: "Price on enquiry",
-    term: "After a discovery session",
-    youGet: "Scoped to your business — discussed on a discovery call",
-    includesTitle: "What we cover (high-level)",
+    name: "1:1 COACHING",
+    positioning: "Three weeks, one-on-one, on your business.",
+    setupPrice: "$750",
+    term: "3-week sprint · in person or remote",
+    youGet:
+      "A first automation live in week one · the thinking behind it · a roadmap you own",
+    includesTitle: "The sprint, week by week",
     includes: [
       {
-        lead: "Strategic AI direction across the business",
-        detail: "Where AI fits, what to bet on, what to govern",
+        lead: "WK1 — First live build",
+        detail: "Something running in your business by the end of session one",
       },
       {
-        lead: "Custom AI built around your workflows",
-        detail: "Designed and delivered to fit how your business actually runs",
+        lead: "WK2 — The thinking",
+        detail: "Spot what's automatable, brief an agent properly, know the limits",
       },
       {
-        lead: "Integration with the tools you already use",
-        detail: "AI lives in your existing stack, not a separate dashboard",
-      },
-      {
-        lead: "Governance, safety, and review frameworks",
-        detail: "What AI can and can't do, who approves what",
-      },
-      {
-        lead: "Ongoing build, refinement, and team support",
-        detail: "We evolve together as the work changes",
+        lead: "WK3 — The judgment",
+        detail: "A roadmap you own: what to build next and why",
       },
     ],
     narrative:
-      "A scoped, ongoing engagement. We'll figure out the right shape for your business in a discovery session, then design and run an AI department around that — strategy, build, governance, and team support. Specifics depend on the engagement.",
-    forWhom: "businesses ready to treat AI as a strategic function, with someone owning it end-to-end.",
-    cta: "Book Discovery",
+      "Most teams start here: the owner or a champion gets ahead first, then brings the team in with a dev day.",
+    forWhom: "owners and directors who want the capability themselves first.",
+    cta: "See the sprint",
+    href: "/coaching#sprint",
   },
 ];
 
@@ -373,7 +326,7 @@ export default function Training() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="AI Training & Workspace Setup"
-        description="We set up your team's AI workspace, install the assistants, and train everyone — so AI actually does the work for you. Three packages from $2,400."
+        description="Team dev days at your office, Brisbane workshops, and 1:1 coaching. We set up your team's AI workspace, install the assistants, and train everyone — on a system you own."
         url="https://unpaste.ai/training"
       />
 
@@ -426,7 +379,7 @@ export default function Training() {
                   href="#packages"
                   className="brutalist-button inline-flex items-center justify-center gap-2"
                 >
-                  See the packages
+                  See the formats
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
@@ -831,13 +784,13 @@ export default function Training() {
               >
                 <div className="section-tag mb-4">[THE PROBLEM]</div>
                 <h2 className="text-3xl md:text-4xl tracking-tighter mb-6">
-                  Workshops don&rsquo;t fix this.{" "}
+                  A demo day doesn&rsquo;t fix this.{" "}
                   <span className="text-primary">Infrastructure does.</span>
                 </h2>
                 <div className="space-y-4 font-mono text-sm text-muted-foreground leading-relaxed">
                   <p>
                     Tools change every week. Each person uses AI differently.
-                    Workshops don&rsquo;t stick.
+                    One-off demos don&rsquo;t stick.
                   </p>
                   <p className="text-foreground font-bold">
                     Build one AI setup the whole team works from, and it sticks.
@@ -918,14 +871,14 @@ export default function Training() {
         >
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="section-tag mb-4">[PACKAGES]</div>
+              <div className="section-tag mb-4">[FORMATS]</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
                 Three ways to get{" "}
-                <span className="text-primary">your workspace running.</span>
+                <span className="text-primary">your team running.</span>
               </h2>
               <p className="font-mono text-sm text-muted-foreground">
-                Start with Kickstart to see the pattern. Most teams choose Operations
-                for the ongoing relationship.
+                Same system underneath, three depths. Full detail and booking on
+                the coaching page.
               </p>
             </div>
 
@@ -988,7 +941,7 @@ export default function Training() {
                               pkg.highlighted ? "text-background/60" : "text-muted-foreground"
                             }`}
                           >
-                            setup
+                            + GST
                           </span>
                         )}
                       </div>
@@ -1197,9 +1150,9 @@ export default function Training() {
 
                     {/* CTA */}
                     <a
-                      href={calendlyUrl(pkg.name.toLowerCase().replace(/ /g, "_"))}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href={pkg.href ?? calendlyUrl(pkg.name.toLowerCase().replace(/ /g, "_"))}
+                      target={pkg.href ? undefined : "_blank"}
+                      rel={pkg.href ? undefined : "noopener noreferrer"}
                       className={`mt-auto inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors ${
                         pkg.highlighted
                           ? "bg-primary text-white hover:bg-primary/90"
@@ -1219,7 +1172,7 @@ export default function Training() {
               <div className="text-center max-w-2xl mx-auto mb-10">
                 <div className="section-tag mb-3">[ALSO AVAILABLE]</div>
                 <h3 className="text-2xl md:text-3xl tracking-tight">
-                  For when the three packages aren&rsquo;t{" "}
+                  For when the three formats aren&rsquo;t{" "}
                   <span className="text-primary">quite the right shape.</span>
                 </h3>
               </div>
@@ -1234,24 +1187,22 @@ export default function Training() {
                 >
                   <div className="mono-label text-primary mb-3">[A]</div>
                   <h4 className="font-bold text-lg md:text-xl tracking-tight mb-3">
-                    One-on-one executive coaching
+                    Custom development
                   </h4>
                   <p className="font-mono text-sm text-foreground leading-relaxed mb-4">
-                    For founders, CEOs, and team leaders who want to lead AI
-                    adoption instead of react to it. Strategy, tooling decisions,
-                    what to delegate to AI vs. keep human.
+                    Quoting systems, client pipelines, internal tools,
+                    automations. Scoped on a call, built on your stack, handed
+                    over running — and you own every file.
                   </p>
                   <p className="font-mono text-xs text-muted-foreground italic mb-5 flex-1">
-                    Run as ongoing monthly sessions or focused short sprints.
-                    Pricing depends on scope &mdash; book a chat to discuss.
+                    Projects from $5,000 + GST. Dev days are the done-with-you
+                    entry point.
                   </p>
                   <a
-                    href={calendlyUrl("coaching")}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/book"
                     className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline self-start"
                   >
-                    Book a chat
+                    Book a scoping call
                     <ArrowRight className="h-3.5 w-3.5" />
                   </a>
                 </motion.div>
@@ -1301,8 +1252,8 @@ export default function Training() {
                 <span className="text-primary">on day one.</span>
               </h2>
               <p className="font-mono text-sm text-muted-foreground">
-                The half-day Kickstart curriculum. Operations and Department layer
-                more on top.
+                The dev-day curriculum. The workshop covers the same ground for
+                one seat; coaching goes deeper, one-on-one.
               </p>
             </div>
 
