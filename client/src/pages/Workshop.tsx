@@ -267,7 +267,7 @@ export default function Workshop() {
                   {[
                     "You're a business owner, marketer, executive, or solo operator who's used Claude or ChatGPT and wants to actually put it to work.",
                     "You want real skills you keep — not another subscription someone else runs.",
-                    "You can use a laptop. That's the only requirement — no code, no jargon.",
+                    "You can use a laptop — no code, no jargon needed.",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
@@ -285,8 +285,7 @@ export default function Workshop() {
                 <ul className="space-y-4">
                   {[
                     "You're a developer who already lives in the terminal — you'll be ahead of the room.",
-                    "You want it built entirely for you — that's custom development, and I'll happily quote it.",
-                    "You're after a strategy document. We build things, we don't write decks about them.",
+                    "You want it built entirely for you — that's custom development. Get in touch for a tailored solution.",
                   ].map((item) => (
                     <li key={item} className="flex items-start gap-3">
                       <span className="font-mono text-sm text-muted-foreground flex-shrink-0 mt-0.5">
@@ -329,6 +328,13 @@ export default function Workshop() {
                 </div>
               ))}
             </div>
+
+            <p className="font-mono text-sm text-muted-foreground mt-8 max-w-3xl leading-relaxed">
+              What to bring: your own laptop and a{" "}
+              <span className="text-foreground font-bold">Claude Pro subscription</span>{" "}
+              (from Anthropic) — it's what runs Claude Code. We'll help you get set
+              up on the day.
+            </p>
           </div>
         </section>
 
