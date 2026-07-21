@@ -647,8 +647,7 @@ export default function Coaching() {
                   </div>
                   <ul className="space-y-4">
                     {[
-                      "You want it done entirely for you — that's custom development, and I'll happily quote it.",
-                      "You're after an AI strategy document. We build things, we don't write decks about them.",
+                      "You want it done entirely for you — that's custom development. Get in touch for a tailored solution.",
                       "Nobody on your side can give it an hour a week. Skills don't install themselves.",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-3">
