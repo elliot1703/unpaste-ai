@@ -30,29 +30,29 @@ export default function Home() {
   const services = [
     {
       num: "01",
-      title: "AI Coaching",
-      description: "One-on-one, on your real work. A 3-week sprint that ends with automations running in your business and a roadmap you own. $750 + GST.",
+      title: "AI Workshops",
+      description: "Three hours in a Brisbane room. Bring your laptop, leave using Claude Code to actually do your work — not just chat with it. $399 + GST a seat.",
+      icon: Users,
+      href: "/workshops",
+    },
+    {
+      num: "02",
+      title: "1:1 Coaching",
+      description: "One-on-one, hands-on, on your own business. Claude Code on your real work, at your pace — with a system you own at the end. Scoped on a call.",
       icon: Compass,
       href: "/coaching",
     },
     {
-      num: "02",
+      num: "03",
       title: "AI Training",
       description: "Your team's AI workspace set up, assistants installed, everyone trained on the work they already do — and one person owning it internally.",
       icon: GraduationCap,
       href: "/training",
     },
     {
-      num: "03",
-      title: "AI Workshops",
-      description: "One day in a Brisbane room. Claude Code set up on your laptop, workspace skills installed, frameworks that stick. $399 + GST a seat.",
-      icon: Users,
-      href: "/coaching#workshop",
-    },
-    {
       num: "04",
       title: "Custom Development",
-      description: "Done-with-you dev days at your office ($3,500), or scoped builds from $5,000. Built on your stack, handed over running, owned by you.",
+      description: "Done-with-you dev days at your office, or scoped builds from $5,000. Built on your stack, handed over running, owned by you.",
       icon: Code2,
       href: "/coaching#dev-day",
     },
@@ -201,7 +201,7 @@ export default function Home() {
                     transition={{ duration: 1.5, repeat: Infinity }}
                     className="inline-block w-2 h-2 bg-primary"
                   />
-                  [001] AI COACHING · TRAINING · CUSTOM DEV
+                  [001] AI WORKSHOPS · COACHING · CUSTOM DEV
                 </motion.div>
 
                 {/* Main Headline with staggered letter animation */}
@@ -258,9 +258,9 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  AI coaching, workshops, and custom development for Brisbane
-                  businesses. Learn to run your business on AI — or have it
-                  built with you. Either way, you own the system.
+                  Hands-on AI workshops in Brisbane, plus 1:1 coaching and
+                  custom development. Learn to use Claude Code for real work — or
+                  have it built with you. Either way, you own the system.
                 </motion.p>
 
                 {/* CTA with hover effects */}
@@ -271,12 +271,12 @@ export default function Home() {
                   className="flex flex-col sm:flex-row gap-4 items-start"
                 >
                   <motion.a
-                    href="/coaching"
+                    href="/workshops"
                     className="brutalist-button inline-flex items-center gap-3 group"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Coaching & Dev Days
+                    Reserve a workshop seat
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}

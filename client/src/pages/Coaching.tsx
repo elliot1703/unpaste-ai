@@ -173,7 +173,7 @@ export default function Coaching() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
         title="AI Coaching, Workshops & Dev Days"
-        description="Learn to run your business on AI — 1:1 coaching sprints ($750), Brisbane workshops ($399), and done-with-you dev days at your office ($3,500). Claude Code, on your real work, with a system you own."
+        description="Put AI to work in your own business — 1:1 coaching hands-on with Claude Code, Brisbane workshops ($399), and done-with-you dev days at your office ($3,500). On your real work, with a system you own."
         keywords="AI coaching Brisbane, Claude Code coaching, AI workshop Brisbane, done with you AI, executive AI coaching, AI dev day, business AI training"
         url="https://unpaste.ai/coaching"
         faqItems={faqs.map((faq) => ({ question: faq.q, answer: faq.a }))}
@@ -203,8 +203,8 @@ export default function Coaching() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-8"
               >
-                LEARN TO RUN YOUR BUSINESS{" "}
-                <span className="text-primary">THE WAY I RUN MINE.</span>
+                PUT AI TO WORK IN{" "}
+                <span className="text-primary">YOUR OWN BUSINESS.</span>
               </motion.h1>
 
               <motion.p
@@ -213,10 +213,10 @@ export default function Coaching() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl"
               >
-                Unpaste is a one-person business that ships like a team. Every
-                page, proposal, and automation goes through the same AI system —
-                and I'll teach you to build yours. Hands-on, on your real work.
-                Brisbane in person, remote anywhere in Australia.
+                One-on-one, hands-on, on your real work. Go from using Claude in
+                a browser to running Claude Code on the jobs that eat your week —
+                and walk away with a system you own. Brisbane in person, remote
+                anywhere in Australia.
               </motion.p>
 
               <motion.div
@@ -248,7 +248,7 @@ export default function Coaching() {
                 transition={{ delay: 0.6 }}
                 className="mono-label"
               >
-                WORKSHOP $399 · SPRINT $750 · DEV DAY $3,500 · + GST
+                WORKSHOP $399 · DEV DAY $3,500 · 1:1 COACHING BY ENQUIRY · + GST
               </motion.p>
             </div>
           </div>
@@ -374,12 +374,12 @@ export default function Coaching() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mono-label mb-4">FIRST BRISBANE SESSION — DATE TBC</p>
+                  <p className="mono-label mb-4">NEXT BRISBANE SESSION — ANNOUNCING SOON</p>
                   <a
-                    href={`mailto:${CONTACT_EMAIL}?subject=Brisbane%20AI%20workshop%20—%20first%20seat%20access`}
+                    href="/workshops"
                     className="mt-auto inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 bg-foreground text-background hover:bg-foreground/90 transition-colors"
                   >
-                    Get first seat access
+                    See the workshop
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </div>
@@ -404,7 +404,7 @@ export default function Coaching() {
                     <User className="h-5 w-5 text-primary" />
                   </div>
                   <div className="mb-1 text-3xl font-bold tracking-tight">
-                    $750 <span className="text-sm font-normal">+ GST</span>
+                    By enquiry
                   </div>
                   <div className="mono-label mb-6 text-background/60">
                     3 WEEKS · 1:1 · YOUR BUSINESS
