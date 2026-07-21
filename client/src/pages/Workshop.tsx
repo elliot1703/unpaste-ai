@@ -1,0 +1,439 @@
+import {
+  ArrowRight,
+  CheckCircle2,
+  Laptop,
+  Brain,
+  Rocket,
+  Search,
+  ShoppingBag,
+  Megaphone,
+  User,
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { SEO } from "@/components/SEO";
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
+import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
+
+const calendlyUrl = (source: string) => baseCalendlyUrl(`workshop_${source}`);
+
+// "Reserve your seat" — no booking tool yet, so register interest by email.
+const reserveHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+  "Reserve a seat — Brisbane AI workshop"
+)}&body=${encodeURIComponent(
+  "Hi Elliot, I'd like to reserve a seat at the next Brisbane AI workshop. My name is "
+)}`;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+  }),
+};
+
+const learn = [
+  {
+    title: "Get Claude Code running",
+    detail: "Set up and working on your own machine — the version that does the work, not the chatbox.",
+  },
+  {
+    title: "Build your first automation",
+    detail: "Something real you'll use after you leave. Your work, your tools.",
+  },
+  {
+    title: "Steer it for better results",
+    detail: "How to give feedback that sharpens the output instead of settling for the first try.",
+  },
+  {
+    title: "The mental models",
+    detail: "How to think about this new way of working, so it keeps paying off after today.",
+  },
+];
+
+const walkOut = [
+  "Claude Code installed and working on your laptop.",
+  "At least one automation running in your own work.",
+  "The confidence to keep building on your own.",
+];
+
+const nextModules = [
+  { icon: Search, title: "SEO", detail: "Run your SEO through Claude Code." },
+  { icon: ShoppingBag, title: "Shopify + Meta ads", detail: "Run your store and ads through Claude Code." },
+  { icon: Megaphone, title: "Social media", detail: "Run your social media through Claude Code." },
+];
+
+const learnIcons = [Laptop, Rocket, CheckCircle2, Brain];
+
+export default function Workshop() {
+  return (
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <SEO
+        title="AI Workshop Brisbane — Learn Claude Code for Work"
+        description="A 3-hour, hands-on AI workshop in Brisbane. Small group. Bring your laptop and leave using Claude Code to actually do your work — not just chat with it. $399 + GST a seat."
+        keywords="AI workshop Brisbane, Claude Code workshop, learn Claude Code, hands-on AI training Brisbane, AI for business owners, AI workshop for beginners"
+        url="https://unpaste.ai/workshops"
+      />
+
+      <Navigation />
+
+      <div className="grid-background" />
+
+      <div className="relative z-10">
+        {/* [001] Hero */}
+        <section className="pt-32 pb-16 md:pt-40 md:pb-24">
+          <div className="container">
+            <div className="max-w-4xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="section-tag mb-8"
+              >
+                [001] AI WORKSHOP · BRISBANE
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-8"
+              >
+                LEARN TO USE CLAUDE CODE{" "}
+                <span className="text-primary">FOR WORK.</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl"
+              >
+                A 3-hour, hands-on AI workshop in Brisbane. Small group. Bring
+                your laptop — leave using AI to actually do your work, not just
+                chat with it.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="flex flex-col sm:flex-row gap-4 items-start mb-8"
+              >
+                <a
+                  href={reserveHref}
+                  className="brutalist-button inline-flex items-center gap-3"
+                >
+                  Reserve your seat
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <a
+                  href="#what-it-is"
+                  className="brutalist-button-outline inline-flex items-center gap-3"
+                >
+                  See what's inside
+                </a>
+              </motion.div>
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mono-label"
+              >
+                $399 + GST · 3 HOURS · SMALL GROUP · BRISBANE · NEXT SESSION
+                ANNOUNCING SOON
+              </motion.p>
+            </div>
+          </div>
+        </section>
+
+        {/* [002] What it is */}
+        <section
+          id="what-it-is"
+          className="py-20 md:py-28 border-t border-border bg-card scroll-mt-20"
+        >
+          <div className="container">
+            <div className="max-w-3xl">
+              <div className="section-tag mb-4">[002] WHAT IT IS</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-6">
+                THREE HOURS. YOUR LAPTOP.{" "}
+                <span className="text-primary">REAL WORK.</span>
+              </h2>
+              <div className="space-y-4 font-mono text-sm text-muted-foreground leading-relaxed">
+                <p>
+                  A hands-on session in a small group of four to ten. You're on
+                  your own laptop the whole time. You'll go from typing questions
+                  into Claude in a browser to running{" "}
+                  <span className="text-foreground font-bold">Claude Code</span>{" "}
+                  — the version that actually does the work: writing, building,
+                  and automating inside your real files and tools.
+                </p>
+                <p className="text-foreground font-bold">
+                  No slides to sit through. You build as you learn.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* [003] What you'll learn */}
+        <section className="py-20 md:py-28 border-t border-border">
+          <div className="container">
+            <div className="max-w-2xl mb-12">
+              <div className="section-tag mb-4">[003] WHAT YOU'LL LEARN</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter">
+                FOUR THINGS YOU'LL{" "}
+                <span className="text-primary">TAKE HOME.</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl">
+              {learn.map((item, i) => {
+                const Icon = learnIcons[i];
+                return (
+                  <motion.div
+                    key={item.title}
+                    custom={i}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={fadeUp}
+                    className="brutalist-card bg-background p-6 md:p-8 flex items-start gap-4"
+                  >
+                    <div className="h-10 w-10 border border-border flex items-center justify-center flex-shrink-0 text-primary">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <h3 className="font-bold text-lg tracking-tight mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                        {item.detail}
+                      </p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* [004] What you'll walk out with */}
+        <section className="py-20 md:py-28 border-t border-border bg-foreground text-background">
+          <div className="container">
+            <div className="max-w-3xl">
+              <div className="font-mono text-xs text-primary tracking-widest mb-4">
+                [004] WHAT YOU'LL WALK OUT WITH
+              </div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-8">
+                TOOLS IN HAND.{" "}
+                <span className="text-primary">NOT A FOLDER OF NOTES.</span>
+              </h2>
+              <ul className="space-y-4 mb-8">
+                {walkOut.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <span className="font-mono text-sm md:text-base text-background leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="font-mono text-sm text-background/70 leading-relaxed">
+                You leave with things that work — not a folder of notes you'll
+                never open.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* [005] Who it's for */}
+        <section className="py-20 md:py-28 border-t border-border">
+          <div className="container">
+            <div className="max-w-2xl mb-12">
+              <div className="section-tag mb-4">[005] WHO IT'S FOR</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter">
+                YOU'VE TRIED THE CHATBOT.{" "}
+                <span className="text-primary">NOW GO FURTHER.</span>
+              </h2>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl">
+              <div className="brutalist-card bg-background p-6 md:p-8">
+                <div className="mono-label text-primary mb-6">THIS IS FOR YOU IF</div>
+                <ul className="space-y-4">
+                  {[
+                    "You're a business owner, marketer, executive, or solo operator who's used Claude or ChatGPT and wants to actually put it to work.",
+                    "You want real skills you keep — not another subscription someone else runs.",
+                    "You can use a laptop. That's the only requirement — no code, no jargon.",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-1" />
+                      <span className="font-mono text-sm text-foreground leading-relaxed">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="brutalist-card bg-background p-6 md:p-8">
+                <div className="mono-label text-muted-foreground mb-6">
+                  MAYBE NOT YET IF
+                </div>
+                <ul className="space-y-4">
+                  {[
+                    "You're a developer who already lives in the terminal — you'll be ahead of the room.",
+                    "You want it built entirely for you — that's custom development, and I'll happily quote it.",
+                    "You're after a strategy document. We build things, we don't write decks about them.",
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="font-mono text-sm text-muted-foreground flex-shrink-0 mt-0.5">
+                        ✕
+                      </span>
+                      <span className="font-mono text-sm text-muted-foreground leading-relaxed">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* [006] How it runs */}
+        <section className="py-20 md:py-28 border-t border-border bg-card">
+          <div className="container">
+            <div className="max-w-2xl mb-12">
+              <div className="section-tag mb-4">[006] HOW IT RUNS</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter">
+                THE <span className="text-primary">DETAILS.</span>
+              </h2>
+            </div>
+
+            <div className="stats-grid md:grid-cols-3 lg:grid-cols-5 max-w-6xl">
+              {[
+                { value: "3 hrs", label: "HANDS-ON" },
+                { value: "4–10", label: "PEOPLE" },
+                { value: "Brisbane", label: "IN PERSON" },
+                { value: "Laptop", label: "BRING YOUR OWN" },
+                { value: "$399", label: "+ GST / SEAT" },
+              ].map((stat) => (
+                <div key={stat.label} className="p-6 md:p-8">
+                  <div className="text-2xl md:text-3xl font-bold tracking-tight mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="mono-label">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* [007] What's coming next */}
+        <section className="py-20 md:py-28 border-t border-border">
+          <div className="container">
+            <div className="max-w-2xl mb-12">
+              <div className="section-tag mb-4">[007] WHAT'S COMING NEXT</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                THIS IS THE <span className="text-primary">FIRST SESSION.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                More are on the way — each one going deep on a job you already
+                do. Come to this one and you'll hear about the rest first.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl">
+              {nextModules.map((mod, i) => (
+                <motion.div
+                  key={mod.title}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={fadeUp}
+                  className="brutalist-card bg-background p-6 md:p-8"
+                >
+                  <div className="h-10 w-10 border border-border flex items-center justify-center mb-6 text-primary">
+                    <mod.icon className="h-4 w-4" />
+                  </div>
+                  <h3 className="font-bold text-lg tracking-tight mb-2 uppercase">
+                    {mod.title}
+                  </h3>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                    {mod.detail}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* [008] Side offer — 1:1 coaching (no pricing) */}
+        <section className="py-16 md:py-20 border-t border-border bg-card">
+          <div className="container">
+            <div className="grid lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+              <div className="lg:col-span-2">
+                <div className="font-mono text-xs text-primary tracking-widest mb-4">
+                  [008] PREFER ONE-ON-ONE?
+                </div>
+                <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                  1:1 COACHING,{" "}
+                  <span className="text-primary">ON YOUR OWN BUSINESS.</span>
+                </h2>
+                <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl">
+                  Want to go deeper than a room allows? One-on-one coaching runs
+                  hands-on with you — Claude Code on your real work, at your
+                  pace. Book an intro call and we'll scope it together.
+                </p>
+              </div>
+              <div className="flex lg:justify-end">
+                <a
+                  href={calendlyUrl("coaching_sideoffer")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-wider px-8 py-4 bg-foreground text-background hover:bg-foreground/90 transition-colors"
+                >
+                  <User className="h-4 w-4" />
+                  Book an intro call
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* [009] Reserve your seat */}
+        <section className="py-20 md:py-28 border-t border-border">
+          <div className="container text-center">
+            <div className="section-tag mb-8">[009] RESERVE YOUR SEAT</div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight max-w-3xl mx-auto mb-8">
+              SMALL ROOM. <span className="text-primary">LIMITED SEATS.</span>
+            </h2>
+            <p className="font-mono text-sm text-muted-foreground max-w-md mx-auto mb-10">
+              Brisbane. Next session announcing soon. Reserve now and you'll be
+              first to get the date.
+            </p>
+            <a
+              href={reserveHref}
+              className="brutalist-button text-base px-10 py-5 inline-flex items-center gap-3"
+            >
+              Reserve your seat — $399 + GST
+              <ArrowRight className="h-5 w-5" />
+            </a>
+            <p className="mono-label mt-8">
+              OR EMAIL{" "}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
+                {CONTACT_EMAIL.toUpperCase()}
+              </a>
+            </p>
+          </div>
+        </section>
+
+        <Footer />
+      </div>
+    </div>
+  );
+}

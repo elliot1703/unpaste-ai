@@ -22,9 +22,8 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
   const hashLink = (hash: string) => isHome ? hash : `/${hash}`;
 
   const navLinks = [
-    { label: "Solutions", href: "/solutions", type: "route" as const },
-    { label: "Services", href: "#services", type: "hash" as const },
-    { label: "Method", href: "#method", type: "hash" as const },
+    { label: "Workshops", href: "/workshops", type: "route" as const },
+    { label: "Coaching", href: "/coaching", type: "route" as const },
     { label: "Training", href: "/training", type: "route" as const },
     { label: "About", href: "/about", type: "route" as const },
   ];

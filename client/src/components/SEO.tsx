@@ -19,9 +19,9 @@ interface SEOProps {
 const defaultSEO = {
   title: "unpaste.ai | Stop Copy-Pasting. Start Scaling.",
   description:
-    "Discover where your business is bleeding time. Take our free 5-minute Efficiency Score assessment and see exactly where automation can transform your operations.",
+    "AI coaching, training, workshops, and custom development for Brisbane businesses. Learn to run your business on AI — or have it built with you. Either way, you own the system.",
   keywords:
-    "AI automation, workflow automation, efficiency assessment, Brisbane AI, business automation, SMB automation, process automation, AI agents",
+    "AI coaching Brisbane, AI training, AI workshops Brisbane, Claude Code, custom development, AI automation, workflow automation, Brisbane AI, business automation, AI agents",
   image: "https://unpaste.ai/images/og-image.png",
   url: "https://unpaste.ai",
   type: "website",
@@ -52,7 +52,7 @@ export function SEO({
     name: "unpaste.ai",
     url: "https://unpaste.ai",
     logo: "https://unpaste.ai/images/og-image.png",
-    description: "AI automation solutions for Brisbane businesses",
+    description: "AI coaching, training, workshops, and custom development for Brisbane businesses",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Brisbane",
@@ -88,7 +88,7 @@ export function SEO({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "unpaste.ai",
-    description: "AI automation and workflow solutions for small to medium businesses",
+    description: "AI coaching, training, workshops, and custom development for small to medium businesses",
     url: "https://unpaste.ai",
     address: {
       "@type": "PostalAddress",
