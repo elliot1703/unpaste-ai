@@ -117,27 +117,14 @@ const pillars = [
   },
 ];
 
-// DRAFT quotes — pending sign-off from each client before production deploy.
+// Real, signed-off testimonial (Kim Allen, CRA Construction — provided 2026-07).
 const proof = [
   {
-    name: "Kim",
-    org: "CRC",
-    context: "1:1 executive coaching",
+    name: "Kim Allen",
+    org: "CEO & Co-Founder, CRA Construction",
+    context: "AI coaching",
     quote:
-      "I went from watching AI videos to running Claude Code on my own work in the first session.",
-  },
-  {
-    name: "Matt",
-    org: "Recruiting firm director",
-    context: "1:1 coaching",
-    quote:
-      "Watching Elliot run his own business through it is what sold me. Now I'm building the same thing for mine.",
-  },
-  {
-    name: "Paul",
-    org: "Public Sector People",
-    context: "1:1 coaching",
-    quote: "Every session ends with something running that wasn't there before.",
+      "Elliot is a master of AI, showing me many ways of utilising AI in our business. It has saved my team and me significant hours every week by implementing automations and using AI in ways we never thought possible. If you're new to AI, or looking to find out what it can do for your business, I highly recommend meeting with Elliot for a deep dive. It changed our business significantly.",
   },
 ];
 
@@ -588,17 +575,17 @@ export default function Coaching() {
           </div>
         </section>
 
-        {/* [006] Proof */}
+        {/* [006] Proof — real, signed-off client testimonial */}
         <section className="py-20 md:py-28 border-t border-border bg-card">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="section-tag mb-4">[006] WHO'S ALREADY IN</div>
+              <div className="section-tag mb-4">[006] ON THE RECORD</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter">
-                COACHING CLIENTS, <span className="text-primary">ON THE RECORD.</span>
+                A CLIENT, <span className="text-primary">IN THEIR WORDS.</span>
               </h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
+            <div className="max-w-3xl mx-auto">
               {proof.map((client, i) => (
                 <motion.div
                   key={client.name}
@@ -607,9 +594,9 @@ export default function Coaching() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
-                  className="brutalist-card bg-background p-6 md:p-8 flex flex-col"
+                  className="brutalist-card bg-background p-8 md:p-10 flex flex-col"
                 >
-                  <p className="font-mono text-sm text-foreground leading-relaxed mb-6 flex-1">
+                  <p className="text-lg md:text-xl text-foreground leading-relaxed mb-6 flex-1">
                     “{client.quote}”
                   </p>
                   <div className="pt-4 border-t border-border">
