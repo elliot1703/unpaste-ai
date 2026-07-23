@@ -174,7 +174,7 @@ export default function Coaching() {
       <SEO
         title="AI Coaching, Workshops & Dev Days"
         description="Learn to run your business on AI — 1:1 coaching sprints ($750), Brisbane workshops ($399), and done-with-you dev days at your office ($3,500). Claude Code, on your real work, with a system you own."
-        keywords="AI coaching Brisbane, Claude Code coaching, AI workshop Brisbane, done with you AI, executive AI coaching, AI dev day, business AI training"
+        keywords="AI coaching Brisbane, Claude Code coaching, AI workshop Brisbane, done with you AI, executive AI coaching, AI dev day, AI social media automation Brisbane, AI content pipeline, business AI training"
         url="https://unpaste.ai/coaching"
         faqItems={faqs.map((faq) => ({ question: faq.q, answer: faq.a }))}
       />
@@ -248,7 +248,7 @@ export default function Coaching() {
                 transition={{ delay: 0.6 }}
                 className="mono-label"
               >
-                WORKSHOP $399 · SPRINT $750 · DEV DAY $3,500 · + GST
+                WORKSHOP $399 · SPRINT $750 · PIPELINE $1,200 · DEV DAY $3,500 · + GST
               </motion.p>
             </div>
           </div>
@@ -501,7 +501,92 @@ export default function Coaching() {
           </div>
         </section>
 
-        {/* [004] Custom development bridge */}
+        {/* [004] Themed builds — productized pipelines */}
+        <section
+          id="pipeline"
+          className="py-20 md:py-28 border-t border-border bg-card scroll-mt-20"
+        >
+          <div className="container">
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="section-tag mb-4">[004] THEMED BUILDS</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
+                ONE PIPELINE. ONE PRICE.{" "}
+                <span className="text-primary">RUNNING BEFORE WE LEAVE.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground">
+                Productized builds for the systems every business needs. First
+                up: content.
+              </p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="brutalist-card bg-background max-w-4xl mx-auto"
+            >
+              <div className="p-6 md:p-10 grid md:grid-cols-5 gap-8">
+                <div className="md:col-span-3">
+                  <div className="mono-label text-primary mb-3">
+                    THE SOCIAL CONTENT PIPELINE
+                  </div>
+                  <div className="mb-1 text-3xl md:text-4xl font-bold tracking-tight">
+                    $1,200 <span className="text-sm font-normal">+ GST</span>
+                  </div>
+                  <div className="mono-label mb-6">
+                    HALF DAY · YOUR OFFICE OR REMOTE
+                  </div>
+                  <p className="font-mono text-sm text-foreground font-bold leading-relaxed mb-4">
+                    Every business needs the content. Nobody needs the hire.
+                  </p>
+                  <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-6">
+                    We set up the same content system Unpaste runs on — in your
+                    business, on your brand — and teach you to drive it. The
+                    production work gets handled. You stay the editor.
+                  </p>
+                  <ul className="space-y-3">
+                    {[
+                      "Your brand voice + content pillars, written down so an agent can use them",
+                      "Post templates for your platforms, yours to keep",
+                      "The generation workflow in Claude + Codex — drafts in your voice, batched weekly",
+                      "Scheduling wired up, plus the review habit",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                        <span className="font-mono text-xs md:text-sm text-foreground leading-relaxed">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="md:col-span-2 flex flex-col md:border-l md:border-border md:pl-8">
+                  <div className="mono-label mb-3">YOU LEAVE WITH</div>
+                  <p className="font-mono text-sm text-foreground leading-relaxed mb-6">
+                    A month of content drafted, the pipeline running, and the
+                    skills to keep it going.
+                  </p>
+                  <p className="font-mono text-xs text-muted-foreground italic mb-6 flex-1">
+                    Less than a marketing hire's first week. Once. Want a
+                    different pipeline built the same way? Ask on the call.
+                  </p>
+                  <a
+                    href={calendlyUrl("pipeline")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 bg-primary text-white hover:bg-primary/90 transition-colors"
+                  >
+                    Book a pipeline day
+                    <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* [005] Custom development bridge */}
         <section
           id="custom"
           className="py-16 md:py-20 border-t border-border bg-foreground text-background scroll-mt-20"
@@ -510,7 +595,7 @@ export default function Coaching() {
             <div className="grid lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
               <div className="lg:col-span-2">
                 <div className="font-mono text-xs text-primary tracking-widest mb-4">
-                  [004] WANT IT BUILT FOR YOU?
+                  [005] WANT IT BUILT FOR YOU?
                 </div>
                 <h2 className="text-3xl md:text-4xl tracking-tighter mb-4">
                   CUSTOM DEVELOPMENT.{" "}
@@ -540,7 +625,7 @@ export default function Coaching() {
           <div className="container">
             <div className="max-w-6xl mx-auto">
               <div className="max-w-2xl mb-12">
-                <div className="section-tag mb-4">[005] WHAT YOU LEAVE WITH</div>
+                <div className="section-tag mb-4">[006] WHAT YOU LEAVE WITH</div>
                 <h2 className="text-3xl md:text-4xl tracking-tighter mb-6">
                   YOU OWN THE SYSTEM.{" "}
                   <span className="text-primary">YOU RENT THE INTELLIGENCE.</span>
@@ -592,7 +677,7 @@ export default function Coaching() {
         <section className="py-20 md:py-28 border-t border-border bg-card">
           <div className="container">
             <div className="text-center max-w-2xl mx-auto mb-12">
-              <div className="section-tag mb-4">[006] WHO'S ALREADY IN</div>
+              <div className="section-tag mb-4">[007] WHO'S ALREADY IN</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter">
                 COACHING CLIENTS, <span className="text-primary">ON THE RECORD.</span>
               </h2>
@@ -629,7 +714,7 @@ export default function Coaching() {
           <div className="container">
             <div className="max-w-6xl mx-auto">
               <div className="max-w-2xl mb-12">
-                <div className="section-tag mb-4">[007] WHO IT'S FOR</div>
+                <div className="section-tag mb-4">[008] WHO IT'S FOR</div>
                 <h2 className="text-3xl md:text-4xl tracking-tighter">
                   FOR PEOPLE WHO'LL{" "}
                   <span className="text-primary">OPEN THE LAPTOP.</span>
@@ -684,7 +769,7 @@ export default function Coaching() {
         <section className="py-20 md:py-28 border-t border-border bg-card">
           <div className="container max-w-3xl">
             <div className="text-center mb-12">
-              <div className="section-tag mb-4">[008] FAQ</div>
+              <div className="section-tag mb-4">[009] FAQ</div>
               <h2 className="text-3xl md:text-4xl tracking-tighter">
                 THE HONEST ANSWERS.
               </h2>
@@ -712,7 +797,7 @@ export default function Coaching() {
         {/* [009] Final CTA */}
         <section className="py-20 md:py-28 border-t border-border">
           <div className="container text-center">
-            <div className="section-tag mb-8">[009] NEXT STEP</div>
+            <div className="section-tag mb-8">[010] NEXT STEP</div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight max-w-3xl mx-auto mb-8">
               START WITH A <span className="text-primary">CALL.</span>
             </h2>
