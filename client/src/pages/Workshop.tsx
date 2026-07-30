@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import {
   ArrowRight,
   CheckCircle2,
@@ -5,14 +6,21 @@ import {
   Brain,
   Rocket,
   Search,
-  ShoppingBag,
-  Megaphone,
   User,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  MetaIcon,
+  ShopifyIcon,
+  TikTokIcon,
+  XIcon,
+} from "@/components/BrandIcons";
 import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
 
 const calendlyUrl = (source: string) => baseCalendlyUrl(`workshop_${source}`);
@@ -23,6 +31,14 @@ const reserveHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
 )}&body=${encodeURIComponent(
   "Hi Elliot, I'd like to reserve a seat at the next Brisbane AI workshop. My name is "
 )}`;
+
+// Per-module "register interest" mailto for the [007] coming-next cards.
+const moduleInterestHref = (moduleTitle: string) =>
+  `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+    `Register interest — ${moduleTitle} module — Brisbane AI workshop`
+  )}&body=${encodeURIComponent(
+    `Hi Elliot, I'd like to register interest in the ${moduleTitle} module when it runs. My name is `
+  )}`;
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -58,10 +74,36 @@ const walkOut = [
   "The confidence to keep building on your own.",
 ];
 
-const nextModules = [
-  { icon: Search, title: "SEO", detail: "Run your SEO through Claude Code." },
-  { icon: ShoppingBag, title: "Shopify + Meta ads", detail: "Run your store and ads through Claude Code." },
-  { icon: Megaphone, title: "Social media", detail: "Run your social media through Claude Code." },
+type WorkshopModule = {
+  title: string;
+  detail: string;
+  icons: ComponentType<{ className?: string }>[];
+};
+
+const nextModules: WorkshopModule[] = [
+  {
+    title: "Shopify + Meta ads",
+    detail: "Run your store and ads through Claude Code.",
+    icons: [ShopifyIcon, MetaIcon],
+  },
+  {
+    title: "Social media",
+    detail: "Run your social media through Claude Code.",
+    icons: [InstagramIcon, FacebookIcon, TikTokIcon, LinkedInIcon, XIcon],
+  },
+  {
+    title: "SEO",
+    detail: "Run your SEO through Claude Code.",
+    icons: [Search],
+  },
+];
+
+const sessionStats: { value: string; label: string; was?: string }[] = [
+  { value: "3 hrs", label: "HANDS-ON" },
+  { value: "4–10", label: "PEOPLE" },
+  { value: "Brisbane", label: "IN PERSON" },
+  { value: "Laptop", label: "BRING YOUR OWN" },
+  { value: "$399", was: "$850", label: "+ GST / SEAT" },
 ];
 
 const learnIcons = [Laptop, Rocket, CheckCircle2, Brain];
@@ -71,7 +113,7 @@ export default function Workshop() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
         title="AI Workshop Brisbane — Learn Claude Code for Work"
-        description="A 3-hour, hands-on AI workshop in Brisbane. Small group. Bring your laptop and leave using Claude Code to actually do your work — not just chat with it. $399 + GST a seat."
+        description="A 3-hour, hands-on AI workshop in Brisbane. Small group. Bring your laptop and leave using Claude Code to actually do your work — not just chat with it. $399 + GST a seat — down from $850."
         keywords="AI workshop Brisbane, Claude Code workshop, learn Claude Code, hands-on AI training Brisbane, AI for business owners, AI workshop for beginners"
         url="https://unpaste.ai/workshops"
       />
@@ -142,7 +184,8 @@ export default function Workshop() {
                 transition={{ delay: 0.6 }}
                 className="mono-label"
               >
-                $399 + GST · 3 HOURS · SMALL GROUP · BRISBANE · NEXT SESSION
+                <span className="line-through opacity-60">$850</span> $399 +
+                GST · 3 HOURS · SMALL GROUP · BRISBANE · NEXT SESSION
                 ANNOUNCING SOON
               </motion.p>
             </div>
@@ -313,15 +356,14 @@ export default function Workshop() {
             </div>
 
             <div className="stats-grid md:grid-cols-3 lg:grid-cols-5 max-w-6xl">
-              {[
-                { value: "3 hrs", label: "HANDS-ON" },
-                { value: "4–10", label: "PEOPLE" },
-                { value: "Brisbane", label: "IN PERSON" },
-                { value: "Laptop", label: "BRING YOUR OWN" },
-                { value: "$399", label: "+ GST / SEAT" },
-              ].map((stat) => (
+              {sessionStats.map((stat) => (
                 <div key={stat.label} className="p-6 md:p-8">
                   <div className="text-2xl md:text-3xl font-bold tracking-tight mb-2">
+                    {stat.was && (
+                      <span className="mr-2 text-base md:text-lg font-normal text-muted-foreground line-through">
+                        {stat.was}
+                      </span>
+                    )}
                     {stat.value}
                   </div>
                   <div className="mono-label">{stat.label}</div>
@@ -361,17 +403,26 @@ export default function Workshop() {
                   whileInView="visible"
                   viewport={{ once: true }}
                   variants={fadeUp}
-                  className="brutalist-card bg-background p-6 md:p-8"
+                  className="brutalist-card bg-background p-6 md:p-8 flex flex-col"
                 >
-                  <div className="h-10 w-10 border border-border flex items-center justify-center mb-6 text-primary">
-                    <mod.icon className="h-4 w-4" />
+                  <div className="inline-flex h-10 items-center justify-center gap-3 self-start border border-border px-3 mb-6 text-primary">
+                    {mod.icons.map((Icon, idx) => (
+                      <Icon key={idx} className="h-4 w-4" />
+                    ))}
                   </div>
                   <h3 className="font-bold text-lg tracking-tight mb-2 uppercase">
                     {mod.title}
                   </h3>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed mb-6">
                     {mod.detail}
                   </p>
+                  <a
+                    href={moduleInterestHref(mod.title)}
+                    className="mt-auto inline-flex items-center gap-2 self-start border border-foreground px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-colors hover:bg-foreground hover:text-background"
+                  >
+                    Register interest
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </a>
                 </motion.div>
               ))}
             </div>
@@ -426,7 +477,8 @@ export default function Workshop() {
               href={reserveHref}
               className="brutalist-button text-base px-10 py-5 inline-flex items-center gap-3"
             >
-              Reserve your seat — $399 + GST
+              Reserve your seat —{" "}
+              <span className="line-through opacity-60">$850</span> $399 + GST
               <ArrowRight className="h-5 w-5" />
             </a>
             <p className="mono-label mt-8">
