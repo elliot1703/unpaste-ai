@@ -65,9 +65,9 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           href={session.bookUrl!}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Take a seat — ${session.date}, ${session.time}${
-            session.venue ? `, ${session.venue.name}` : ""
-          }`}
+          aria-label={`Take a seat — ${session.date ?? "date to be confirmed"}${
+            session.time ? `, ${session.time}` : ""
+          }${session.venue ? `, ${session.venue.name}` : ""}`}
         >
           <span className="seat-tip" aria-hidden="true">
             Take this seat &rarr;
