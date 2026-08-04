@@ -1,12 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { SeatGrid } from "@/components/SeatGrid";
 import type { SeatInfo } from "@/hooks/useSeats";
-import {
-  WORKSHOP_PRICE,
-  WORKSHOP_VENUE,
-  isOnSale,
-  type WorkshopSession,
-} from "@/lib/workshops";
+import { WORKSHOP_PRICE, isOnSale, type WorkshopSession } from "@/lib/workshops";
 
 type SessionCardProps = {
   session: WorkshopSession;
@@ -39,12 +34,27 @@ export function SessionCard({ session, seats }: SessionCardProps) {
 
       <div className="flex items-baseline justify-between gap-3">
         <span className="mono-label">{session.label}</span>
-        <span className="mono-label">{WORKSHOP_VENUE.short}</span>
+        <span className="mono-label">{session.seats} seats</span>
       </div>
 
       <div className="session-card__date">{session.date ?? "DATE TBC"}</div>
       <div className="session-card__time">
-        {session.date ? session.time : "Announcing soon"}
+        {session.time ?? "Time announcing soon"}
+      </div>
+
+      {/* Venue lives on the session, not the page — sessions can be in
+          different places, or not have one locked in yet. */}
+      <div className="session-card__venue">
+        {session.venue ? (
+          <>
+            {session.venue.name}
+            <span className="session-card__venue-addr">
+              {session.venue.street}, {session.venue.suburb}
+            </span>
+          </>
+        ) : (
+          <span className="session-card__venue-tbc">Venue announcing soon</span>
+        )}
       </div>
 
       <div className="session-card__rule" />
@@ -55,7 +65,9 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           href={session.bookUrl!}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Take a seat — ${session.date}, ${session.time}, ${WORKSHOP_VENUE.name}`}
+          aria-label={`Take a seat — ${session.date}, ${session.time}${
+            session.venue ? `, ${session.venue.name}` : ""
+          }`}
         >
           <span className="seat-tip" aria-hidden="true">
             Take this seat &rarr;

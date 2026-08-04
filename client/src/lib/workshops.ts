@@ -6,6 +6,7 @@
 // "dates announcing" state and is skipped by /api/seats. That's what lets the
 // page ship before the Stripe links exist.
 
+/** Default only — each session carries its own `seats`, so this can vary. */
 export const SEATS_PER_SESSION = 6;
 
 export const WORKSHOP_PRICE = {
@@ -18,13 +19,22 @@ export const WORKSHOP_PRICE = {
   was: "$850",
 } as const;
 
-export const WORKSHOP_VENUE = {
-  name: "Gather Bulimba",
-  street: "9/57 Karthina Street",
-  suburb: "Bulimba QLD 4171",
-  /** Short form for card labels. */
-  short: "Bulimba",
-} as const;
+export type Venue = {
+  name: string;
+  street: string;
+  suburb: string;
+  /** Short form for compact labels. */
+  short: string;
+};
+
+export const VENUES = {
+  gatherBulimba: {
+    name: "Gather Bulimba",
+    street: "9/57 Karthina Street",
+    suburb: "Bulimba QLD 4171",
+    short: "Bulimba",
+  },
+} as const satisfies Record<string, Venue>;
 
 export type WorkshopSession = {
   /** Stable id — used as the React key and the /api/seats lookup key. */
@@ -37,16 +47,23 @@ export type WorkshopSession = {
   isoDate: string | null;
   /** "5:00PM – 8:00PM" */
   time: string | null;
+  /** Null = venue not locked in yet. Sessions don't have to share one. */
+  venue: Venue | null;
   /** Stripe Payment Link id (plink_...). Null = not on sale. */
   paymentLinkId: string | null;
   /** Stripe Payment Link URL. Null = not on sale. */
   bookUrl: string | null;
+  /** Per session on purpose — a room of 6 and a room of 100 both work here. */
   seats: number;
 };
 
-// Venue is booked 4:30–8:30PM; the session runs 5:00–8:00PM with setup and
-// pack-down either side. Dates pending — swap `date`/`isoDate` and drop in the
-// Stripe ids and nothing else needs to change.
+// Nothing here is global on purpose — venue, time and seat count all live per
+// session, so a 6-seat evening in Bulimba and a 100-seat daytime thing
+// somewhere else can sit side by side without touching a component.
+//
+// Session 01's venue is booked 4:30–8:30PM; the session runs 5:00–8:00PM with
+// setup and pack-down either side. Dates pending — fill in `date`/`isoDate`
+// and the Stripe ids and nothing else needs to change.
 export const SESSIONS: WorkshopSession[] = [
   {
     id: "s01",
@@ -54,6 +71,7 @@ export const SESSIONS: WorkshopSession[] = [
     date: null,
     isoDate: null,
     time: "5:00PM – 8:00PM",
+    venue: VENUES.gatherBulimba,
     paymentLinkId: null,
     bookUrl: null,
     seats: SEATS_PER_SESSION,
@@ -63,7 +81,8 @@ export const SESSIONS: WorkshopSession[] = [
     label: "Session 02",
     date: null,
     isoDate: null,
-    time: "5:00PM – 8:00PM",
+    time: null,
+    venue: null,
     paymentLinkId: null,
     bookUrl: null,
     seats: SEATS_PER_SESSION,
@@ -73,12 +92,17 @@ export const SESSIONS: WorkshopSession[] = [
     label: "Session 03",
     date: null,
     isoDate: null,
-    time: "5:00PM – 8:00PM",
+    time: null,
+    venue: null,
     paymentLinkId: null,
     bookUrl: null,
     seats: SEATS_PER_SESSION,
   },
 ];
+
+/** Lookup for the post-payment page, which gets ?s=<id> from Stripe. */
+export const sessionById = (id: string | null): WorkshopSession | null =>
+  SESSIONS.find((s) => s.id === id) ?? null;
 
 /** A session can be booked only once it has a live Stripe link. */
 export const isOnSale = (s: WorkshopSession): boolean =>

@@ -382,6 +382,12 @@
     border: 1px dashed var(--foreground);
   }
 
+  /* An available seat is an invitation, not an absence — red frame reads as
+     "yours if you want it" where the grey one read as missing. */
+  .seat[data-state="open"] {
+    border-color: var(--primary);
+  }
+
   .session-card--soldout .seat,
   .seat-grid--inverted .seat {
     border-color: rgba(250, 250, 250, 0.55);
@@ -404,15 +410,18 @@
     box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--background);
   }
 
-  /* Unknown = loading, or /api/seats unreachable. Never guesses a number. */
+  /* Unknown = loading, not yet on sale, or /api/seats unreachable. Never
+     guesses a number. Warm-tinted rather than grey so a pending session still
+     looks like something coming, but stays clearly weaker than an open seat —
+     it must not read as bookable. */
   .seat[data-state="unknown"] {
-    border-color: var(--border);
+    border-color: color-mix(in srgb, var(--primary) 35%, transparent);
     background: repeating-linear-gradient(
       45deg,
       transparent 0,
       transparent 5px,
-      var(--border) 5px,
-      var(--border) 6px
+      color-mix(in srgb, var(--primary) 14%, transparent) 5px,
+      color-mix(in srgb, var(--primary) 14%, transparent) 6px
     );
   }
 
@@ -536,6 +545,36 @@
     margin-top: 6px;
     font-family: var(--font-mono);
     font-size: 12px;
+  }
+
+  .session-card__venue {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .session-card__venue-addr {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted-foreground);
+  }
+
+  .session-card--soldout .session-card__venue-addr {
+    color: rgba(250, 250, 250, 0.62);
+  }
+
+  .session-card__venue-tbc {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--muted-foreground);
   }
 
   .session-card__rule {

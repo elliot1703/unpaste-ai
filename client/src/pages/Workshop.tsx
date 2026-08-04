@@ -24,12 +24,7 @@ import {
 import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
 import { SessionCard } from "@/components/SessionCard";
 import { useSeats } from "@/hooks/useSeats";
-import {
-  SESSIONS,
-  WORKSHOP_PRICE,
-  WORKSHOP_VENUE,
-  nextSessionLabel,
-} from "@/lib/workshops";
+import { SESSIONS, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
 
 const calendlyUrl = (source: string) => baseCalendlyUrl(`workshop_${source}`);
 
@@ -188,9 +183,8 @@ export default function Workshop() {
                 <span className="line-through opacity-60">
                   {WORKSHOP_PRICE.was}
                 </span>{" "}
-                {WORKSHOP_PRICE.display} {WORKSHOP_PRICE.suffix} · 3 HOURS ·{" "}
-                {SESSIONS[0].seats} SEATS · {WORKSHOP_VENUE.short.toUpperCase()}{" "}
-                · {nextSessionLabel()}
+                {WORKSHOP_PRICE.display} {WORKSHOP_PRICE.suffix} · 3 HOURS ·
+                SMALL GROUP · BRISBANE · {nextSessionLabel()}
               </motion.p>
             </div>
           </div>
@@ -491,15 +485,11 @@ function Sessions() {
         <div className="max-w-3xl">
           <div className="section-tag mb-6">[009] TAKE A SEAT</div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-            THREE SESSIONS.{" "}
-            <span className="text-primary">
-              {SESSIONS[0].seats} SEATS EACH.
-            </span>
+            CURRENT <span className="text-primary">SESSIONS.</span>
           </h2>
           <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-12 max-w-xl">
-            Small rooms on purpose — {SESSIONS[0].seats} people means everyone
-            gets their own thing working before they leave. {WORKSHOP_VENUE.name},{" "}
-            {WORKSHOP_VENUE.street}, {WORKSHOP_VENUE.suburb}.
+            Dates, venues and group sizes vary by session — everything running
+            right now is below. Seats update live.
           </p>
         </div>
 

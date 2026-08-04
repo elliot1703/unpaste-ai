@@ -3,7 +3,7 @@ import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/booking";
-import { WORKSHOP_VENUE } from "@/lib/workshops";
+import { sessionById } from "@/lib/workshops";
 
 /**
  * Stripe's success_url lands here after payment.
@@ -13,6 +13,15 @@ import { WORKSHOP_VENUE } from "@/lib/workshops";
  * guaranteed to see immediately after paying.
  */
 export default function WorkshopBooked() {
+  // Stripe's success_url carries ?s=<session id> so we can name the right
+  // venue. Sessions can be at different places, so there's no single fallback —
+  // if the param is missing we point at the receipt rather than guess.
+  const session =
+    typeof window !== "undefined"
+      ? sessionById(new URLSearchParams(window.location.search).get("s"))
+      : null;
+  const venue = session?.venue ?? null;
+
   return (
     <div className="min-h-screen bg-background">
       <SEO
@@ -45,18 +54,36 @@ export default function WorkshopBooked() {
                   <MapPin className="h-5 w-5 text-primary mb-4" />
                   <div className="mono-label mb-2">WHERE</div>
                   <div className="font-mono text-sm leading-relaxed">
-                    {WORKSHOP_VENUE.name}
-                    <br />
-                    {WORKSHOP_VENUE.street}
-                    <br />
-                    {WORKSHOP_VENUE.suburb}
+                    {venue ? (
+                      <>
+                        {venue.name}
+                        <br />
+                        {venue.street}
+                        <br />
+                        {venue.suburb}
+                      </>
+                    ) : (
+                      <>
+                        The venue is on your receipt.
+                        <br />
+                        I'll confirm it by email too.
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="p-6">
                   <Calendar className="h-5 w-5 text-primary mb-4" />
                   <div className="mono-label mb-2">WHEN</div>
                   <div className="font-mono text-sm leading-relaxed">
-                    The date and time on your receipt.
+                    {session?.date ? (
+                      <>
+                        {session.date}
+                        <br />
+                        {session.time}
+                      </>
+                    ) : (
+                      <>The date and time on your receipt.</>
+                    )}
                     <br />
                     Arrive 10 minutes early.
                   </div>
