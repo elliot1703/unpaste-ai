@@ -13,6 +13,7 @@ const routes = [
   "/book",
   "/training",
   "/workshops",
+  "/workshops/booked",
   "/coaching",
   "/quick-wins",
   "/pricing",

@@ -16,6 +16,7 @@ import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import Training from "./pages/Training";
 import Workshop from "./pages/Workshop";
+import WorkshopBooked from "./pages/WorkshopBooked";
 import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
 
@@ -32,6 +33,7 @@ function AppRoutes() {
       <Route path={"/pricing"} component={Pricing} />
       <Route path={"/training"} component={Training} />
       <Route path={"/workshops"} component={Workshop} />
+      <Route path={"/workshops/booked"} component={WorkshopBooked} />
       <Route path={"/coaching"} component={Coaching} />
       <Route path={"/quick-wins"} component={QuickWins} />
       <Route path={"/styles"} component={StyleExplorer} />
