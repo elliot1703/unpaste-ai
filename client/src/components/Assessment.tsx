@@ -759,7 +759,7 @@ function SectionContact({
 // Submit assessment lead data
 async function submitAssessmentLead(data: AssessmentData) {
   try {
-    // Send to server endpoint — will store or forward to Google Sheet / email
+    // Sends to api/assessment-lead.ts — Klaviyo "Assessment Completed" event
     await fetch("/api/assessment-lead", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
