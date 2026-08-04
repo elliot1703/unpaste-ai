@@ -72,8 +72,8 @@ export const SESSIONS: WorkshopSession[] = [
   {
     id: "s01",
     label: "Session 01",
-    date: null,
-    isoDate: null,
+    date: "MON 10 AUG",
+    isoDate: "2026-08-10",
     time: "5:00PM – 8:00PM",
     venue: VENUES.gatherBulimba,
     paymentLinkId: "plink_1U0d3zP7rmTet5nIRUuAWWzR",
