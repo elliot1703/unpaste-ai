@@ -65,9 +65,6 @@ export type WorkshopSession = {
 // setup and pack-down either side. Dates pending — fill in `date`/`isoDate`
 // and nothing else needs to change.
 //
-// ⚠️ TEST-MODE Stripe links (sandbox, no real money) so the preview can be
-// exercised end-to-end. Swap for live plink ids + buy.stripe.com URLs (and set
-// real dates) BEFORE merging to main.
 export const SESSIONS: WorkshopSession[] = [
   {
     id: "s01",
@@ -76,8 +73,8 @@ export const SESSIONS: WorkshopSession[] = [
     isoDate: "2026-08-10",
     time: "5:00PM – 8:00PM",
     venue: VENUES.gatherBulimba,
-    paymentLinkId: "plink_1U0d3zP7rmTet5nIRUuAWWzR",
-    bookUrl: "https://buy.stripe.com/test_8x2cN79Rbe4L2Zz86lfAc00",
+    paymentLinkId: "plink_1U0g3j1gBgJJLcc0kWYke9Ej",
+    bookUrl: "https://buy.stripe.com/fZu8wH6gQe2H0Al0zR5kk00",
     seats: SEATS_PER_SESSION,
   },
   {
@@ -87,8 +84,8 @@ export const SESSIONS: WorkshopSession[] = [
     isoDate: null,
     time: null,
     venue: null,
-    paymentLinkId: "plink_1U0d40P7rmTet5nIU2Cv0VQX",
-    bookUrl: "https://buy.stripe.com/test_fZu4gB9Rb4ubbw5bixfAc01",
+    paymentLinkId: null,
+    bookUrl: null,
     seats: SEATS_PER_SESSION,
   },
   {
@@ -98,8 +95,8 @@ export const SESSIONS: WorkshopSession[] = [
     isoDate: null,
     time: null,
     venue: null,
-    paymentLinkId: "plink_1U0d41P7rmTet5nIeRtrj7yK",
-    bookUrl: "https://buy.stripe.com/test_cNi00l4wR0dVeIh9apfAc02",
+    paymentLinkId: null,
+    bookUrl: null,
     seats: SEATS_PER_SESSION,
   },
 ];
