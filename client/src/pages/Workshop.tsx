@@ -22,15 +22,16 @@ import {
   XIcon,
 } from "@/components/BrandIcons";
 import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
+import { SessionCard } from "@/components/SessionCard";
+import { useSeats } from "@/hooks/useSeats";
+import {
+  SESSIONS,
+  WORKSHOP_PRICE,
+  WORKSHOP_VENUE,
+  nextSessionLabel,
+} from "@/lib/workshops";
 
 const calendlyUrl = (source: string) => baseCalendlyUrl(`workshop_${source}`);
-
-// "Reserve your seat" — no booking tool yet, so register interest by email.
-const reserveHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-  "Reserve a seat — Brisbane AI workshop"
-)}&body=${encodeURIComponent(
-  "Hi Elliot, I'd like to reserve a seat at the next Brisbane AI workshop. My name is "
-)}`;
 
 // Per-module "register interest" mailto for the [007] coming-next cards.
 const moduleInterestHref = (moduleTitle: string) =>
@@ -164,10 +165,10 @@ export default function Workshop() {
                 className="flex flex-col sm:flex-row gap-4 items-start mb-8"
               >
                 <a
-                  href={reserveHref}
+                  href="#sessions"
                   className="brutalist-button inline-flex items-center gap-3"
                 >
-                  Reserve your seat
+                  Take a seat
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
@@ -184,9 +185,12 @@ export default function Workshop() {
                 transition={{ delay: 0.6 }}
                 className="mono-label"
               >
-                <span className="line-through opacity-60">$850</span> $399 +
-                GST · 3 HOURS · SMALL GROUP · BRISBANE · NEXT SESSION
-                ANNOUNCING SOON
+                <span className="line-through opacity-60">
+                  {WORKSHOP_PRICE.was}
+                </span>{" "}
+                {WORKSHOP_PRICE.display} {WORKSHOP_PRICE.suffix} · 3 HOURS ·{" "}
+                {SESSIONS[0].seats} SEATS · {WORKSHOP_VENUE.short.toUpperCase()}{" "}
+                · {nextSessionLabel()}
               </motion.p>
             </div>
           </div>
@@ -462,36 +466,63 @@ export default function Workshop() {
           </div>
         </section>
 
-        {/* [009] Reserve your seat */}
-        <section className="py-20 md:py-28 border-t border-border">
-          <div className="container text-center">
-            <div className="section-tag mb-8">[009] RESERVE YOUR SEAT</div>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight max-w-3xl mx-auto mb-8">
-              SMALL ROOM. <span className="text-primary">LIMITED SEATS.</span>
-            </h2>
-            <p className="font-mono text-sm text-muted-foreground max-w-md mx-auto mb-10">
-              Brisbane. Next session announcing soon. Reserve now and you'll be
-              first to get the date.
-            </p>
-            <a
-              href={reserveHref}
-              className="brutalist-button text-base px-10 py-5 inline-flex items-center gap-3"
-            >
-              Reserve your seat —{" "}
-              <span className="line-through opacity-60">$850</span> $399 + GST
-              <ArrowRight className="h-5 w-5" />
-            </a>
-            <p className="mono-label mt-8">
-              OR EMAIL{" "}
-              <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary hover:underline">
-                {CONTACT_EMAIL.toUpperCase()}
-              </a>
-            </p>
-          </div>
-        </section>
+        {/* [009] Take a seat */}
+        <Sessions />
 
         <Footer />
       </div>
     </div>
+  );
+}
+
+/**
+ * [009] — the three session cards.
+ *
+ * Split out so the seat fetch lives in its own component: /api/seats is only
+ * called once a session has a Stripe link, so while dates are pending this
+ * renders entirely from static data and makes no network request.
+ */
+function Sessions() {
+  const { seats } = useSeats();
+
+  return (
+    <section id="sessions" className="py-20 md:py-28 border-t border-border">
+      <div className="container">
+        <div className="max-w-3xl">
+          <div className="section-tag mb-6">[009] TAKE A SEAT</div>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
+            THREE SESSIONS.{" "}
+            <span className="text-primary">
+              {SESSIONS[0].seats} SEATS EACH.
+            </span>
+          </h2>
+          <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-12 max-w-xl">
+            Small rooms on purpose — {SESSIONS[0].seats} people means everyone
+            gets their own thing working before they leave. {WORKSHOP_VENUE.name},{" "}
+            {WORKSHOP_VENUE.street}, {WORKSHOP_VENUE.suburb}.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {SESSIONS.map((session) => (
+            <SessionCard
+              key={session.id}
+              session={session}
+              seats={seats[session.id]}
+            />
+          ))}
+        </div>
+
+        <p className="mono-label mt-10">
+          QUESTIONS? EMAIL{" "}
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="text-primary hover:underline"
+          >
+            {CONTACT_EMAIL.toUpperCase()}
+          </a>
+        </p>
+      </div>
+    </section>
   );
 }

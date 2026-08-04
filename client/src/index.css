@@ -354,6 +354,318 @@
     transform: scaleX(1);
     transform-origin: left;
   }
+
+  /* ==========================================================================
+     Workshop session cards + seat grid
+
+     The seat is a dashed frame that never changes; the red tile inside is the
+     person in it. Tile geometry lives in these three vars — tune here, not in
+     the six rules below.
+     ========================================================================== */
+
+  .seat-grid {
+    --seat-inset: 5px;
+    --seat-offset: 9px;
+    --seat-shadow: 3px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    max-width: 190px;
+  }
+
+  .seat {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    /* Grid children with unwrappable content force the page wider without this. */
+    min-width: 0;
+    border: 1px dashed var(--foreground);
+  }
+
+  .session-card--soldout .seat,
+  .seat-grid--inverted .seat {
+    border-color: rgba(250, 250, 250, 0.55);
+  }
+
+  /* The dropped tile — sits up-left of centre so the hard shadow has room. */
+  .seat[data-state="taken"]::after {
+    content: "";
+    position: absolute;
+    top: var(--seat-inset);
+    left: var(--seat-inset);
+    right: var(--seat-offset);
+    bottom: var(--seat-offset);
+    background: var(--primary);
+    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
+  }
+
+  .session-card--soldout .seat[data-state="taken"]::after,
+  .seat-grid--inverted .seat[data-state="taken"]::after {
+    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--background);
+  }
+
+  /* Unknown = loading, or /api/seats unreachable. Never guesses a number. */
+  .seat[data-state="unknown"] {
+    border-color: var(--border);
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 5px,
+      var(--border) 5px,
+      var(--border) 6px
+    );
+  }
+
+  /* Open seat: ghost of the tile, starts oversized so it lands rather than
+     grows. Scaling down is how you fake a z-axis without one. */
+  .seat[data-state="open"]::after {
+    content: "";
+    position: absolute;
+    top: var(--seat-inset);
+    left: var(--seat-inset);
+    right: var(--seat-offset);
+    bottom: var(--seat-offset);
+    background: var(--primary);
+    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
+    opacity: 0;
+    transform: scale(1.9);
+    transition:
+      opacity 0.08s linear,
+      transform 0.17s cubic-bezier(0.3, 1.35, 0.5, 1);
+  }
+
+  .seat-link:hover .seat[data-state="open"]:hover::after {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  .seat-link {
+    position: relative;
+    display: block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Label pops down from above to match the tile landing. */
+  .seat-tip {
+    position: absolute;
+    left: 0;
+    bottom: calc(100% + 10px);
+    padding: 7px 10px;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--foreground);
+    color: var(--background);
+    box-shadow: 3px 3px 0 0 var(--primary);
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.5) translateY(-10px);
+    transform-origin: bottom left;
+    transition:
+      opacity 0.08s linear,
+      transform 0.17s cubic-bezier(0.3, 1.35, 0.5, 1);
+  }
+
+  .seat-link:hover .seat-tip {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* ---- the card ---- */
+
+  .session-card {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 24px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: all 0.3s;
+  }
+
+  .session-card:hover {
+    box-shadow: 4px 4px 0 0 var(--foreground);
+    transform: translate(-2px, -2px);
+  }
+
+  .session-card--soldout {
+    background: var(--foreground);
+    color: var(--background);
+    border-color: var(--foreground);
+  }
+
+  .session-card--soldout .mono-label {
+    color: rgba(250, 250, 250, 0.62);
+  }
+
+  .session-card--pending {
+    border-style: dashed;
+    opacity: 0.72;
+  }
+
+  .session-card--pending:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  .session-card__soldbar {
+    margin: -26px -24px 22px;
+    padding: 7px 10px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--background);
+    color: var(--foreground);
+  }
+
+  .session-card__date {
+    margin-top: 12px;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .session-card__time {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+  }
+
+  .session-card__rule {
+    height: 1px;
+    margin: 22px 0 20px;
+    background: var(--border);
+  }
+
+  .session-card--soldout .session-card__rule {
+    background: rgba(250, 250, 250, 0.22);
+  }
+
+  .session-card__count {
+    margin-top: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .session-card__count-dim {
+    font-weight: 400;
+    color: var(--muted-foreground);
+  }
+
+  .session-card__price {
+    margin-top: auto;
+    padding-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .session-card__gst {
+    font-weight: 400;
+    color: var(--muted-foreground);
+  }
+
+  .session-card--soldout .session-card__gst {
+    color: rgba(250, 250, 250, 0.62);
+  }
+
+  .session-card__cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 14px;
+    padding: 16px 20px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    box-shadow: 4px 4px 0 0 var(--foreground);
+    transition: all 0.2s ease;
+  }
+
+  .session-card__cta:hover {
+    box-shadow: 6px 6px 0 0 var(--foreground);
+    transform: translate(-2px, -2px);
+  }
+
+  .session-card__cta:active {
+    box-shadow: 2px 2px 0 0 var(--foreground);
+    transform: translate(2px, 2px);
+  }
+
+  .session-card__cta--ghost {
+    background: transparent;
+    color: var(--muted-foreground);
+    border: 1px dashed var(--border);
+    box-shadow: none;
+    cursor: default;
+  }
+
+  .session-card__cta--ghost:hover {
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* Waitlist takes the CTA's slot — an empty hole reads as broken. */
+  .session-card__waitlist {
+    margin-top: auto;
+    padding-top: 20px;
+  }
+
+  .session-card__waitlist-cta {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    background: var(--background);
+    color: var(--foreground);
+    transition: all 0.2s ease;
+  }
+
+  .session-card__waitlist-cta:hover {
+    box-shadow: 3px 3px 0 0 var(--primary);
+    transform: translate(-2px, -2px);
+  }
+
+  /* The pop is decoration; the information must survive without it. */
+  @media (prefers-reduced-motion: reduce) {
+    .seat[data-state="open"]::after,
+    .seat-tip {
+      transition: opacity 0.1s linear;
+      transform: none;
+    }
+
+    .seat-link:hover .seat[data-state="open"]:hover::after {
+      transform: none;
+    }
+
+    .seat-link:hover .seat-tip {
+      transform: none;
+    }
+  }
 }
 
 /* Smooth scroll */
