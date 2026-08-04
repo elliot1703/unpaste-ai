@@ -388,7 +388,6 @@
     border-color: var(--primary);
   }
 
-  .session-card--soldout .seat,
   .seat-grid--inverted .seat {
     border-color: rgba(250, 250, 250, 0.55);
   }
@@ -405,28 +404,35 @@
     box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
   }
 
-  .session-card--soldout .seat[data-state="taken"]::after,
   .seat-grid--inverted .seat[data-state="taken"]::after {
     box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--background);
   }
 
   /* Unknown = loading, not yet on sale, or /api/seats unreachable. Never
-     guesses a number. Warm-tinted rather than grey so a pending session still
-     looks like something coming, but stays clearly weaker than an open seat —
-     it must not read as bookable. */
+     guesses a number. Same six objects as an open grid so the room is visibly
+     there waiting, but greyed and inert — a pending card must never be
+     mistaken for a bookable one. */
   .seat[data-state="unknown"] {
-    border-color: color-mix(in srgb, var(--primary) 35%, transparent);
-    background: repeating-linear-gradient(
-      45deg,
-      transparent 0,
-      transparent 5px,
-      color-mix(in srgb, var(--primary) 14%, transparent) 5px,
-      color-mix(in srgb, var(--primary) 14%, transparent) 6px
-    );
+    border-color: var(--border);
   }
 
-  /* Open seat: ghost of the tile, starts oversized so it lands rather than
-     grows. Scaling down is how you fake a z-axis without one. */
+  .seat[data-state="unknown"]::after {
+    content: "";
+    position: absolute;
+    top: var(--seat-inset);
+    left: var(--seat-inset);
+    right: var(--seat-offset);
+    bottom: var(--seat-offset);
+    background: var(--background);
+    border: 1px solid var(--border);
+    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--border);
+  }
+
+  /* Open seat holds a white tile — an empty seat still has a chair in it, so
+     the difference between free and taken is which colour is in the chair,
+     not whether anything is there.
+     Flat at rest, pops up on hover: hovering performs the same transition
+     buying it would, so the interaction rehearses the click. */
   .seat[data-state="open"]::after {
     content: "";
     position: absolute;
@@ -434,18 +440,25 @@
     left: var(--seat-inset);
     right: var(--seat-offset);
     bottom: var(--seat-offset);
-    background: var(--primary);
-    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
-    opacity: 0;
-    transform: scale(1.9);
+    background: var(--background);
+    border: 1px solid var(--foreground);
+    box-shadow: 0 0 0 0 var(--foreground);
     transition:
-      opacity 0.08s linear,
+      box-shadow 0.17s cubic-bezier(0.3, 1.35, 0.5, 1),
       transform 0.17s cubic-bezier(0.3, 1.35, 0.5, 1);
   }
 
-  .seat-link:hover .seat[data-state="open"]:hover::after {
-    opacity: 0.45;
-    transform: scale(1);
+  .seat[data-state="open"]:hover::after {
+    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
+    transform: translate(-2px, -2px);
+  }
+
+  .seat-grid--inverted .seat[data-state="open"]::after {
+    border-color: var(--background);
+  }
+
+  .seat-grid--inverted .seat[data-state="open"]:hover::after {
+    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--background);
   }
 
   .seat-link {
@@ -689,7 +702,8 @@
     transform: translate(-2px, -2px);
   }
 
-  /* The pop is decoration; the information must survive without it. */
+  /* The pop is decoration; the information must survive without it. The seat
+     still gains its shadow on hover — that's the affordance, not the spring. */
   @media (prefers-reduced-motion: reduce) {
     .seat[data-state="open"]::after,
     .seat-tip {
@@ -697,7 +711,7 @@
       transform: none;
     }
 
-    .seat-link:hover .seat[data-state="open"]:hover::after {
+    .seat[data-state="open"]:hover::after {
       transform: none;
     }
 
