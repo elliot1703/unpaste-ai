@@ -2,6 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { SeatGrid } from "@/components/SeatGrid";
 import type { SeatInfo } from "@/hooks/useSeats";
 import { WORKSHOP_PRICE, isOnSale, type WorkshopSession } from "@/lib/workshops";
+import { trackMeta } from "@/lib/metaPixel";
 
 type SessionCardProps = {
   session: WorkshopSession;
@@ -23,6 +24,17 @@ export function SessionCard({ session, seats }: SessionCardProps) {
     : soldOut
       ? "soldout"
       : "open";
+
+  // Highest-intent signal we can see: Stripe checkout is off-site, so this
+  // fires on the click through, not on payment. Purchase is tracked on the
+  // confirmation page instead.
+  const onCheckoutClick = () =>
+    trackMeta("InitiateCheckout", {
+      value: WORKSHOP_PRICE.inclGstAmount,
+      currency: "AUD",
+      content_name: `Workshop — ${session.label}`,
+      content_ids: [session.id],
+    });
 
   return (
     <article
@@ -65,6 +77,7 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           href={session.bookUrl!}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onCheckoutClick}
           aria-label={`Take a seat — ${session.date ?? "date to be confirmed"}${
             session.time ? `, ${session.time}` : ""
           }${session.venue ? `, ${session.venue.name}` : ""}`}
@@ -106,6 +119,7 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           href={session.bookUrl!}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={onCheckoutClick}
         >
           Take a seat <ArrowRight className="h-4 w-4" />
         </a>

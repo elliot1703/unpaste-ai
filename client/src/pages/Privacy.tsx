@@ -56,8 +56,12 @@ export default function Privacy() {
             <p className="mt-3">We also collect basic analytics data:</p>
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li>
-                Page views and general usage patterns (via privacy-focused analytics — no
-                personal tracking, no cookies).
+                Page views and general usage patterns, via Vercel Web Analytics (aggregated,
+                no personal data).
+              </li>
+              <li>
+                Advertising and retargeting data via the Meta (Facebook) pixel — see Cookies
+                and Advertising below.
               </li>
             </ul>
           </section>
@@ -88,9 +92,28 @@ export default function Privacy() {
           <section>
             <h2 className="text-lg font-bold text-foreground mb-3">COOKIES</h2>
             <p>
-              We use privacy-focused analytics that do not use cookies or track you across
-              websites. No cookie consent banner is required because we don't use tracking
-              cookies.
+              We use the Meta (Facebook) advertising pixel, which sets cookies in your browser
+              and allows Meta to recognise you across other websites and apps in order to show
+              you our ads. This is cross-site tracking, and we want to be plain about it rather
+              than bury it.
+            </p>
+            <p className="mt-3">
+              Our own website analytics (Vercel Web Analytics) is aggregated and does not
+              identify you individually.
+            </p>
+            <p className="mt-3">
+              <strong className="text-foreground">How to opt out:</strong> you can turn off
+              personalised advertising in your{" "}
+              <a
+                href="https://www.facebook.com/adpreferences/ad_settings"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                Facebook ad settings
+              </a>
+              , block third-party cookies in your browser, or use a tracker-blocking extension.
+              None of this affects your ability to browse the site or book a workshop.
             </p>
           </section>
 
@@ -120,7 +143,9 @@ export default function Privacy() {
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li><strong className="text-foreground">Vercel:</strong> Website hosting.</li>
               <li><strong className="text-foreground">Google Workspace:</strong> Email communication.</li>
-              <li><strong className="text-foreground">Umami:</strong> Privacy-focused analytics (no personal data collected).</li>
+              <li><strong className="text-foreground">Vercel Web Analytics:</strong> Aggregated page-view analytics (no personal data collected).</li>
+              <li><strong className="text-foreground">Meta Platforms:</strong> Advertising pixel used for retargeting and to measure ad performance. Meta may combine this with data it already holds about you.</li>
+              <li><strong className="text-foreground">Stripe:</strong> Payment processing for workshop bookings. Card details go directly to Stripe and never reach our servers.</li>
             </ul>
           </section>
 

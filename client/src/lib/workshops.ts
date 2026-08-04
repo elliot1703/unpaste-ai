@@ -15,6 +15,8 @@ export const WORKSHOP_PRICE = {
   suffix: "+ GST",
   /** What actually gets charged at checkout. */
   inclGst: "$438.90",
+  /** Same figure as a number, for analytics/pixel event values. */
+  inclGstAmount: 438.9,
   /** Original price, shown struck through. */
   was: "$850",
 } as const;

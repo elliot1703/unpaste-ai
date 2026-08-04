@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { ArrowRight, Calendar, Laptop, MapPin } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { CONTACT_EMAIL } from "@/lib/booking";
-import { sessionById } from "@/lib/workshops";
+import { sessionById, WORKSHOP_PRICE } from "@/lib/workshops";
+import { trackMeta } from "@/lib/metaPixel";
 
 /**
  * Stripe's success_url lands here after payment.
@@ -21,6 +23,18 @@ export default function WorkshopBooked() {
       ? sessionById(new URLSearchParams(window.location.search).get("s"))
       : null;
   const venue = session?.venue ?? null;
+
+  // This page is only reachable via Stripe's post-payment redirect, so it's a
+  // reliable conversion signal — reliable enough to optimise ads against, while
+  // Stripe stays the source of truth for what was actually sold.
+  useEffect(() => {
+    trackMeta("Purchase", {
+      value: WORKSHOP_PRICE.inclGstAmount,
+      currency: "AUD",
+      content_name: session ? `Workshop — ${session.label}` : "Workshop",
+      content_ids: session ? [session.id] : undefined,
+    });
+  }, [session]);
 
   return (
     <div className="min-h-screen bg-background">
