@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Analytics } from "@vercel/analytics/react";
 import NotFound from "@/pages/NotFound";
 import { Route, Router, Switch } from "wouter";
 import { HelmetProvider } from "react-helmet-async";
@@ -65,6 +66,7 @@ function App({ ssrPath, helmetContext }: AppProps = {}) {
           <TooltipProvider>
             <Toaster />
             <AppRoutes />
+            <Analytics />
           </TooltipProvider>
         </ThemeProvider>
       </ErrorBoundary>
