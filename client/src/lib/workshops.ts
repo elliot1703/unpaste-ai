@@ -21,12 +21,23 @@ export const WORKSHOP_PRICE = {
   was: "$850",
 } as const;
 
+export type VenuePhoto = {
+  src: string;
+  alt: string;
+  /** Mono caption shown under the frame. */
+  caption: string;
+  /** Small right-aligned detail beside the caption. */
+  meta?: string;
+};
+
 export type Venue = {
   name: string;
   street: string;
   suburb: string;
   /** Short form for compact labels. */
   short: string;
+  /** First photo is the feature panel; the rest stack beside it. */
+  photos?: VenuePhoto[];
 };
 
 export const VENUES = {
@@ -35,6 +46,26 @@ export const VENUES = {
     street: "9/57 Karthina Street",
     suburb: "Bulimba QLD 4171",
     short: "Bulimba",
+    photos: [
+      {
+        src: "/images/venues/gather-bulimba/room.webp",
+        alt: "The workshop room at Gather Bulimba — one table, six chairs, laptops out and the curriculum on screen",
+        caption: "Six chairs. That's the whole room.",
+        meta: "Set up for the session",
+      },
+      {
+        src: "/images/venues/gather-bulimba/lounge.webp",
+        alt: "Breakout lounge with a curved sofa beside a window",
+        caption: "Breakout",
+        meta: "Coffee + reset",
+      },
+      {
+        src: "/images/venues/gather-bulimba/entrance.webp",
+        alt: "Gather signage on Karthina Lane, Bulimba",
+        caption: "Look for this",
+        meta: "9/57 Karthina",
+      },
+    ],
   },
 } as const satisfies Record<string, Venue>;
 
