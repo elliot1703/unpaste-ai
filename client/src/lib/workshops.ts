@@ -49,9 +49,9 @@ export const VENUES = {
     photos: [
       {
         src: "/images/venues/gather-bulimba/room.webp",
-        alt: "The workshop room at Gather Bulimba — one table, six chairs, laptops out and the curriculum on screen",
-        caption: "Six chairs. That's the whole room.",
-        meta: "Set up for the session",
+        alt: "The workshop room at Gather Bulimba — one table, laptops out and the curriculum on screen",
+        caption: "The room",
+        meta: "Set up for a session",
       },
       {
         src: "/images/venues/gather-bulimba/lounge.webp",
