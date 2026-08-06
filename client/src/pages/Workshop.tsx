@@ -23,8 +23,9 @@ import {
 } from "@/components/BrandIcons";
 import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
 import { SessionCard } from "@/components/SessionCard";
+import { VenueBand } from "@/components/VenueBand";
 import { useSeats } from "@/hooks/useSeats";
-import { SESSIONS, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
+import { SESSIONS, VENUES, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
 
 const calendlyUrl = (source: string) => baseCalendlyUrl(`workshop_${source}`);
 
@@ -460,7 +461,26 @@ export default function Workshop() {
           </div>
         </section>
 
-        {/* [009] Take a seat */}
+        {/* [009] The room */}
+        <section className="py-16 md:py-20 border-t border-border">
+          <div className="container">
+            <div className="max-w-3xl">
+              <div className="section-tag mb-6">[009] THE ROOM</div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
+                THIS IS WHERE{" "}
+                <span className="text-primary">YOU'LL BE SITTING.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-10 max-w-xl">
+                {VENUES.gatherBulimba.name}, {VENUES.gatherBulimba.street},{" "}
+                {VENUES.gatherBulimba.suburb}. Free parking on the street, and
+                the room is a two-minute walk from Oxford Street.
+              </p>
+            </div>
+            <VenueBand venue={VENUES.gatherBulimba} />
+          </div>
+        </section>
+
+        {/* [010] Take a seat */}
         <Sessions />
 
         <Footer />
@@ -470,7 +490,7 @@ export default function Workshop() {
 }
 
 /**
- * [009] — the three session cards.
+ * [010] — the three session cards.
  *
  * Split out so the seat fetch lives in its own component: /api/seats is only
  * called once a session has a Stripe link, so while dates are pending this
@@ -483,7 +503,7 @@ function Sessions() {
     <section id="sessions" className="py-20 md:py-28 border-t border-border">
       <div className="container">
         <div className="max-w-3xl">
-          <div className="section-tag mb-6">[009] TAKE A SEAT</div>
+          <div className="section-tag mb-6">[010] TAKE A SEAT</div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
             CURRENT <span className="text-primary">SESSIONS.</span>
           </h2>
