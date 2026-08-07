@@ -588,7 +588,7 @@ export default function Resources() {
         <section className="py-16 md:py-24 border-t border-border bg-card">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="section-tag mb-6">[004] GO FURTHER</div>
+              <div className="section-tag mb-6">[005] GO FURTHER</div>
               <h2 className="text-3xl md:text-5xl tracking-tighter mb-6">
                 THESE PROMPTS ARE THE FIRST HOUR{" "}
                 <span className="text-primary">OF THE WORKSHOP.</span>
