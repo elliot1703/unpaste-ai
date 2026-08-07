@@ -4,6 +4,7 @@ import {
   Bot,
   Check,
   Copy,
+  Download,
   FileText,
   MessageSquare,
   Shield,
@@ -179,6 +180,30 @@ Once I've answered, write the rebuilt brief in my words, ready to paste. Tell me
   },
 ];
 
+const tasteFiles = [
+  {
+    number: "T1",
+    slug: "swiss-brutalist",
+    name: "Swiss Brutalist",
+    vibe: "Bauhaus meets tech startup. Zero radius, hard shadows, one red accent. The taste file behind this website.",
+    url: "/taste/taste-swiss-brutalist.md",
+  },
+  {
+    number: "T2",
+    slug: "bauhaus",
+    name: "Bauhaus",
+    vibe: "Form follows function. Jost + Inter, primary colours as structure, geometry as layout.",
+    url: "/taste/taste-bauhaus.md",
+  },
+  {
+    number: "T3",
+    slug: "modern-retro",
+    name: "Modern Retro",
+    vibe: "Sun-faded '70s warmth with modern spacing. Fraunces + Karla, cream and espresso, arches and badges.",
+    url: "/taste/taste-modern-retro.md",
+  },
+];
+
 const steps = [
   {
     number: "01",
@@ -224,6 +249,42 @@ function CopyButton({ text }: { text: string }) {
         copied
           ? "border-primary bg-primary text-white"
           : "border-zinc-600 text-zinc-100 hover:border-primary hover:text-primary"
+      }`}
+    >
+      {copied ? (
+        <>
+          <Check className="h-3.5 w-3.5" /> COPIED
+        </>
+      ) : (
+        <>
+          <Copy className="h-3.5 w-3.5" /> COPY
+        </>
+      )}
+    </button>
+  );
+}
+
+function CopyTasteButton({ url }: { url: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      const res = await fetch(url);
+      await navigator.clipboard.writeText(await res.text());
+    } catch {
+      return;
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={copy}
+      className={`inline-flex items-center gap-2 border px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider transition-colors ${
+        copied
+          ? "border-primary bg-primary text-white"
+          : "border-foreground text-foreground hover:border-primary hover:text-primary"
       }`}
     >
       {copied ? (
@@ -458,7 +519,72 @@ export default function Resources() {
           </div>
         </section>
 
-        {/* [004] CTA */}
+        {/* [004] Design taste files */}
+        <section id="taste-files" className="py-16 md:py-24 border-t border-border bg-card scroll-mt-20">
+          <div className="container">
+            <div className="max-w-3xl mb-12">
+              <div className="section-tag mb-4">[004] DESIGN TASTE FILES</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-3">
+                TEACH YOUR AGENT <span className="text-primary">TASTE.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                A taste file is a set of design rules — fonts, colour, spacing, motion, and a
+                never-list — that an agent reads before it designs anything. Drop one into
+                your project, tell your agent to follow it, and every page it builds comes
+                out with a point of view instead of a default. These are the same files we
+                use on client work.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-6 max-w-5xl">
+              {tasteFiles.map((t, i) => (
+                <motion.div
+                  key={t.slug}
+                  custom={i}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-50px" }}
+                  variants={fadeUp}
+                  className="brutalist-card bg-background p-6 flex flex-col"
+                >
+                  <div className="mono-label text-primary mb-3">[{t.number}]</div>
+                  <h3 className="font-bold text-xl tracking-tight mb-1">{t.name}</h3>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed mb-5">
+                    {t.vibe}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {["TYPE", "COLOUR", "SPACING", "MOTION", "NEVER"].map((chip) => (
+                      <span
+                        key={chip}
+                        className="border border-border px-2 py-1 font-mono text-[10px] tracking-wider text-muted-foreground"
+                      >
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="mt-auto flex gap-3">
+                    <CopyTasteButton url={t.url} />
+                    <a
+                      href={t.url}
+                      download
+                      className="inline-flex items-center gap-2 border border-zinc-600 px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition-colors"
+                    >
+                      <Download className="h-3.5 w-3.5" /> .MD
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <p className="mt-8 font-mono text-xs text-muted-foreground leading-relaxed max-w-2xl border-l-2 border-primary pl-3">
+              How to use: copy or download a file, save it as DESIGN-TASTE.md at the root of
+              your project, then tell your agent — "read DESIGN-TASTE.md and follow it for
+              every visual decision." The file includes the exact install prompt.
+            </p>
+          </div>
+        </section>
+
+        {/* [005] CTA */}
         <section className="py-16 md:py-24 border-t border-border bg-card">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
