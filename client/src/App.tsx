@@ -21,6 +21,7 @@ import Workshop from "./pages/Workshop";
 import WorkshopBooked from "./pages/WorkshopBooked";
 import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
+import Resources from "./pages/Resources";
 
 function AppRoutes() {
   return (
@@ -38,6 +39,7 @@ function AppRoutes() {
       <Route path={"/workshops/booked"} component={WorkshopBooked} />
       <Route path={"/coaching"} component={Coaching} />
       <Route path={"/quick-wins"} component={QuickWins} />
+      <Route path={"/resources"} component={Resources} />
       <Route path={"/styles"} component={StyleExplorer} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
