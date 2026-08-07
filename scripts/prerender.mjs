@@ -16,6 +16,7 @@ const routes = [
   "/workshops/booked",
   "/coaching",
   "/quick-wins",
+  "/resources",
   "/pricing",
   "/styles",
   "/privacy",
