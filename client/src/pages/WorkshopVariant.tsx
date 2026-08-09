@@ -1,4 +1,4 @@
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, FileText, Landmark } from "lucide-react";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -6,6 +6,13 @@ import { Footer } from "@/components/Footer";
 import { BrainDiagram } from "@/components/BrainDiagram";
 import { VenueBand } from "@/components/VenueBand";
 import { SessionsSection } from "@/components/SessionsSection";
+import {
+  InstagramIcon,
+  LinkedInIcon,
+  MetaColourIcon,
+  ShopifyColourIcon,
+  HubSpotColourIcon,
+} from "@/components/BrandIcons";
 import { VENUES, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
 import { BRAIN_H1, type WorkshopVariant as Variant } from "@/lib/workshopVariants";
 
@@ -132,19 +139,21 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
               <div>
                 <div className="section-tag text-sm md:text-base mb-4">[003] PROOF</div>
                 <h2 className="text-3xl md:text-5xl leading-[0.95] tracking-tighter mb-6">
-                  IT TIDIED A REAL DESKTOP{" "}
-                  <span className="text-primary">IN FIVE MINUTES.</span>
+                  ONE SESSION.{" "}
+                  <span className="text-primary">
+                    THEN HE BOOKED HIS WHOLE TEAM.
+                  </span>
                 </h2>
                 <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                  A business owner sat down with me last week — 60 loose files
-                  on his desktop. Before the session properly started, the AI
-                  had sorted the lot into folders. That's the moment most
-                  people get it: it works on your real computer.
+                  A Brisbane marketing agency owner did the first run of this
+                  workshop. Before it ended he'd left a five-star review and
+                  hired me to put his entire team through it — because he'd
+                  watched it start on his real work, not a demo.
                 </p>
               </div>
               <ShotSlot
                 label="Screenshot needed"
-                hint="Konrad's desktop — before / after"
+                hint="The five-star review — posted before the session ended"
               />
             </div>
           </div>
@@ -178,7 +187,40 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [005] The artefact — needs a real screenshot */}
+        {/* [005] What it unlocks — plain words, one line each */}
+        <section className="py-16 md:py-24 border-t border-border">
+          <div className="container">
+            <div className="max-w-3xl mb-12">
+              <div className="section-tag text-sm md:text-base mb-4">
+                [005] AFTER THE WORKSHOP
+              </div>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
+                WHAT YOU CAN DO{" "}
+                <span className="text-primary">ONCE IT'S LOADED.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                The workshop gets the first job running. These are the ones
+                people build next.
+              </p>
+            </div>
+
+            <div className="stats-grid grid sm:grid-cols-2 lg:grid-cols-4 border border-border">
+              {CAPABILITIES.map(({ title, line, icon }) => (
+                <div key={title} className="p-6">
+                  <div className="h-6 mb-4 flex items-center">{icon}</div>
+                  <h3 className="font-mono text-sm font-bold tracking-wide mb-2">
+                    {title}
+                  </h3>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                    {line}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* [006] The takeaway — needs a real screenshot */}
         <section className="py-16 md:py-20 border-t border-border bg-card">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
@@ -187,7 +229,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 hint="A real CLAUDE.md — never-list visible"
               />
               <div>
-                <div className="section-tag text-sm md:text-base mb-4">[005] WHAT YOU TAKE HOME</div>
+                <div className="section-tag text-sm md:text-base mb-4">[006] WHAT YOU TAKE HOME</div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
                   THE CONFIDENCE TO{" "}
                   <span className="text-primary">KEEP BUILDING.</span>
@@ -201,11 +243,11 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [006] The objection */}
+        {/* [007] The objection */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-4">[006] THE HONEST BIT</div>
+              <div className="section-tag text-sm md:text-base mb-4">[007] THE HONEST BIT</div>
               <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.objection.heading}
               </h2>
@@ -216,11 +258,11 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [007] The room */}
+        {/* [008] The room */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-6">[007] THE ROOM</div>
+              <div className="section-tag text-sm md:text-base mb-6">[008] THE ROOM</div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
                 THIS IS WHERE{" "}
                 <span className="text-primary">YOU'LL BE SITTING.</span>
@@ -235,14 +277,62 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [008] Book */}
-        <SessionsSection tag="[008] TAKE A SEAT" />
+        {/* [009] Book */}
+        <SessionsSection tag="[009] TAKE A SEAT" />
 
         <Footer />
       </div>
     </div>
   );
 }
+
+/**
+ * What the loaded brain unlocks. Shared across variants — the capabilities
+ * don't change with the door someone came in through. Wording is mum-test
+ * plain: each line says what happens, not what category of thing it is.
+ */
+const CAPABILITIES: { title: string; line: string; icon: React.ReactNode }[] = [
+  {
+    title: "SOCIAL CONTENT",
+    line: "Posts drafted from work you actually did this week.",
+    icon: <InstagramIcon className="h-6 w-6" style={{ color: "#E4405F" }} />,
+  },
+  {
+    title: "BUSINESS GRANTS",
+    line: "It finds grants you're eligible for and drafts the application.",
+    icon: <Landmark className="h-6 w-6 text-primary" />,
+  },
+  {
+    title: "LINKEDIN",
+    line: "Your week, turned into posts, in your voice.",
+    icon: <LinkedInIcon className="h-6 w-6" style={{ color: "#0A66C2" }} />,
+  },
+  {
+    title: "META ADS",
+    line: "Campaigns created, watched and adjusted.",
+    icon: <MetaColourIcon className="h-6 w-6" />,
+  },
+  {
+    title: "SHOPIFY",
+    line: "Products, orders and updates handled from your desk.",
+    icon: <ShopifyColourIcon className="h-6 w-6" />,
+  },
+  {
+    title: "QUOTES & PROPOSALS",
+    line: "Advanced proposals in your wording, in minutes.",
+    icon: <FileText className="h-6 w-6 text-primary" />,
+  },
+  {
+    title: "CRM NURTURE",
+    line: "Follow-up campaigns that run themselves.",
+    icon: <HubSpotColourIcon className="h-6 w-6" />,
+  },
+  {
+    title: "WHATEVER'S NEXT",
+    line: "The thing eating your week right now — that's the one you build.",
+    icon: <ArrowRight className="h-6 w-6 text-primary" />,
+  },
+];
 
 /**
  * Placeholder for imagery that has to be captured from a real machine.
