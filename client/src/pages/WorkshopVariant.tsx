@@ -132,29 +132,35 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [003] Proof — needs a real screenshot */}
-        <section className="py-16 md:py-20 border-t border-border bg-card">
+        {/* [003] What it unlocks — plain words, one line each */}
+        <section className="py-16 md:py-24 border-t border-border">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
-              <div>
-                <div className="section-tag text-sm md:text-base mb-4">[003] PROOF</div>
-                <h2 className="text-3xl md:text-5xl leading-[0.95] tracking-tighter mb-6">
-                  ONE SESSION.{" "}
-                  <span className="text-primary">
-                    THEN HE BOOKED HIS WHOLE TEAM.
-                  </span>
-                </h2>
-                <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                  A Brisbane marketing agency owner did the first run of this
-                  workshop. Before it ended he'd left a five-star review and
-                  hired me to put his entire team through it — because he'd
-                  watched it start on his real work, not a demo.
-                </p>
+            <div className="max-w-3xl mb-12">
+              <div className="section-tag text-sm md:text-base mb-4">
+                [003] ONCE IT'S LOADED
               </div>
-              <ShotSlot
-                label="Screenshot needed"
-                hint="The five-star review — posted before the session ended"
-              />
+              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
+                WHAT YOU CAN DO{" "}
+                <span className="text-primary">ONCE IT'S LOADED.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                The workshop gets the first job running. These are the ones
+                people build next.
+              </p>
+            </div>
+
+            <div className="stats-grid grid sm:grid-cols-2 lg:grid-cols-4 border border-border">
+              {CAPABILITIES.map(({ title, line, icon }) => (
+                <div key={title} className="p-6">
+                  <div className="h-6 mb-4 flex items-center">{icon}</div>
+                  <h3 className="font-mono text-sm font-bold tracking-wide mb-2">
+                    {title}
+                  </h3>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                    {line}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -187,40 +193,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [005] What it unlocks — plain words, one line each */}
-        <section className="py-16 md:py-24 border-t border-border">
-          <div className="container">
-            <div className="max-w-3xl mb-12">
-              <div className="section-tag text-sm md:text-base mb-4">
-                [005] AFTER THE WORKSHOP
-              </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
-                WHAT YOU CAN DO{" "}
-                <span className="text-primary">ONCE IT'S LOADED.</span>
-              </h2>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                The workshop gets the first job running. These are the ones
-                people build next.
-              </p>
-            </div>
-
-            <div className="stats-grid grid sm:grid-cols-2 lg:grid-cols-4 border border-border">
-              {CAPABILITIES.map(({ title, line, icon }) => (
-                <div key={title} className="p-6">
-                  <div className="h-6 mb-4 flex items-center">{icon}</div>
-                  <h3 className="font-mono text-sm font-bold tracking-wide mb-2">
-                    {title}
-                  </h3>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
-                    {line}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* [006] The takeaway — needs a real screenshot */}
+        {/* [005] The takeaway — needs a real screenshot */}
         <section className="py-16 md:py-20 border-t border-border bg-card">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
@@ -229,7 +202,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 hint="A real CLAUDE.md — never-list visible"
               />
               <div>
-                <div className="section-tag text-sm md:text-base mb-4">[006] WHAT YOU TAKE HOME</div>
+                <div className="section-tag text-sm md:text-base mb-4">[005] WHAT YOU TAKE HOME</div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
                   THE CONFIDENCE TO{" "}
                   <span className="text-primary">KEEP BUILDING.</span>
@@ -243,12 +216,12 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [007] The objection */}
+        {/* [006] The objection */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
               <div>
-                <div className="section-tag text-sm md:text-base mb-4">[007] THE HONEST BIT</div>
+                <div className="section-tag text-sm md:text-base mb-4">[006] THE HONEST BIT</div>
                 <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                   {variant.objection.heading}
                 </h2>
@@ -261,11 +234,11 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [008] The room */}
+        {/* [007] The room */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-6">[008] THE ROOM</div>
+              <div className="section-tag text-sm md:text-base mb-6">[007] THE ROOM</div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
                 THIS IS WHERE{" "}
                 <span className="text-primary">YOU'LL BE SITTING.</span>
@@ -291,8 +264,8 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [009] Book */}
-        <SessionsSection tag="[009] TAKE A SEAT" />
+        {/* [008] Book */}
+        <SessionsSection tag="[008] TAKE A SEAT" />
 
         <Footer />
       </div>
