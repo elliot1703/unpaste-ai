@@ -356,6 +356,120 @@
   }
 
   /* ==========================================================================
+     Brain diagram
+
+     Inherits currentColor so it reads on either background. Text sizes are
+     fixed px inside the viewBox — the SVG scales, the hierarchy doesn't.
+     ========================================================================== */
+
+  .brain-diagram {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 760px;
+  }
+
+  .bd-box {
+    fill: none;
+    stroke: var(--foreground);
+    stroke-width: 1;
+  }
+
+  .bd-box--primary {
+    stroke: var(--primary);
+    stroke-width: 2;
+  }
+
+  .bd-line {
+    stroke: var(--foreground);
+    stroke-width: 1;
+  }
+
+  .bd-line--accent {
+    stroke: var(--primary);
+    stroke-dasharray: 4 4;
+  }
+
+  .bd-arrow {
+    fill: var(--primary);
+  }
+
+  .bd-kicker {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    fill: var(--primary);
+  }
+
+  .bd-title {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    fill: var(--foreground);
+  }
+
+  .bd-job {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    fill: var(--foreground);
+  }
+
+  .bd-body {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--muted-foreground);
+  }
+
+  .bd-edge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    fill: var(--muted-foreground);
+  }
+
+  .bd-edge--accent {
+    fill: var(--primary);
+    font-weight: 700;
+  }
+
+  /* ==========================================================================
+     Variant page — screenshot slots
+
+     Deliberately visible when empty. A missing proof image should look like an
+     unfinished job, not render as nothing and get forgotten before launch.
+     ========================================================================== */
+
+  .shot-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 260px;
+    padding: 24px;
+    text-align: center;
+    border: 1px dashed var(--primary);
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 7px,
+      color-mix(in srgb, var(--primary) 8%, transparent) 7px,
+      color-mix(in srgb, var(--primary) 8%, transparent) 8px
+    );
+  }
+
+  .shot-slot__label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ==========================================================================
      Venue photo band
 
      No filter or duotone on the images on purpose — these exist so people can

@@ -22,8 +22,8 @@ import {
   XIcon,
 } from "@/components/BrandIcons";
 import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
-import { SessionCard } from "@/components/SessionCard";
 import { VenueBand } from "@/components/VenueBand";
+import { SessionsSection } from "@/components/SessionsSection";
 import { useSeats } from "@/hooks/useSeats";
 import { SESSIONS, VENUES, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
 
@@ -481,7 +481,7 @@ export default function Workshop() {
         </section>
 
         {/* [010] Take a seat */}
-        <Sessions />
+        <SessionsSection />
 
         <Footer />
       </div>
@@ -489,50 +489,3 @@ export default function Workshop() {
   );
 }
 
-/**
- * [010] — the three session cards.
- *
- * Split out so the seat fetch lives in its own component: /api/seats is only
- * called once a session has a Stripe link, so while dates are pending this
- * renders entirely from static data and makes no network request.
- */
-function Sessions() {
-  const { seats } = useSeats();
-
-  return (
-    <section id="sessions" className="py-20 md:py-28 border-t border-border">
-      <div className="container">
-        <div className="max-w-3xl">
-          <div className="section-tag mb-6">[010] TAKE A SEAT</div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-            CURRENT <span className="text-primary">SESSIONS.</span>
-          </h2>
-          <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-12 max-w-xl">
-            Dates, venues and group sizes vary by session — everything running
-            right now is below. Seats update live.
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {SESSIONS.map((session) => (
-            <SessionCard
-              key={session.id}
-              session={session}
-              seats={seats[session.id]}
-            />
-          ))}
-        </div>
-
-        <p className="mono-label mt-10">
-          QUESTIONS? EMAIL{" "}
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="text-primary hover:underline"
-          >
-            {CONTACT_EMAIL.toUpperCase()}
-          </a>
-        </p>
-      </div>
-    </section>
-  );
-}

@@ -19,6 +19,8 @@ import Pricing from "./pages/Pricing";
 import Training from "./pages/Training";
 import Workshop from "./pages/Workshop";
 import WorkshopBooked from "./pages/WorkshopBooked";
+import WorkshopVariantPage from "./pages/WorkshopVariant";
+import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
 import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
 import Resources from "./pages/Resources";
@@ -37,6 +39,12 @@ function AppRoutes() {
       <Route path={"/training"} component={Training} />
       <Route path={"/workshops"} component={Workshop} />
       <Route path={"/workshops/booked"} component={WorkshopBooked} />
+      {/* Messaging variants — noIndex, reachable by direct link / ads only. */}
+      {WORKSHOP_VARIANTS.map((v) => (
+        <Route key={v.slug} path={`/workshops/${v.slug}`}>
+          <WorkshopVariantPage variant={v} />
+        </Route>
+      ))}
       <Route path={"/coaching"} component={Coaching} />
       <Route path={"/quick-wins"} component={QuickWins} />
       <Route path={"/resources"} component={Resources} />
