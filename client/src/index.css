@@ -482,6 +482,47 @@
     color: var(--muted-foreground);
   }
 
+  /* The folder tree — left-aligned inside the centred core box. */
+  .folder-tree {
+    display: inline-block;
+    margin: 6px auto 2px;
+    padding: 18px 22px;
+    text-align: left;
+    border: 1px solid var(--border);
+    background: var(--background);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .folder-tree__branch {
+    color: var(--muted-foreground);
+    white-space: pre;
+  }
+
+  .folder-tree__name {
+    font-weight: 700;
+  }
+
+  .folder-tree__name--accent {
+    color: var(--primary);
+  }
+
+  .folder-tree__note {
+    margin-left: 10px;
+    font-size: 11px;
+    color: var(--muted-foreground);
+  }
+
+  @media (max-width: 640px) {
+    .folder-tree__note {
+      display: block;
+      margin-left: 26px;
+      line-height: 1.3;
+      padding-bottom: 6px;
+    }
+  }
+
   /* ==========================================================================
      Variant page — screenshot slots
 

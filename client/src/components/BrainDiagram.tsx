@@ -50,16 +50,13 @@ export function BrainDiagram() {
 
       <Connector label="all read the same rules" />
 
-      {/* ---- the folder ---- */}
+      {/* ---- the folder, shown rather than described ---- */}
       <div className="brain-core">
         <span className="section-tag">YOUR BUSINESS FOLDER</span>
         <h3 className="brain-core__title">THE RULES, WRITTEN DOWN ONCE</h3>
-        <p className="brain-core__body">
-          How you word things · what you never do · who gets a call not an email
-          · your standards, your voice, your exceptions
-        </p>
+        <FolderTree />
         <span className="mono-label">
-          Plain markdown. Yours. Portable. Not locked to any vendor.
+          Plain files on your computer. Yours. Not locked to any vendor.
         </span>
       </div>
 
@@ -79,6 +76,39 @@ export function BrainDiagram() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+/**
+ * The folder, drawn as a folder — a rendered tree beats any sentence about
+ * "your rules in plain text". Annotations say what each part is for in words
+ * a first-timer already has.
+ */
+const TREE: { depth: 0 | 1; name: string; note?: string; accent?: boolean }[] = [
+  { depth: 0, name: "my-business/" },
+  { depth: 1, name: "RULES.md", note: "how you work · the never-list", accent: true },
+  { depth: 1, name: "clients/", note: "one folder per client" },
+  { depth: 1, name: "quotes/" },
+  { depth: 1, name: "invoices/" },
+  { depth: 1, name: "skills/", note: "jobs it has learned to do" },
+  { depth: 1, name: "inbox/", note: "drop things here, it sorts them" },
+];
+
+function FolderTree() {
+  return (
+    <div className="folder-tree" role="img" aria-label="Your business folder: a RULES file holding how you work and the never-list, plus folders for clients, quotes, invoices, learned skills, and an inbox it sorts for you">
+      {TREE.map((row, i) => (
+        <div key={row.name} className="folder-tree__row">
+          <span className="folder-tree__branch" aria-hidden="true">
+            {row.depth === 0 ? "" : i === TREE.length - 1 ? "└─ " : "├─ "}
+          </span>
+          <span className={`folder-tree__name${row.accent ? " folder-tree__name--accent" : ""}`}>
+            {row.name}
+          </span>
+          {row.note && <span className="folder-tree__note">← {row.note}</span>}
+        </div>
+      ))}
     </div>
   );
 }

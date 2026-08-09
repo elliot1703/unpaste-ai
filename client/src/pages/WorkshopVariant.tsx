@@ -130,15 +130,16 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
               <div>
-                <div className="section-tag text-sm md:text-base mb-4">[003] FIVE MINUTES IN</div>
-                <h2 className="text-3xl md:text-4xl leading-tight mb-6">
-                  60 FILES. 5.3 GIGABYTES.{" "}
-                  <span className="text-primary">SORTED IN FIVE MINUTES.</span>
+                <div className="section-tag text-sm md:text-base mb-4">[003] PROOF</div>
+                <h2 className="text-3xl md:text-5xl leading-[0.95] tracking-tighter mb-6">
+                  IT TIDIED A REAL DESKTOP{" "}
+                  <span className="text-primary">IN FIVE MINUTES.</span>
                 </h2>
                 <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                  That was the warm-up in a session last week. Not the
-                  impressive part — just the moment you stop reading about it
-                  and watch it touch your own machine.
+                  A business owner sat down with me last week — 60 loose files
+                  on his desktop. Before the session properly started, the AI
+                  had sorted the lot into folders. That's the moment most
+                  people get it: it works on your real computer.
                 </p>
               </div>
               <ShotSlot

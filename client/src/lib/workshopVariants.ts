@@ -51,7 +51,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     lede:
       "Three hours, hands-on, Brisbane. Bring your laptop and one job that keeps coming back. Leave with it running.",
     problem: {
-      heading: "IT WAS NEVER THE LEARNING CURVE",
+      heading: "YOU KNOW AI MATTERS. YOU HAVEN'T STARTED.",
       body:
         "The skill packs are downloaded. The tabs are open. What's missing is one evening pointed at your own work — with someone next to you when it breaks. That's the whole gap.",
     },
@@ -81,7 +81,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     lede:
       "AI that answers you isn't AI that does the work. The difference is reach — that's what we set up. Three hours, hands-on, Brisbane.",
     problem: {
-      heading: "THE COPY-PASTE TAX",
+      heading: "YOU'RE STILL THE ONE DOING THE COPY-PASTING.",
       body:
         "Paste in, copy out, fix the formatting, do it again tomorrow. The tool never sees your files and never remembers last week. You're the integration layer.",
     },
@@ -111,7 +111,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     lede:
       "How your business runs lives in your head. Write it down once, in a form an AI can act on. Three hours, hands-on, Brisbane.",
     problem: {
-      heading: "THE STUFF ONLY YOU KNOW",
+      heading: "EVERY JOB STILL ENDS UP BACK ON YOUR DESK.",
       body:
         "How the quote gets worded. Who gets a call, not an email. What never ships without your eyes on it. None of it is in a system — so the work keeps coming back to you.",
     },
