@@ -356,6 +356,209 @@
   }
 
   /* ==========================================================================
+     Brain diagram — three layers
+
+     Any agent (top) → your folder of rules (middle) → your tools (bottom).
+     HTML not SVG so the tool row uses real brand marks and reflows on a phone.
+     ========================================================================== */
+
+  .brain-stack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .brain-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brain-row__label {
+    text-align: center;
+  }
+
+  .brain-agents,
+  .brain-tools {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .brain-agent {
+    padding: 11px 16px;
+    border: 1px solid var(--foreground);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* Colour is the point here — these have to be recognisable at a glance. */
+  .brain-tool {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 15px;
+    border: 1px solid var(--border);
+    background: var(--background);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+
+  .brain-tool:hover {
+    border-color: var(--foreground);
+    box-shadow: 3px 3px 0 0 var(--foreground);
+    transform: translate(-2px, -2px);
+  }
+
+  .brain-connector {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 22px 0;
+  }
+
+  .brain-connector__line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .brain-connector--accent .brain-connector__line {
+    background: repeating-linear-gradient(
+      to right,
+      var(--primary) 0,
+      var(--primary) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
+  .brain-connector__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    text-align: center;
+  }
+
+  .brain-connector--accent .brain-connector__label {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .brain-core {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 28px 24px;
+    text-align: center;
+    border: 2px solid var(--primary);
+  }
+
+  .brain-core__title {
+    font-size: clamp(20px, 3vw, 30px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  .brain-core__body {
+    max-width: 52ch;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted-foreground);
+  }
+
+  /* The folder tree — left-aligned inside the centred core box. */
+  .folder-tree {
+    display: inline-block;
+    margin: 6px auto 2px;
+    padding: 18px 22px;
+    text-align: left;
+    border: 1px solid var(--border);
+    background: var(--background);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 2;
+  }
+
+  .folder-tree__branch {
+    color: var(--muted-foreground);
+    white-space: pre;
+  }
+
+  .folder-tree__name {
+    font-weight: 700;
+  }
+
+  .folder-tree__name--accent {
+    color: var(--primary);
+  }
+
+  .folder-tree__note {
+    margin-left: 10px;
+    font-size: 11px;
+    color: var(--muted-foreground);
+  }
+
+  @media (max-width: 640px) {
+    .folder-tree__note {
+      display: block;
+      margin-left: 26px;
+      line-height: 1.3;
+      padding-bottom: 6px;
+    }
+  }
+
+  /* ==========================================================================
+     Variant page — screenshot slots
+
+     Deliberately visible when empty. A missing proof image should look like an
+     unfinished job, not render as nothing and get forgotten before launch.
+     ========================================================================== */
+
+  .shot-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 260px;
+    padding: 24px;
+    text-align: center;
+    border: 1px dashed var(--primary);
+    background: repeating-linear-gradient(
+      45deg,
+      transparent 0,
+      transparent 7px,
+      color-mix(in srgb, var(--primary) 8%, transparent) 7px,
+      color-mix(in srgb, var(--primary) 8%, transparent) 8px
+    );
+  }
+
+  .shot-slot__label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--primary);
+  }
+
+  /* ==========================================================================
      Venue photo band
 
      No filter or duotone on the images on purpose — these exist so people can

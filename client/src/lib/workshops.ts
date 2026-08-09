@@ -36,6 +36,8 @@ export type Venue = {
   suburb: string;
   /** Short form for compact labels. */
   short: string;
+  /** Link for a "find it" button — Google Maps search URL. */
+  mapUrl?: string;
   /** First photo is the feature panel; the rest stack beside it. */
   photos?: VenuePhoto[];
 };
@@ -46,6 +48,8 @@ export const VENUES = {
     street: "9/57 Karthina Street",
     suburb: "Bulimba QLD 4171",
     short: "Bulimba",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Gather%20Bulimba%209%2F57%20Karthina%20Street%20Bulimba%20QLD%204171",
     photos: [
       {
         src: "/images/venues/gather-bulimba/room.webp",
