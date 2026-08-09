@@ -45,15 +45,15 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
   {
     slug: "start",
     label: "A · Start",
-    audience: "The stalled — reads about it constantly, hasn't opened it",
+    audience: "Uses ChatGPT daily — ready for AI that acts, not answers",
     kicker: "[001] CLAUDE CODE · BRISBANE",
-    subhead: "You've read enough about AI. One evening and it's running.",
+    subhead: "You already use AI every day. This is the next level — AI that actually does things.",
     lede:
       "Three hours, hands-on, Brisbane. Bring your laptop and one job that keeps coming back. Leave with it running.",
     problem: {
-      heading: "YOU KNOW AI MATTERS. YOU HAVEN'T STARTED.",
+      heading: "YOU TALK TO AI EVERY DAY. IT STILL DOES NOTHING FOR YOU.",
       body:
-        "The skill packs are downloaded. The tabs are open. What's missing is one evening pointed at your own work — with someone next to you when it breaks. That's the whole gap.",
+        "ChatGPT answers your questions — then you go do the work anyway. The next level is AI with its hands on your actual business. Getting there takes one evening, with someone next to you when it breaks.",
     },
     brain: {
       heading: "A FOLDER WITH YOUR RULES BAKED IN",
