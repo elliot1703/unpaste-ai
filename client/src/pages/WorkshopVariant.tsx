@@ -115,7 +115,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           <div className="container">
             <div className="max-w-3xl">
               <div className="section-tag mb-4">[002] THE PROBLEM</div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.problem.heading}
               </h2>
               <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
@@ -136,10 +136,9 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                   <span className="text-primary">SORTED IN FIVE MINUTES.</span>
                 </h2>
                 <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                  That was the warm-up in a session last week — before we'd
-                  properly started. It's not the impressive part, it's the part
-                  where you stop reading about this and watch it touch your own
-                  machine.
+                  That was the warm-up in a session last week. Not the
+                  impressive part — just the moment you stop reading about it
+                  and watch it touch your own machine.
                 </p>
               </div>
               <ShotSlot
@@ -155,7 +154,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           <div className="container">
             <div className="max-w-3xl mb-12">
               <div className="section-tag mb-4">[004] WHAT YOU BUILD</div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.brain.heading}
               </h2>
               <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
@@ -187,16 +186,14 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 hint="A real CLAUDE.md — never-list visible"
               />
               <div>
-                <div className="section-tag mb-4">[005] THE ARTEFACT</div>
-                <h2 className="text-3xl md:text-4xl leading-tight mb-6">
-                  YOU GO HOME{" "}
-                  <span className="text-primary">WITH THE FILE.</span>
+                <div className="section-tag mb-4">[005] WHAT YOU TAKE HOME</div>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
+                  THE CONFIDENCE TO{" "}
+                  <span className="text-primary">KEEP BUILDING.</span>
                 </h2>
                 <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                  Not notes. Not a recording you'll never watch. A working
-                  setup on your own laptop and a file that knows how your
-                  business runs — which keeps getting better every time you
-                  correct it.
+                  A working setup on your laptop, your rules in a folder, one
+                  job automated — and you know how to do the next one.
                 </p>
               </div>
             </div>
@@ -208,7 +205,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           <div className="container">
             <div className="max-w-3xl">
               <div className="section-tag mb-4">[006] THE HONEST BIT</div>
-              <h2 className="text-3xl md:text-4xl leading-tight mb-6">
+              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.objection.heading}
               </h2>
               <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
