@@ -56,13 +56,13 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
         "You've got the skill packs downloaded. Tabs you keep meaning to read. Maybe a folder somewhere called ai stuff. What you haven't had is an evening where you sit down, install it properly, and point it at something of your own — with someone next to you when it breaks. That's the whole gap, and it's three hours wide.",
     },
     brain: {
-      heading: "THE FILE THAT KNOWS YOUR BUSINESS",
+      heading: "A FOLDER WITH YOUR RULES BAKED IN",
       body:
-        "Halfway through the session, the AI interviews you about how your business actually runs and writes what it learns into a file. How you word things. What you never do. Which jobs come back every week. That file is the brain — and every time you correct it, it gets better. You go home with it.",
+        "Halfway through the session the AI interviews you about how your business actually runs, and writes what it learns into a folder. How you word things. What you never do. Which jobs come back every week. It's plain text you own — so any agent can read it, and it can reach the tools you already run. You go home with it.",
     },
     outcomes: [
       "Claude Code installed and working on your own machine",
-      "A CLAUDE.md that knows your business, in your words",
+      "A folder of rules any agent can read — not locked to one vendor",
       "One real weekly job automated before you leave",
     ],
     objection: {
@@ -86,13 +86,13 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
         "You already use AI every day. You paste something in, get something good back, paste it into the real document, fix the formatting, and do it again tomorrow. The tool never sees your files, never remembers last week, never learns your standards. You're the integration layer — and it's costing you the hours it was supposed to save.",
     },
     brain: {
-      heading: "SAME MODEL. YOUR DESK.",
+      heading: "SAME MODEL. YOUR DESK. YOUR TOOLS.",
       body:
-        "Claude Code is the same intelligence with its hands on your machine — your folders, your documents, your inbox. In the session it interviews you and writes what it learns into a file it reads every time. Your voice, your standards, your never-do list. Stop re-explaining yourself every morning.",
+        "Claude Code is the same intelligence with its hands on your machine — your folders, your documents, your inbox, your store, your ad account. In the session it interviews you and writes your rules into a folder it reads before every job. Stop re-explaining yourself every morning, and stop being the thing that carries data between systems.",
     },
     outcomes: [
       "AI working on your real files, not a chat window",
-      "A CLAUDE.md so you stop re-briefing it daily",
+      "Your rules in a folder, connected to the tools you already run",
       "One recurring job running end to end",
     ],
     objection: {
@@ -118,7 +118,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     brain: {
       heading: "DOCUMENTED ONCE, THEN OPERATIONAL",
       body:
-        "The session produces a file that holds your operating knowledge — your standards, your exceptions, the never-list — and an AI that reads it before every task. Unlike a procedures doc nobody opens, this one gets used every day, and gets sharper each time you correct it. It's an asset that stays when staff leave.",
+        "The session produces a folder holding your operating knowledge — standards, exceptions, the never-list — that an AI reads before every task. Unlike a procedures doc nobody opens, this one gets used daily and sharpens each time you correct it. It's plain text, so it isn't tied to one vendor: point whichever agent you're using at it and it works. An asset that stays when staff leave, and when tools change.",
     },
     outcomes: [
       "Your operating knowledge written down and usable",
