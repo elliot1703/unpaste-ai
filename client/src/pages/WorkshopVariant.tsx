@@ -42,7 +42,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
-                className="section-tag mb-8"
+                className="section-tag text-sm md:text-base mb-8"
               >
                 {variant.kicker}
               </motion.div>
@@ -114,7 +114,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag mb-4">[002] THE PROBLEM</div>
+              <div className="section-tag text-sm md:text-base mb-4">[002] THE PROBLEM</div>
               <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.problem.heading}
               </h2>
@@ -130,7 +130,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           <div className="container">
             <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
               <div>
-                <div className="section-tag mb-4">[003] FIVE MINUTES IN</div>
+                <div className="section-tag text-sm md:text-base mb-4">[003] FIVE MINUTES IN</div>
                 <h2 className="text-3xl md:text-4xl leading-tight mb-6">
                   60 FILES. 5.3 GIGABYTES.{" "}
                   <span className="text-primary">SORTED IN FIVE MINUTES.</span>
@@ -153,7 +153,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
         <section id="brain" className="py-16 md:py-24 border-t border-border">
           <div className="container">
             <div className="max-w-3xl mb-12">
-              <div className="section-tag mb-4">[004] WHAT YOU BUILD</div>
+              <div className="section-tag text-sm md:text-base mb-4">[004] WHAT YOU BUILD</div>
               <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.brain.heading}
               </h2>
@@ -186,7 +186,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 hint="A real CLAUDE.md — never-list visible"
               />
               <div>
-                <div className="section-tag mb-4">[005] WHAT YOU TAKE HOME</div>
+                <div className="section-tag text-sm md:text-base mb-4">[005] WHAT YOU TAKE HOME</div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
                   THE CONFIDENCE TO{" "}
                   <span className="text-primary">KEEP BUILDING.</span>
@@ -204,7 +204,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag mb-4">[006] THE HONEST BIT</div>
+              <div className="section-tag text-sm md:text-base mb-4">[006] THE HONEST BIT</div>
               <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                 {variant.objection.heading}
               </h2>
@@ -219,7 +219,7 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag mb-6">[007] THE ROOM</div>
+              <div className="section-tag text-sm md:text-base mb-6">[007] THE ROOM</div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
                 THIS IS WHERE{" "}
                 <span className="text-primary">YOU'LL BE SITTING.</span>
