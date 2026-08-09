@@ -51,14 +51,14 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     lede:
       "Three hours, hands-on, Brisbane. Bring your laptop and one job that keeps coming back. Leave with it running.",
     problem: {
-      heading: "YOU TALK TO AI EVERY DAY. IT STILL DOES NOTHING FOR YOU.",
+      heading: "GIVE CHATGPT REAL WORK AND IT STARTS MAKING MISTAKES.",
       body:
-        "ChatGPT answers your questions — then you go do the work anyway. The next level is AI with its hands on your actual business. Getting there takes one evening, with someone next to you when it breaks.",
+        "Not because you're using it wrong — a chat window can't hold your business in its head. It forgets, guesses, and repeats the same errors. An agentic system is the opposite: your corrections get saved, so it only improves with use.",
     },
     brain: {
       heading: "A FOLDER WITH YOUR RULES BAKED IN",
       body:
-        "Halfway through, the AI interviews you and writes your rules into a folder. How you word things. What you never do. Plain text you own — any agent can read it.",
+        "Halfway through, the AI interviews you and writes your rules into a folder. How you word things. What you never do. Plain text you own — and correct it once, it stays corrected.",
     },
     outcomes: [
       "Claude Code installed and working on your own machine",
