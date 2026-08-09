@@ -1,4 +1,4 @@
-import { ArrowRight, Check, FileText, Landmark } from "lucide-react";
+import { ArrowRight, Check, FileText, Landmark, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -246,14 +246,17 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
         {/* [007] The objection */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
-            <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-4">[007] THE HONEST BIT</div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
-                {variant.objection.heading}
-              </h2>
-              <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
-                {variant.objection.body}
-              </p>
+            <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
+              <div>
+                <div className="section-tag text-sm md:text-base mb-4">[007] THE HONEST BIT</div>
+                <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
+                  {variant.objection.heading}
+                </h2>
+                <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
+                  {variant.objection.body}
+                </p>
+              </div>
+              <ShotSlot label="Photo incoming" hint="Elliot, at the machine" />
             </div>
           </div>
         </section>
@@ -272,6 +275,17 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 the street, and the room is a two-minute walk from Oxford
                 Street.
               </p>
+              {venue.mapUrl && (
+                <a
+                  href={venue.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brutalist-button-outline inline-flex items-center gap-3 mb-10"
+                >
+                  <MapPin className="h-4 w-4" />
+                  Open in Maps
+                </a>
+              )}
             </div>
             <VenueBand venue={venue} />
           </div>

@@ -1,6 +1,7 @@
 import type { ComponentType } from "react";
 import {
   ArrowRight,
+  MapPin,
   CheckCircle2,
   Laptop,
   Brain,
@@ -475,6 +476,17 @@ export default function Workshop() {
                 {VENUES.gatherBulimba.suburb}. Free parking on the street, and
                 the room is a two-minute walk from Oxford Street.
               </p>
+              {VENUES.gatherBulimba.mapUrl && (
+                <a
+                  href={VENUES.gatherBulimba.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="brutalist-button-outline inline-flex items-center gap-3 mb-10"
+                >
+                  <MapPin className="h-4 w-4" />
+                  Open in Maps
+                </a>
+              )}
             </div>
             <VenueBand venue={VENUES.gatherBulimba} />
           </div>
