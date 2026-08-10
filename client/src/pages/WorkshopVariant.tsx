@@ -225,11 +225,32 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
                 <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
                   {variant.objection.heading}
                 </h2>
-                <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
+                <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
                   {variant.objection.body}
                 </p>
+                <p className="mono-label mb-3">WHO'S TEACHING THIS</p>
+                <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
+                  I'm not a developer. I ran a gardening business in Bulimba —
+                  and it became the test bed for my first AI agents. Watching
+                  them work opened my eyes to what's possible, so I went all in
+                  on learning it. Teaching is the next stage: you get the same
+                  feeling of superpowers, without figuring it out alone.
+                </p>
               </div>
-              <ShotSlot label="Photo incoming" hint="Elliot, at the machine" />
+              <figure className="m-0 lg:justify-self-end w-full max-w-md">
+                <img
+                  src="/images/elliot.webp"
+                  alt="Elliot, outdoors in Brisbane"
+                  loading="lazy"
+                  decoding="async"
+                  width={937}
+                  height={1250}
+                  className="w-full aspect-[4/5] object-cover border border-border"
+                />
+                <figcaption className="mono-label mt-3">
+                  Elliot · started with a gardening business in Bulimba
+                </figcaption>
+              </figure>
             </div>
           </div>
         </section>
