@@ -17,7 +17,6 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import Training from "./pages/Training";
-import Workshop from "./pages/Workshop";
 import WorkshopBooked from "./pages/WorkshopBooked";
 import WorkshopVariantPage from "./pages/WorkshopVariant";
 import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
@@ -37,7 +36,10 @@ function AppRoutes() {
       <Route path={"/terms"} component={Terms} />
       <Route path={"/pricing"} component={Pricing} />
       <Route path={"/training"} component={Training} />
-      <Route path={"/workshops"} component={Workshop} />
+      {/* /workshops serves the winning variant (indexed); old page unrouted. */}
+      <Route path={"/workshops"}>
+        <WorkshopVariantPage variant={WORKSHOP_VARIANTS[0]} canonical />
+      </Route>
       <Route path={"/workshops/booked"} component={WorkshopBooked} />
       {/* Messaging variants — noIndex, reachable by direct link / ads only. */}
       {WORKSHOP_VARIANTS.map((v) => (

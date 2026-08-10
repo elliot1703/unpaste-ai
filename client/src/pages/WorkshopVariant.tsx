@@ -26,16 +26,31 @@ import { BRAIN_H1, type WorkshopVariant as Variant } from "@/lib/workshopVariant
  * noIndex on all variants: three near-duplicate pages would otherwise compete
  * with /workshops for the same terms and split its ranking.
  */
-export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
+export default function WorkshopVariantPage({
+  variant,
+  canonical = false,
+}: {
+  variant: Variant;
+  /** True when this variant IS /workshops — indexed, canonical URL. */
+  canonical?: boolean;
+}) {
   const venue = VENUES.gatherBulimba;
 
   return (
     <div className="min-h-screen bg-background">
       <SEO
-        title={`${BRAIN_H1.main} ${BRAIN_H1.accent}`}
+        title={
+          canonical
+            ? "AI Workshop Brisbane — Build Your Business an AI Brain"
+            : `${BRAIN_H1.main} ${BRAIN_H1.accent}`
+        }
         description={variant.lede}
-        url={`https://unpaste.ai/workshops/${variant.slug}`}
-        noIndex
+        url={
+          canonical
+            ? "https://unpaste.ai/workshops"
+            : `https://unpaste.ai/workshops/${variant.slug}`
+        }
+        noIndex={!canonical}
       />
       <div className="grid-background" />
       <div className="relative z-10">
@@ -193,14 +208,10 @@ export default function WorkshopVariantPage({ variant }: { variant: Variant }) {
           </div>
         </section>
 
-        {/* [005] The takeaway — needs a real screenshot */}
+        {/* [005] The takeaway */}
         <section className="py-16 md:py-20 border-t border-border bg-card">
           <div className="container">
-            <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
-              <ShotSlot
-                label="Screenshot needed"
-                hint="A real CLAUDE.md — never-list visible"
-              />
+            <div className="max-w-3xl">
               <div>
                 <div className="section-tag text-sm md:text-base mb-4">[005] WHAT YOU TAKE HOME</div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
@@ -342,16 +353,3 @@ const CAPABILITIES: { title: string; line: string; icon: React.ReactNode }[] = [
   },
 ];
 
-/**
- * Placeholder for imagery that has to be captured from a real machine.
- * Loud on purpose — an empty proof slot should look unfinished rather than
- * quietly render as nothing and ship that way.
- */
-function ShotSlot({ label, hint }: { label: string; hint: string }) {
-  return (
-    <div className="shot-slot">
-      <span className="shot-slot__label">{label}</span>
-      <span className="font-mono text-xs text-muted-foreground">{hint}</span>
-    </div>
-  );
-}
