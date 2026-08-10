@@ -18,12 +18,14 @@ export function SessionCard({ session, seats }: SessionCardProps) {
   const taken = seats?.taken ?? 0;
   const open = total - taken;
 
-  // Three mutually exclusive card modes.
-  const mode: "pending" | "soldout" | "open" = !onSale
-    ? "pending"
-    : soldOut
-      ? "soldout"
-      : "open";
+  // Four mutually exclusive card modes.
+  const mode: "postponed" | "pending" | "soldout" | "open" = session.postponed
+    ? "postponed"
+    : !onSale
+      ? "pending"
+      : soldOut
+        ? "soldout"
+        : "open";
 
   // Highest-intent signal we can see: Stripe checkout is off-site, so this
   // fires on the click through, not on payment. Purchase is tracked on the
@@ -49,9 +51,16 @@ export function SessionCard({ session, seats }: SessionCardProps) {
         <span className="mono-label">{session.seats} seats</span>
       </div>
 
-      <div className="session-card__date">{session.date ?? "DATE TBC"}</div>
+      {mode === "postponed" && (
+        <div className="section-tag mt-3">POSTPONED</div>
+      )}
+      <div className="session-card__date">
+        {mode === "postponed" ? "MOVING TO A DAYTIME SESSION" : (session.date ?? "DATE TBC")}
+      </div>
       <div className="session-card__time">
-        {session.time ?? "Time announcing soon"}
+        {mode === "postponed"
+          ? "New date announcing soon"
+          : (session.time ?? "Time announcing soon")}
       </div>
 
       {/* Venue lives on the session, not the page — sessions can be in
@@ -97,7 +106,11 @@ export function SessionCard({ session, seats }: SessionCardProps) {
       )}
 
       <div className="session-card__count">
-        {mode === "pending" ? (
+        {mode === "postponed" ? (
+          <span className="session-card__count-dim">
+            {total} seats &middot; new date to be announced
+          </span>
+        ) : mode === "pending" ? (
           <span className="session-card__count-dim">
             {total} seats &middot; not yet on sale
           </span>
@@ -129,6 +142,19 @@ export function SessionCard({ session, seats }: SessionCardProps) {
         <span className="session-card__cta session-card__cta--ghost">
           Dates announcing soon
         </span>
+      )}
+
+      {mode === "postponed" && (
+        <a
+          className="session-card__cta"
+          href={`mailto:elliot@unpaste.co?subject=${encodeURIComponent(
+            "Register interest — daytime workshop session"
+          )}&body=${encodeURIComponent(
+            "Hi Elliot, I'd like to register my interest in the daytime workshop session. My name is "
+          )}`}
+        >
+          ( Click here to register your interest )
+        </a>
       )}
 
       {mode === "soldout" && (

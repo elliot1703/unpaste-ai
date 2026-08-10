@@ -92,6 +92,9 @@ export type WorkshopSession = {
   bookUrl: string | null;
   /** Per session on purpose — a room of 6 and a room of 100 both work here. */
   seats: number;
+  /** True = event pulled, moving to a new (daytime) slot. Card shows an
+      interest CTA instead of a buy button. */
+  postponed?: boolean;
 };
 
 // Nothing here is global on purpose — venue, time and seat count all live per
@@ -106,13 +109,16 @@ export const SESSIONS: WorkshopSession[] = [
   {
     id: "s01",
     label: "Session 01",
-    date: "MON 10 AUG",
-    isoDate: "2026-08-10",
-    time: "5:00PM – 8:00PM",
+    // Postponed 2026-08-10: every timeslot vote in the leads file is daytime.
+    // Links nulled so no buy path renders; the Stripe link is deactivated too.
+    date: null,
+    isoDate: null,
+    time: null,
     venue: VENUES.gatherBulimba,
-    paymentLinkId: "plink_1U0g3j1gBgJJLcc0kWYke9Ej",
-    bookUrl: "https://buy.stripe.com/fZu8wH6gQe2H0Al0zR5kk00",
+    paymentLinkId: null,
+    bookUrl: null,
     seats: SEATS_PER_SESSION,
+    postponed: true,
   },
   {
     id: "s02",
@@ -157,5 +163,5 @@ export const nextSession = (): WorkshopSession | null =>
 /** Hero date line — falls back to the existing copy while dates are pending. */
 export const nextSessionLabel = (): string => {
   const s = nextSession();
-  return s?.date ? `NEXT SESSION — ${s.date}` : "NEXT SESSION ANNOUNCING SOON";
+  return s?.date ? `NEXT SESSION — ${s.date}` : "DAYTIME SESSIONS — DATES ANNOUNCING SOON";
 };
