@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "unpaste": {
+      "source": {
+        "source": "github",
+        "repo": "elliot1703/unpaste-plugins"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "unpaste-brand@unpaste": true
+  }
+}
