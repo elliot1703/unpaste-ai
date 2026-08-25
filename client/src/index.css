@@ -656,148 +656,11 @@
   }
 
   /* ==========================================================================
-     Workshop session cards + seat grid
+     Workshop session cards
 
-     The seat is a dashed frame that never changes; the red tile inside is the
-     person in it. Tile geometry lives in these three vars — tune here, not in
-     the six rules below.
+     Seat tiles were removed 2026-08-25 (Elliot: cards read as an empty room).
+     The card sells date, venue and scarcity line only; Stripe holds the cap.
      ========================================================================== */
-
-  .seat-grid {
-    --seat-inset: 5px;
-    --seat-offset: 9px;
-    --seat-shadow: 3px;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    max-width: 190px;
-  }
-
-  .seat {
-    position: relative;
-    aspect-ratio: 1 / 1;
-    /* Grid children with unwrappable content force the page wider without this. */
-    min-width: 0;
-    border: 1px dashed var(--foreground);
-  }
-
-  /* An available seat is an invitation, not an absence — red frame reads as
-     "yours if you want it" where the grey one read as missing. */
-  .seat[data-state="open"] {
-    border-color: var(--primary);
-  }
-
-  .seat-grid--inverted .seat {
-    border-color: rgba(250, 250, 250, 0.55);
-  }
-
-  /* The dropped tile — sits up-left of centre so the hard shadow has room. */
-  .seat[data-state="taken"]::after {
-    content: "";
-    position: absolute;
-    top: var(--seat-inset);
-    left: var(--seat-inset);
-    right: var(--seat-offset);
-    bottom: var(--seat-offset);
-    background: var(--primary);
-    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
-  }
-
-  .seat-grid--inverted .seat[data-state="taken"]::after {
-    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--background);
-  }
-
-  /* Unknown = loading, not yet on sale, or /api/seats unreachable. Never
-     guesses a number. Same six objects as an open grid so the room is visibly
-     there waiting, but greyed and inert — a pending card must never be
-     mistaken for a bookable one. */
-  .seat[data-state="unknown"] {
-    border-color: var(--border);
-  }
-
-  .seat[data-state="unknown"]::after {
-    content: "";
-    position: absolute;
-    top: var(--seat-inset);
-    left: var(--seat-inset);
-    right: var(--seat-offset);
-    bottom: var(--seat-offset);
-    background: var(--background);
-    border: 1px solid var(--border);
-    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--border);
-  }
-
-  /* Open seat holds a white tile — an empty seat still has a chair in it, so
-     the difference between free and taken is which colour is in the chair,
-     not whether anything is there.
-     Flat at rest, pops up on hover: hovering performs the same transition
-     buying it would, so the interaction rehearses the click. */
-  .seat[data-state="open"]::after {
-    content: "";
-    position: absolute;
-    top: var(--seat-inset);
-    left: var(--seat-inset);
-    right: var(--seat-offset);
-    bottom: var(--seat-offset);
-    background: var(--background);
-    border: 1px solid var(--foreground);
-    box-shadow: 0 0 0 0 var(--foreground);
-    transition:
-      box-shadow 0.17s cubic-bezier(0.3, 1.35, 0.5, 1),
-      transform 0.17s cubic-bezier(0.3, 1.35, 0.5, 1);
-  }
-
-  .seat[data-state="open"]:hover::after {
-    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--foreground);
-    transform: translate(-2px, -2px);
-  }
-
-  .seat-grid--inverted .seat[data-state="open"]::after {
-    border-color: var(--background);
-  }
-
-  .seat-grid--inverted .seat[data-state="open"]:hover::after {
-    box-shadow: var(--seat-shadow) var(--seat-shadow) 0 0 var(--background);
-  }
-
-  .seat-link {
-    position: relative;
-    display: block;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Label pops down from above to match the tile landing. */
-  .seat-tip {
-    position: absolute;
-    left: 0;
-    bottom: calc(100% + 10px);
-    padding: 7px 10px;
-    white-space: nowrap;
-    font-family: var(--font-mono);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--foreground);
-    color: var(--background);
-    box-shadow: 3px 3px 0 0 var(--primary);
-    pointer-events: none;
-    opacity: 0;
-    transform: scale(0.5) translateY(-10px);
-    transform-origin: bottom left;
-    transition:
-      opacity 0.08s linear,
-      transform 0.17s cubic-bezier(0.3, 1.35, 0.5, 1);
-  }
-
-  .seat-link:hover .seat-tip {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-
-  /* ---- the card ---- */
 
   .session-card {
     display: flex;
@@ -901,7 +764,6 @@
   }
 
   .session-card__count {
-    margin-top: 14px;
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
@@ -1002,23 +864,6 @@
     transform: translate(-2px, -2px);
   }
 
-  /* The pop is decoration; the information must survive without it. The seat
-     still gains its shadow on hover — that's the affordance, not the spring. */
-  @media (prefers-reduced-motion: reduce) {
-    .seat[data-state="open"]::after,
-    .seat-tip {
-      transition: opacity 0.1s linear;
-      transform: none;
-    }
-
-    .seat[data-state="open"]:hover::after {
-      transform: none;
-    }
-
-    .seat-link:hover .seat-tip {
-      transform: none;
-    }
-  }
 }
 
 /* Smooth scroll */

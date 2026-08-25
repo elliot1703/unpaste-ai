@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import { SeatGrid } from "@/components/SeatGrid";
 import type { SeatInfo } from "@/hooks/useSeats";
 import { WORKSHOP_PRICE, isOnSale, type WorkshopSession } from "@/lib/workshops";
 import { trackMeta } from "@/lib/metaPixel";
@@ -43,8 +42,11 @@ export function SessionCard({ session, seats }: SessionCardProps) {
     >
       {mode === "soldout" && <div className="session-card__soldbar">Sold out</div>}
 
+      {/* The session number is bookkeeping, not selling — the date is the
+          heading a buyer actually reads. `label` stays on the data for
+          analytics and the booked page. */}
       <div className="flex items-baseline justify-between gap-3">
-        <span className="mono-label">{session.label}</span>
+        <span className="mono-label">Session date</span>
         <span className="mono-label">{session.seats} seats</span>
       </div>
 
@@ -77,34 +79,8 @@ export function SessionCard({ session, seats }: SessionCardProps) {
 
       <div className="session-card__rule" />
 
-      {/* The grid is a room, not a counter — no live availability is shown.
-          Every seat renders as an invitation; Stripe still enforces the cap,
-          and the card flips to sold out when the link deactivates. */}
-      {mode === "open" ? (
-        <a
-          className="seat-link"
-          href={session.bookUrl!}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={onCheckoutClick}
-          aria-label={`Grab your seat — ${session.date ?? "date to be confirmed"}${
-            session.time ? `, ${session.time}` : ""
-          }${session.venue ? `, ${session.venue.name}` : ""}`}
-        >
-          <span className="seat-tip" aria-hidden="true">
-            Grab this seat &rarr;
-          </span>
-          <SeatGrid total={total} taken={0} known />
-        </a>
-      ) : (
-        <SeatGrid
-          total={total}
-          taken={mode === "soldout" ? total : 0}
-          known={mode === "soldout"}
-          inverted={mode === "soldout"}
-        />
-      )}
-
+      {/* No seat tiles and no live counts — Stripe enforces the cap and the
+          card flips to sold out when the link deactivates. */}
       <div className="session-card__count">
         {mode === "postponed" ? (
           <span className="session-card__count-dim">

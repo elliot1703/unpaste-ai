@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { DictationNote } from "@/components/DictationNote";
 import { Analytics } from "@vercel/analytics/react";
 import { MetaPixel } from "@/components/MetaPixel";
 import NotFound from "@/pages/NotFound";
@@ -79,6 +80,7 @@ function App({ ssrPath, helmetContext }: AppProps = {}) {
           <TooltipProvider>
             <Toaster />
             <AppRoutes />
+            <DictationNote />
             <Analytics />
             <MetaPixel />
           </TooltipProvider>
