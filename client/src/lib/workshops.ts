@@ -101,24 +101,18 @@ export type WorkshopSession = {
 // session, so a 6-seat evening in Bulimba and a 100-seat daytime thing
 // somewhere else can sit side by side without touching a component.
 //
-// Session 01's venue is booked 4:30–8:30PM; the session runs 5:00–8:00PM with
-// setup and pack-down either side. Dates pending — fill in `date`/`isoDate`
-// and nothing else needs to change.
-//
+// Session 01 rescheduled 2026-08-25 (Cherie, Gather): daytime slot, ten seats.
 export const SESSIONS: WorkshopSession[] = [
   {
     id: "s01",
     label: "Session 01",
-    // Postponed 2026-08-10: every timeslot vote in the leads file is daytime.
-    // Links nulled so no buy path renders; the Stripe link is deactivated too.
-    date: null,
-    isoDate: null,
-    time: null,
+    date: "WED 16 SEP",
+    isoDate: "2026-09-16",
+    time: "10:00AM – 1:30PM",
     venue: VENUES.gatherBulimba,
-    paymentLinkId: null,
-    bookUrl: null,
-    seats: SEATS_PER_SESSION,
-    postponed: true,
+    paymentLinkId: "plink_1U0g3j1gBgJJLcc0kWYke9Ej",
+    bookUrl: "https://buy.stripe.com/fZu8wH6gQe2H0Al0zR5kk00",
+    seats: 10,
   },
   {
     id: "s02",

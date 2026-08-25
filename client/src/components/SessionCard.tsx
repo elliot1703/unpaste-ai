@@ -12,11 +12,8 @@ type SessionCardProps = {
 
 export function SessionCard({ session, seats }: SessionCardProps) {
   const onSale = isOnSale(session);
-  const known = Boolean(seats);
   const soldOut = seats?.soldOut ?? false;
-  const total = seats?.total ?? session.seats;
-  const taken = seats?.taken ?? 0;
-  const open = total - taken;
+  const total = session.seats;
 
   // Four mutually exclusive card modes.
   const mode: "postponed" | "pending" | "soldout" | "open" = session.postponed
@@ -80,6 +77,9 @@ export function SessionCard({ session, seats }: SessionCardProps) {
 
       <div className="session-card__rule" />
 
+      {/* The grid is a room, not a counter — no live availability is shown.
+          Every seat renders as an invitation; Stripe still enforces the cap,
+          and the card flips to sold out when the link deactivates. */}
       {mode === "open" ? (
         <a
           className="seat-link"
@@ -87,20 +87,20 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           target="_blank"
           rel="noopener noreferrer"
           onClick={onCheckoutClick}
-          aria-label={`Take a seat — ${session.date ?? "date to be confirmed"}${
+          aria-label={`Grab your seat — ${session.date ?? "date to be confirmed"}${
             session.time ? `, ${session.time}` : ""
           }${session.venue ? `, ${session.venue.name}` : ""}`}
         >
           <span className="seat-tip" aria-hidden="true">
-            Take this seat &rarr;
+            Grab this seat &rarr;
           </span>
-          <SeatGrid total={total} taken={taken} known={known} />
+          <SeatGrid total={total} taken={0} known />
         </a>
       ) : (
         <SeatGrid
           total={total}
-          taken={taken}
-          known={known && mode === "soldout"}
+          taken={mode === "soldout" ? total : 0}
+          known={mode === "soldout"}
           inverted={mode === "soldout"}
         />
       )}
@@ -114,10 +114,8 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           <span className="session-card__count-dim">
             {total} seats &middot; not yet on sale
           </span>
-        ) : !known ? (
-          <span className="session-card__count-dim">{total} seats per session</span>
         ) : (
-          `${open} of ${total} seats open`
+          "Limited seats available"
         )}
       </div>
 
@@ -134,7 +132,7 @@ export function SessionCard({ session, seats }: SessionCardProps) {
           rel="noopener noreferrer"
           onClick={onCheckoutClick}
         >
-          Take a seat <ArrowRight className="h-4 w-4" />
+          Grab your seat <ArrowRight className="h-4 w-4" />
         </a>
       )}
 

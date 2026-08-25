@@ -49,7 +49,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     kicker: "[001] CLAUDE CODE · BRISBANE",
     subhead: "You already use AI every day. This is the next level — AI that actually does things.",
     lede:
-      "Three hours, hands-on, Brisbane. Bring your laptop and one job that keeps coming back. Leave with it running.",
+      "One morning, hands-on, Brisbane. Bring your laptop and one job that keeps coming back. Leave with it running.",
     problem: {
       heading: "GIVE CHATGPT REAL WORK AND IT STARTS MAKING MISTAKES.",
       body:
@@ -68,9 +68,9 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     objection: {
       heading: "“I'M NOT TECHNICAL”",
       body:
-        "There's no code. You talk to it in plain English — mostly by dictation. The most technical thing you'll do all night is name a folder.",
+        "There's no code. You talk to it in plain English — mostly by dictation. The most technical thing you'll do all morning is name a folder.",
     },
-    cta: "Take a seat",
+    cta: "Grab your seat",
   },
   {
     slug: "beyond-chat",
@@ -79,7 +79,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     kicker: "[001] BEYOND THE CHAT WINDOW · BRISBANE",
     subhead: "You've hit the ceiling of copy and paste. This is what's past it.",
     lede:
-      "AI that answers you isn't AI that does the work. The difference is reach — that's what we set up. Three hours, hands-on, Brisbane.",
+      "AI that answers you isn't AI that does the work. The difference is reach — that's what we set up. One morning, hands-on, Brisbane.",
     problem: {
       heading: "YOU'RE STILL THE ONE DOING THE COPY-PASTING.",
       body:
@@ -100,7 +100,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
       body:
         "Keep it. This is a different shape of tool — one that opens files, edits them, and remembers. Most people end up using both.",
     },
-    cta: "Take a seat",
+    cta: "Grab your seat",
   },
   {
     slug: "systems",
@@ -109,7 +109,7 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
     kicker: "[001] AN ASSET, NOT A SUBSCRIPTION · BRISBANE",
     subhead: "Your business runs on knowledge that only lives in your head. Write it down once, then put it to work.",
     lede:
-      "How your business runs lives in your head. Write it down once, in a form an AI can act on. Three hours, hands-on, Brisbane.",
+      "How your business runs lives in your head. Write it down once, in a form an AI can act on. One morning, hands-on, Brisbane.",
     problem: {
       heading: "EVERY JOB STILL ENDS UP BACK ON YOUR DESK.",
       body:
@@ -126,11 +126,11 @@ export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
       "One recurring job off your desk for good",
     ],
     objection: {
-      heading: "“I HAVEN'T GOT AN EVENING”",
+      heading: "“I HAVEN'T GOT A MORNING”",
       body:
-        "Three hours once, against a job that comes back every week. Most people bring the thing that was eating their Sunday.",
+        "Three and a half hours once, against a job that comes back every week. Most people bring the thing that was eating their Sunday.",
     },
-    cta: "Take a seat",
+    cta: "Grab your seat",
   },
 ];
 

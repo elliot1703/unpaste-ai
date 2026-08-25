@@ -16,7 +16,7 @@ type SessionsSectionProps = {
  * variant can change every word above it and still cannot misreport what's
  * actually for sale.
  */
-export function SessionsSection({ tag = "[010] TAKE A SEAT" }: SessionsSectionProps) {
+export function SessionsSection({ tag = "[010] GRAB YOUR SEAT" }: SessionsSectionProps) {
   const { seats } = useSeats();
 
   return (
@@ -29,7 +29,7 @@ export function SessionsSection({ tag = "[010] TAKE A SEAT" }: SessionsSectionPr
           </h2>
           <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-12 max-w-xl">
             Dates, venues and group sizes vary by session — everything running
-            right now is below. Seats update live.
+            right now is below. Limited seats available.
           </p>
         </div>
 

@@ -124,8 +124,8 @@ export default function WorkshopVariantPage({
                 transition={{ delay: 0.6 }}
                 className="mono-label"
               >
-                {WORKSHOP_PRICE.display} {WORKSHOP_PRICE.suffix} · 3 HOURS ·
-                SMALL GROUP · {venue.short.toUpperCase()} ·{" "}
+                {WORKSHOP_PRICE.display} {WORKSHOP_PRICE.suffix} · 3.5 HOURS ·
+                10 SEATS · {venue.short.toUpperCase()} ·{" "}
                 {nextSessionLabel()}
               </motion.p>
             </div>
@@ -297,7 +297,7 @@ export default function WorkshopVariantPage({
         </section>
 
         {/* [008] Book */}
-        <SessionsSection tag="[008] TAKE A SEAT" />
+        <SessionsSection tag="[008] GRAB YOUR SEAT" />
 
         <Footer />
       </div>
