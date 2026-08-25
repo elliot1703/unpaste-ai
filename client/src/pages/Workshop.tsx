@@ -473,8 +473,7 @@ export default function Workshop() {
               </h2>
               <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-10 max-w-xl">
                 {VENUES.gatherBulimba.name}, {VENUES.gatherBulimba.street},{" "}
-                {VENUES.gatherBulimba.suburb}. Free parking on the street, and
-                the room is a two-minute walk from Oxford Street.
+                {VENUES.gatherBulimba.suburb}. Free parking on site.
               </p>
               {VENUES.gatherBulimba.mapUrl && (
                 <a

@@ -277,8 +277,7 @@ export default function WorkshopVariantPage({
               </h2>
               <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-10 max-w-xl">
                 {venue.name}, {venue.street}, {venue.suburb}. Free parking on
-                the street, and the room is a two-minute walk from Oxford
-                Street.
+                site.
               </p>
               {venue.mapUrl && (
                 <a
