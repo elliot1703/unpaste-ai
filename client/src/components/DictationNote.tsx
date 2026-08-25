@@ -52,37 +52,39 @@ export function DictationNote() {
     <AnimatePresence>
       {visible && !onBookedPage && (
         <motion.aside
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          exit={{ y: "100%" }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
           role="status"
-          className="fixed bottom-4 left-4 right-4 z-50 border border-foreground bg-background p-5 sm:right-auto sm:max-w-sm"
-          style={{ boxShadow: "5px 5px 0 0 var(--foreground)" }}
+          className="fixed inset-x-0 bottom-0 z-50 border-t-2 border-foreground bg-background"
         >
-          <button
-            type="button"
-            onClick={dismiss}
-            aria-label="Dismiss"
-            className="absolute right-3 top-3 p-1 text-muted-foreground transition-colors hover:text-foreground"
-          >
-            <X className="h-4 w-4" />
-          </button>
-
-          <div className="section-tag mb-3">[TRUE STORY]</div>
-          <p className="mb-4 pr-6 font-mono text-sm leading-relaxed">
-            This entire website was built by{" "}
-            <span className="font-bold">dictating to Claude Code</span>. Spoken,
-            not typed. The workshop teaches you to do the same.
-          </p>
-          <button
-            type="button"
-            onClick={onLearnHow}
-            className="inline-flex items-center gap-2 border border-foreground px-4 py-2.5 font-mono text-xs font-bold uppercase tracking-wider transition-colors hover:bg-foreground hover:text-background"
-          >
-            Learn how
-            <ArrowRight className="h-3.5 w-3.5" />
-          </button>
+          <div className="container flex flex-wrap items-center gap-x-6 gap-y-2 py-3">
+            <p className="font-mono text-xs leading-relaxed sm:text-sm">
+              <span className="section-tag mr-3">[TRUE STORY]</span>
+              This entire website was built by{" "}
+              <span className="font-bold">dictating to Claude Code</span>.
+              Spoken, not typed.
+            </p>
+            <span className="ml-auto inline-flex items-center gap-2">
+              <button
+                type="button"
+                onClick={onLearnHow}
+                className="inline-flex items-center gap-2 border border-foreground px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider transition-colors hover:bg-foreground hover:text-background"
+              >
+                Learn how
+                <ArrowRight className="h-3.5 w-3.5" />
+              </button>
+              <button
+                type="button"
+                onClick={dismiss}
+                aria-label="Dismiss"
+                className="p-2 text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </span>
+          </div>
         </motion.aside>
       )}
     </AnimatePresence>
