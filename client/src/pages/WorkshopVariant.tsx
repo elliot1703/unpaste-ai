@@ -1,4 +1,13 @@
-import { ArrowRight, Check, FileText, Landmark, MapPin } from "lucide-react";
+import {
+  ArrowRight,
+  BatteryCharging,
+  Check,
+  FileText,
+  Landmark,
+  Laptop,
+  MapPin,
+  Sparkles,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -266,11 +275,44 @@ export default function WorkshopVariantPage({
           </div>
         </section>
 
-        {/* [007] The room */}
+        {/* [007] What you'll need */}
+        <section className="py-16 md:py-20 border-t border-border bg-card">
+          <div className="container">
+            <div className="max-w-3xl mb-12">
+              <div className="section-tag text-sm md:text-base mb-4">
+                [007] WHAT YOU'LL NEED
+              </div>
+              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter">
+                BRING <span className="text-primary">THREE THINGS.</span>
+              </h2>
+            </div>
+
+            <div className="stats-grid grid sm:grid-cols-3 border border-border">
+              {NEEDS.map(({ title, line, icon }) => (
+                <div key={title} className="p-6">
+                  <div className="h-6 mb-4 flex items-center">{icon}</div>
+                  <h3 className="font-mono text-sm font-bold tracking-wide mb-2">
+                    {title}
+                  </h3>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
+                    {line}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <p className="font-mono text-sm text-muted-foreground mt-8 max-w-3xl leading-relaxed">
+              That's the whole list. No code, no prep reading — everything else
+              gets sorted in the room.
+            </p>
+          </div>
+        </section>
+
+        {/* [008] The room */}
         <section className="py-16 md:py-20 border-t border-border">
           <div className="container">
             <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-6">[007] THE ROOM</div>
+              <div className="section-tag text-sm md:text-base mb-6">[008] THE ROOM</div>
               <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
                 THIS IS WHERE{" "}
                 <span className="text-primary">YOU'LL BE SITTING.</span>
@@ -295,14 +337,33 @@ export default function WorkshopVariantPage({
           </div>
         </section>
 
-        {/* [008] Book */}
-        <SessionsSection tag="[008] GRAB YOUR SEAT" />
+        {/* [009] Book */}
+        <SessionsSection tag="[009] GRAB YOUR SEAT" />
 
         <Footer />
       </div>
     </div>
   );
 }
+
+/** The bring list — factual, so shared across variants like the room is. */
+const NEEDS: { title: string; line: string; icon: React.ReactNode }[] = [
+  {
+    title: "YOUR LAPTOP",
+    line: "Mac or Windows — whatever you actually work on.",
+    icon: <Laptop className="h-6 w-6 text-primary" />,
+  },
+  {
+    title: "ITS CHARGER",
+    line: "Three and a half hours of real work. Batteries alone won't make it.",
+    icon: <BatteryCharging className="h-6 w-6 text-primary" />,
+  },
+  {
+    title: "CLAUDE PRO",
+    line: "The subscription that runs Claude Code, about $31 AUD a month. Have it active before the day.",
+    icon: <Sparkles className="h-6 w-6 text-primary" />,
+  },
+];
 
 /**
  * What the loaded brain unlocks. Shared across variants — the capabilities
