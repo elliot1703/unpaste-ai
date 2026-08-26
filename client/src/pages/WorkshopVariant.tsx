@@ -189,13 +189,17 @@ export default function WorkshopVariantPage({
             </div>
 
             {/* The grid says what's possible; this shows what asking for it
-                actually looks like — the real composer they'll type into. */}
+                actually looks like — the real composer they'll type into,
+                with the tools it reaches into alongside. */}
             <div className="mt-10">
               <p className="mono-label mb-4">What asking looks like</p>
               <ComposerBox
                 prompt="Hey Claude, let's make a new landing page for the end-of-year sale. Use the transcript from yesterday's team brainstorm as the starting point. We'll also need an EDM in Mailchimp to match."
-                after="40 min later"
-                result="page live for review, EDM drafted in Mailchimp"
+                steps={[
+                  { action: "Reads the brainstorm transcript", tool: "Granola" },
+                  { action: "Builds and deploys the page", tool: "Vercel" },
+                  { action: "Drafts the matching EDM", tool: "Mailchimp" },
+                ]}
               />
             </div>
           </div>

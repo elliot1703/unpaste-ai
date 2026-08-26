@@ -19,37 +19,57 @@ function OutcomeTag({ after, result }: { after: string; result: string }) {
 /**
  * B — the Claude Desktop composer, mid-type with a blinking caret. The only
  * one of the three that's literally true to the product: this is the box the
- * workshop puts on their laptop.
+ * workshop puts on their laptop. Beside it, the step rail shows HOW the job
+ * gets done — which tools it reaches into — with no elapsed time shown:
+ * the working time is Claude's, not the reader's.
  */
 export function ComposerBox({
   prompt,
-  after,
-  result,
+  steps,
 }: {
   prompt: string;
-  after: string;
-  result: string;
+  /** What Claude does with the ask, in order: action + the tool it opens. */
+  steps: { action: string; tool: string }[];
 }) {
   return (
-    <div className="max-w-md">
-      <div className="rounded-[20px] border border-[#E8E6DC] bg-[#FAF9F5] p-5">
-        <div className="rounded-2xl border border-[#DEDCD1] bg-white p-3.5 pb-2.5 shadow-sm">
-          <p className="min-h-11 text-[14.5px] leading-normal text-[#1F1E1D]">
-            {prompt}
-            <span className="prompt-caret ml-px inline-block h-[1.1em] w-0.5 translate-y-[3px] bg-[#D97757]" />
-          </p>
-          <div className="mt-3 flex items-center">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#DEDCD1] text-base font-light text-[#6E6D66]">
-              +
-            </span>
-            <span className="ml-auto mr-2.5 text-xs text-[#6E6D66]">Claude</span>
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#D97757] text-sm text-white">
-              &uarr;
-            </span>
+    <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
+      <div className="w-full max-w-md">
+        <div className="rounded-[20px] border border-[#E8E6DC] bg-[#FAF9F5] p-5">
+          <div className="rounded-2xl border border-[#DEDCD1] bg-white p-3.5 pb-2.5 shadow-sm">
+            <p className="min-h-11 text-[14.5px] leading-normal text-[#1F1E1D]">
+              {prompt}
+              <span className="prompt-caret ml-px inline-block h-[1.1em] w-0.5 translate-y-[3px] bg-[#D97757]" />
+            </p>
+            <div className="mt-3 flex items-center">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg border border-[#DEDCD1] text-base font-light text-[#6E6D66]">
+                +
+              </span>
+              <span className="ml-auto mr-2.5 text-xs text-[#6E6D66]">Claude</span>
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#D97757] text-sm text-white">
+                &uarr;
+              </span>
+            </div>
           </div>
         </div>
       </div>
-      <OutcomeTag after={after} result={result} />
+
+      <div className="shrink-0">
+        <p className="mono-label mb-4">How it does it</p>
+        <ul className="space-y-3">
+          {steps.map((s, i) => (
+            <li key={s.tool} className="flex items-center gap-3 font-mono text-xs">
+              <span className="font-mono text-[10px] text-muted-foreground">
+                0{i + 1}
+              </span>
+              <span className="h-2 w-2 bg-primary" aria-hidden="true" />
+              <span className="text-foreground">{s.action}</span>
+              <span className="border border-border px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                {s.tool}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
