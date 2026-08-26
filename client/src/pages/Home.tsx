@@ -8,6 +8,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Assessment } from "@/components/Assessment";
+import { calendlyUrl } from "@/lib/booking";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { AgentsSection } from "@/components/AgentsSection";
 import { SEO } from "@/components/SEO";
@@ -483,34 +484,33 @@ export default function Home() {
               </div>
 
               <div className="space-y-0">
+                {/* Each step row is clickable and leads to its gateway
+                    action: the assessment modal for [01]/[03] (the roadmap
+                    starts there), Calendly for the free call in [02]. */}
                 {[
                   {
                     step: "[01]",
                     title: "TAKE THE ASSESSMENT",
                     description: "Answer 15 questions about how your business runs. Get an Efficiency Score and see exactly where time is being wasted.",
-                    time: "5 MIN"
+                    time: "5 MIN",
+                    href: null
                   },
                   {
                     step: "[02]",
                     title: "BOOK YOUR WORKSHOP",
                     description: "In a free 30-minute call, we'll review your results, identify your biggest bottleneck, and show you what's possible.",
-                    time: "30 MIN"
+                    time: "30 MIN",
+                    href: calendlyUrl("home_method")
                   },
                   {
                     step: "[03]",
                     title: "GET YOUR ROADMAP",
                     description: "Leave with a clear action plan—what to automate first, what to fix, and exactly how it will transform your operations.",
-                    time: "INSTANT"
+                    time: "INSTANT",
+                    href: null
                   }
-                ].map((item, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.15 }}
-                    className="border-b border-border py-8 first:pt-0 last:border-none group"
-                  >
+                ].map((item, i) => {
+                  const inner = (
                     <div className="flex items-start gap-6">
                       <span className="section-tag pt-1">{item.step}</span>
                       <div className="flex-1">
@@ -528,8 +528,38 @@ export default function Home() {
                         </p>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
+                  );
+                  const rowClass =
+                    "block w-full text-left border-b border-border py-8 first:pt-0 last:border-none group cursor-pointer";
+                  const motionProps = {
+                    initial: { opacity: 0, x: 20 },
+                    whileInView: { opacity: 1, x: 0 },
+                    viewport: { once: true },
+                    transition: { delay: i * 0.15 },
+                  };
+                  return item.href ? (
+                    <motion.a
+                      key={i}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={rowClass}
+                      {...motionProps}
+                    >
+                      {inner}
+                    </motion.a>
+                  ) : (
+                    <motion.button
+                      key={i}
+                      type="button"
+                      onClick={() => setIsAssessmentOpen(true)}
+                      className={rowClass}
+                      {...motionProps}
+                    >
+                      {inner}
+                    </motion.button>
+                  );
+                })}
               </div>
             </div>
           </div>
