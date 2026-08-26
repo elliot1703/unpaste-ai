@@ -40,24 +40,30 @@ const agentOsTree = `your-business/
 ├── rules.md        ← the never-list
 └── work/           ← what ships`;
 
-const sprintWeeks = [
+const blockSessions = [
   {
-    week: "WK 1",
-    title: "First live build",
+    week: "S1",
+    title: "Set up and first agent running",
     detail:
-      "A working automation in your business by the end of session one. Not a demo — your work, your tools.",
+      "90 minutes. Your workspace built, your first agent running on your real work that day.",
   },
   {
-    week: "WK 2",
+    week: "S2",
     title: "The thinking",
     detail:
       "How to spot what's automatable, how to brief an agent properly, and where the limits actually are.",
   },
   {
-    week: "WK 3",
+    week: "S3",
+    title: "Build the habit",
+    detail:
+      "Between sessions you run it solo. That gap is where it becomes yours, and we review what stuck.",
+  },
+  {
+    week: "S4",
     title: "The judgment",
     detail:
-      "A roadmap you own — what to build next, what to skip, and how to keep compounding without me.",
+      "A roadmap you own: what to build next, what to skip, and how to keep compounding without me.",
   },
 ];
 
@@ -150,8 +156,8 @@ const faqs = [
     a: "Workshops and dev days run in person — Brisbane and surrounds. Coaching runs in person in Brisbane or remote anywhere in Australia.",
   },
   {
-    q: "WHAT HAPPENS AFTER THE SPRINT?",
-    a: "Three options: keep going with ongoing sessions (we scope it together), book a dev day to bring your team in, or take the roadmap and run solo. No lock-in either way.",
+    q: "WHAT HAPPENS AFTER THE EIGHT WEEKS?",
+    a: "Three options: keep going with a second block (we scope it together), book a dev day to bring your team in, or take the roadmap and run solo. No lock-in either way.",
   },
 ];
 
@@ -235,7 +241,7 @@ export default function Coaching() {
                 transition={{ delay: 0.6 }}
                 className="mono-label"
               >
-                WORKSHOP $399 · DEV DAY $3,500 · 1:1 COACHING BY ENQUIRY · + GST
+                WORKSHOP $399 · 1:1 UPSKILLING $2,000 · DEV DAY $3,500 · + GST
               </motion.p>
             </div>
           </div>
@@ -372,7 +378,7 @@ export default function Coaching() {
                 </div>
               </motion.div>
 
-              {/* Coaching sprint — featured */}
+              {/* AI Upskilling block — featured */}
               <motion.div
                 id="sprint"
                 custom={1}
@@ -387,21 +393,21 @@ export default function Coaching() {
                 </div>
                 <div className="p-6 md:p-8 flex flex-col flex-1">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="mono-label text-primary">[B] COACHING SPRINT</span>
+                    <span className="mono-label text-primary">[B] AI UPSKILLING, HANDS-ON</span>
                     <User className="h-5 w-5 text-primary" />
                   </div>
                   <div className="mb-1 text-3xl font-bold tracking-tight">
-                    By enquiry
+                    $2,000
                   </div>
                   <div className="mono-label mb-6 text-background/60">
-                    3 WEEKS · 1:1 · YOUR BUSINESS
+                    8-WEEK BLOCK · 4 SESSIONS · 1:1 · + GST
                   </div>
                   <p className="font-mono text-sm text-background/80 leading-relaxed mb-6">
-                    Three weeks, one-on-one, on your real work. The first
-                    session ends with something running.
+                    By the end of eight weeks you're running AI agents on your
+                    own business, on your own machine, without me in the room.
                   </p>
                   <div className="space-y-4 mb-6 flex-1">
-                    {sprintWeeks.map((wk) => (
+                    {blockSessions.map((wk) => (
                       <div key={wk.week} className="flex items-start gap-3">
                         <span className="mono-label text-primary pt-0.5 flex-shrink-0">
                           {wk.week}
@@ -418,11 +424,11 @@ export default function Coaching() {
                     ))}
                   </div>
                   <p className="font-mono text-xs text-background/60 italic mb-5">
-                    Then: extend with ongoing sessions, book a dev day, or run
-                    solo. Your call.
+                    Includes weekly best-practice notes and a direct line to me
+                    for the sticking points between sessions.
                   </p>
                   <a
-                    href={calendlyUrl("sprint")}
+                    href={calendlyUrl("block")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-auto inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 bg-primary text-white hover:bg-primary/90 transition-colors"

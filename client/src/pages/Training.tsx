@@ -116,31 +116,35 @@ const packages: Package[] = [
   },
   {
     tag: "[003]",
-    name: "1:1 COACHING",
-    positioning: "Three weeks, one-on-one, on your business.",
-    setupPrice: "$750",
-    term: "3-week sprint · in person or remote",
+    name: "1:1 AI UPSKILLING",
+    positioning: "Eight weeks, one-on-one, on your business.",
+    setupPrice: "$2,000",
+    term: "8-week block · 4 sessions · in person or remote",
     youGet:
-      "A first automation live in week one · the thinking behind it · a roadmap you own",
-    includesTitle: "The sprint, week by week",
+      "An agent running on your work from session one · the thinking behind it · a roadmap you own",
+    includesTitle: "The block, session by session",
     includes: [
       {
-        lead: "WK1 — First live build",
-        detail: "Something running in your business by the end of session one",
+        lead: "S1 — Set up and first agent (90 min)",
+        detail: "Workspace built, first agent running on your real work that day",
       },
       {
-        lead: "WK2 — The thinking",
-        detail: "Spot what's automatable, brief an agent properly, know the limits",
+        lead: "S2–S3 — The thinking",
+        detail: "Spot what's automatable, brief an agent properly, run it solo between sessions",
       },
       {
-        lead: "WK3 — The judgment",
+        lead: "S4 — The judgment",
         detail: "A roadmap you own: what to build next and why",
+      },
+      {
+        lead: "Between sessions",
+        detail: "Weekly best-practice notes plus a direct line for sticking points",
       },
     ],
     narrative:
       "Most teams start here: the owner or a champion gets ahead first, then brings the team in with a dev day.",
     forWhom: "owners and directors who want the capability themselves first.",
-    cta: "See the sprint",
+    cta: "See the block",
     href: "/coaching#sprint",
   },
 ];

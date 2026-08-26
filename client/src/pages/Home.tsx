@@ -37,8 +37,8 @@ export default function Home() {
     },
     {
       num: "02",
-      title: "1:1 Coaching",
-      description: "One-on-one, hands-on, on your own business. Claude Code on your real work, at your pace — with a system you own at the end. Scoped on a call.",
+      title: "1:1 AI Upskilling",
+      description: "Eight-week block, one-on-one, on your own business. Four working sessions, an agent running from day one, a system you own at the end. $2,000 + GST.",
       icon: Compass,
       href: "/coaching",
     },
