@@ -24,6 +24,7 @@ import {
 } from "@/components/BrandIcons";
 import { VENUES, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
 import { BRAIN_H1, type WorkshopVariant as Variant } from "@/lib/workshopVariants";
+import { ComposerBox, ClaudeConvo, IMessageThread } from "@/components/PromptBoxes";
 
 /**
  * A messaging variant of the workshop page.
@@ -186,6 +187,17 @@ export default function WorkshopVariantPage({
                 </div>
               ))}
             </div>
+
+            {/* The grid says what's possible; this shows what asking for it
+                actually looks like — the real composer they'll type into. */}
+            <div className="mt-10">
+              <p className="mono-label mb-4">What asking looks like</p>
+              <ComposerBox
+                prompt="Hey Claude, let's make a new landing page for the end-of-year sale. Use the transcript from yesterday's team brainstorm as the starting point. We'll also need an EDM in Mailchimp to match."
+                after="40 min later"
+                result="page live for review, EDM drafted in Mailchimp"
+              />
+            </div>
           </div>
         </section>
 
@@ -214,13 +226,26 @@ export default function WorkshopVariantPage({
                 </div>
               ))}
             </div>
+
+            {/* The brain in use — the reply name-drops the rules folder the
+                section just described. */}
+            <div className="mt-10">
+              <p className="mono-label mb-4">The brain, in use</p>
+              <ClaudeConvo
+                prompt="Draft this week's socials from the jobs we finished. The Henderson deck photos are in the shared folder."
+                reply="Reading your brand voice file and the Henderson photos"
+                after="12 min later"
+                result="five posts drafted in your voice, ready to approve"
+              />
+            </div>
           </div>
         </section>
 
-        {/* [005] The takeaway */}
+        {/* [005] The takeaway — the iMessage box paints the after-state:
+            delegating from your phone like it's any other text thread. */}
         <section className="py-16 md:py-20 border-t border-border bg-card">
           <div className="container">
-            <div className="max-w-3xl">
+            <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
               <div>
                 <div className="section-tag text-sm md:text-base mb-4">[005] WHAT YOU TAKE HOME</div>
                 <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
@@ -231,6 +256,16 @@ export default function WorkshopVariantPage({
                   A working setup on your laptop, your rules in a folder, one
                   job automated — and you know how to do the next one.
                 </p>
+              </div>
+              <div className="w-full lg:justify-self-end lg:max-w-md">
+                <IMessageThread
+                  messages={[
+                    "Chase the three quotes that haven't replied, in my voice, and log the follow-ups in the CRM.",
+                  ]}
+                  reply="Done. Three follow-ups sent, CRM updated. Two have already opened it."
+                  after="your tuesday now"
+                  result="work you didn't do, done your way"
+                />
               </div>
             </div>
           </div>

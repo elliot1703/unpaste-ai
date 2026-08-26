@@ -68,6 +68,7 @@
       transform: translateY(0);
     }
   }
+
 }
 
 :root {
@@ -884,4 +885,27 @@ textarea,
 select,
 [role="dialog"] {
   border-radius: 0 !important;
+}
+
+/* Blinking caret in the workshop prompt-box composer (PromptBoxes.tsx). */
+@keyframes caret-blink {
+  0%,
+  55% {
+    opacity: 1;
+  }
+
+  56%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.prompt-caret {
+  animation: caret-blink 1.1s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .prompt-caret {
+    animation: none;
+  }
 }
