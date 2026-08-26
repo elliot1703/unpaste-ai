@@ -10,6 +10,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -21,7 +22,20 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
 
-const calendlyUrl = (source: string) => baseCalendlyUrl(`coaching_${source}`);
+// Referral attribution: /coaching?ref=andrew tags every Calendly link on the
+// page with utm_content=ref_andrew (terms: business/strategy/referral-program.md).
+// Read after mount so prerendered HTML stays clean and hydration matches.
+const useReferrer = () => {
+  const [ref, setRef] = useState<string | null>(null);
+  useEffect(() => {
+    const r = new URLSearchParams(window.location.search).get("ref");
+    if (r && /^[a-z0-9-]{1,32}$/i.test(r)) setRef(r.toLowerCase());
+  }, []);
+  return ref;
+};
+
+const makeCalendlyUrl = (ref: string | null) => (source: string) =>
+  baseCalendlyUrl(`coaching_${source}`) + (ref ? `&utm_content=ref_${ref}` : "");
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -162,6 +176,8 @@ const faqs = [
 ];
 
 export default function Coaching() {
+  const referrer = useReferrer();
+  const calendlyUrl = makeCalendlyUrl(referrer);
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
