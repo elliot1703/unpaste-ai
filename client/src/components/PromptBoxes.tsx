@@ -16,6 +16,35 @@ function OutcomeTag({ after, result }: { after: string; result: string }) {
   );
 }
 
+type Step = { action: string; tool: string };
+
+/**
+ * The "how it does it" rail beside a chat box: numbered steps, each with the
+ * tool (or state) it reaches, in unpaste mono. Deliberately shows mechanism
+ * with no elapsed time — the working time is Claude's, not the reader's.
+ */
+function StepRail({ steps }: { steps: Step[] }) {
+  return (
+    <div className="shrink-0">
+      <p className="mono-label mb-4">How it does it</p>
+      <ul className="space-y-3">
+        {steps.map((s, i) => (
+          <li key={s.tool} className="flex items-center gap-3 font-mono text-xs">
+            <span className="font-mono text-[10px] text-muted-foreground">
+              0{i + 1}
+            </span>
+            <span className="h-2 w-2 bg-primary" aria-hidden="true" />
+            <span className="text-foreground">{s.action}</span>
+            <span className="border border-border px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+              {s.tool}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 /**
  * B — the Claude Desktop composer, mid-type with a blinking caret. The only
  * one of the three that's literally true to the product: this is the box the
@@ -29,7 +58,7 @@ export function ComposerBox({
 }: {
   prompt: string;
   /** What Claude does with the ask, in order: action + the tool it opens. */
-  steps: { action: string; tool: string }[];
+  steps: Step[];
 }) {
   return (
     <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
@@ -53,23 +82,7 @@ export function ComposerBox({
         </div>
       </div>
 
-      <div className="shrink-0">
-        <p className="mono-label mb-4">How it does it</p>
-        <ul className="space-y-3">
-          {steps.map((s, i) => (
-            <li key={s.tool} className="flex items-center gap-3 font-mono text-xs">
-              <span className="font-mono text-[10px] text-muted-foreground">
-                0{i + 1}
-              </span>
-              <span className="h-2 w-2 bg-primary" aria-hidden="true" />
-              <span className="text-foreground">{s.action}</span>
-              <span className="border border-border px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
-                {s.tool}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <StepRail steps={steps} />
     </div>
   );
 }
@@ -81,29 +94,30 @@ export function ComposerBox({
 export function ClaudeConvo({
   prompt,
   reply,
-  after,
-  result,
+  steps,
 }: {
   prompt: string;
   reply: string;
-  after: string;
-  result: string;
+  steps: Step[];
 }) {
   return (
-    <div className="max-w-md">
-      <div className="rounded-[20px] border border-[#E8E6DC] bg-[#FAF9F5] p-5">
-        <p className="mb-3.5 ml-12 rounded-xl bg-[#F0EEE6] px-4 py-3 text-[14.5px] leading-normal text-[#1F1E1D]">
-          {prompt}
-        </p>
-        <div className="flex items-start gap-2.5">
-          <span className="text-[15px] leading-normal text-[#D97757]">✱</span>
-          <p className="text-sm leading-relaxed text-[#3D3D3A]">
-            {reply}
-            <span className="tracking-widest text-[#A8A69D]">…</span>
+    <div className="flex flex-col gap-8 md:flex-row md:items-center md:gap-12">
+      <div className="w-full max-w-md">
+        <div className="rounded-[20px] border border-[#E8E6DC] bg-[#FAF9F5] p-5">
+          <p className="mb-3.5 ml-12 rounded-xl bg-[#F0EEE6] px-4 py-3 text-[14.5px] leading-normal text-[#1F1E1D]">
+            {prompt}
           </p>
+          <div className="flex items-start gap-2.5">
+            <span className="text-[15px] leading-normal text-[#D97757]">✱</span>
+            <p className="text-sm leading-relaxed text-[#3D3D3A]">
+              {reply}
+              <span className="tracking-widest text-[#A8A69D]">…</span>
+            </p>
+          </div>
         </div>
       </div>
-      <OutcomeTag after={after} result={result} />
+
+      <StepRail steps={steps} />
     </div>
   );
 }

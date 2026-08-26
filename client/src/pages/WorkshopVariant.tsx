@@ -232,14 +232,17 @@ export default function WorkshopVariantPage({
             </div>
 
             {/* The brain in use — the reply name-drops the rules folder the
-                section just described. */}
+                section just described, and the rail shows it being read. */}
             <div className="mt-10">
               <p className="mono-label mb-4">The brain, in use</p>
               <ClaudeConvo
                 prompt="Draft this week's socials from the jobs we finished. The Henderson deck photos are in the shared folder."
                 reply="Reading your brand voice file and the Henderson photos"
-                after="12 min later"
-                result="five posts drafted in your voice, ready to approve"
+                steps={[
+                  { action: "Reads your brand voice file", tool: "The brain" },
+                  { action: "Pulls the Henderson job photos", tool: "Shared folder" },
+                  { action: "Drafts five posts in your voice", tool: "Ready to approve" },
+                ]}
               />
             </div>
           </div>
