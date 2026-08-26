@@ -95,12 +95,14 @@ export default function Home() {
     },
   ];
 
-  // Words to cycle through in hero — each split into two lines
+  // Words to cycle through in hero — lead word + two lines. Three STOPs and
+  // one START, in that order: the subtraction story sets up a single
+  // capability beat, deliberately not more (2026-08 positioning dial).
   const heroWords = [
-    { top: "COPY-", bottom: "PASTING." },
-    { top: "MANUAL", bottom: "WORK." },
-    { top: "BUSY-", bottom: "WORK." },
-    { top: "WASTING", bottom: "TIME." },
+    { lead: "STOP", top: "COPY-", bottom: "PASTING." },
+    { lead: "STOP", top: "BUSY-", bottom: "WORK." },
+    { lead: "STOP", top: "WASTING", bottom: "TIME." },
+    { lead: "START", top: "BIGGER", bottom: "WORK." },
   ];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
@@ -212,14 +214,22 @@ export default function Home() {
                     transition={{ duration: 0.3 }}
                     className="text-5xl md:text-7xl lg:text-8xl leading-[0.95] tracking-tighter"
                   >
-                    <motion.span
-                      initial={{ opacity: 0, y: 50 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.1 }}
-                      className="block"
-                    >
-                      STOP
-                    </motion.span>
+                    {/* Keyed by the word itself, so it only animates on the
+                        STOP -> START flip, not every tick. */}
+                    <div className="relative h-[1.1em] overflow-hidden">
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={heroWords[currentWordIndex].lead}
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -50 }}
+                          transition={{ duration: 0.5 }}
+                          className="block"
+                        >
+                          {heroWords[currentWordIndex].lead}
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
                     <div className="relative h-[1.1em] overflow-hidden">
                       <AnimatePresence mode="wait">
                         <motion.span
@@ -259,8 +269,9 @@ export default function Home() {
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
                   Hands-on AI workshops in Brisbane, plus 1:1 coaching and
-                  custom development. Learn to use Claude Code for real work — or
-                  have it built with you. Either way, you own the system.
+                  custom development. Automating the busy-work is step one —
+                  then you build things you couldn't before. Either way, you
+                  own the system.
                 </motion.p>
 
                 {/* CTA with hover effects */}
@@ -393,7 +404,7 @@ export default function Home() {
                   <span className="text-foreground font-bold">UNPASTE</span> /ʌnˈpeɪst/ <span className="italic">verb</span>
                 </div>
                 <p className="font-mono text-sm leading-relaxed text-muted-foreground">
-                  To remove the need for manual data transfer by connecting your tools with automation—freeing humans to do higher-value work.
+                  To remove the need for manual data transfer by connecting your tools with automation—freeing humans to do the work only humans can do.
                 </p>
               </motion.div>
             </div>
@@ -613,8 +624,8 @@ export default function Home() {
               viewport={{ once: true }}
               className="text-5xl md:text-6xl lg:text-7xl leading-tight max-w-4xl mx-auto mb-8"
             >
-              READY TO GET YOUR{" "}
-              <span className="text-primary">TIME</span> BACK?
+              READY FOR <span className="text-primary">MORE</span> THAN YOUR
+              TIME BACK?
             </motion.h2>
             <motion.p
               initial={{ opacity: 0, y: 20 }}

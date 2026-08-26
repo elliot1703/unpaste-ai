@@ -138,8 +138,8 @@ export function AgentsSection() {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-5xl max-w-2xl leading-tight mb-6"
           >
-            YOUR 24/7 WORKFORCE.{" "}
-            <span className="text-muted-foreground">ALWAYS ON. NEVER TIRED.</span>
+            AGENTS DO THE LEGWORK.{" "}
+            <span className="text-muted-foreground">YOU MAKE THE CALLS.</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
