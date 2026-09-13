@@ -24,6 +24,7 @@ import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
 import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
 import Resources from "./pages/Resources";
+import ClaudeAndCoffee from "./pages/ClaudeAndCoffee";
 
 function AppRoutes() {
   return (
@@ -51,6 +52,7 @@ function AppRoutes() {
       <Route path={"/coaching"} component={Coaching} />
       <Route path={"/quick-wins"} component={QuickWins} />
       <Route path={"/resources"} component={Resources} />
+      <Route path={"/claude-and-coffee"} component={ClaudeAndCoffee} />
       <Route path={"/styles"} component={StyleExplorer} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

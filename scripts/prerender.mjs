@@ -20,6 +20,7 @@ const routes = [
   "/coaching",
   "/quick-wins",
   "/resources",
+  "/claude-and-coffee",
   "/pricing",
   "/styles",
   "/privacy",

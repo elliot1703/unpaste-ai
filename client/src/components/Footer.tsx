@@ -18,6 +18,8 @@ export function Footer() {
           <div>
             <h4 className="font-mono text-xs font-bold uppercase tracking-wider mb-4">Navigation</h4>
             <ul className="space-y-3 font-mono text-xs text-muted-foreground">
+              <li><Link href="/workshops" className="hover:text-foreground transition-colors">WORKSHOPS</Link></li>
+              <li><Link href="/claude-and-coffee" className="hover:text-foreground transition-colors">CLAUDE &amp; COFFEE</Link></li>
               <li><Link href="/coaching" className="hover:text-foreground transition-colors">COACHING & DEV DAYS</Link></li>
               <li><Link href="/training" className="hover:text-foreground transition-colors">TRAINING</Link></li>
               <li><Link href="/resources" className="hover:text-foreground transition-colors">FREE RESOURCES</Link></li>

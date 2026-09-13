@@ -71,6 +71,16 @@ export const VENUES = {
       },
     ],
   },
+  // Claude & Coffee — weekly Tuesday meetup. No room photos yet, so the page
+  // links out to the studio site instead of rendering a VenueBand.
+  jaggerRocky: {
+    name: "Jagger Rocky Studios",
+    street: "Unit 1/27 Birubi Street",
+    suburb: "Coorparoo QLD 4151",
+    short: "Coorparoo",
+    mapUrl:
+      "https://www.google.com/maps/search/?api=1&query=Jagger%20Rocky%20Studios%20Unit%201%2F27%20Birubi%20Street%20Coorparoo%20QLD%204151",
+  },
 } as const satisfies Record<string, Venue>;
 
 export type WorkshopSession = {
