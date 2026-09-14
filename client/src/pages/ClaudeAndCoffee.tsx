@@ -92,7 +92,8 @@ const forYou = [
 
 const details: { value: string; label: string }[] = [
   { value: "Tuesdays", label: "EVERY WEEK" },
-  { value: "7:00am", label: "START" },
+  { value: "7–8:30am", label: "THEN CHAT" },
+  { value: "Free", label: "FOR NOW" },
   { value: "Coorparoo", label: "IN PERSON" },
   { value: "Small", label: "GROUP" },
   { value: "Optional", label: "LAPTOP" },
@@ -103,7 +104,8 @@ const eventSchema = {
   "@type": "Event",
   name: "Claude & Coffee",
   description:
-    "A weekly Tuesday morning meetup in Brisbane for people curious about AI agents. See real agents doing real work, ask anything, no code needed.",
+    "A free weekly Tuesday morning meetup in Brisbane for people curious about AI agents. See real agents doing real work, ask anything, no code needed.",
+  isAccessibleForFree: true,
   url: "https://unpaste.ai/claude-and-coffee",
   image: `https://unpaste.ai${HERO_IMAGE}`,
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
@@ -113,6 +115,7 @@ const eventSchema = {
     repeatFrequency: "P1W",
     byDay: "https://schema.org/Tuesday",
     startTime: "07:00",
+    endTime: "08:30",
     scheduleTimezone: "Australia/Brisbane",
   },
   location: {
@@ -139,7 +142,7 @@ export default function ClaudeAndCoffee() {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
         title="Claude & Coffee — Weekly AI Meetup, Brisbane"
-        description="AI for normies. Every Tuesday, 7am, Jagger Rocky Studios in Coorparoo. See AI agents doing real work, ask anything, no code needed. Small group, places limited."
+        description="AI for normies. A free meetup every Tuesday, 7 to 8:30am, at Jagger Rocky Studios in Coorparoo. See AI agents doing real work, ask anything, no code needed. Small group, places limited."
         keywords="AI meetup Brisbane, Claude meetup, AI agents for business, Claude Code meetup, AI for beginners Brisbane, Coorparoo events, Tuesday morning meetup"
         url="https://unpaste.ai/claude-and-coffee"
         type="event"
@@ -184,9 +187,10 @@ export default function ClaudeAndCoffee() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl"
                 >
-                  Every Tuesday, 7am, Jagger Rocky Studios in Coorparoo. An hour
-                  with a coffee, watching AI agents do real work, and asking
-                  whatever you've been wondering. No code. No pitch.
+                  Every Tuesday, 7 to 8:30am, Jagger Rocky Studios in Coorparoo.
+                  Free. Ninety minutes with a coffee, watching AI agents do real
+                  work and asking whatever you've been wondering. Stick around
+                  after if you want to keep talking. No code. No pitch.
                 </motion.p>
 
                 <motion.div
@@ -216,8 +220,9 @@ export default function ClaudeAndCoffee() {
                   transition={{ delay: 0.6 }}
                   className="mono-label"
                 >
-                  EVERY TUESDAY · 7:00AM · {venue.name.toUpperCase()},{" "}
-                  {venue.short.toUpperCase()} · SMALL GROUP · PLACES LIMITED
+                  EVERY TUESDAY · 7:00–8:30AM · FREE ·{" "}
+                  {venue.name.toUpperCase()}, {venue.short.toUpperCase()} ·
+                  PLACES LIMITED
                 </motion.p>
               </div>
 
@@ -431,7 +436,7 @@ export default function ClaudeAndCoffee() {
               </h2>
             </div>
 
-            <div className="stats-grid md:grid-cols-3 lg:grid-cols-5 max-w-6xl">
+            <div className="stats-grid md:grid-cols-3 lg:grid-cols-6 max-w-6xl">
               {details.map((stat) => (
                 <div key={stat.label} className="p-6 md:p-8 min-w-0">
                   <div className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-bold tracking-tight mb-2 break-words">
@@ -443,9 +448,10 @@ export default function ClaudeAndCoffee() {
             </div>
 
             <p className="font-mono text-sm text-muted-foreground mt-8 max-w-3xl leading-relaxed">
-              What to bring: curiosity. A laptop if you want to follow along on
-              your own machine, though most people watch the first time. Places
-              are limited by the size of the room, so{" "}
+              It's free. What to bring: curiosity. A laptop if you want to
+              follow along on your own machine, though most people watch the
+              first time. We wrap at 8:30, and anyone who wants to keep talking
+              usually does. Places are limited by the size of the room, so{" "}
               <a
                 href={saveSpotHref}
                 className="text-foreground font-bold underline underline-offset-4 hover:text-primary transition-colors"
@@ -514,9 +520,9 @@ export default function ClaudeAndCoffee() {
                   7AM. COFFEE'S ON.
                 </h2>
                 <p className="font-mono text-sm leading-relaxed max-w-xl opacity-90">
-                  Email Elliot to hold a place. One line is enough. If Tuesday
-                  mornings don't work, say so, and you'll hear first when a
-                  second slot opens.
+                  Free, for now. Email Elliot to hold a place. One line is
+                  enough. If Tuesday mornings don't work, say so, and you'll
+                  hear first when a second slot opens.
                 </p>
               </div>
               <div className="flex lg:justify-end">
