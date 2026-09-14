@@ -436,10 +436,10 @@ export default function ClaudeAndCoffee() {
               </h2>
             </div>
 
-            <div className="stats-grid md:grid-cols-3 lg:grid-cols-6 max-w-6xl">
+            <div className="stats-grid md:grid-cols-3 max-w-6xl">
               {details.map((stat) => (
                 <div key={stat.label} className="p-6 md:p-8 min-w-0">
-                  <div className="text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-bold tracking-tight mb-2 break-words">
+                  <div className="text-2xl md:text-3xl font-bold tracking-tight mb-2">
                     {stat.value}
                   </div>
                   <div className="mono-label">{stat.label}</div>
