@@ -15,17 +15,34 @@ import { Link } from "wouter";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { CONTACT_EMAIL } from "@/lib/booking";
+import { useMemo } from "react";
+import { trackMeta } from "@/lib/metaPixel";
 import { VENUES } from "@/lib/workshops";
 
-// Weekly meetup, not a ticketed session, so there's no Stripe link and no
-// seat counter. The "save a spot" path is a mailto — same pattern as the
-// per-module "register interest" links on /workshops.
-const saveSpotHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-  "Claude & Coffee — save me a spot"
-)}&body=${encodeURIComponent(
-  "Hi Elliot, I'd like to come along to Claude & Coffee on Tuesday. My name is "
-)}`;
+// Free ticket on Humanitix. Visitors who arrive from a paid ad (utm_source=meta
+// in the URL) get the affiliate-tagged link, so Humanitix's affiliate report
+// shows who came from the ads; everyone else gets the plain event link. The
+// UTMs are forwarded either way. The click also fires the pixel's Lead event
+// so Meta reports a result per ad.
+const HUMANITIX_EVENT =
+  "https://events.humanitix.com/claude-and-coffee-ai-for-normies";
+const HUMANITIX_ADS_LINK = HUMANITIX_EVENT; // swap for the affiliate link once created
+
+const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
+
+function getReserveLink(): { href: string; fromAds: boolean; utmContent: string } {
+  if (typeof window === "undefined") {
+    return { href: HUMANITIX_EVENT, fromAds: false, utmContent: "" };
+  }
+  const params = new URLSearchParams(window.location.search);
+  const fromAds = params.get("utm_source") === "meta";
+  const target = new URL(fromAds ? HUMANITIX_ADS_LINK : HUMANITIX_EVENT);
+  for (const key of UTM_KEYS) {
+    const value = params.get(key);
+    if (value) target.searchParams.set(key, value);
+  }
+  return { href: target.toString(), fromAds, utmContent: params.get("utm_content") ?? "" };
+}
 
 const venue = VENUES.jaggerRocky;
 const VENUE_SITE = "https://jaggerrocky.com/";
@@ -107,6 +124,13 @@ const eventSchema = {
     "A free weekly Tuesday morning meetup in Brisbane for people curious about AI agents. See real agents doing real work, ask anything, no code needed.",
   isAccessibleForFree: true,
   url: "https://unpaste.ai/claude-and-coffee",
+  offers: {
+    "@type": "Offer",
+    url: HUMANITIX_EVENT,
+    price: "0",
+    priceCurrency: "AUD",
+    availability: "https://schema.org/InStock",
+  },
   image: `https://unpaste.ai${HERO_IMAGE}`,
   eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
   eventStatus: "https://schema.org/EventScheduled",
@@ -138,6 +162,17 @@ const eventSchema = {
 };
 
 export default function ClaudeAndCoffee() {
+  // Read once on mount: the ad lands people here with UTMs in the URL.
+  const reserve = useMemo(getReserveLink, []);
+  // Humanitix is off-site, so Lead fires on the click through, the same way
+  // the workshop cards fire InitiateCheckout before Stripe.
+  const onReserveClick = () =>
+    trackMeta("Lead", {
+      content_name: "Claude & Coffee — reserve a spot",
+      content_category: reserve.fromAds ? "paid" : "organic",
+      utm_content: reserve.utmContent,
+    });
+
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <SEO
@@ -200,7 +235,10 @@ export default function ClaudeAndCoffee() {
                   className="flex flex-col sm:flex-row gap-4 items-start mb-8"
                 >
                   <a
-                    href={saveSpotHref}
+                    href={reserve.href}
+                    onClick={onReserveClick}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="brutalist-button inline-flex items-center gap-3"
                   >
                     Save a spot
@@ -453,10 +491,13 @@ export default function ClaudeAndCoffee() {
               first time. We wrap at 8:30, and anyone who wants to keep talking
               usually does. Places are limited by the size of the room, so{" "}
               <a
-                href={saveSpotHref}
+                href={reserve.href}
+                    onClick={onReserveClick}
+                    target="_blank"
+                    rel="noopener noreferrer"
                 className="text-foreground font-bold underline underline-offset-4 hover:text-primary transition-colors"
               >
-                let Elliot know you're coming
+                grab a free ticket
               </a>
               .
             </p>
@@ -520,14 +561,18 @@ export default function ClaudeAndCoffee() {
                   7AM. COFFEE'S ON.
                 </h2>
                 <p className="font-mono text-sm leading-relaxed max-w-xl opacity-90">
-                  Free, for now. Email Elliot to hold a place. One line is
-                  enough. If Tuesday mornings don't work, say so, and you'll
-                  hear first when a second slot opens.
+                  Free, for now. Grab a ticket on Humanitix so we know the
+                  numbers. Takes twenty seconds. If Tuesday mornings don't
+                  work, email Elliot, and you'll hear first when a second slot
+                  opens.
                 </p>
               </div>
               <div className="flex lg:justify-end">
                 <a
-                  href={saveSpotHref}
+                  href={reserve.href}
+                    onClick={onReserveClick}
+                    target="_blank"
+                    rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-wider px-8 py-4 bg-foreground text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5"
                   style={{ boxShadow: "4px 4px 0 0 var(--primary-foreground)" }}
                 >
