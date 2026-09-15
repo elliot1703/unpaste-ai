@@ -26,7 +26,9 @@ import { VENUES } from "@/lib/workshops";
 // so Meta reports a result per ad.
 const HUMANITIX_EVENT =
   "https://events.humanitix.com/claude-and-coffee-ai-for-normies";
-const HUMANITIX_ADS_LINK = HUMANITIX_EVENT; // swap for the affiliate link once created
+// Humanitix affiliate tracking code "meta-ads": orders through this link show
+// under Reports → Affiliate tracking in the event console.
+const HUMANITIX_ADS_LINK = `${HUMANITIX_EVENT}?c=meta-ads`;
 
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content"];
 
