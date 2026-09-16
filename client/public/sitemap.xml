@@ -67,6 +67,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://unpaste.ai/brand/template</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://unpaste.ai/privacy</loc>
     <lastmod>2026-08-04</lastmod>
     <changefreq>yearly</changefreq>

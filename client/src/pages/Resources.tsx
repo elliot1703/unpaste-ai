@@ -777,11 +777,81 @@ export default function Resources() {
           </div>
         </section>
 
-        {/* [005] CTA */}
+        {/* [005] Brand guide template */}
+        <section id="brand-guide" className="py-16 md:py-24 border-t border-border scroll-mt-20">
+          <div className="container">
+            <div className="max-w-3xl mb-12">
+              <div className="section-tag mb-4">[005] BRAND GUIDE TEMPLATE</div>
+              <h2 className="text-3xl md:text-4xl tracking-tighter mb-3">
+                STEAL OUR <span className="text-primary">BRAND GUIDE.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
+                A taste file teaches an agent how to design. A brand guide is the finished
+                system: colour, type, logo, voice and every asset template, in one page you
+                can hand to a designer, a printer or a client. Ours is public. Copy the
+                prompt, give it to your agent, and it rebuilds the whole thing in your brand.
+              </p>
+            </div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              variants={fadeUp}
+              className="brutalist-card bg-card p-6 md:p-8 max-w-5xl"
+            >
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="min-w-0">
+                  <div className="mono-label text-primary mb-3">[B1]</div>
+                  <h3 className="font-bold text-xl tracking-tight mb-3">
+                    Visual Brand Guidelines
+                  </h3>
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed mb-5">
+                    Sixteen sections. Colour, typography, spacing, components, logo, voice,
+                    motion and dark mode, then the asset templates: business card, email
+                    signature, letterhead, social and proposal. Click a swatch, it copies the
+                    hex. One HTML file, no build step, no dependencies.
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {["COLOUR", "TYPE", "LOGO", "VOICE", "MOTION", "ASSETS"].map((chip) => (
+                      <span
+                        key={chip}
+                        className="border border-border px-2 py-1 font-mono text-[10px] tracking-wider text-muted-foreground"
+                      >
+                        {chip}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="min-w-0 flex flex-col justify-center gap-3">
+                  <a
+                    href="/brand/template"
+                    className="brutalist-button bg-primary text-white px-6 py-4 inline-flex items-center justify-center gap-2"
+                  >
+                    GET THE TEMPLATE <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <a
+                    href="/brand"
+                    className="inline-flex items-center justify-center gap-2 border border-foreground px-6 py-4 font-mono text-xs font-bold uppercase tracking-wider text-foreground hover:border-primary hover:text-primary transition-colors"
+                  >
+                    <FileText className="h-3.5 w-3.5" /> SEE THE EXAMPLE
+                  </a>
+                  <p className="font-mono text-[11px] text-muted-foreground leading-relaxed border-l-2 border-primary pl-3 mt-2">
+                    It is our real brand guide, not a blank. The prompt makes your agent
+                    replace every value that belongs to us, then prove it did.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* [006] CTA */}
         <section className="py-16 md:py-24 border-t border-border bg-card">
           <div className="container">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="section-tag mb-6">[005] GO FURTHER</div>
+              <div className="section-tag mb-6">[006] GO FURTHER</div>
               <h2 className="text-3xl md:text-5xl tracking-tighter mb-6">
                 THESE PROMPTS ARE THE FIRST HOUR{" "}
                 <span className="text-primary">OF THE WORKSHOP.</span>
