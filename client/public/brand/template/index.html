@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steal This Brand Guide — UNPASTE</title>
+  <meta name="description" content="Unpaste's actual visual brand guide, free to take. One HTML file, 16 sections, no build step. Copy the prompt, hand it to your agent, get your own.">
+  <meta property="og:title" content="Steal This Brand Guide — UNPASTE">
+  <meta property="og:description" content="Our real brand guide, free to take. Copy the prompt, hand it to your agent, get your own.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://unpaste.ai/brand/template">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       TOKENS — mirrors /brand/index.html
+       ═══════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red: #DC2626;
+      --fg: #09090B;
+      --bg: #FAFAFA;
+      --muted: #E4E4E7;
+      --muted-text: #71717A;
+      --secondary: #F4F4F5;
+
+      --sp-1: 8px;  --sp-2: 16px; --sp-3: 24px; --sp-4: 32px;
+      --sp-5: 40px; --sp-6: 48px; --sp-8: 64px; --sp-10: 80px;
+      --sp-12: 96px; --sp-15: 120px;
+    }
+
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+
+    ::selection { background: var(--red); color: #fff; }
+
+    /* Fixed grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, var(--fg) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--fg) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @media (max-width: 767px) { body::before { background-size: 40px 40px; } }
+
+    /* ═══════════════════════════════════════════════════════
+       LAYOUT
+       ═══════════════════════════════════════════════════════ */
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--sp-6) var(--sp-3) var(--sp-8);
+    }
+    @media (min-width: 768px) { .page { padding: var(--sp-8) var(--sp-4) var(--sp-12); } }
+
+    section { margin-bottom: var(--sp-12); }
+    @media (min-width: 768px) { section { margin-bottom: var(--sp-15); } }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: var(--sp-5); }
+    @media (min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; gap: var(--sp-8); } }
+    .grid-2 > * { min-width: 0; }
+
+    /* ═══════════════════════════════════════════════════════
+       TYPOGRAPHY
+       ═══════════════════════════════════════════════════════ */
+    .display {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+    .display-xl { font-size: clamp(44px, 9vw, 92px); }
+    .display-md { font-size: clamp(28px, 4.5vw, 44px); }
+
+    .red-accent { color: var(--red); }
+
+    .body-text { font-size: 15px; max-width: 62ch; }
+    .body-text + .body-text { margin-top: var(--sp-2); }
+    .muted { color: var(--muted-text); }
+    .lead { font-size: 18px; max-width: 58ch; }
+
+    .mono-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted-text);
+    }
+
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--red);
+      margin-bottom: var(--sp-3);
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RULES & DIVIDERS
+       ═══════════════════════════════════════════════════════ */
+    .divider-red { height: 3px; background: var(--red); border: 0; margin: var(--sp-5) 0; }
+    .divider-dashed { height: 0; border: 0; border-top: 1px dashed var(--muted); margin: var(--sp-5) 0; }
+
+    /* ═══════════════════════════════════════════════════════
+       TOP BAR
+       ═══════════════════════════════════════════════════════ */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-2);
+      margin-bottom: var(--sp-8);
+      flex-wrap: wrap;
+    }
+    .logo-lockup { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); }
+    .logo-mark { width: 26px; height: 26px; background: var(--red); flex-shrink: 0; }
+    .logo-wordmark {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       META ROW
+       ═══════════════════════════════════════════════════════ */
+    .meta-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-5); }
+    .data-label { display: flex; align-items: baseline; gap: var(--sp-1); }
+    .data-label-key {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.1em;
+    }
+    .data-label-value { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted-text); }
+
+    /* ═══════════════════════════════════════════════════════
+       SPEC LIST (1px gap grid)
+       ═══════════════════════════════════════════════════════ */
+    .spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--muted); border: 1px solid var(--muted); }
+    @media (min-width: 640px) { .spec-grid { grid-template-columns: repeat(3, 1fr); } }
+    .spec-cell { background: var(--bg); padding: var(--sp-3) var(--sp-2); min-width: 0; }
+    .spec-cell .k { display: block; font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-text); margin-bottom: 6px; }
+    .spec-cell .v { display: block; font-family: system-ui, sans-serif; font-weight: 800; font-size: 19px; letter-spacing: -0.02em; text-transform: uppercase; }
+
+    /* ═══════════════════════════════════════════════════════
+       BUTTONS
+       ═══════════════════════════════════════════════════════ */
+    .btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 16px 32px;
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-1);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+    .btn-primary { background: var(--red); color: #fff; box-shadow: 4px 4px 0 0 var(--fg); }
+    .btn-primary:hover { box-shadow: 6px 6px 0 0 var(--fg); transform: translate(-2px, -2px); }
+    .btn-primary:active { box-shadow: 2px 2px 0 0 var(--fg); transform: translate(2px, 2px); }
+
+    .btn-ghost { background: var(--bg); color: var(--fg); border: 1px solid var(--fg); box-shadow: 4px 4px 0 0 var(--fg); }
+    .btn-ghost:hover { box-shadow: 6px 6px 0 0 var(--red); border-color: var(--red); color: var(--red); transform: translate(-2px, -2px); }
+    .btn-ghost:active { box-shadow: 2px 2px 0 0 var(--fg); transform: translate(2px, 2px); }
+
+    .btn-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+
+    /* ═══════════════════════════════════════════════════════
+       PROMPT BLOCK
+       ═══════════════════════════════════════════════════════ */
+    .prompt-shell { border: 1px solid var(--fg); background: #fff; }
+    .prompt-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-2);
+      padding: 12px var(--sp-2);
+      border-bottom: 1px solid var(--muted);
+      background: var(--secondary);
+      flex-wrap: wrap;
+    }
+    .prompt-body {
+      margin: 0;
+      padding: var(--sp-3) var(--sp-2);
+      font-family: 'Space Mono', monospace;
+      font-size: 12.5px;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      word-break: break-word;
+      overflow-x: auto;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+    @media (min-width: 768px) { .prompt-body { padding: var(--sp-4); font-size: 13px; } }
+
+    .copy-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 9px 16px;
+      background: var(--fg);
+      color: #fff;
+      border: 0;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .copy-btn:hover { background: var(--red); }
+    .copy-btn.copied { background: var(--red); }
+
+    /* ═══════════════════════════════════════════════════════
+       CHECKLIST
+       ═══════════════════════════════════════════════════════ */
+    .check-list { display: grid; gap: 1px; background: var(--muted); border: 1px solid var(--muted); }
+    .check-item {
+      background: var(--bg);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--sp-2);
+      padding: var(--sp-2);
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .check-item:hover { background: var(--secondary); }
+    .check-box {
+      width: 16px; height: 16px;
+      border: 1.5px solid var(--fg);
+      flex-shrink: 0;
+      margin-top: 3px;
+      position: relative;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .check-item.done .check-box { background: var(--red); border-color: var(--red); }
+    .check-item.done .check-box::after {
+      content: '';
+      position: absolute;
+      left: 4px; top: 0px;
+      width: 5px; height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+    .check-text { font-size: 14px; min-width: 0; }
+    .check-item.done .check-text { color: var(--muted-text); text-decoration: line-through; }
+    .check-text strong { font-weight: 700; }
+    .check-text .where { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--red); }
+
+    /* ═══════════════════════════════════════════════════════
+       WARNING PANEL
+       ═══════════════════════════════════════════════════════ */
+    .warn {
+      border-left: 3px solid var(--red);
+      padding: var(--sp-2) var(--sp-3);
+      background: var(--secondary);
+      margin-bottom: var(--sp-4);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       STEPS
+       ═══════════════════════════════════════════════════════ */
+    .steps { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--muted); border: 1px solid var(--muted); }
+    @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+    .step { background: var(--bg); padding: var(--sp-3); min-width: 0; }
+    .step-num { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--red); letter-spacing: 0.1em; display: block; margin-bottom: var(--sp-1); }
+    .step-title { font-family: system-ui, sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: -0.02em; font-size: 18px; margin-bottom: 6px; }
+    .step-detail { font-size: 13.5px; color: var(--muted-text); }
+
+    /* ═══════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════ */
+    footer { border-top: 1px solid var(--muted); padding-top: var(--sp-5); display: flex; flex-wrap: wrap; gap: var(--sp-4); justify-content: space-between; align-items: center; }
+    footer a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--red); }
+    footer a:hover { color: var(--red); }
+
+    /* ═══════════════════════════════════════════════════════
+       REVEAL
+       ═══════════════════════════════════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: var(--sp-3);
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--fg);
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 50;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+
+    <!-- ═══════════════════════════════════════════════════
+         TOP BAR
+         ═══════════════════════════════════════════════════ -->
+    <div class="topbar">
+      <a href="/" class="logo-lockup">
+        <span class="logo-mark"></span>
+        <span class="logo-wordmark">Unpaste</span>
+      </a>
+      <span class="mono-label">Free Template</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════
+         HEADER
+         ═══════════════════════════════════════════════════ -->
+    <header style="margin-bottom: var(--sp-10);">
+      <h1 class="display display-xl" style="margin-bottom: var(--sp-4);">
+        Steal this<br><span class="red-accent">brand guide.</span>
+      </h1>
+      <p class="lead" style="margin-bottom: var(--sp-4);">
+        This is our real one. Sixteen sections, one HTML file, no build step. Copy the prompt below, hand it to your agent, and get the same thing back in your own colours.
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-primary" id="topCopy">Copy the prompt</button>
+        <a class="btn btn-ghost" href="/brand">See the example</a>
+      </div>
+      <hr class="divider-red">
+      <div class="meta-row" style="margin-bottom: 0;">
+        <div class="data-label"><span class="data-label-key">V</span><span class="data-label-value">1.0</span></div>
+        <div class="data-label"><span class="data-label-key">D</span><span class="data-label-value">2026-09-16</span></div>
+        <div class="data-label"><span class="data-label-key">C</span><span class="data-label-value">Free</span></div>
+      </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════
+         001 — WHAT THIS IS
+         ═══════════════════════════════════════════════════ -->
+    <section class="reveal">
+      <span class="section-tag">[001] What this is</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-4);">
+        A brand guide that <span class="red-accent">runs.</span>
+      </h2>
+
+      <div class="grid-2" style="margin-bottom: var(--sp-5);">
+        <div>
+          <p class="body-text">
+            Most brand guidelines are a PDF nobody opens. This one is a web page that shows the system working. Click a colour, it copies the hex. The type scale is set in the real fonts. The animations play. The business card, email signature and social templates are already built.
+          </p>
+          <p class="body-text muted">
+            One file. Inline CSS, vanilla JavaScript, fonts from Google. Open it in a browser, host it anywhere, edit it live on a call.
+          </p>
+        </div>
+        <div>
+          <div class="spec-grid">
+            <div class="spec-cell"><span class="k">Sections</span><span class="v">16</span></div>
+            <div class="spec-cell"><span class="k">Files</span><span class="v">1</span></div>
+            <div class="spec-cell"><span class="k">Build step</span><span class="v">None</span></div>
+            <div class="spec-cell"><span class="k">Dependencies</span><span class="v">None</span></div>
+            <div class="spec-cell"><span class="k">Framework</span><span class="v">None</span></div>
+            <div class="spec-cell"><span class="k">Price</span><span class="v">Free</span></div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider-dashed">
+
+      <div class="steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div class="step-title">Copy</div>
+          <p class="step-detail">Take the prompt in section 002.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div class="step-title">Paste</div>
+          <p class="step-detail">Claude, Claude Code, ChatGPT, Cursor. Anything that can read a web page.</p>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div class="step-title">Read the plan</div>
+          <p class="step-detail">It tells you what it needs and what it is about to do, before it builds. Read that part. That is the whole skill.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         002 — THE PROMPT
+         ═══════════════════════════════════════════════════ -->
+    <section class="reveal">
+      <span class="section-tag">[002] The prompt</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        Hand this to your <span class="red-accent">agent.</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-4);">
+        It fetches our guide, works out what it does not know about you, asks, then builds. How you brief it is up to you. A paragraph about the business works. So does your website URL, or the name of a brand you want to feel like.
+      </p>
+
+      <div class="prompt-shell" style="margin-bottom: var(--sp-3);">
+        <div class="prompt-head">
+          <span class="mono-label">Prompt</span>
+          <button class="copy-btn" id="mainCopy">Copy</button>
+        </div>
+        <pre class="prompt-body" id="promptText">Fetch https://unpaste.ai/brand/index.html and read the whole file.
+
+It is a working visual brand guide: 16 sections, one self-contained HTML
+file, inline CSS and vanilla JavaScript, no build step, no dependencies.
+It belongs to a business called Unpaste. It is not mine.
+
+Rebuild it as my brand guide.
+
+KEEP the machinery:
+  - the 16 section structure and the numbered section tags
+  - the CSS custom property token system in :root
+  - click to copy colour swatches
+  - scroll reveal, scroll progress, the animation demos
+  - one file, no dependencies, no build step
+
+REPLACE everything that belongs to Unpaste. None of it is mine:
+  - business name, wordmark and logo mark
+  - tagline, positioning and brand essence (section 001)
+  - contact details in section 001 and in the footer
+  - every colour token in :root, light and dark
+  - the font pair
+  - voice and tone rules, including the banned word list (section 007)
+  - all asset templates: business card, email signature, letterhead,
+    social templates, proposal (sections 011 to 016)
+  - the page title and meta description
+
+Before you write any code: tell me what you need to know about my brand
+that you cannot work out on your own, and ask me for it. Then show me
+your plan. Then build.
+
+Where I have not decided something yet, propose an option and tell me
+why you picked it.
+
+When you are done, search the file for "unpaste", "Brisbane", "DC2626"
+and "Swiss Brutalist" and show me every hit. There should be none.
+
+Output one HTML file I can open in a browser.</pre>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" id="bottomCopy">Copy the prompt</button>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         003 — REPLACE THESE
+         ═══════════════════════════════════════════════════ -->
+    <section class="reveal">
+      <span class="section-tag">[003] Replace these</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        Do not ship <span class="red-accent">our brand.</span>
+      </h2>
+
+      <div class="warn">
+        <p class="body-text" style="margin: 0;">
+          This is a live brand guide for a working business, not a blank template. Every value in it is a decision we made. If your agent leaves any of it in, you are publishing our colours, our positioning and our email address.
+        </p>
+      </div>
+
+      <p class="mono-label" style="margin-bottom: var(--sp-2);">Check them off</p>
+      <div class="check-list">
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Name and logo</strong> — the UNPASTE wordmark and the red square mark <span class="where">header, 006, footer</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Brand essence</strong> — "Swiss Brutalist" and the personality tags <span class="where">001</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Contact details</strong> — unpaste.ai, Brisbane, elliot@unpaste.co <span class="where">001, footer</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Colour tokens</strong> — red #DC2626 and the full light and dark palettes <span class="where">:root, 002, 009</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Font pair</strong> — Inter for body, Space Mono for labels <span class="where">head, 003</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Voice rules</strong> — our banned word list is ours, write your own <span class="where">007</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Asset templates</strong> — business card, email signature, letterhead, social, proposal <span class="where">011 to 016</span></span>
+        </div>
+        <div class="check-item">
+          <span class="check-box"></span>
+          <span class="check-text"><strong>Page title and meta</strong> — including the browser tab and share preview <span class="where">head</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         004 — TAKE THE FILE
+         ═══════════════════════════════════════════════════ -->
+    <section class="reveal">
+      <span class="section-tag">[004] Take the file</span>
+      <h2 class="display display-md" style="margin-bottom: var(--sp-2);">
+        Or skip the agent <span class="red-accent">entirely.</span>
+      </h2>
+      <p class="body-text muted" style="margin-bottom: var(--sp-4);">
+        Download it and edit it by hand. It is plain HTML with the sections marked in comments. Nothing to install.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="/brand/index.html" download="brand-guidelines.html">Download the HTML</a>
+        <a class="btn btn-ghost" href="/brand">See it running</a>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         FOOTER
+         ═══════════════════════════════════════════════════ -->
+    <footer>
+      <div class="logo-lockup">
+        <span class="logo-mark"></span>
+        <span class="logo-wordmark">Unpaste</span>
+      </div>
+      <p class="mono-label" style="max-width: 44ch; line-height: 1.7;">
+        Built by Unpaste, Brisbane. Take it, change it, ship it.<br>
+        <a href="/">unpaste.ai</a>
+      </p>
+    </footer>
+
+  </div>
+
+  <div class="toast" id="toast">Copied</div>
+
+  <script>
+    // ═══════════════════════════════════════════════════
+    // SCROLL REVEAL
+    // ═══════════════════════════════════════════════════
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) entry.target.classList.add('revealed');
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(function (el) { revealObserver.observe(el); });
+
+    // ═══════════════════════════════════════════════════
+    // COPY THE PROMPT
+    // ═══════════════════════════════════════════════════
+    var toast = document.getElementById('toast');
+    var toastTimer;
+
+    function showToast(msg) {
+      toast.textContent = msg;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 1800);
+    }
+
+    function copyPrompt(btn) {
+      var text = document.getElementById('promptText').textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        showToast('Prompt copied');
+        if (btn) {
+          var original = btn.textContent;
+          btn.textContent = 'Copied';
+          btn.classList.add('copied');
+          setTimeout(function () {
+            btn.textContent = original;
+            btn.classList.remove('copied');
+          }, 1800);
+        }
+      }).catch(function () {
+        showToast('Copy failed, select the text');
+      });
+    }
+
+    ['topCopy', 'mainCopy', 'bottomCopy'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('click', function () { copyPrompt(el); });
+    });
+
+    // ═══════════════════════════════════════════════════
+    // CHECKLIST
+    // ═══════════════════════════════════════════════════
+    document.querySelectorAll('.check-item').forEach(function (item) {
+      item.addEventListener('click', function () { item.classList.toggle('done'); });
+    });
+  </script>
+
+</body>
+</html>
