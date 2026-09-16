@@ -300,6 +300,196 @@ function CopyTasteButton({ url }: { url: string }) {
   );
 }
 
+function TasteSpecimen({ slug }: { slug: string }) {
+  if (slug === "swiss-brutalist") {
+    return (
+      <div
+        style={{
+          background: "#FAFAFA",
+          border: "1px solid #E4E4E7",
+          padding: 20,
+          fontFamily: "Inter, system-ui, sans-serif",
+        }}
+      >
+        <div
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: 10,
+            letterSpacing: "0.1em",
+            color: "#DC2626",
+            marginBottom: 10,
+          }}
+        >
+          [001] PRECISION
+        </div>
+        <div
+          style={{
+            fontFamily: "system-ui, -apple-system, sans-serif",
+            fontWeight: 800,
+            fontSize: 24,
+            letterSpacing: "-0.04em",
+            lineHeight: 0.95,
+            textTransform: "uppercase",
+            color: "#09090B",
+            marginBottom: 12,
+          }}
+        >
+          Waste is a <span style={{ color: "#DC2626" }}>choice.</span>
+        </div>
+        <div
+          style={{
+            fontFamily: "'Space Mono', monospace",
+            fontSize: 10,
+            fontWeight: 700,
+            letterSpacing: "0.05em",
+            background: "#DC2626",
+            color: "#FFFFFF",
+            display: "inline-block",
+            padding: "8px 12px",
+            boxShadow: "4px 4px 0 0 #09090B",
+          }}
+        >
+          FIX IT
+        </div>
+      </div>
+    );
+  }
+
+  if (slug === "bauhaus") {
+    return (
+      <div
+        style={{
+          background: "#F5F1E8",
+          padding: 20,
+          fontFamily: "Inter, system-ui, sans-serif",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            width: 56,
+            height: 56,
+            borderRadius: "50%",
+            background: "#DA291C",
+            position: "absolute",
+            top: 16,
+            right: 16,
+          }}
+        />
+        <div
+          style={{
+            fontFamily: "Jost, Futura, sans-serif",
+            fontWeight: 800,
+            fontSize: 24,
+            lineHeight: 1.0,
+            color: "#101010",
+            textTransform: "lowercase",
+            marginBottom: 12,
+            maxWidth: "75%",
+          }}
+        >
+          form follows function
+        </div>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          <div
+            style={{
+              fontFamily: "Jost, Futura, sans-serif",
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: "0.02em",
+              background: "#FFC72C",
+              color: "#101010",
+              padding: "8px 14px",
+            }}
+          >
+            BUILD
+          </div>
+          <div style={{ width: 40, height: 6, background: "#0057B8" }} />
+          <div
+            style={{
+              width: 0,
+              height: 0,
+              borderLeft: "10px solid transparent",
+              borderRight: "10px solid transparent",
+              borderBottom: "16px solid #101010",
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{
+        background: "#FAF3E7",
+        border: "2px solid #3B2A1E",
+        borderRadius: 16,
+        padding: 20,
+        fontFamily: "Karla, system-ui, sans-serif",
+      }}
+    >
+      <div
+        style={{
+          fontFamily: "Fraunces, Georgia, serif",
+          fontWeight: 900,
+          fontSize: 24,
+          lineHeight: 1.05,
+          color: "#3B2A1E",
+          marginBottom: 12,
+        }}
+      >
+        Warmth, on a grid.
+      </div>
+      <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 14 }}>
+        <span
+          style={{
+            width: 10,
+            height: 10,
+            borderRadius: "50%",
+            background: "#C75B39",
+            display: "inline-block",
+          }}
+        />
+        <span
+          style={{
+            width: 10,
+            height: 10,
+            borderRadius: "50%",
+            background: "#E3A72F",
+            display: "inline-block",
+          }}
+        />
+        <span
+          style={{
+            width: 10,
+            height: 10,
+            borderRadius: "50%",
+            background: "#7A8450",
+            display: "inline-block",
+          }}
+        />
+      </div>
+      <div
+        style={{
+          fontFamily: "Karla, system-ui, sans-serif",
+          fontWeight: 600,
+          fontSize: 11,
+          letterSpacing: "0.04em",
+          background: "#2F6D62",
+          color: "#FAF3E7",
+          display: "inline-block",
+          padding: "8px 16px",
+          borderRadius: 999,
+        }}
+      >
+        Say hello
+      </div>
+    </div>
+  );
+}
+
 export default function Resources() {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -549,9 +739,12 @@ export default function Resources() {
                 >
                   <div className="mono-label text-primary mb-3">[{t.number}]</div>
                   <h3 className="font-bold text-xl tracking-tight mb-1">{t.name}</h3>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed mb-5">
+                  <p className="font-mono text-xs text-muted-foreground leading-relaxed mb-4">
                     {t.vibe}
                   </p>
+                  <div className="mb-5 -mx-1">
+                    <TasteSpecimen slug={t.slug} />
+                  </div>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {["TYPE", "COLOUR", "SPACING", "MOTION", "NEVER"].map((chip) => (
                       <span
