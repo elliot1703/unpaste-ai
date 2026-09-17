@@ -379,8 +379,44 @@ export default function WorkshopVariantPage({
           </div>
         </section>
 
-        {/* [009] Book */}
-        <SessionsSection tag="[009] GRAB YOUR SEAT" />
+        {/* [009] From the last one — real photos from the 16 Sep 2026 session
+            (Ollie). Everyone in them consented. Same 1px-gap grid as the
+            venue band; no filter, so the room reads as it is. */}
+        <section className="py-16 md:py-20 border-t border-border bg-card">
+          <div className="container">
+            <div className="max-w-3xl mb-10">
+              <div className="section-tag text-sm md:text-base mb-4">
+                [009] FROM THE LAST ONE
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
+                WHAT A SESSION{" "}
+                <span className="text-primary">ACTUALLY LOOKS LIKE.</span>
+              </h2>
+              <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl">
+                16 September at Gather. Six people, one table, everyone building
+                their own brain by lunch.
+              </p>
+            </div>
+            <div className="stats-grid grid grid-cols-2 sm:grid-cols-3 border border-border">
+              {SESSION_PHOTOS.map((p) => (
+                <figure key={p.src} className="m-0 bg-background">
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    loading="lazy"
+                    decoding="async"
+                    width={1200}
+                    height={1200}
+                    className="w-full aspect-square object-cover"
+                  />
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* [010] Book */}
+        <SessionsSection tag="[010] GRAB YOUR SEAT" />
 
         <Footer />
       </div>
@@ -389,6 +425,35 @@ export default function WorkshopVariantPage({
 }
 
 /** The bring list — factual, so shared across variants like the room is. */
+// [009] gallery — Ollie's picks from the 16 Sep 2026 session, web-sized to
+// 1200px in /images/workshops/2026-09-16/. Order: sign, close work, wide room.
+const SESSION_PHOTOS: { src: string; alt: string }[] = [
+  {
+    src: "/images/workshops/2026-09-16/gather-sign.webp",
+    alt: "Elliot standing beside an attendee working at a laptop under the Gather sign",
+  },
+  {
+    src: "/images/workshops/2026-09-16/notebook.webp",
+    alt: "Elliot leaning over an attendee's laptop and notebook at the workshop table",
+  },
+  {
+    src: "/images/workshops/2026-09-16/table.webp",
+    alt: "Elliot and an attendee talking across the table, laptops open",
+  },
+  {
+    src: "/images/workshops/2026-09-16/standing.webp",
+    alt: "Two attendees and Elliot standing around the table mid-conversation",
+  },
+  {
+    src: "/images/workshops/2026-09-16/couch.webp",
+    alt: "Two attendees on the breakout couch with laptops, talking through a build",
+  },
+  {
+    src: "/images/workshops/2026-09-16/room-wide.webp",
+    alt: "The full room at Gather with the slides on screen, two attendees at laptops and Elliot standing",
+  },
+];
+
 const NEEDS: { title: string; line: string; icon: React.ReactNode }[] = [
   {
     title: "YOUR LAPTOP",

@@ -50,18 +50,20 @@ export const VENUES = {
     short: "Bulimba",
     mapUrl:
       "https://www.google.com/maps/search/?api=1&query=Gather%20Bulimba%209%2F57%20Karthina%20Street%20Bulimba%20QLD%204171",
+    // Real session photos from 16 Sep 2026 (Ollie). Attendees consented to
+    // their use. The empty-room and lounge shots were replaced with these.
     photos: [
       {
-        src: "/images/venues/gather-bulimba/room.webp",
-        alt: "The workshop room at Gather Bulimba — one table, laptops out and the curriculum on screen",
-        caption: "The room",
-        meta: "Set up for a session",
+        src: "/images/workshops/2026-09-16/room-session.webp",
+        alt: "The workshop room at Gather Bulimba mid-session: three people at laptops around one table, the slides on the wall screen",
+        caption: "The room, mid-session",
+        meta: "16 Sep 2026",
       },
       {
-        src: "/images/venues/gather-bulimba/lounge.webp",
-        alt: "Breakout lounge with a curved sofa beside a window",
-        caption: "Breakout",
-        meta: "Coffee + reset",
+        src: "/images/workshops/2026-09-16/hands-on.webp",
+        alt: "Elliot pointing at a laptop screen between two attendees at the workshop table",
+        caption: "Hands on",
+        meta: "One table, laptops out",
       },
       {
         src: "/images/venues/gather-bulimba/entrance.webp",
