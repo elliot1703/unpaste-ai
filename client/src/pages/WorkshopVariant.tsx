@@ -1,522 +1,248 @@
-import {
-  ArrowRight,
-  BatteryCharging,
-  Check,
-  FileText,
-  Landmark,
-  Laptop,
-  MapPin,
-  Sparkles,
-} from "lucide-react";
+import { ArrowDown, ArrowRight, Check, Laptop, X } from "lucide-react";
 import { motion } from "framer-motion";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { BrainDiagram } from "@/components/BrainDiagram";
-import { VenueBand } from "@/components/VenueBand";
-import { SessionsSection } from "@/components/SessionsSection";
-import {
-  InstagramIcon,
-  LinkedInIcon,
-  MetaColourIcon,
-  ShopifyColourIcon,
-  HubSpotColourIcon,
-} from "@/components/BrandIcons";
-import { VENUES, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
-import { BRAIN_H1, type WorkshopVariant as Variant } from "@/lib/workshopVariants";
-import { ComposerBox, ClaudeConvo, IMessageThread } from "@/components/PromptBoxes";
+import { WorkshopInterestForm } from "@/components/WorkshopInterestForm";
+import type { WorkshopVariant as Variant } from "@/lib/workshopVariants";
 
-/**
- * A messaging variant of the workshop page.
- *
- * Every word above the fold is per-variant; everything that states fact —
- * price, dates, venue, seat availability — comes from the same data the live
- * page uses. A variant can reframe the offer but cannot misdescribe it.
- *
- * noIndex on all variants: three near-duplicate pages would otherwise compete
- * with /workshops for the same terms and split its ranking.
- */
+const BUILD_EXAMPLES = [
+  {
+    number: "01",
+    title: "A brand guide your agent can read",
+    body: "Save the voice, standards and never-list you are tired of re-explaining.",
+  },
+  {
+    number: "02",
+    title: "A campaign built through conversation",
+    body: "Talk through what you want, then watch the agent turn the brief into working assets.",
+  },
+  {
+    number: "03",
+    title: "One recurring job running from your workspace",
+    body: "Start with the task that keeps coming back and build a repeatable way to hand it over.",
+  },
+];
+
+const MORNING = [
+  ["See it work", "Live demonstrations on real tools and files—not polished magic tricks."],
+  ["Build on your business", "Work on the job you brought, with help beside you when it gets stuck."],
+  ["Leave able to continue", "Keep the workspace, instructions and a clear next step on your own laptop."],
+];
+
+const PHOTOS = [
+  {
+    src: "/images/workshops/2026-09-16/notebook.webp",
+    alt: "Elliot helping an attendee work through a build on their laptop",
+    label: "BUILDING",
+  },
+  {
+    src: "/images/workshops/2026-09-16/standing.webp",
+    alt: "Attendees and Elliot standing around the workshop table in conversation",
+    label: "ASKING",
+  },
+  {
+    src: "/images/workshops/2026-09-16/couch.webp",
+    alt: "Two attendees troubleshooting a build together on the breakout couch",
+    label: "FIXING",
+  },
+];
+
 export default function WorkshopVariantPage({
   variant,
   canonical = false,
 }: {
   variant: Variant;
-  /** True when this variant IS /workshops — indexed, canonical URL. */
   canonical?: boolean;
 }) {
-  const venue = VENUES.gatherBulimba;
-
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background workshop-page">
       <SEO
         title={
           canonical
-            ? "AI Workshop Brisbane — Build Your Business an AI Brain"
-            : `${BRAIN_H1.main} ${BRAIN_H1.accent}`
+            ? "Hands-on AI Workshop Brisbane — Unpaste"
+            : `${variant.headline.main} ${variant.headline.accent}`
         }
         description={variant.lede}
-        url={
-          canonical
-            ? "https://unpaste.ai/workshops"
-            : `https://unpaste.ai/workshops/${variant.slug}`
-        }
+        url={canonical ? "https://unpaste.ai/workshops" : `https://unpaste.ai/workshops/${variant.slug}`}
         noIndex={!canonical}
       />
-      <div className="grid-background" />
       <div className="relative z-10">
         <Navigation />
 
-        {/* [001] Hero */}
-        <section className="pt-32 pb-16 md:pt-40 md:pb-20">
-          <div className="container">
-            <div className="max-w-4xl">
+        <main>
+          <section className="workshop-hero">
+            <div className="container workshop-hero-grid">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="section-tag text-sm md:text-base mb-8"
+                transition={{ duration: 0.55 }}
+                className="workshop-hero-copy"
               >
-                {variant.kicker}
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-8"
-              >
-                {BRAIN_H1.main}{" "}
-                <span className="text-primary">{BRAIN_H1.accent}</span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15 }}
-                className="text-xl md:text-2xl lg:text-3xl leading-snug tracking-tight mb-8 max-w-3xl"
-              >
-                {variant.subhead}
-              </motion.p>
-
-              <motion.p
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-10 max-w-2xl"
-              >
-                {variant.lede}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="flex flex-col sm:flex-row gap-4 items-start mb-8"
-              >
-                <a
-                  href="#sessions"
-                  className="brutalist-button inline-flex items-center gap-3"
-                >
-                  {variant.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href="#brain"
-                  className="brutalist-button-outline inline-flex items-center gap-3"
-                >
-                  What you'll build
-                </a>
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mono-label"
-              >
-                {WORKSHOP_PRICE.display} {WORKSHOP_PRICE.suffix} · 3.5 HOURS ·
-                10 SEATS · {venue.short.toUpperCase()} ·{" "}
-                {nextSessionLabel()}
-              </motion.p>
-            </div>
-          </div>
-        </section>
-
-        {/* [002] The problem */}
-        <section className="py-16 md:py-20 border-t border-border">
-          <div className="container">
-            <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-4">[002] THE PROBLEM</div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
-                {variant.problem.heading}
-              </h2>
-              <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
-                {variant.problem.body}
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* [003] What it unlocks — plain words, one line each */}
-        <section className="py-16 md:py-24 border-t border-border">
-          <div className="container">
-            <div className="max-w-3xl mb-12">
-              <div className="section-tag text-sm md:text-base mb-4">
-                [003] ONCE IT'S LOADED
-              </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
-                WHAT YOU CAN DO{" "}
-                <span className="text-primary">ONCE IT'S LOADED.</span>
-              </h2>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                The workshop gets the first job running. These are the ones
-                people build next.
-              </p>
-            </div>
-
-            <div className="stats-grid grid sm:grid-cols-2 lg:grid-cols-4 border border-border">
-              {CAPABILITIES.map(({ title, line, icon }) => (
-                <div key={title} className="p-6">
-                  <div className="h-6 mb-4 flex items-center">{icon}</div>
-                  <h3 className="font-mono text-sm font-bold tracking-wide mb-2">
-                    {title}
-                  </h3>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
-                    {line}
-                  </p>
+                <p className="workshop-kicker">{variant.kicker}</p>
+                <h1>
+                  {variant.headline.main}<br />
+                  <span>{variant.headline.accent}</span>
+                </h1>
+                <p className="workshop-subhead">{variant.subhead}</p>
+                <p className="workshop-lede">{variant.lede}</p>
+                <div className="workshop-hero-actions">
+                  <a href="#first-notice" className="brutalist-button inline-flex items-center gap-3">
+                    Get first notice <ArrowRight className="h-4 w-4" />
+                  </a>
+                  <a href="#proof" className="workshop-text-link">
+                    See the room <ArrowDown className="h-4 w-4" />
+                  </a>
                 </div>
-              ))}
-            </div>
-
-            {/* The grid says what's possible; this shows what asking for it
-                actually looks like — the real composer they'll type into,
-                with the tools it reaches into alongside. */}
-            <div className="mt-10">
-              <p className="mono-label mb-4">What asking looks like</p>
-              <ComposerBox
-                prompt="Hey Claude, let's make a new landing page for the end-of-year sale. Use the transcript from yesterday's team brainstorm as the starting point. We'll also need an EDM in Mailchimp to match."
-                steps={[
-                  { action: "Reads the brainstorm transcript", tool: "Granola" },
-                  { action: "Builds and deploys the page", tool: "Vercel" },
-                  { action: "Drafts the matching EDM", tool: "Mailchimp" },
-                ]}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* [004] The brain */}
-        <section id="brain" className="py-16 md:py-24 border-t border-border">
-          <div className="container">
-            <div className="max-w-3xl mb-12">
-              <div className="section-tag text-sm md:text-base mb-4">[004] WHAT YOU BUILD</div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
-                {variant.brain.heading}
-              </h2>
-              <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
-                {variant.brain.body}
-              </p>
-            </div>
-
-            <div className="border border-border p-6 md:p-10 flex justify-center">
-              <BrainDiagram />
-            </div>
-
-            <div className="stats-grid grid sm:grid-cols-3 border border-border mt-6">
-              {variant.outcomes.map((o) => (
-                <div key={o} className="p-6">
-                  <Check className="h-5 w-5 text-primary mb-4" />
-                  <p className="font-mono text-sm leading-relaxed">{o}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* The brain in use — the reply name-drops the rules folder the
-                section just described, and the rail shows it being read. */}
-            <div className="mt-10">
-              <p className="mono-label mb-4">The brain, in use</p>
-              <ClaudeConvo
-                prompt="Draft this week's socials from the jobs we finished. The Henderson deck photos are in the shared folder."
-                reply="Reading your brand voice file and the Henderson photos"
-                steps={[
-                  { action: "Reads your brand voice file", tool: "The brain" },
-                  { action: "Pulls the Henderson job photos", tool: "Shared folder" },
-                  { action: "Drafts five posts in your voice", tool: "Ready to approve" },
-                ]}
-              />
-            </div>
-          </div>
-        </section>
-
-        {/* [005] The takeaway — the iMessage box paints the after-state:
-            delegating from your phone like it's any other text thread. */}
-        <section className="py-16 md:py-20 border-t border-border bg-card">
-          <div className="container">
-            <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
-              <div>
-                <div className="section-tag text-sm md:text-base mb-4">[005] WHAT YOU TAKE HOME</div>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-tighter mb-6">
-                  THE CONFIDENCE TO{" "}
-                  <span className="text-primary">KEEP BUILDING.</span>
-                </h2>
-                <p className="font-mono text-sm text-muted-foreground leading-relaxed">
-                  A working setup on your laptop, your rules in a folder, one
-                  job automated — and you know how to do the next one.
-                </p>
-              </div>
-              <div className="w-full lg:justify-self-end lg:max-w-md">
-                <IMessageThread
-                  messages={[
-                    "Chase the three quotes that haven't replied, in my voice, and log the follow-ups in the CRM.",
-                  ]}
-                  reply="Done. Three follow-ups sent, CRM updated. Two have already opened it."
-                  after="your tuesday now"
-                  result="work you didn't do, done your way"
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* [006] The objection */}
-        <section className="py-16 md:py-20 border-t border-border">
-          <div className="container">
-            <div className="grid lg:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
-              <div>
-                <div className="section-tag text-sm md:text-base mb-4">[006] THE HONEST BIT</div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">
-                  {variant.objection.heading}
-                </h2>
-                <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed mb-8">
-                  {variant.objection.body}
-                </p>
-                <p className="mono-label mb-3">WHO'S TEACHING THIS</p>
-                <p className="font-mono text-sm md:text-base text-muted-foreground leading-relaxed">
-                  I'm not a developer. I ran a gardening business in Bulimba —
-                  and it became the test bed for my first AI agents. Watching
-                  them work opened my eyes to what's possible, so I went all in
-                  on learning it. Teaching is the next stage: you get the same
-                  feeling of superpowers, without figuring it out alone.
-                </p>
-              </div>
-              <figure className="m-0 lg:justify-self-end w-full max-w-md">
+                <p className="workshop-meta">BRISBANE · HALF-DAY · HANDS-ON · NEXT DATE IN PLANNING</p>
+              </motion.div>
+              <motion.figure
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, delay: 0.12 }}
+                className="workshop-hero-photo"
+              >
                 <img
-                  src="/images/elliot.webp"
-                  alt="Elliot, outdoors in Brisbane"
-                  loading="lazy"
-                  decoding="async"
-                  width={937}
-                  height={1250}
-                  className="w-full aspect-[4/5] object-cover border border-border"
+                  src="/images/workshops/2026-09-16/hands-on.webp"
+                  alt="Elliot working beside workshop attendees on their laptops"
+                  width={1200}
+                  height={1500}
                 />
-                <figcaption className="mono-label mt-3">
-                  Elliot · started with a gardening business in Bulimba
-                </figcaption>
+                <figcaption>THE FIRST BRISBANE ROOM · 16 SEPTEMBER 2026</figcaption>
+              </motion.figure>
+            </div>
+          </section>
+
+          <section id="proof" className="workshop-section workshop-proof">
+            <div className="container">
+              <div className="workshop-section-intro">
+                <p className="workshop-kicker">THE REAL ROOM</p>
+                <h2>Not a webinar.<br /><span>A working table.</span></h2>
+                <p>
+                  People arrive with different businesses and different problems. The common bit is the work: laptops open, questions asked, useful things made.
+                </p>
+              </div>
+              <div className="workshop-proof-lead">
+                <img
+                  src="/images/workshops/2026-09-16/room-session.webp"
+                  alt="A hands-on Unpaste workshop in progress at Gather in Bulimba"
+                  loading="lazy"
+                  width={1600}
+                  height={1000}
+                />
+              </div>
+              <div className="workshop-photo-strip">
+                {PHOTOS.map((photo) => (
+                  <figure key={photo.src}>
+                    <img src={photo.src} alt={photo.alt} loading="lazy" width={1200} height={1200} />
+                    <figcaption>{photo.label}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="workshop-section workshop-builds">
+            <div className="container">
+              <div className="workshop-section-intro">
+                <p className="workshop-kicker">WHAT YOU COULD BUILD</p>
+                <h2>Bring the job that<br /><span>keeps coming back.</span></h2>
+                <p>These are examples from the kinds of work explored in the first room. Your useful build may be different.</p>
+              </div>
+              <div className="workshop-build-list">
+                {BUILD_EXAMPLES.map((item) => (
+                  <article key={item.number}>
+                    <span>{item.number}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </article>
+                ))}
+              </div>
+              <a href="#first-notice" className="brutalist-button inline-flex items-center gap-3">
+                Get first notice <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </section>
+
+          <section className="workshop-section workshop-rhythm">
+            <div className="container workshop-rhythm-grid">
+              <div className="workshop-section-intro">
+                <p className="workshop-kicker">THE MORNING</p>
+                <h2>See it.<br />Build it.<br /><span>Leave with it.</span></h2>
+              </div>
+              <div className="workshop-rhythm-list">
+                {MORNING.map(([title, body], index) => (
+                  <article key={title}>
+                    <span>0{index + 1}</span>
+                    <div><h3>{title}</h3><p>{body}</p></div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="workshop-section workshop-fit">
+            <div className="container">
+              <div className="workshop-section-intro">
+                <p className="workshop-kicker">THE HONEST BIT</p>
+                <h2>Useful if you’re<br /><span>past the curiosity stage.</span></h2>
+              </div>
+              <div className="workshop-fit-grid">
+                <article>
+                  <h3>It’s for you if</h3>
+                  <ul>
+                    <li><Check /> You already use ChatGPT or Claude and want to go further.</li>
+                    <li><Check /> You can bring a laptop and a real piece of work.</li>
+                    <li><Check /> You’re happy to learn by making, asking and fixing.</li>
+                  </ul>
+                </article>
+                <article>
+                  <h3>It’s not</h3>
+                  <ul>
+                    <li><X /> A passive keynote or slide-heavy AI overview.</li>
+                    <li><X /> A developer course that expects you to know code.</li>
+                    <li><X /> A done-for-you implementation day.</li>
+                  </ul>
+                </article>
+              </div>
+              <div className="workshop-bring-note">
+                <Laptop className="h-6 w-6" />
+                <p><strong>Bring the computer you actually work on.</strong> We’ll confirm the required account setup before the day—without surprising you with it in the room.</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="workshop-section workshop-facilitator">
+            <div className="container workshop-facilitator-grid">
+              <figure>
+                <img src="/images/elliot.webp" alt="Elliot, founder of Unpaste" loading="lazy" width={937} height={1250} />
               </figure>
-            </div>
-          </div>
-        </section>
-
-        {/* [007] What you'll need */}
-        <section className="py-16 md:py-20 border-t border-border bg-card">
-          <div className="container">
-            <div className="max-w-3xl mb-12">
-              <div className="section-tag text-sm md:text-base mb-4">
-                [007] WHAT YOU'LL NEED
+              <div className="workshop-section-intro">
+                <p className="workshop-kicker">YOUR FACILITATOR</p>
+                <h2>Taught by the person<br /><span>doing the work.</span></h2>
+                <p>
+                  Elliot learned by applying agents to a real operating business—not by collecting AI theory. In the workshop he works beside you while you apply the same practical approach to yours.
+                </p>
               </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl leading-[0.95] tracking-tighter">
-                BRING <span className="text-primary">THREE THINGS.</span>
-              </h2>
             </div>
+          </section>
 
-            <div className="stats-grid grid sm:grid-cols-3 border border-border">
-              {NEEDS.map(({ title, line, icon }) => (
-                <div key={title} className="p-6">
-                  <div className="h-6 mb-4 flex items-center">{icon}</div>
-                  <h3 className="font-mono text-sm font-bold tracking-wide mb-2">
-                    {title}
-                  </h3>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed">
-                    {line}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <p className="font-mono text-sm text-muted-foreground mt-8 max-w-3xl leading-relaxed">
-              That's the whole list. No code, no prep reading — everything else
-              gets sorted in the room.
-            </p>
-          </div>
-        </section>
-
-        {/* [008] The room */}
-        <section className="py-16 md:py-20 border-t border-border">
-          <div className="container">
-            <div className="max-w-3xl">
-              <div className="section-tag text-sm md:text-base mb-6">[008] THE ROOM</div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-6">
-                THIS IS WHERE{" "}
-                <span className="text-primary">YOU'LL BE SITTING.</span>
-              </h2>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed mb-10 max-w-xl">
-                {venue.name}, {venue.street}, {venue.suburb}. Free parking on
-                site.
-              </p>
-              {venue.mapUrl && (
-                <a
-                  href={venue.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="brutalist-button-outline inline-flex items-center gap-3 mb-10"
-                >
-                  <MapPin className="h-4 w-4" />
-                  Open in Maps
-                </a>
-              )}
-            </div>
-            <VenueBand venue={venue} />
-          </div>
-        </section>
-
-        {/* [009] From the last one — real photos from the 16 Sep 2026 session
-            (Ollie). Everyone in them consented. Same 1px-gap grid as the
-            venue band; no filter, so the room reads as it is. */}
-        <section className="py-16 md:py-20 border-t border-border bg-card">
-          <div className="container">
-            <div className="max-w-3xl mb-10">
-              <div className="section-tag text-sm md:text-base mb-4">
-                [009] FROM THE LAST ONE
+          <section id="first-notice" className="workshop-section workshop-interest">
+            <div className="container workshop-interest-grid">
+              <div className="workshop-section-intro">
+                <p className="workshop-kicker">THE NEXT BRISBANE ROOM</p>
+                <h2>Bring your problem.<br /><span>We’ll shape the room.</span></h2>
+                <p>
+                  Tell us what you want to work on and which side of town suits. People on this list will hear first when the date, room and price are locked.
+                </p>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl leading-tight mb-4">
-                WHAT A SESSION{" "}
-                <span className="text-primary">ACTUALLY LOOKS LIKE.</span>
-              </h2>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed max-w-xl">
-                16 September at Gather. Six people, one table, everyone building
-                their own brain by lunch.
-              </p>
+              <WorkshopInterestForm variant={variant.slug} />
             </div>
-            <div className="stats-grid grid grid-cols-2 sm:grid-cols-3 border border-border">
-              {SESSION_PHOTOS.map((p) => (
-                <figure key={p.src} className="m-0 bg-background">
-                  <img
-                    src={p.src}
-                    alt={p.alt}
-                    loading="lazy"
-                    decoding="async"
-                    width={1200}
-                    height={1200}
-                    className="w-full aspect-square object-cover"
-                  />
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* [010] Book */}
-        <SessionsSection tag="[010] GRAB YOUR SEAT" />
+          </section>
+        </main>
 
         <Footer />
       </div>
     </div>
   );
 }
-
-/** The bring list — factual, so shared across variants like the room is. */
-// [009] gallery — Ollie's picks from the 16 Sep 2026 session, web-sized to
-// 1200px in /images/workshops/2026-09-16/. Order: sign, close work, wide room.
-const SESSION_PHOTOS: { src: string; alt: string }[] = [
-  {
-    src: "/images/workshops/2026-09-16/gather-sign.webp",
-    alt: "Elliot standing beside an attendee working at a laptop under the Gather sign",
-  },
-  {
-    src: "/images/workshops/2026-09-16/notebook.webp",
-    alt: "Elliot leaning over an attendee's laptop and notebook at the workshop table",
-  },
-  {
-    src: "/images/workshops/2026-09-16/table.webp",
-    alt: "Elliot and an attendee talking across the table, laptops open",
-  },
-  {
-    src: "/images/workshops/2026-09-16/standing.webp",
-    alt: "Two attendees and Elliot standing around the table mid-conversation",
-  },
-  {
-    src: "/images/workshops/2026-09-16/couch.webp",
-    alt: "Two attendees on the breakout couch with laptops, talking through a build",
-  },
-  {
-    src: "/images/workshops/2026-09-16/room-wide.webp",
-    alt: "The full room at Gather with the slides on screen, two attendees at laptops and Elliot standing",
-  },
-];
-
-const NEEDS: { title: string; line: string; icon: React.ReactNode }[] = [
-  {
-    title: "YOUR LAPTOP",
-    line: "Mac or Windows — whatever you actually work on.",
-    icon: <Laptop className="h-6 w-6 text-primary" />,
-  },
-  {
-    title: "ITS CHARGER",
-    line: "Three and a half hours of real work. Batteries alone won't make it.",
-    icon: <BatteryCharging className="h-6 w-6 text-primary" />,
-  },
-  {
-    title: "CLAUDE PRO",
-    line: "The subscription that runs Claude Code, about $31 AUD a month. Have it active before the day.",
-    icon: <Sparkles className="h-6 w-6 text-primary" />,
-  },
-];
-
-/**
- * What the loaded brain unlocks. Shared across variants — the capabilities
- * don't change with the door someone came in through. Wording is mum-test
- * plain: each line says what happens, not what category of thing it is.
- */
-const CAPABILITIES: { title: string; line: string; icon: React.ReactNode }[] = [
-  {
-    title: "SOCIAL CONTENT",
-    line: "Posts drafted from work you actually did this week.",
-    icon: <InstagramIcon className="h-6 w-6" style={{ color: "#E4405F" }} />,
-  },
-  {
-    title: "BUSINESS GRANTS",
-    line: "It finds grants you're eligible for and drafts the application.",
-    icon: <Landmark className="h-6 w-6 text-primary" />,
-  },
-  {
-    title: "LINKEDIN",
-    line: "Your week, turned into posts, in your voice.",
-    icon: <LinkedInIcon className="h-6 w-6" style={{ color: "#0A66C2" }} />,
-  },
-  {
-    title: "META ADS",
-    line: "Campaigns created, watched and adjusted.",
-    icon: <MetaColourIcon className="h-6 w-6" />,
-  },
-  {
-    title: "SHOPIFY",
-    line: "Products, orders and updates handled from your desk.",
-    icon: <ShopifyColourIcon className="h-6 w-6" />,
-  },
-  {
-    title: "QUOTES & PROPOSALS",
-    line: "Advanced proposals in your wording, in minutes.",
-    icon: <FileText className="h-6 w-6 text-primary" />,
-  },
-  {
-    title: "CRM NURTURE",
-    line: "Follow-up campaigns that run themselves.",
-    icon: <HubSpotColourIcon className="h-6 w-6" />,
-  },
-  {
-    title: "WHATEVER'S NEXT",
-    line: "The thing eating your week right now — that's the one you build.",
-    icon: <ArrowRight className="h-6 w-6 text-primary" />,
-  },
-];
-
