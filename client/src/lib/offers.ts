@@ -40,9 +40,9 @@ export type Offer = {
   seo: { title: string; description: string };
 };
 
-// TODO(elliot): weekday to confirm. 10 Nov 2026 is a Tuesday; Elliot said Wednesday.
-export const WORKSHOP_DATE = "10 November";
-export const WORKSHOP_EARLY_BIRD_ENDS = "3 November";
+// Confirmed by Elliot 6 Oct 2026.
+export const WORKSHOP_DATE = "Wed 11 November";
+export const WORKSHOP_EARLY_BIRD_ENDS = "4 November";
 export const WORKSHOP_SEATS = 10;
 
 const STRIPE_LINK_WORKSHOP = import.meta.env.VITE_STRIPE_LINK_WORKSHOP as string | undefined;
@@ -92,7 +92,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     seo: {
       title: "Hands-on AI Workshop Brisbane — Unpaste",
       description:
-        "Bring your laptop and one real job. Build it with Elliot beside you and leave with it running. 10 seats, Brisbane.",
+        "Wednesday 11 November, Brisbane. Bring your laptop and one real job. Build it with Elliot beside you and leave with it running. 10 seats.",
     },
   },
 
