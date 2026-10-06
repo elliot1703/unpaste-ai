@@ -17,6 +17,8 @@ export type Offer = {
   lede: string;
   /** Mono facts line under the hero. */
   facts: string[];
+  /** Hero pills over the photo. Short, three to four. */
+  pills: string[];
   /** How the day runs, three lines. */
   steps: { title: string; body: string }[];
   forYou: string[];
@@ -60,6 +62,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     lede:
       "Bring your laptop and a real job from your business. Build it with Elliot beside you, and leave with it running.",
     facts: [WORKSHOP_DATE, "4.5 hours", `${WORKSHOP_SEATS} seats`, "Brisbane"],
+    pills: ["AI workshop", "Brisbane", `Wednesday 11 November`, `${WORKSHOP_SEATS} seats`],
     steps: [
       { title: "Bring your laptop and one real job.", body: "The quote you rewrite every week. The inbox nobody owns. The report you build by hand." },
       { title: "Build it with Elliot beside you.", body: "Small room, laptops open. When you get stuck, he's at your shoulder, not on a slide." },
@@ -110,6 +113,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     lede:
       "Before the day, we write down what AI should be doing for you. Then I come to you and we build it, together, until it's done.",
     facts: ["One day", "In your office", "Claude Code or Codex", "Brisbane"],
+    pills: ["1:1 setup", "In your office", "Brisbane", "One day"],
     steps: [
       { title: "Before the day, we write the list.", body: "The quoting. The follow-ups. Monday's numbers. Whatever is actually eating your week." },
       { title: "We build it in your office, together.", body: "On your laptop, in your accounts, with your real files. Not a demo environment." },
@@ -161,6 +165,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     lede:
       "We come to you, find the tasks eating the team's time, build the first workflows together on the day, then keep the momentum with weekly catch-ups.",
     facts: ["Up to 12 people", "In your office", "Brisbane", "2 spots left in October"],
+    pills: ["Team training", "Up to 12", "We come to you", "2 October dates left"],
     steps: [
       { title: "Find the tasks eating the team's time.", body: "A short call before the day. We pick the two or three jobs worth automating first." },
       { title: "Build useful AI workflows together.", body: "Laptops open, everyone building on their own real work, Elliot moving between desks." },

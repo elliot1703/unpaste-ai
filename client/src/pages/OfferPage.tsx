@@ -7,6 +7,7 @@ import { ApplyForm } from "@/components/ApplyForm";
 import type { Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
+import { EXAMPLES, TOOLS, toolByKey } from "@/lib/integrations";
 
 // One page shape for all three offers. Price is never on the page; the form
 // reveals it. Everything named here (date, seats, reviews, photos) is true or
@@ -59,18 +60,14 @@ export default function OfferPage({
 
       <main>
         <section className="offer-hero">
-          <figure className="offer-hero-photo">
-            <img src="/images/workshops/2026-09-16/hands-on.webp" alt="Elliot working beside workshop attendees on their laptops" width={1200} height={1500} fetchPriority="high" />
-            <figcaption>The first Brisbane room · 16 September 2026</figcaption>
-          </figure>
+          <img className="offer-hero-bg" src={`${P}/hands-on.webp`} alt="" width={1200} height={1500} fetchPriority="high" />
           <div className="offer-hero-copy">
-            <p className="offer-kicker">{offer.kicker}</p>
+            <ul className="offer-pills">
+              {offer.pills.map((f) => <li key={f}>{f}</li>)}
+            </ul>
             <h1>{headline.main} <span>{headline.accent}</span></h1>
             <p className="offer-subhead">{subhead}</p>
             <p className="offer-lede">{lede}</p>
-            <ul className="offer-facts">
-              {offer.facts.map((f) => <li key={f}>{f}</li>)}
-            </ul>
             <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.cta} <ArrowRight className="h-4 w-4" /></a>
             <p className="offer-guarantee"><Check /> {offer.guarantee}</p>
           </div>
@@ -106,6 +103,34 @@ export default function OfferPage({
           <figure className="offer-wide-photo">
             <img src={`${P}/teaching-wide.webp`} alt="Elliot teaching at the front of the room while attendees work on their laptops" loading="lazy" width={1600} height={900} />
           </figure>
+        </section>
+
+        <section className="offer-section offer-tools">
+          <p className="offer-kicker">What it connects to</p>
+          <h2>Your agent, in the tools you already use.</h2>
+          <p className="offer-lede">We show you how to connect an agent to the apps your business runs on, and the way we set them up ourselves: which connections are worth making first, what to give the agent access to, what to keep it away from, and the habits that keep it useful after the day.</p>
+          <ul className="offer-logos">
+            {TOOLS.map((t) => (
+              <li key={t.key}><img src={t.logo} alt="" width={28} height={28} loading="lazy" /><span>{t.name}</span></li>
+            ))}
+          </ul>
+          <div className="offer-examples">
+            {EXAMPLES.map((ex) => (
+              <article key={ex.ask} className="offer-example">
+                <div className="offer-ask"><span>You</span><p>{ex.ask}</p></div>
+                <ol>
+                  {ex.steps.map((st) => {
+                    const t = toolByKey(st.tool);
+                    return (
+                      <li key={st.text}><img src={t.logo} alt={t.name} width={22} height={22} loading="lazy" /><span>{st.text}</span></li>
+                    );
+                  })}
+                </ol>
+                <div className="offer-result"><Check /> {ex.result}</div>
+              </article>
+            ))}
+          </div>
+          <p className="offer-note">Examples of what you can set up on the day. What you build depends on the job you bring.</p>
         </section>
 
         {offer.slug === "workshop" && (
