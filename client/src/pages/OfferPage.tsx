@@ -7,7 +7,8 @@ import { ApplyForm } from "@/components/ApplyForm";
 import type { Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
-import { EXAMPLES, TOOLS, toolByKey } from "@/lib/integrations";
+import { TOOLS } from "@/lib/integrations";
+import { BuildExamples } from "@/components/BuildExamples";
 
 // One page shape for all three offers. Price is never on the page; the form
 // reveals it. Everything named here (date, seats, reviews, photos) is true or
@@ -23,12 +24,6 @@ const PHOTOS = [
   { src: `${P}/over-shoulder.webp`, alt: "Over the shoulder of attendees working at the table" },
 ];
 
-const BUILT = [
-  { title: "A quote written from the job notes", body: "Photos and a few lines in, a priced quote out, ready to send. The agent uses your rate card, not a guess." },
-  { title: "Customer details filed without typing", body: "Say what happened on the call. The agent puts the name, the job and the next step into the CRM." },
-  { title: "The Monday numbers, before coffee", body: "Last week's sales, ad spend and new leads pulled into one short brief every Monday morning." },
-  { title: "Posts that sound like you", body: "Your brand voice saved once. The agent drafts the week's posts and captions in it, you approve." },
-];
 
 // Plain hash links don't reliably scroll inside the SPA, so every CTA scrolls itself.
 function scrollToApply(e: React.MouseEvent<HTMLAnchorElement>) {
@@ -115,34 +110,14 @@ export default function OfferPage({
               <li key={t.key}><img src={t.logo} alt="" width={28} height={28} loading="lazy" /><span>{t.name}</span></li>
             ))}
           </ul>
-          <div className="offer-examples">
-            {EXAMPLES.map((ex) => (
-              <article key={ex.ask} className="offer-example">
-                <div className="offer-ask"><span>You</span><p>{ex.ask}</p></div>
-                <ol>
-                  {ex.steps.map((st) => {
-                    const t = toolByKey(st.tool);
-                    return (
-                      <li key={st.text}><img src={t.logo} alt={t.name} width={22} height={22} loading="lazy" /><span>{st.text}</span></li>
-                    );
-                  })}
-                </ol>
-                <div className="offer-result"><Check /> {ex.result}</div>
-              </article>
-            ))}
-          </div>
-          <p className="offer-note">Examples of what you can set up on the day. What you build depends on the job you bring.</p>
         </section>
 
         {offer.slug === "workshop" && (
           <section className="offer-section offer-built">
             <p className="offer-kicker">Examples</p>
             <h2>What people build.</h2>
-            <ul className="offer-built-list">
-              {BUILT.map((b) => (
-                <li key={b.title}><h3>{b.title}</h3><p>{b.body}</p></li>
-              ))}
-            </ul>
+            <BuildExamples />
+            <p className="offer-note">Illustrations of what you can set up on the day. Names and numbers are examples.</p>
           </section>
         )}
 
