@@ -19,7 +19,8 @@ import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import Training from "./pages/Training";
 import WorkshopBooked from "./pages/WorkshopBooked";
-import WorkshopVariantPage from "./pages/WorkshopVariant";
+import OfferPage from "./pages/OfferPage";
+import { OFFERS } from "@/lib/offers";
 import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
 import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
@@ -38,17 +39,22 @@ function AppRoutes() {
       <Route path={"/terms"} component={Terms} />
       <Route path={"/pricing"} component={Pricing} />
       <Route path={"/training"} component={Training} />
-      {/* /workshops serves the winning variant (indexed); old page unrouted. */}
+      {/* Gated-pricing offer pages. /workshops is indexed; the H1 variants are noindex, ads only. */}
       <Route path={"/workshops"}>
-        <WorkshopVariantPage variant={WORKSHOP_VARIANTS[0]} canonical />
+        <OfferPage offer={OFFERS.workshop} />
       </Route>
       <Route path={"/workshops/booked"} component={WorkshopBooked} />
-      {/* Messaging variants — noIndex, reachable by direct link / ads only. */}
       {WORKSHOP_VARIANTS.map((v) => (
         <Route key={v.slug} path={`/workshops/${v.slug}`}>
-          <WorkshopVariantPage variant={v} />
+          <OfferPage offer={OFFERS.workshop} variant={v} canonical={false} />
         </Route>
       ))}
+      <Route path={"/one-on-one"}>
+        <OfferPage offer={OFFERS["one-on-one"]} />
+      </Route>
+      <Route path={"/team-training"}>
+        <OfferPage offer={OFFERS.team} />
+      </Route>
       <Route path={"/coaching"} component={Coaching} />
       <Route path={"/quick-wins"} component={QuickWins} />
       <Route path={"/resources"} component={Resources} />

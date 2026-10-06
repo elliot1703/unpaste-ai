@@ -19,9 +19,12 @@ export function DictationNote() {
 
   const onBookedPage = location === "/workshops/booked";
   const onWorkshopPage = location.startsWith("/workshops") && !onBookedPage;
+  // The offer pages carry their own sticky bar on phones; two bars collide.
+  const onOfferPage =
+    location.startsWith("/workshops") || location === "/one-on-one" || location === "/team-training";
 
   useEffect(() => {
-    if (onBookedPage) return;
+    if (onBookedPage || onOfferPage) return;
     if (sessionStorage.getItem(DISMISS_KEY)) return;
 
     const onScroll = () => {
@@ -32,7 +35,7 @@ export function DictationNote() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [onBookedPage]);
+  }, [onBookedPage, onOfferPage]);
 
   const dismiss = () => {
     sessionStorage.setItem(DISMISS_KEY, "1");
