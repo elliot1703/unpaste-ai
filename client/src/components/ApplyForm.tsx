@@ -192,7 +192,7 @@ function Reveal({ offer, email, variant }: { offer: Offer; email: string; varian
       ) : (
         <p className="apply-fallback">{r.fallback}</p>
       )}
-      <p className="apply-note">A copy of this has gone to {email}.</p>
+      <p className="apply-note">Elliot has your details and will be in touch at {email}.</p>
     </div>
   );
 }
