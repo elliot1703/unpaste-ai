@@ -1434,6 +1434,8 @@ select,
 .offer-hero-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 16px; }
 .offer-hero-photo figcaption { margin-top: 0.6rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--offer-muted); }
 .offer-hero-copy .offer-button { margin-top: 1.5rem; }
+.offer-guarantee { margin-top: 0.9rem; display: flex; gap: 0.5rem; align-items: flex-start; font-size: 0.92rem; line-height: 1.4; color: var(--offer-muted); max-width: 32rem; }
+.offer-guarantee svg { flex: none; width: 18px; height: 18px; margin-top: 2px; color: var(--offer-red); }
 
 /* Proof bar under the hero */
 .offer-proofbar { margin-top: 2.5rem; padding: 1.4rem 0; border-top: 2px solid var(--offer-ink); border-bottom: 2px solid var(--offer-rule); display: grid; gap: 1.25rem; }

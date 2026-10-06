@@ -24,6 +24,8 @@ export type Offer = {
   askTeamSize: boolean;
   /** Button label used on every CTA on the page. */
   cta: string;
+  /** Shown under every CTA and on the end screen. Elliot, 6 Oct: 100% money back if unsatisfied. */
+  guarantee: string;
   /** Shown only after the form is submitted. */
   reveal: {
     title: string;
@@ -75,6 +77,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: false,
     cta: "Apply for a seat",
+    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "The workshop seat",
       price: "$499",
@@ -84,6 +87,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         `${WORKSHOP_SEATS} seats, so everyone gets help`,
         "One real job from your business, running by the end",
         "You keep everything built on the day",
+        "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Pay now, lock the seat",
       action: { kind: "stripe", link: STRIPE_LINK_WORKSHOP },
@@ -123,6 +127,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: false,
     cta: "Check availability",
+    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "The 1:1 day",
       // TODO(elliot): price and length to confirm.
@@ -133,6 +138,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         "A full day in your office, Elliot beside you",
         "Everything built stays yours",
         "A follow-up call two weeks later",
+        "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Book a 20-minute call",
       action: { kind: "calendly", url: calendlyUrl("one-on-one") },
@@ -172,6 +178,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: true,
     cta: "Check October dates",
+    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "Team training day",
       price: "$2,500",
@@ -181,6 +188,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         "A full day in your office, built around your team's work",
         "Weekly catch-up calls after",
         "Everything built stays with the team",
+        "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Book a 20-minute call",
       action: { kind: "calendly", url: calendlyUrl("team-training") },

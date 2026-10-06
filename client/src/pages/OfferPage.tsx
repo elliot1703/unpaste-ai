@@ -72,6 +72,7 @@ export default function OfferPage({
               {offer.facts.map((f) => <li key={f}>{f}</li>)}
             </ul>
             <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.cta} <ArrowRight className="h-4 w-4" /></a>
+            <p className="offer-guarantee"><Check /> {offer.guarantee}</p>
           </div>
         </section>
 
@@ -182,7 +183,7 @@ export default function OfferPage({
       <div className="offer-sticky">
         <div>
           <strong>{offer.facts[0]}</strong>
-          <span>{offer.facts.slice(1, 3).join(" · ")}</span>
+          <span>100% money-back guarantee</span>
         </div>
         <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.cta}</a>
       </div>
