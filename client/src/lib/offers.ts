@@ -150,7 +150,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     path: "/team-training",
     name: "Team AI Training",
     kicker: "Team training · Up to 12 · We come to you",
-    headline: { main: "Put AI to work", accent: "in your business." },
+    headline: { main: "AI training", accent: "for the whole team." },
     subhead: "Practical training built around your team's real work.",
     lede:
       "We come to you, find the tasks eating the team's time, build the first workflows together on the day, then keep the momentum with weekly catch-ups.",
