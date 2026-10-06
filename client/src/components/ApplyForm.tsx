@@ -135,8 +135,8 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
         </fieldset>
       ) : (
         <form className="apply-step apply-details" onSubmit={submit}>
-          <h3>Good fit. The price is on the next screen.</h3>
-          <p>Four details so Elliot can call you with context.</p>
+          <h3>Your details.</h3>
+          <p>So Elliot can get in touch. The price is on the next screen.</p>
           <label><span>Your name</span><input name="name" autoComplete="name" required /></label>
           <label><span>Business name</span><input name="business" autoComplete="organization" /></label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>

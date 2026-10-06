@@ -54,7 +54,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     name: "The Unpaste Workshop",
     kicker: `AI workshop · Brisbane · ${WORKSHOP_DATE}`,
     headline: { main: "Watch it", accent: "do the work." },
-    subhead: "Not a webinar. Not a prompt pack.",
+    subhead: "A hands-on workshop for Brisbane business owners.",
     lede:
       "Bring your laptop and a real job from your business. Build it with Elliot beside you, and leave with it running.",
     facts: [WORKSHOP_DATE, "4.5 hours", `${WORKSHOP_SEATS} seats`, "Brisbane"],
@@ -76,7 +76,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     askTeamSize: false,
     cta: "Apply for a seat",
     reveal: {
-      title: "You're a fit. Here's the seat.",
+      title: "The workshop seat",
       price: "$499",
       priceNote: `+ GST · early bird until ${WORKSHOP_EARLY_BIRD_ENDS}, then $699`,
       includes: [
@@ -124,7 +124,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     askTeamSize: false,
     cta: "Check availability",
     reveal: {
-      title: "You're a fit. Let's find the day.",
+      title: "The 1:1 day",
       // TODO(elliot): price and length to confirm.
       price: "Price on the call",
       priceNote: "one day, in person, Brisbane",
@@ -173,7 +173,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     askTeamSize: true,
     cta: "Check October dates",
     reveal: {
-      title: "You're a fit. Two October dates left.",
+      title: "Team training day",
       price: "$2,500",
       priceNote: "+ GST · for the day, up to 12 people",
       includes: [

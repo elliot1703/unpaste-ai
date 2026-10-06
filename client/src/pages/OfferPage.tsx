@@ -75,7 +75,7 @@ export default function OfferPage({
           <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noreferrer" className="offer-rating">
             <span className="offer-stars" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <Star key={i} />)}</span>
             <strong>{GOOGLE_RATING.score} on Google</strong>
-            <span>{GOOGLE_RATING.count} reviews, all five stars</span>
+            <span>Google reviews</span>
           </a>
           <div className="offer-pulls">
             {reviews.slice(0, 2).map((r) => (
@@ -89,7 +89,7 @@ export default function OfferPage({
 
         <section className="offer-section">
           <p className="offer-kicker">How it runs</p>
-          <h2>Three steps. <span>No slides.</span></h2>
+          <h2>How the day runs.</h2>
           <ol className="offer-steps">
             {offer.steps.map((s, i) => (
               <li key={s.title}>
@@ -102,8 +102,8 @@ export default function OfferPage({
 
         {offer.slug === "workshop" && (
           <section className="offer-section offer-built">
-            <p className="offer-kicker">What people built last time</p>
-            <h2>Real jobs, <span>not demos.</span></h2>
+            <p className="offer-kicker">Last workshop</p>
+            <h2>What people built.</h2>
             <ul className="offer-built-list">
               {BUILT.map((b) => (
                 <li key={b.title}><h3>{b.title}</h3><p>{b.body}</p></li>
@@ -114,7 +114,7 @@ export default function OfferPage({
 
         <section className="offer-section offer-room">
           <p className="offer-kicker">The room</p>
-          <h2>Laptops open. <span>Questions asked.</span></h2>
+          <h2>What it looks like.</h2>
           <div className="offer-photo-strip">
             {PHOTOS.map((p) => (
               <figure key={p.src}>
@@ -127,8 +127,8 @@ export default function OfferPage({
         </section>
 
         <section className="offer-section offer-reviews" id="reviews">
-          <p className="offer-kicker">Every Google review, in full</p>
-          <h2>{GOOGLE_RATING.score} from {GOOGLE_RATING.count}. <span>Named, not anonymous.</span></h2>
+          <p className="offer-kicker">Reviews</p>
+          <h2>What people say.</h2>
           <div className="offer-review-list">
             {reviews.map((r) => (
               <article key={r.name}>
@@ -145,8 +145,8 @@ export default function OfferPage({
         </section>
 
         <section className="offer-section offer-fit">
-          <p className="offer-kicker">The honest bit</p>
-          <h2>Useful if you're <span>past curious.</span></h2>
+          <p className="offer-kicker">Fit</p>
+          <h2>Is it for you?</h2>
           <div className="offer-fit-grid">
             <article>
               <h3>It's for you if</h3>
@@ -163,15 +163,15 @@ export default function OfferPage({
           <figure><img src="/images/elliot.webp" alt="Elliot, founder of Unpaste" loading="lazy" width={937} height={1250} /></figure>
           <div>
             <p className="offer-kicker">Who's teaching</p>
-            <h2>Elliot. <span>On the floor all day.</span></h2>
-            <p>Runs Unpaste on the same tools he teaches. Built his own business on agents first, then started showing Brisbane owners how. No theory, no slides, beside you when it gets stuck.</p>
+            <h2>Elliot Stone.</h2>
+            <p>Founder of Unpaste. Runs his own business on the same tools he teaches, and works beside you on the day when something gets stuck.</p>
           </div>
         </section>
 
         <section className="offer-section offer-apply" id="apply">
           <p className="offer-kicker">{offer.cta}</p>
-          <h2>Three questions, <span>then the price.</span></h2>
-          <p className="offer-lede">So Elliot knows what you're bringing, and so you're not reading a price for something that isn't a fit.</p>
+          <h2>A few quick questions.</h2>
+          <p className="offer-lede">So Elliot knows what you want to work on. The price is on the next screen.</p>
           <ApplyForm offer={offer} variant={variant?.slug} />
         </section>
       </main>
