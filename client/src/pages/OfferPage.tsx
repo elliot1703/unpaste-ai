@@ -24,9 +24,10 @@ const PHOTOS = [
 ];
 
 const BUILT = [
-  { title: "An agent that enters the CRM for her", body: "Anna now hands monday.com entry to her agent instead of doing it by hand. Her words: admin time noticeably down." },
-  { title: "A brand guide the agent can read", body: "The voice, the standards and the never-list, saved once so nobody re-explains them." },
-  { title: "One recurring job, running from the workspace", body: "The task that kept coming back, handed over with instructions the agent follows." },
+  { title: "A quote written from the job notes", body: "Photos and a few lines in, a priced quote out, ready to send. The agent uses your rate card, not a guess." },
+  { title: "Customer details filed without typing", body: "Say what happened on the call. The agent puts the name, the job and the next step into the CRM." },
+  { title: "The Monday numbers, before coffee", body: "Last week's sales, ad spend and new leads pulled into one short brief every Monday morning." },
+  { title: "Posts that sound like you", body: "Your brand voice saved once. The agent drafts the week's posts and captions in it, you approve." },
 ];
 
 // Plain hash links don't reliably scroll inside the SPA, so every CTA scrolls itself.
@@ -135,8 +136,8 @@ export default function OfferPage({
 
         {offer.slug === "workshop" && (
           <section className="offer-section offer-built">
-            <p className="offer-kicker">Last workshop</p>
-            <h2>What people built.</h2>
+            <p className="offer-kicker">Examples</p>
+            <h2>What people build.</h2>
             <ul className="offer-built-list">
               {BUILT.map((b) => (
                 <li key={b.title}><h3>{b.title}</h3><p>{b.body}</p></li>

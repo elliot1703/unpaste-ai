@@ -1584,6 +1584,6 @@ select,
   .offer-photo-strip { grid-template-columns: repeat(3, 1fr); }
   .offer-fit-grid { grid-template-columns: 1fr 1fr; }
   .offer-who { grid-template-columns: 260px 1fr; gap: 2.5rem; align-items: center; }
-  .offer-built-list { grid-template-columns: repeat(3, 1fr); }
+  .offer-built-list { grid-template-columns: repeat(2, 1fr); }
   .offer-sticky { display: none; }
 }
