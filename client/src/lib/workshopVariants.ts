@@ -15,11 +15,11 @@ export type WorkshopVariant = {
 export const WORKSHOP_VARIANTS: WorkshopVariant[] = [
   {
     slug: "start",
-    label: "A · Watch it work",
+    label: "A · First agent",
     audience: "Already uses AI and wants to see it take useful action",
     kicker: "AI WORKSHOP · BRISBANE",
-    headline: { main: "WATCH IT", accent: "DO THE WORK." },
-    subhead: "Not a webinar. Not a prompt pack.",
+    headline: { main: "Get your first", accent: "AI agent built." },
+    subhead: "A hands-on workshop for Brisbane business owners.",
     lede:
       "Bring your laptop and a real job from your business. Build with Elliot beside you, then leave with something useful working and the confidence to keep going.",
   },

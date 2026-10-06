@@ -53,7 +53,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     path: "/workshops",
     name: "The Unpaste Workshop",
     kicker: `AI workshop · Brisbane · ${WORKSHOP_DATE}`,
-    headline: { main: "Watch it", accent: "do the work." },
+    headline: { main: "Put AI to work", accent: "in your business." },
     subhead: "A hands-on workshop for Brisbane business owners.",
     lede:
       "Bring your laptop and a real job from your business. Build it with Elliot beside you, and leave with it running.",
