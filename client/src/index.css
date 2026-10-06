@@ -1476,7 +1476,7 @@ select,
 /* Tools */
 .offer-logos { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
 .offer-logos li { display: grid; justify-items: center; gap: 0.45rem; padding: 0.8rem 0.4rem; border: 2px solid var(--offer-rule); border-radius: 12px; font-weight: 600; font-size: 0.78rem; text-align: center; background: #fff; min-width: 0; }
-.offer-logos img { width: 30px; height: 30px; }
+.offer-logos img { height: 30px; width: auto; max-width: 88%; object-fit: contain; border-radius: 7px; }
 .offer-logos span { line-height: 1.15; }
 .offer-examples { margin-top: 1.5rem; display: grid; gap: 1rem; }
 .offer-example { border: 2px solid var(--offer-ink); border-radius: 16px; background: #fff; overflow: hidden; }
@@ -1486,7 +1486,7 @@ select,
 .offer-example ol { list-style: none; padding: 0.5rem 1.1rem; display: grid; }
 .offer-example ol li { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0; border-bottom: 1px dashed var(--offer-rule); font-size: 0.95rem; }
 .offer-example ol li:last-child { border-bottom: 0; }
-.offer-example ol img { flex: none; width: 22px; height: 22px; }
+.offer-example ol img { flex: none; height: 22px; width: auto; max-width: 64px; object-fit: contain; border-radius: 5px; }
 .offer-result { display: flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.1rem; background: #fef2f2; font-weight: 700; font-size: 0.92rem; }
 .offer-result svg { width: 18px; height: 18px; color: var(--offer-red); }
 .offer-note { margin-top: 1rem; font-size: 0.88rem; color: var(--offer-muted); }

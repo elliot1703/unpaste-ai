@@ -1,11 +1,11 @@
-// Tools the workshop connects an agent to. Logos live in /images/logos (brand
-// colour glyphs from Simple Icons; Canva and ServiceM8 are stand-ins until the
-// official files arrive). Order is the order on the page.
+// Tools the workshop connects an agent to. Logos in /images/logos are the
+// official current marks: Wikimedia Commons SVGs for seven, App Store icons
+// (PNG) for ServiceM8 and Canva. Order is the order on the page.
 
 export type Tool = { key: string; name: string; logo: string };
 
 export const TOOLS: Tool[] = [
-  { key: "servicem8", name: "ServiceM8", logo: "/images/logos/servicem8.svg" },
+  { key: "servicem8", name: "ServiceM8", logo: "/images/logos/servicem8.png" },
   { key: "shopify", name: "Shopify", logo: "/images/logos/shopify.svg" },
   { key: "hubspot", name: "HubSpot", logo: "/images/logos/hubspot.svg" },
   { key: "instagram", name: "Instagram", logo: "/images/logos/instagram.svg" },
@@ -13,7 +13,7 @@ export const TOOLS: Tool[] = [
   { key: "meta", name: "Meta Ads", logo: "/images/logos/meta.svg" },
   { key: "gmail", name: "Gmail", logo: "/images/logos/gmail.svg" },
   { key: "googledrive", name: "Google Drive", logo: "/images/logos/googledrive.svg" },
-  { key: "canva", name: "Canva", logo: "/images/logos/canva.svg" },
+  { key: "canva", name: "Canva", logo: "/images/logos/canva.png" },
 ];
 
 export const toolByKey = (key: string): Tool => TOOLS.find((t) => t.key === key)!;
