@@ -14,12 +14,18 @@ interface SEOProps {
   type?: string;
   noIndex?: boolean;
   faqItems?: FAQItem[];
+  /** Extra JSON-LD objects for this page (Event, Course, Article…). */
+  jsonLd?: Record<string, unknown>[];
 }
+
+/** One sentence, reused everywhere the entity is described. */
+export const ENTITY_STATEMENT =
+  "Unpaste.ai is a Brisbane AI training company. Elliot Stone teaches business owners and teams to run their work with Claude, Claude Code and Cowork, through hands-on workshops, team dev days and 1:1 coaching.";
 
 const defaultSEO = {
   title: "unpaste.ai | Stop Copy-Pasting. Start Scaling.",
   description:
-    "AI coaching, training, workshops, and custom development for Brisbane businesses. Learn to run your business on AI — or have it built with you. Either way, you own the system.",
+    "Brisbane AI training. Hands-on Claude Code workshops, team dev days and 1:1 coaching for business owners and teams. Learn to run your work with Claude, Claude Code and Cowork, on a system you own.",
   keywords:
     "AI coaching Brisbane, AI training, AI workshops Brisbane, Claude Code, custom development, AI automation, workflow automation, Brisbane AI, business automation, AI agents",
   image: "https://unpaste.ai/images/og-image.png",
@@ -36,6 +42,7 @@ export function SEO({
   type,
   noIndex = false,
   faqItems,
+  jsonLd,
 }: SEOProps) {
   const seo = {
     title: title ? `${title} | unpaste.ai` : defaultSEO.title,
@@ -46,13 +53,28 @@ export function SEO({
     type: type || defaultSEO.type,
   };
 
+  // Entity statement. Keep this sentence identical in llms.txt, the Home
+  // subheadline, LinkedIn and Google Business Profile: AI engines assemble
+  // "what is Unpaste.ai" from whichever of these they read first.
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "unpaste.ai",
+    "@id": "https://unpaste.ai/#organization",
+    name: "Unpaste.ai",
+    alternateName: "Unpaste",
     url: "https://unpaste.ai",
     logo: "https://unpaste.ai/images/og-image.png",
-    description: "AI coaching, training, workshops, and custom development for Brisbane businesses",
+    description: ENTITY_STATEMENT,
+    foundingDate: "2025",
+    founder: { "@id": "https://unpaste.ai/#elliot" },
+    areaServed: ["Brisbane", "South East Queensland", "Australia"],
+    knowsAbout: [
+      "Claude",
+      "Claude Code",
+      "Claude Cowork",
+      "AI training for small business",
+      "AI agents for business operations",
+    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Brisbane",
@@ -66,7 +88,28 @@ export function SEO({
     },
     sameAs: [
       "https://www.linkedin.com/company/unpaste-ai",
+      "https://www.linkedin.com/in/elliot-stone-66a5a1a4",
     ],
+  };
+
+  const personData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": "https://unpaste.ai/#elliot",
+    name: "Elliot Stone",
+    jobTitle: "Founder",
+    worksFor: { "@id": "https://unpaste.ai/#organization" },
+    url: "https://unpaste.ai/about",
+    image: "https://unpaste.ai/images/team-elliot.jpg",
+    description:
+      "Brisbane AI trainer. Teaches business owners and teams to run their work with Claude, Claude Code and Cowork, and runs the weekly Claude & Coffee meetup.",
+    sameAs: ["https://www.linkedin.com/in/elliot-stone-66a5a1a4"],
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Brisbane",
+      addressRegion: "QLD",
+      addressCountry: "AU",
+    },
   };
 
   const faqSchema = faqItems?.length
@@ -87,8 +130,9 @@ export function SEO({
   const localBusinessData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "unpaste.ai",
-    description: "AI coaching, training, workshops, and custom development for small to medium businesses",
+    "@id": "https://unpaste.ai/#localbusiness",
+    name: "Unpaste.ai",
+    description: ENTITY_STATEMENT,
     url: "https://unpaste.ai",
     address: {
       "@type": "PostalAddress",
@@ -139,9 +183,15 @@ export function SEO({
       {/* Structured Data */}
       <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
       <script type="application/ld+json">{JSON.stringify(localBusinessData)}</script>
+      <script type="application/ld+json">{JSON.stringify(personData)}</script>
       {faqSchema && (
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       )}
+      {jsonLd?.map((block, i) => (
+        <script key={i} type="application/ld+json">
+          {JSON.stringify(block)}
+        </script>
+      ))}
     </Helmet>
   );
 }

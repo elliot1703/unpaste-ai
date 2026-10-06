@@ -332,6 +332,7 @@ export default function Training() {
         title="AI Training & Workspace Setup"
         description="Team dev days at your office, Brisbane workshops, and 1:1 coaching. We set up your team's AI workspace, install the assistants, and train everyone — on a system you own."
         url="https://unpaste.ai/training"
+        faqItems={faqs.map((faq) => ({ question: faq.q, answer: faq.a }))}
       />
 
       <Navigation />

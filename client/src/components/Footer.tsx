@@ -22,6 +22,7 @@ export function Footer() {
               <li><Link href="/claude-and-coffee" className="hover:text-foreground transition-colors">CLAUDE &amp; COFFEE</Link></li>
               <li><Link href="/coaching" className="hover:text-foreground transition-colors">COACHING & DEV DAYS</Link></li>
               <li><Link href="/training" className="hover:text-foreground transition-colors">TRAINING</Link></li>
+              <li><Link href="/claude-code-training" className="hover:text-foreground transition-colors">CLAUDE CODE TRAINING</Link></li>
               <li><Link href="/resources" className="hover:text-foreground transition-colors">FREE RESOURCES</Link></li>
               <li><Link href="/solutions" className="hover:text-foreground transition-colors">SOLUTIONS</Link></li>
               <li><Link href="/about" className="hover:text-foreground transition-colors">ABOUT</Link></li>
