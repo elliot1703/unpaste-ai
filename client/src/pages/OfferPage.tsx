@@ -12,10 +12,14 @@ import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
 // reveals it. Everything named here (date, seats, reviews, photos) is true or
 // it doesn't ship.
 
+const P = "/images/workshops/2026-09-16";
 const PHOTOS = [
-  { src: "/images/workshops/2026-09-16/notebook.webp", alt: "Elliot helping an attendee work through a build on their laptop", label: "Building" },
-  { src: "/images/workshops/2026-09-16/standing.webp", alt: "Attendees and Elliot standing around the workshop table in conversation", label: "Asking" },
-  { src: "/images/workshops/2026-09-16/couch.webp", alt: "Two attendees troubleshooting a build together on the breakout couch", label: "Fixing" },
+  { src: `${P}/notebook.webp`, alt: "Elliot helping an attendee work through a build on their laptop" },
+  { src: `${P}/conversation.webp`, alt: "Elliot talking through a build with two attendees at the whiteboard" },
+  { src: `${P}/couch-help.webp`, alt: "Elliot beside an attendee on the couch, both looking at the laptop" },
+  { src: `${P}/listening.webp`, alt: "Two attendees listening at the table, laptops open" },
+  { src: `${P}/gather-anna.webp`, alt: "Elliot and an attendee at Gather in Bulimba" },
+  { src: `${P}/over-shoulder.webp`, alt: "Over the shoulder of attendees working at the table" },
 ];
 
 const BUILT = [
@@ -98,6 +102,9 @@ export default function OfferPage({
               </li>
             ))}
           </ol>
+          <figure className="offer-wide-photo">
+            <img src={`${P}/teaching-wide.webp`} alt="Elliot teaching at the front of the room while attendees work on their laptops" loading="lazy" width={1600} height={900} />
+          </figure>
         </section>
 
         {offer.slug === "workshop" && (
@@ -119,7 +126,6 @@ export default function OfferPage({
             {PHOTOS.map((p) => (
               <figure key={p.src}>
                 <img src={p.src} alt={p.alt} loading="lazy" width={1200} height={1200} />
-                <figcaption>{p.label}</figcaption>
               </figure>
             ))}
           </div>
@@ -131,14 +137,9 @@ export default function OfferPage({
           <h2>What people say.</h2>
           <div className="offer-review-list">
             {reviews.map((r) => (
-              <article key={r.name}>
-                <header>
-                  <span className="offer-stars" aria-label="Five stars">{[0, 1, 2, 3, 4].map((i) => <Star key={i} />)}</span>
-                  <strong>{r.name}</strong>
-                  {r.business && <span>{r.business}</span>}
-                </header>
-                {r.text.split("\n\n").map((para, i) => <p key={i}>{para}</p>)}
-              </article>
+              <figure key={r.name}>
+                <img src={r.screenshot} alt={`Google review from ${r.name}${r.business ? `, ${r.business}` : ""}: ${r.text.replace(/\s+/g, " ")}`} loading="lazy" />
+              </figure>
             ))}
           </div>
           <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noreferrer" className="offer-text-link">Read them on Google <ArrowRight className="h-4 w-4" /></a>
@@ -160,7 +161,7 @@ export default function OfferPage({
         </section>
 
         <section className="offer-section offer-who">
-          <figure><img src="/images/elliot.webp" alt="Elliot, founder of Unpaste" loading="lazy" width={937} height={1250} /></figure>
+          <figure><img src={`${P}/room-elliot.webp`} alt="Elliot in the workshop room at Gather, Bulimba" loading="lazy" width={1280} height={1600} /></figure>
           <div>
             <p className="offer-kicker">Who's teaching</p>
             <h2>Elliot Stone.</h2>

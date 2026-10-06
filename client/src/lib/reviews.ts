@@ -13,12 +13,15 @@ export type Review = {
   backs: ("workshop" | "one-on-one" | "team")[];
   /** One line for tiles and the hero strip. */
   pull: string;
+  /** Screenshot of the review as it appears on Google, used on the page. */
+  screenshot: string;
   text: string;
 };
 
 export const REVIEWS: Review[] = [
   {
     name: "Anna Mascaro",
+    screenshot: "/images/reviews/anna-mascaro.webp",
     business: "Luminate Leadership",
     backs: ["workshop"],
     pull: "It has noticeably cut down the time I spend on admin.",
@@ -30,6 +33,7 @@ Thanks, Elliot. I'd highly recommend this workshop to anyone who wants to move f
   },
   {
     name: "Christophe Cosson",
+    screenshot: "/images/reviews/christophe-cosson.webp",
     backs: ["one-on-one", "workshop"],
     pull: "We walked away with practical skills and systems we could actually put to work straight away.",
     text: `Elliot's AI training was absolutely brilliant. My partner and I attended his AI training to learn how to build Claude Agents and, honestly, it has completely changed the way we approach our businesses.
@@ -42,6 +46,7 @@ I couldn't recommend Elliot's AI training highly enough. If you're looking to sa
   },
   {
     name: "Conrad Tamsen",
+    screenshot: "/images/reviews/conrad-tamsen.webp",
     business: "DO Financial",
     backs: ["team"],
     pull: "Upskill the entire team. Could not recommend him enough.",
@@ -55,6 +60,7 @@ We look forward to our continued engagement with him`,
   },
   {
     name: "Andy Canning",
+    screenshot: "/images/reviews/andy-canning.webp",
     business: "Luminate Leadership",
     backs: ["workshop"],
     pull: "I walked away with actionable ideas on how and when to use Claude Code.",
@@ -63,6 +69,7 @@ Elliot is so knowledgeable and patient in catering for everyone's question. I wa
   },
   {
     name: "Andrew Ciui",
+    screenshot: "/images/reviews/andrew-ciui.webp",
     backs: ["workshop", "team"],
     pull: "Very helpful at understanding how to utilise AI across my 3 separate businesses.",
     text: `Absolutely loved the experience, had a great time and it was very helpful at understanding how to utilise AI across my 3 seperate businesses.`,
