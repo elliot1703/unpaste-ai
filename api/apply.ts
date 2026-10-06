@@ -89,7 +89,6 @@ export default async function handler(req: Request): Promise<Response> {
                   first_name: firstName,
                   last_name: rest.join(" "),
                   properties,
-                  subscriptions: { email: { marketing: { consent: "SUBSCRIBED" } } },
                 },
               },
             },
@@ -111,7 +110,12 @@ export default async function handler(req: Request): Promise<Response> {
           attributes: {
             properties,
             metric: { data: { type: "metric", attributes: { name: "Applied" } } },
-            profile: { data: { type: "profile", attributes: { email: lead.email.trim() } } },
+            profile: {
+              data: {
+                type: "profile",
+                attributes: { email: lead.email.trim(), first_name: firstName, last_name: rest.join(" "), properties },
+              },
+            },
           },
         },
       }),
@@ -122,6 +126,9 @@ export default async function handler(req: Request): Promise<Response> {
   if (!subRes.ok && !evtRes.ok) {
     return json({ ok: false, error: "klaviyo rejected the lead" }, 502);
   }
+  // One of the two failing is still a lead landed, but say so in the logs.
+  if (!subRes.ok) console.error("[apply] klaviyo subscribe failed", subRes.status, await subRes.text());
+  if (!evtRes.ok) console.error("[apply] klaviyo event failed", evtRes.status, await evtRes.text());
 
   const webhook = process.env.LEAD_WEBHOOK_URL;
   if (webhook) {
