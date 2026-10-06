@@ -1,4 +1,43 @@
 import { Helmet } from "react-helmet-async";
+import { SESSIONS, WORKSHOP_PRICE } from "@/lib/workshops";
+
+// Event schema for every dated workshop session. Attached automatically to the
+// canonical /workshops page so OfferPage.tsx needs no SEO plumbing. Emits
+// nothing while sessions are undated.
+const WORKSHOPS_URL = "https://unpaste.ai/workshops";
+const workshopEvents = () =>
+  SESSIONS.filter((x) => x.isoDate && x.venue).map((x) => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: "Claude Code Workshop, Brisbane",
+    description:
+      "A hands-on, small-group AI workshop in Brisbane. Bring your laptop and leave using Claude Code on your own work.",
+    startDate: x.isoDate,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    url: WORKSHOPS_URL,
+    location: {
+      "@type": "Place",
+      name: x.venue!.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: x.venue!.street,
+        addressLocality: x.venue!.suburb,
+        addressCountry: "AU",
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      price: String(WORKSHOP_PRICE.inclGstAmount),
+      priceCurrency: "AUD",
+      availability: x.paymentLinkId
+        ? "https://schema.org/InStock"
+        : "https://schema.org/PreOrder",
+      url: WORKSHOPS_URL,
+    },
+    organizer: { "@id": "https://unpaste.ai/#organization" },
+    performer: { "@id": "https://unpaste.ai/#elliot" },
+  }));
 
 interface FAQItem {
   question: string;
@@ -187,7 +226,7 @@ export function SEO({
       {faqSchema && (
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       )}
-      {jsonLd?.map((block, i) => (
+      {[...(seo.url === WORKSHOPS_URL && !noIndex ? workshopEvents() : []), ...(jsonLd ?? [])].map((block, i) => (
         <script key={i} type="application/ld+json">
           {JSON.stringify(block)}
         </script>
