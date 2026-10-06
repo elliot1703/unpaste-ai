@@ -12,6 +12,7 @@ const routes = [
   "/about",
   "/book",
   "/training",
+  "/claude-code-training",
   "/workshops",
   "/workshops/booked",
   "/workshops/start",
@@ -94,6 +95,28 @@ async function prerender() {
       `  Prerendered: ${route} → ${filePath.replace(root + "/", "")}`
     );
   }
+
+  // Sitemap is generated from the same route list so it cannot drift from
+  // what is actually prerendered. Routes that are noindex or utility pages
+  // are excluded here; keep this list in sync with the pages' noIndex props.
+  // /workshops/* are the booked page and the noindex H1 variants (ads only).
+  const sitemapExclude = new Set(["/styles", "/workshops/booked"]);
+  const isExcluded = (r) => sitemapExclude.has(r) || r.startsWith("/workshops/");
+  // Static pages under client/public that are not React routes but should be indexed.
+  const sitemapExtra = ["/brand/template"];
+  const today = new Date().toISOString().slice(0, 10);
+  const included = [...routes.filter((r) => !isExcluded(r)), ...sitemapExtra];
+  const urls = included
+    .map((r) => {
+      const priority = r === "/" ? "1.0" : r.split("/").length > 2 ? "0.6" : "0.8";
+      return `  <url>\n    <loc>https://unpaste.ai${r === "/" ? "" : r}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${priority}</priority>\n  </url>`;
+    })
+    .join("\n");
+  writeFileSync(
+    resolve(root, "dist/public/sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  );
+  console.log(`  Sitemap: ${included.length} URLs → dist/public/sitemap.xml`);
 
   console.log(`\n✓ Prerendered ${routes.length} routes`);
 }

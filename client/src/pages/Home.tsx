@@ -204,7 +204,7 @@ export default function Home() {
                     transition={{ duration: 1.5, repeat: Infinity }}
                     className="inline-block w-2 h-2 bg-primary"
                   />
-                  [001] AI WORKSHOPS · COACHING · CUSTOM DEV
+                  [001] AI TRAINING · WORKSHOPS · COACHING · BRISBANE
                 </motion.div>
 
                 {/* Main Headline with staggered letter animation */}
@@ -269,9 +269,11 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  Hands-on AI workshops in Brisbane, plus 1:1 coaching and
-                  custom development. Automating the busy-work is step one —
-                  then you build things you couldn't before. Either way, you
+                  Unpaste.ai is a Brisbane AI training company. Elliot Stone
+                  teaches business owners and teams to run their work with
+                  Claude, Claude Code and Cowork: hands-on workshops, team dev
+                  days and 1:1 coaching. Automating the busy-work is step one.
+                  Then you build things you couldn't before. Either way, you
                   own the system.
                 </motion.p>
 

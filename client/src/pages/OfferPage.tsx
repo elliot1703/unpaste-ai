@@ -7,6 +7,44 @@ import { ApplyForm } from "@/components/ApplyForm";
 import type { Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
+import { SESSIONS, WORKSHOP_PRICE } from "@/lib/workshops";
+
+// Event schema for every dated workshop session. Only the canonical /workshops
+// page carries it; the H1 variants are noindex. Emits nothing while sessions
+// are undated, so it is safe to leave in place between runs.
+const workshopEvents = () =>
+  SESSIONS.filter((x) => x.isoDate && x.venue).map((x) => ({
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: "Claude Code Workshop, Brisbane",
+    description:
+      "A hands-on, small-group AI workshop in Brisbane. Bring your laptop and leave using Claude Code on your own work.",
+    startDate: x.isoDate,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    url: "https://unpaste.ai/workshops",
+    location: {
+      "@type": "Place",
+      name: x.venue!.name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: x.venue!.street,
+        addressLocality: x.venue!.suburb,
+        addressCountry: "AU",
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      price: String(WORKSHOP_PRICE.inclGstAmount),
+      priceCurrency: "AUD",
+      availability: x.paymentLinkId
+        ? "https://schema.org/InStock"
+        : "https://schema.org/PreOrder",
+      url: "https://unpaste.ai/workshops",
+    },
+    organizer: { "@id": "https://unpaste.ai/#organization" },
+    performer: { "@id": "https://unpaste.ai/#elliot" },
+  }));
 
 // One page shape for all three offers. Price is never on the page; the form
 // reveals it. Everything named here (date, seats, reviews, photos) is true or
@@ -54,7 +92,13 @@ export default function OfferPage({
 
   return (
     <div className="min-h-screen offer-page">
-      <SEO title={variant ? `${headline.main} ${headline.accent}` : offer.seo.title} description={offer.seo.description} url={url} noIndex={!canonical} />
+      <SEO
+        title={variant ? `${headline.main} ${headline.accent}` : offer.seo.title}
+        description={offer.seo.description}
+        url={url}
+        noIndex={!canonical}
+        jsonLd={offer.slug === "workshop" && canonical ? workshopEvents() : undefined}
+      />
       <Navigation />
 
       <main>

@@ -71,6 +71,26 @@ export default async function handler(req: Request): Promise<Response> {
     revision: KLAVIYO_REVISION,
   };
 
+  // Profile upsert carries the data; the subscribe call only adds list
+  // membership (Klaviyo's client subscribe ignores profile fields on existing
+  // profiles); the event is what flows trigger on.
+  const upsert = fetch(`https://a.klaviyo.com/client/profiles?company_id=${KLAVIYO_COMPANY_ID}`, {
+    method: "POST",
+    headers: klaviyoHeaders,
+    body: JSON.stringify({
+      data: {
+        type: "profile",
+        attributes: {
+          email: lead.email.trim(),
+          first_name: firstName,
+          last_name: rest.join(" "),
+          organization: lead.business ?? "",
+          properties,
+        },
+      },
+    }),
+  });
+
   const subscribe = fetch(
     `https://a.klaviyo.com/client/subscriptions?company_id=${KLAVIYO_COMPANY_ID}`,
     {
@@ -122,11 +142,12 @@ export default async function handler(req: Request): Promise<Response> {
     }
   );
 
-  const [subRes, evtRes] = await Promise.all([subscribe, event]);
-  if (!subRes.ok && !evtRes.ok) {
+  const [upRes, subRes, evtRes] = await Promise.all([upsert, subscribe, event]);
+  if (!upRes.ok && !subRes.ok && !evtRes.ok) {
     return json({ ok: false, error: "klaviyo rejected the lead" }, 502);
   }
-  // One of the two failing is still a lead landed, but say so in the logs.
+  // Any one failing is still a lead landed, but say so in the logs.
+  if (!upRes.ok) console.error("[apply] klaviyo profile upsert failed", upRes.status, await upRes.text());
   if (!subRes.ok) console.error("[apply] klaviyo subscribe failed", subRes.status, await subRes.text());
   if (!evtRes.ok) console.error("[apply] klaviyo event failed", evtRes.status, await evtRes.text());
 
