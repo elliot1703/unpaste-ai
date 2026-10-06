@@ -8,6 +8,7 @@ import type { Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
 import { SESSIONS, WORKSHOP_PRICE } from "@/lib/workshops";
+import { EXAMPLES, TOOLS, toolByKey } from "@/lib/integrations";
 
 // Event schema for every dated workshop session. Only the canonical /workshops
 // page carries it; the H1 variants are noindex. Emits nothing while sessions
@@ -61,9 +62,10 @@ const PHOTOS = [
 ];
 
 const BUILT = [
-  { title: "An agent that enters the CRM for her", body: "Anna now hands monday.com entry to her agent instead of doing it by hand. Her words: admin time noticeably down." },
-  { title: "A brand guide the agent can read", body: "The voice, the standards and the never-list, saved once so nobody re-explains them." },
-  { title: "One recurring job, running from the workspace", body: "The task that kept coming back, handed over with instructions the agent follows." },
+  { title: "A quote written from the job notes", body: "Photos and a few lines in, a priced quote out, ready to send. The agent uses your rate card, not a guess." },
+  { title: "Customer details filed without typing", body: "Say what happened on the call. The agent puts the name, the job and the next step into the CRM." },
+  { title: "The Monday numbers, before coffee", body: "Last week's sales, ad spend and new leads pulled into one short brief every Monday morning." },
+  { title: "Posts that sound like you", body: "Your brand voice saved once. The agent drafts the week's posts and captions in it, you approve." },
 ];
 
 // Plain hash links don't reliably scroll inside the SPA, so every CTA scrolls itself.
@@ -103,19 +105,16 @@ export default function OfferPage({
 
       <main>
         <section className="offer-hero">
-          <figure className="offer-hero-photo">
-            <img src="/images/workshops/2026-09-16/hands-on.webp" alt="Elliot working beside workshop attendees on their laptops" width={1200} height={1500} fetchPriority="high" />
-            <figcaption>The first Brisbane room · 16 September 2026</figcaption>
-          </figure>
+          <img className="offer-hero-bg" src={`${P}/hands-on.webp`} alt="" width={1200} height={1500} fetchPriority="high" />
           <div className="offer-hero-copy">
-            <p className="offer-kicker">{offer.kicker}</p>
+            <ul className="offer-pills">
+              {offer.pills.map((f) => <li key={f}>{f}</li>)}
+            </ul>
             <h1>{headline.main} <span>{headline.accent}</span></h1>
             <p className="offer-subhead">{subhead}</p>
             <p className="offer-lede">{lede}</p>
-            <ul className="offer-facts">
-              {offer.facts.map((f) => <li key={f}>{f}</li>)}
-            </ul>
             <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.cta} <ArrowRight className="h-4 w-4" /></a>
+            <p className="offer-guarantee"><Check /> {offer.guarantee}</p>
           </div>
         </section>
 
@@ -151,10 +150,38 @@ export default function OfferPage({
           </figure>
         </section>
 
+        <section className="offer-section offer-tools">
+          <p className="offer-kicker">What it connects to</p>
+          <h2>Your agent, in the tools you already use.</h2>
+          <p className="offer-lede">We show you how to connect an agent to the apps your business runs on, and the way we set them up ourselves: which connections are worth making first, what to give the agent access to, what to keep it away from, and the habits that keep it useful after the day.</p>
+          <ul className="offer-logos">
+            {TOOLS.map((t) => (
+              <li key={t.key}><img src={t.logo} alt="" width={28} height={28} loading="lazy" /><span>{t.name}</span></li>
+            ))}
+          </ul>
+          <div className="offer-examples">
+            {EXAMPLES.map((ex) => (
+              <article key={ex.ask} className="offer-example">
+                <div className="offer-ask"><span>You</span><p>{ex.ask}</p></div>
+                <ol>
+                  {ex.steps.map((st) => {
+                    const t = toolByKey(st.tool);
+                    return (
+                      <li key={st.text}><img src={t.logo} alt={t.name} width={22} height={22} loading="lazy" /><span>{st.text}</span></li>
+                    );
+                  })}
+                </ol>
+                <div className="offer-result"><Check /> {ex.result}</div>
+              </article>
+            ))}
+          </div>
+          <p className="offer-note">Examples of what you can set up on the day. What you build depends on the job you bring.</p>
+        </section>
+
         {offer.slug === "workshop" && (
           <section className="offer-section offer-built">
-            <p className="offer-kicker">Last workshop</p>
-            <h2>What people built.</h2>
+            <p className="offer-kicker">Examples</p>
+            <h2>What people build.</h2>
             <ul className="offer-built-list">
               {BUILT.map((b) => (
                 <li key={b.title}><h3>{b.title}</h3><p>{b.body}</p></li>
@@ -226,7 +253,7 @@ export default function OfferPage({
       <div className="offer-sticky">
         <div>
           <strong>{offer.facts[0]}</strong>
-          <span>{offer.facts.slice(1, 3).join(" · ")}</span>
+          <span>100% money-back guarantee</span>
         </div>
         <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.cta}</a>
       </div>

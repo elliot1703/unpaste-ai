@@ -17,6 +17,8 @@ export type Offer = {
   lede: string;
   /** Mono facts line under the hero. */
   facts: string[];
+  /** Hero pills over the photo. Short, three to four. */
+  pills: string[];
   /** How the day runs, three lines. */
   steps: { title: string; body: string }[];
   forYou: string[];
@@ -24,6 +26,8 @@ export type Offer = {
   askTeamSize: boolean;
   /** Button label used on every CTA on the page. */
   cta: string;
+  /** Shown under every CTA and on the end screen. Elliot, 6 Oct: 100% money back if unsatisfied. */
+  guarantee: string;
   /** Shown only after the form is submitted. */
   reveal: {
     title: string;
@@ -58,6 +62,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     lede:
       "Bring your laptop and a real job from your business. Build it with Elliot beside you, and leave with it running.",
     facts: [WORKSHOP_DATE, "4.5 hours", `${WORKSHOP_SEATS} seats`, "Brisbane"],
+    pills: ["AI workshop", "Brisbane", `Wednesday 11 November`, `${WORKSHOP_SEATS} seats`],
     steps: [
       { title: "Bring your laptop and one real job.", body: "The quote you rewrite every week. The inbox nobody owns. The report you build by hand." },
       { title: "Build it with Elliot beside you.", body: "Small room, laptops open. When you get stuck, he's at your shoulder, not on a slide." },
@@ -75,6 +80,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: false,
     cta: "Apply for a seat",
+    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "The workshop seat",
       price: "$499",
@@ -84,6 +90,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         `${WORKSHOP_SEATS} seats, so everyone gets help`,
         "One real job from your business, running by the end",
         "You keep everything built on the day",
+        "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Pay now, lock the seat",
       action: { kind: "stripe", link: STRIPE_LINK_WORKSHOP },
@@ -106,6 +113,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     lede:
       "Before the day, we write down what AI should be doing for you. Then I come to you and we build it, together, until it's done.",
     facts: ["One day", "In your office", "Claude Code or Codex", "Brisbane"],
+    pills: ["1:1 setup", "In your office", "Brisbane", "One day"],
     steps: [
       { title: "Before the day, we write the list.", body: "The quoting. The follow-ups. Monday's numbers. Whatever is actually eating your week." },
       { title: "We build it in your office, together.", body: "On your laptop, in your accounts, with your real files. Not a demo environment." },
@@ -123,6 +131,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: false,
     cta: "Check availability",
+    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "The 1:1 day",
       // TODO(elliot): price and length to confirm.
@@ -133,6 +142,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         "A full day in your office, Elliot beside you",
         "Everything built stays yours",
         "A follow-up call two weeks later",
+        "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Book a 20-minute call",
       action: { kind: "calendly", url: calendlyUrl("one-on-one") },
@@ -155,6 +165,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     lede:
       "We come to you, find the tasks eating the team's time, build the first workflows together on the day, then keep the momentum with weekly catch-ups.",
     facts: ["Up to 12 people", "In your office", "Brisbane", "2 spots left in October"],
+    pills: ["Team training", "Up to 12", "We come to you", "2 October dates left"],
     steps: [
       { title: "Find the tasks eating the team's time.", body: "A short call before the day. We pick the two or three jobs worth automating first." },
       { title: "Build useful AI workflows together.", body: "Laptops open, everyone building on their own real work, Elliot moving between desks." },
@@ -172,6 +183,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: true,
     cta: "Check October dates",
+    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "Team training day",
       price: "$2,500",
@@ -181,6 +193,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         "A full day in your office, built around your team's work",
         "Weekly catch-up calls after",
         "Everything built stays with the team",
+        "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Book a 20-minute call",
       action: { kind: "calendly", url: calendlyUrl("team-training") },
