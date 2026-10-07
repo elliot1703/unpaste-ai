@@ -18,37 +18,68 @@ const MAX_INPUT = 300;
 const STARTERS = ["What do I need to bring?", "Is it for beginners?", "What's the price?", "Who's Elliot?"];
 
 type Turn = { role: "user" | "assistant"; content: string };
-type Mood = "idle" | "thinking" | "happy";
+type Mood = "idle" | "thinking" | "happy" | "oops";
 
 /**
- * The Unpaste red square with eyes. Pupils follow the pointer (or the input
- * caret while typing), it blinks on a timer, looks up while thinking and
- * bounces when an answer lands. Inline SVG so it ships with no asset.
+ * The Unpaste square, sheet 5 (7 Oct 2026): hard corners, the face is cut
+ * out of the red so the card shows through. Pupils follow the pointer, it
+ * blinks on a timer, looks up with a starburst while thinking, grins when an
+ * answer lands, and goes half-lidded on "oops". No limbs. Inline SVG; the
+ * holes are a mask so they're true cut-outs on any background.
  */
 function Mascot({ mood, look, small }: { mood: Mood; look: { x: number; y: number }; small?: boolean }) {
-  const px = mood === "thinking" ? 2.5 : look.x * 3.2;
-  const py = mood === "thinking" ? -3 : look.y * 2.6;
+  const id = small ? "mk-s" : "mk";
+  const px = mood === "thinking" ? -2.5 : look.x * 3;
+  const py = mood === "thinking" ? -3.5 : look.y * 2.4;
+  const lidded = mood === "oops";
   return (
-    <svg
-      className={`mascot mascot-${mood}${small ? " mascot-small" : ""}`}
-      viewBox="0 0 64 64"
-      aria-hidden="true"
-    >
-      <rect className="mascot-body" x="4" y="4" width="56" height="56" rx="10" fill="#DC2626" />
-      <g className="mascot-eyes">
-        <g className="mascot-eye">
-          <ellipse cx="23" cy="30" rx="8.5" ry="10" fill="#fff" />
-          <circle cx={23 + px} cy={30 + py} r="4.2" fill="#0a0a0a" />
-          <circle cx={21.5 + px} cy={28 + py} r="1.3" fill="#fff" />
+    <svg className={`mascot mascot-${mood}${small ? " mascot-small" : ""}`} viewBox="0 0 64 64" aria-hidden="true">
+      <defs>
+        <mask id={id} maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64">
+          <rect width="64" height="64" fill="#fff" />
+          {mood === "happy" ? (
+            <>
+              {/* closed happy eyes: curved slits */}
+              <path d="M14 29q7-9 14 0" stroke="#000" strokeWidth="3.4" fill="none" strokeLinecap="round" />
+              <path d="M36 29q7-9 14 0" stroke="#000" strokeWidth="3.4" fill="none" strokeLinecap="round" />
+              {/* grin notch cut from the bottom edge */}
+              <path d="M22 62a10 10 0 0 1 20 0z" fill="#000" />
+            </>
+          ) : lidded ? (
+            <>
+              <rect x="13" y="26" width="16" height="5" fill="#000" />
+              <rect x="35" y="26" width="16" height="5" fill="#000" />
+              <rect x="25" y="46" width="14" height="3" fill="#000" />
+            </>
+          ) : (
+            <>
+              <ellipse cx="22" cy="28" rx="7" ry="9" fill="#000" />
+              <ellipse cx="42" cy="28" rx="7" ry="9" fill="#000" />
+              {/* blink lid: a red rect that drops over the holes (height animated in CSS) */}
+              <rect className="mascot-lid" x="12" y="17" width="40" height="0" fill="#fff" />
+              {mood === "thinking" && (
+                <g stroke="#000" strokeWidth="2.6" strokeLinecap="round" transform="translate(53 11)">
+                  <path d="M0-6V6M-6 0H6M-4.2-4.2l8.4 8.4M-4.2 4.2l8.4-8.4" />
+                </g>
+              )}
+              {mood === "idle" && <path d="M44 62h8l-4-6z" fill="#000" />}
+            </>
+          )}
+        </mask>
+      </defs>
+      <rect className="mascot-body" x="2" y="2" width="60" height="60" fill="#DC2626" mask={`url(#${id})`} />
+      {!lidded && mood !== "happy" && (
+        <g className="mascot-pupils">
+          <circle cx={22 + px} cy={28 + py} r="3.8" fill="#0a0a0a" />
+          <circle cx={42 + px} cy={28 + py} r="3.8" fill="#0a0a0a" />
         </g>
-        <g className="mascot-eye">
-          <ellipse cx="41" cy="30" rx="8.5" ry="10" fill="#fff" />
-          <circle cx={41 + px} cy={30 + py} r="4.2" fill="#0a0a0a" />
-          <circle cx={39.5 + px} cy={28 + py} r="1.3" fill="#fff" />
-        </g>
-        <rect className="mascot-lid" x="12" y="18" width="40" height="0" fill="#DC2626" />
-      </g>
-      <path className="mascot-mouth" d="M24 46 Q32 52 40 46" stroke="#fff" strokeWidth="3" strokeLinecap="round" fill="none" />
+      )}
+      {lidded && (
+        <>
+          <circle cx="24" cy="28.5" r="2.2" fill="#0a0a0a" />
+          <circle cx="46" cy="28.5" r="2.2" fill="#0a0a0a" />
+        </>
+      )}
     </svg>
   );
 }
@@ -74,8 +105,9 @@ export function AskAgent({ offer }: { offer: Offer }) {
   const cardRef = useRef<HTMLElement>(null);
   const [look, setLook] = useState({ x: 0, y: 0.3 });
   const [happy, setHappy] = useState(false);
+  const [oops, setOops] = useState(false);
   const asked = turns.filter((t) => t.role === "user").length;
-  const mood: Mood = busy ? "thinking" : happy ? "happy" : "idle";
+  const mood: Mood = busy ? "thinking" : happy ? "happy" : oops ? "oops" : "idle";
 
   // Eyes follow the pointer / finger across the card; while typing they watch the input.
   function track(clientX: number, clientY: number) {
@@ -147,6 +179,8 @@ export function AskAgent({ offer }: { offer: Offer }) {
       window.setTimeout(() => setHappy(false), 1400);
     } catch {
       setTurns([...next, { role: "assistant", content: "The agent dropped out for a second. Try again, or apply on this page and Elliot will answer you directly." }]);
+      setOops(true);
+      window.setTimeout(() => setOops(false), 2200);
     } finally {
       setBusy(false);
     }
