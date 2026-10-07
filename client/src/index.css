@@ -1430,7 +1430,7 @@ select,
 
 /* Hero: photo behind, darkened toward the bottom, copy over the top. */
 .offer-hero { position: relative; margin: 0 -1rem; min-height: 100svh; display: flex; align-items: flex-end; padding: 6rem 1rem 6rem; color: #fff; overflow: hidden; background: #111; }
-.offer-hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; }
+.offer-hero-bg { position: absolute; left: 0; right: 0; top: -26%; width: 100%; height: 126%; object-fit: cover; object-position: 46% 50%; }
 .offer-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,.36) 40%, rgba(0,0,0,.84) 100%); }
 .offer-hero-copy { position: relative; z-index: 1; width: 100%; min-width: 0; max-width: 42rem; display: grid; gap: 0.9rem; }
 .offer-hero h1 { color: #fff; }
@@ -1443,6 +1443,9 @@ select,
 .offer-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.4rem; }
 .offer-pills li { font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: rgba(220,38,38,.92); padding: 0.4rem 0.7rem; border-radius: 999px; }
 .offer-pills li:first-child { background: #fff; color: var(--offer-ink); }
+.offer-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: -0.2rem 0 0.2rem; }
+.offer-stack li { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; font-weight: 700; color: var(--offer-ink); background: #fff; padding: 0.35rem 0.7rem 0.35rem 0.5rem; border-radius: 10px; }
+.offer-stack img { width: 18px; height: 18px; display: block; }
 
 /* Proof bar under the hero */
 .offer-proofbar { margin-top: 2.5rem; padding: 1.4rem 0; border-top: 2px solid var(--offer-ink); border-bottom: 2px solid var(--offer-rule); display: grid; gap: 1.25rem; }
@@ -1601,8 +1604,9 @@ select,
 @media (min-width: 820px) {
   .offer-page { padding-bottom: 0; }
   .offer-page main { padding: 0 2rem; }
-  .offer-hero { margin: 0 -2rem; min-height: 88vh; padding: 7rem 3rem 3.5rem; }
-  .offer-hero-bg { object-position: 70% 30%; }
+  .offer-hero { margin: 0 -2rem; min-height: 88vh; padding: 7rem 3rem 3.5rem; justify-content: flex-end; }
+  .offer-hero-copy { max-width: 38rem; }
+  .offer-hero-bg { top: 0; height: 100%; object-position: 50% 40%; }
   .offer-hero::after { background: linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.15) 100%), linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,.6) 100%); }
   .offer-logos { grid-template-columns: repeat(9, 1fr); }
   .offer-logos li { font-size: 0.82rem; }

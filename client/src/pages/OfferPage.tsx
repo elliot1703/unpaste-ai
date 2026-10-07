@@ -56,10 +56,14 @@ export default function OfferPage({
 
       <main>
         <section className="offer-hero">
-          <img className="offer-hero-bg" src={`${P}/hands-on.webp`} alt="" width={1200} height={1500} fetchPriority="high" />
+          <img className="offer-hero-bg" src={`${P}/team-wide.webp`} alt="" width={2000} height={1124} fetchPriority="high" />
           <div className="offer-hero-copy">
             <ul className="offer-pills">
               {offer.pills.map((f) => <li key={f}>{f}</li>)}
+            </ul>
+            <ul className="offer-stack" aria-label="Built with">
+              <li><img src="/images/logos/claude.svg" alt="" width={18} height={18} /> Claude</li>
+              <li><img src="/images/logos/openai.svg" alt="" width={18} height={18} /> Codex</li>
             </ul>
             <h1>{headline.main} <span>{headline.accent}</span></h1>
             <p className="offer-subhead">{subhead}</p>
