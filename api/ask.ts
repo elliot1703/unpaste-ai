@@ -1,14 +1,18 @@
 // POST /api/ask — the "ask the agent that built this page" Easter egg.
 //
-// Answers questions about the three training offers using the Anthropic
-// Messages API. Facts below mirror client/src/lib/offers.ts (that file uses
+// Answers questions about the three training offers via OpenRouter (or the
+// Anthropic API directly). Facts below mirror client/src/lib/offers.ts (that file uses
 // import.meta.env, so it can't be imported here); change both together.
 // Guardrails live in the system prompt: offers and Elliot only, no invented
 // prices, dates, venues or guarantees, price stays gated behind the form.
 
 export const config = { runtime: "edge" };
 
-const MODEL = process.env.ASK_MODEL || "claude-sonnet-5-5";
+// Provider: OpenRouter when OPENROUTER_API_KEY is set (per-key spend cap +
+// per-key usage in openrouter.ai/keys, Elliot's choice 7 Oct 2026), else the
+// Anthropic API directly with ANTHROPIC_API_KEY. ASK_MODEL overrides either.
+const OPENROUTER_MODEL = process.env.ASK_MODEL || "anthropic/claude-sonnet-5.5";
+const ANTHROPIC_MODEL = process.env.ASK_MODEL || "claude-sonnet-5-5";
 const MAX_INPUT = 300;
 const MAX_TURNS = 5;
 const RATE_LIMIT = 30; // questions per IP per hour, best effort per edge instance
@@ -101,33 +105,53 @@ export default async function handler(req: Request): Promise<Response> {
     return json({ ok: true, answer: "That's a lot of questions. Apply on this page and Elliot will answer the rest himself." }, 200);
   }
 
-  const key = process.env.ANTHROPIC_API_KEY;
-  if (!key) {
+  const system = systemPrompt(slug);
+  const orKey = process.env.OPENROUTER_API_KEY;
+  const anKey = process.env.ANTHROPIC_API_KEY;
+  if (!orKey && !anKey) {
     return json({ ok: true, answer: "The agent's not switched on yet. Apply on this page and Elliot will answer you directly." }, 200);
   }
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      "x-api-key": key,
-      "anthropic-version": "2023-06-01",
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 220,
-      system: systemPrompt(slug),
-      messages: turns,
-    }),
-  });
-
-  if (!res.ok) {
-    console.error("[ask] anthropic", res.status, (await res.text()).slice(0, 300));
+  let answer = "";
+  try {
+    if (orKey) {
+      const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${orKey}`,
+          "HTTP-Referer": "https://unpaste.ai",
+          "X-Title": "unpaste.ai ask-the-agent",
+        },
+        body: JSON.stringify({
+          model: OPENROUTER_MODEL,
+          max_tokens: 220,
+          messages: [{ role: "system", content: system }, ...turns],
+        }),
+      });
+      if (res.status === 402) {
+        // Per-key credit cap reached on OpenRouter: fail soft, say so in the logs.
+        console.error("[ask] openrouter 402: key budget exhausted");
+        return json({ ok: true, answer: "I've hit my question limit for now. Apply on this page and Elliot will answer you directly." }, 200);
+      }
+      if (!res.ok) throw new Error(`openrouter ${res.status} ${(await res.text()).slice(0, 300)}`);
+      const data = (await res.json()) as { choices?: { message?: { content?: string } }[] };
+      answer = (data.choices?.[0]?.message?.content ?? "").trim();
+    } else {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "content-type": "application/json", "x-api-key": anKey!, "anthropic-version": "2023-06-01" },
+        body: JSON.stringify({ model: ANTHROPIC_MODEL, max_tokens: 220, system, messages: turns }),
+      });
+      if (!res.ok) throw new Error(`anthropic ${res.status} ${(await res.text()).slice(0, 300)}`);
+      const data = (await res.json()) as { content?: { type: string; text?: string }[] };
+      answer = (data.content ?? []).filter((c) => c.type === "text").map((c) => c.text ?? "").join("").trim();
+    }
+  } catch (e) {
+    console.error("[ask]", (e as Error).message);
     return json({ ok: true, answer: "The agent dropped out for a second. Try again, or apply on this page and Elliot will answer you directly." }, 200);
   }
 
-  const data = (await res.json()) as { content?: { type: string; text?: string }[] };
-  const answer = (data.content ?? []).filter((c) => c.type === "text").map((c) => c.text ?? "").join("").trim();
   return json({ ok: true, answer: answer || "Apply on this page and Elliot will answer that one directly." }, 200);
 }
 
