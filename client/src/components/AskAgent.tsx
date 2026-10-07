@@ -7,10 +7,11 @@ import { trackMetaCustom } from "@/lib/metaPixel";
 // inviting the visitor to ask the agent that built the page about the offer.
 // Answers come from /api/ask. Shown once per visitor (localStorage).
 //
-// Off unless VITE_ASK_AGENT_ENABLED=1. `?askagent=1` on the URL previews it
-// regardless, so it can be checked on production before the flag is flipped.
+// ON by default (Elliot, 7 Oct 2026: "flip the flag and make it live").
+// Kill switch: set VITE_ASK_AGENT_ENABLED=0 on Vercel and redeploy.
+// `?askagent=1` on the URL always shows it, even when switched off.
 
-const ENABLED = import.meta.env.VITE_ASK_AGENT_ENABLED === "1";
+const ENABLED = import.meta.env.VITE_ASK_AGENT_ENABLED !== "0";
 const SEEN_KEY = "unpaste-ask-agent-seen";
 const MAX_QUESTIONS = 5;
 const MAX_INPUT = 300;
