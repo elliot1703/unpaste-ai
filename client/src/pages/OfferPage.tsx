@@ -9,6 +9,7 @@ import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
 import { TOOLS } from "@/lib/integrations";
 import { BuildExamples } from "@/components/BuildExamples";
+import { AskAgent } from "@/components/AskAgent";
 
 // One page shape for all three offers. Price is never on the page; the form
 // reveals it. Everything named here (date, seats, reviews, photos) is true or
@@ -184,6 +185,8 @@ export default function OfferPage({
       </main>
 
       <Footer />
+
+      <AskAgent offer={offer} />
 
       <div className="offer-sticky">
         <div>

@@ -73,4 +73,11 @@ export function trackMeta(
   window.fbq!("track", event, params);
 }
 
+/** Custom (non-standard) event, e.g. the ask-the-agent Easter egg. */
+export function trackMetaCustom(event: string, params?: Record<string, unknown>): void {
+  if (!canRun()) return;
+  initMetaPixel();
+  window.fbq!("trackCustom", event, params);
+}
+
 export const META_PIXEL_ENABLED = Boolean(PIXEL_ID);
