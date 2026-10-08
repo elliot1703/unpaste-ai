@@ -18,6 +18,7 @@ import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import Training from "./pages/Training";
+import ClaudeCodeTraining from "./pages/ClaudeCodeTraining";
 import WorkshopBooked from "./pages/WorkshopBooked";
 import OfferPage from "./pages/OfferPage";
 import { OFFERS } from "@/lib/offers";
@@ -39,6 +40,7 @@ function AppRoutes() {
       <Route path={"/terms"} component={Terms} />
       <Route path={"/pricing"} component={Pricing} />
       <Route path={"/training"} component={Training} />
+      <Route path={"/claude-code-training"} component={ClaudeCodeTraining} />
       {/* Gated-pricing offer pages. /workshops is indexed; the H1 variants are noindex, ads only. */}
       <Route path={"/workshops"}>
         <OfferPage offer={OFFERS.workshop} />

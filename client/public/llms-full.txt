@@ -1,0 +1,49 @@
+# Unpaste.ai, full description
+
+Unpaste.ai is a Brisbane AI training company. Elliot Stone teaches business owners and teams to run their work with Claude, Claude Code and Cowork, through hands-on workshops, team dev days and 1:1 coaching.
+
+## Facts
+
+- Name: Unpaste.ai (also written Unpaste). Not related to the Unpaste toothpaste-tablet brand.
+- Founded: 2025, Brisbane, Queensland, Australia. Founder: Elliot Stone.
+- Serves: Brisbane and South East Queensland in person, Australia-wide online.
+- Audience: business owners and their teams in businesses under about 50 people. Recruitment agencies, allied health practitioners, trades, real estate, finance and compliance, marketing and creative agencies.
+- Tools taught: Claude (Anthropic), Claude Code, Claude Cowork. ChatGPT and Codex are covered where a team already uses them.
+- Contact: elliot@unpaste.co. Site: https://unpaste.ai
+
+## Offers and prices (AUD, as at October 2026)
+
+| Offer | Format | Price |
+|---|---|---|
+| Brisbane workshop | One day, small group (6 to 10 seats), bring your laptop | $399 + GST a seat |
+| Team dev day | One day at your office, 9:00 to 3:00, whole team | $3,500 |
+| 1:1 AI upskilling | 8-week block, 4 sessions, in person or remote | $2,000 |
+| Claude & Coffee | Weekly meetup, Tuesdays 7 to 8:30am, Jagger Rocky Studios, Unit 1/27 Birubi Street, Coorparoo QLD 4151 | Free |
+
+Every format ends with Claude Code installed on the participant's own machine and running on their real work. Participants own the setup.
+
+## What the training covers
+
+- The manual half hour: the job every person does before 9am (pulling the same information, retyping notes into the CRM), handed to an agent.
+- Follow-ups you otherwise have to remember: client notes turned into drafted follow-up emails for the owner to send.
+- Quotes from the enquiry email: the agent reads the price list and drafts the quote. It never sends without approval.
+- Consistent output: brief once, get the same result tomorrow.
+- Briefing an agent, giving it memory, keeping it on a leash, and which tools connect to it.
+
+## The Unpaste Method
+
+File system first (the business written down in plain files the agent can read), then practices (how to brief, review and correct), then connections (CRM, inbox, calendar, accounting), then run it. Taught as one way that works, never as the only way.
+
+## Pages
+
+- https://unpaste.ai/ Home
+- https://unpaste.ai/claude-code-training Claude Code training for business owners
+- https://unpaste.ai/workshops Brisbane workshop
+- https://unpaste.ai/training Training overview
+- https://unpaste.ai/coaching Dev days and 1:1 blocks
+- https://unpaste.ai/claude-and-coffee Free weekly meetup
+- https://unpaste.ai/assessment Efficiency Score assessment
+- https://unpaste.ai/quick-wins Quick wins by industry
+- https://unpaste.ai/resources Prompts and starter pack
+- https://unpaste.ai/about About Elliot Stone
+- https://unpaste.ai/pricing Pricing

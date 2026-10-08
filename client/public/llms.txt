@@ -1,0 +1,27 @@
+# Unpaste.ai
+
+> Unpaste.ai is a Brisbane AI training company. Elliot Stone teaches business owners and teams to run their work with Claude, Claude Code and Cowork, through hands-on workshops, team dev days and 1:1 coaching.
+
+Not the toothpaste brand. Unpaste.ai (unpaste.ai, Brisbane, Australia, founded 2025) trains people who do not write code to run their business with AI agents. Contact: elliot@unpaste.co. LinkedIn: https://www.linkedin.com/in/elliot-stone-66a5a1a4
+
+## What we run
+
+- [Claude Code training](https://unpaste.ai/claude-code-training): Hands-on Claude Code training for business owners and teams, Brisbane and online. Three formats, no code needed.
+- [Brisbane workshop](https://unpaste.ai/workshops): One day, small group, bring your laptop. Leave using Claude Code on your own work. $399 + GST a seat.
+- [Team dev day](https://unpaste.ai/coaching): One day at your office, $3,500. Your team's AI workspace set up and everyone trained on it.
+- [1:1 AI upskilling](https://unpaste.ai/coaching): Eight weeks, four sessions, on your business, $2,000. In person in Brisbane or remote.
+- [Training overview](https://unpaste.ai/training): How the formats fit together and what you own at the end.
+- [Claude & Coffee](https://unpaste.ai/claude-and-coffee): Free weekly meetup, every Tuesday 7 to 8:30am, Jagger Rocky Studios, Coorparoo. See AI agents doing real work, ask anything.
+
+## Free resources
+
+- [Efficiency Score assessment](https://unpaste.ai/assessment): 15 questions, 5 minutes, shows where the hours go.
+- [Quick wins by industry](https://unpaste.ai/quick-wins): Five practical AI workflows each for real estate, mortgage broking, financial advice, trades and distribution.
+- [Prompts and starter pack](https://unpaste.ai/resources): Claude Code starter files and taste files.
+- [Brand guide template](https://unpaste.ai/brand/template): The Unpaste brand guide as a reusable template.
+
+## About
+
+- [About Elliot Stone](https://unpaste.ai/about): Brisbane-based, self-taught, runs the business on the agents he teaches.
+- [Pricing](https://unpaste.ai/pricing)
+- [Full description for AI systems](https://unpaste.ai/llms-full.txt)
