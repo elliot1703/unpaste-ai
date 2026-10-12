@@ -4,7 +4,7 @@ import { DictationNote } from "@/components/DictationNote";
 import { Analytics } from "@vercel/analytics/react";
 import { MetaPixel } from "@/components/MetaPixel";
 import NotFound from "@/pages/NotFound";
-import { Route, Router, Switch } from "wouter";
+import { Redirect, Route, Router, Switch, useSearch } from "wouter";
 import { HelmetProvider } from "react-helmet-async";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
@@ -17,7 +17,6 @@ import AssessmentPage from "./pages/AssessmentPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
-import Training from "./pages/Training";
 import WorkshopBooked from "./pages/WorkshopBooked";
 import OfferPage from "./pages/OfferPage";
 import { OFFERS } from "@/lib/offers";
@@ -26,6 +25,12 @@ import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
 import Resources from "./pages/Resources";
 import ClaudeAndCoffee from "./pages/ClaudeAndCoffee";
+
+function TrainingRedirect() {
+  const search = useSearch();
+  const hash = typeof window === "undefined" ? "" : window.location.hash;
+  return <Redirect to={`/team-training${search ? `?${search}` : ""}${hash}`} replace />;
+}
 
 function AppRoutes() {
   return (
@@ -38,7 +43,7 @@ function AppRoutes() {
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
       <Route path={"/pricing"} component={Pricing} />
-      <Route path={"/training"} component={Training} />
+      <Route path={"/training"} component={TrainingRedirect} />
       {/* Gated-pricing offer pages. /workshops is indexed; the H1 variants are noindex, ads only. */}
       <Route path={"/workshops"}>
         <OfferPage offer={OFFERS.workshop} />

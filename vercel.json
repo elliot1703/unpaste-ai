@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/training",
+      "destination": "/team-training",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/((?!api|assets|images|brand|favicon|robots\\.txt|sitemap\\.xml|apple-touch-icon\\.png|favicon-16x16\\.png|favicon-32x32\\.png|favicon\\.svg).*)",
