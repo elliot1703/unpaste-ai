@@ -1,6 +1,6 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
-import { trackMeta } from "@/lib/metaPixel";
+import { trackMeta, trackMetaCustom } from "@/lib/metaPixel";
 import type { Offer } from "@/lib/offers";
 
 // The gate. Three quick questions, then details, then the price. Every answer
@@ -80,7 +80,12 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
   const total = questions.length + 1;
   const detailsStep = questions.length;
 
+  // Funnel steps for the pixel, one event per offer so the dashboard can split them.
+  const ev = (name: string) => trackMetaCustom(`${name}_${offer.slug.replace(/-/g, "")}`, { variant });
+
   function choose(key: Question["key"], value: string) {
+    if (step === 0) ev("ApplyStart");
+    if (step + 1 === detailsStep) ev("ApplyDetails");
     setAnswers((a) => ({ ...a, [key]: value }));
     setStep((s) => Math.min(s + 1, detailsStep));
   }
@@ -117,6 +122,7 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
       setEmail(lead.email);
       setState("done");
       trackMeta("Lead", { content_name: offer.name, content_category: offer.slug, variant });
+      ev("Applied");
     } catch {
       setError("That didn't go through. Please try once more.");
       setState("error");
@@ -206,7 +212,10 @@ function Reveal({ offer, email, variant }: { offer: Offer; email: string; varian
         <a
           className="apply-submit"
           href={href}
-          onClick={() => trackMeta("InitiateCheckout", { content_name: offer.name, content_category: offer.slug, variant })}
+          onClick={() => {
+            trackMeta("InitiateCheckout", { content_name: offer.name, content_category: offer.slug, variant });
+            trackMetaCustom(`RevealClick_${offer.slug.replace(/-/g, "")}`, { kind: r.action.kind, variant });
+          }}
         >
           {r.buttonLabel} <ArrowRight className="h-4 w-4" />
         </a>

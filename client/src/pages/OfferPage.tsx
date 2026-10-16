@@ -1,4 +1,6 @@
 import type React from "react";
+import { useEffect } from "react";
+import { trackMetaCustom } from "@/lib/metaPixel";
 import { ArrowRight, Check, Star, X } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
@@ -48,6 +50,8 @@ export default function OfferPage({
   const subhead = variant?.subhead ?? offer.subhead;
   const lede = variant?.lede ?? offer.lede;
   const reviews = reviewsFor(offer.slug);
+  // One pixel event per offer page view, so the funnel dashboard can count organic + paid views per offer.
+  useEffect(() => { trackMetaCustom(`OfferView_${offer.slug.replace(/-/g, "")}`, { variant: variant?.slug ?? "" }); }, [offer.slug, variant?.slug]);
   const url = variant ? `https://unpaste.ai/workshops/${variant.slug}` : `https://unpaste.ai${offer.path}`;
 
   return (
