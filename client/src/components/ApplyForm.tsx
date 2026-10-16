@@ -40,6 +40,20 @@ const TEAM_SIZE: Question = {
 type Answers = Partial<Record<Question["key"], string>>;
 type State = "idle" | "submitting" | "done" | "error";
 
+/**
+ * Accepts Australian mobiles and landlines in the ways people type them
+ * (0412 345 678, +61 412 345 678, (07) 3123 4567) and returns a clean
+ * 10-digit local number, or "" if it can't be one. John (16 Oct) typed a
+ * number that reached a stranger; this at least catches the wrong length.
+ */
+export function normaliseAuPhone(raw: string): string {
+  let d = raw.replace(/[^\d+]/g, "");
+  if (d.startsWith("+61")) d = "0" + d.slice(3);
+  else if (d.startsWith("61") && d.length === 11) d = "0" + d.slice(2);
+  d = d.replace(/\D/g, "");
+  return /^0[2-9]\d{8}$/.test(d) ? d : "";
+}
+
 export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }) {
   const questions = useMemo(
     () => (offer.askTeamSize ? [...QUESTIONS, TEAM_SIZE] : QUESTIONS),
@@ -76,12 +90,19 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
     setState("submitting");
     setError("");
     const form = new FormData(event.currentTarget);
+    const phoneRaw = String(form.get("phone") ?? "");
+    const phone = normaliseAuPhone(phoneRaw);
+    if (!phone) {
+      setError("That phone number doesn't look right. Australian mobile or landline, e.g. 0412 345 678.");
+      setState("idle");
+      return;
+    }
     const lead = {
       offer: offer.slug,
       name: String(form.get("name") ?? ""),
       business: String(form.get("business") ?? ""),
       email: String(form.get("email") ?? ""),
-      phone: String(form.get("phone") ?? ""),
+      phone,
       ...answers,
       variant: variant ?? "",
       ...attribution,
@@ -138,9 +159,9 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
           <h3>Your details.</h3>
           <p>So Elliot can get in touch. The price is on the next screen.</p>
           <label><span>Your name</span><input name="name" autoComplete="name" required /></label>
-          <label><span>Business name</span><input name="business" autoComplete="organization" /></label>
+          <label><span>Business name</span><input name="business" autoComplete="organization" required /></label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>
-          <label><span>Phone</span><input name="phone" type="tel" autoComplete="tel" required /></label>
+          <label><span>Phone</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="0412 345 678" required minLength={8} /></label>
           <button className="apply-submit" disabled={state === "submitting"}>
             {state === "submitting" ? "One moment…" : "See the price"}
             {state !== "submitting" && <ArrowRight className="h-4 w-4" />}

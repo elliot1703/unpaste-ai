@@ -40,13 +40,17 @@ export default async function handler(req: Request): Promise<Response> {
     return json({ ok: false, error: "bad json" }, 400);
   }
 
+  const phoneDigits = typeof lead?.phone === "string" ? lead.phone.replace(/\D/g, "") : "";
   if (
     typeof lead?.name !== "string" || !lead.name.trim() ||
+    typeof lead?.business !== "string" || !lead.business.trim() ||
     typeof lead?.email !== "string" || !lead.email.includes("@") ||
+    !/^0[2-9]\d{8}$/.test(phoneDigits) ||
     typeof lead?.offer !== "string" || !lead.offer
   ) {
-    return json({ ok: false, error: "name, email and offer are required" }, 400);
+    return json({ ok: false, error: "name, business, email, an Australian phone number and offer are required" }, 400);
   }
+  lead.phone = phoneDigits;
 
   const [firstName, ...rest] = lead.name.trim().split(/\s+/);
   const properties = {
