@@ -17,7 +17,6 @@ const routes = [
   "/workshops/start",
   "/workshops/beyond-chat",
   "/workshops/systems",
-  "/coaching",
   "/quick-wins",
   "/resources",
   "/claude-and-coffee",

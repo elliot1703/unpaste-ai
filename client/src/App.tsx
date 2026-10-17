@@ -21,10 +21,15 @@ import WorkshopBooked from "./pages/WorkshopBooked";
 import OfferPage from "./pages/OfferPage";
 import { OFFERS } from "@/lib/offers";
 import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
-import Coaching from "./pages/Coaching";
 import QuickWins from "./pages/QuickWins";
 import Resources from "./pages/Resources";
 import ClaudeAndCoffee from "./pages/ClaudeAndCoffee";
+
+function CoachingRedirect() {
+  // The coaching page was retired 17 Oct 2026; its nearest current offer is the 1:1 setup day.
+  const search = useSearch();
+  return <Redirect to={`/one-on-one${search ? `?${search}` : ""}`} replace />;
+}
 
 function TrainingRedirect() {
   const search = useSearch();
@@ -60,7 +65,7 @@ function AppRoutes() {
       <Route path={"/team-training"}>
         <OfferPage offer={OFFERS.team} />
       </Route>
-      <Route path={"/coaching"} component={Coaching} />
+      <Route path={"/coaching"} component={CoachingRedirect} />
       <Route path={"/quick-wins"} component={QuickWins} />
       <Route path={"/resources"} component={Resources} />
       <Route path={"/claude-and-coffee"} component={ClaudeAndCoffee} />

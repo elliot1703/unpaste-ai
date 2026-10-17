@@ -1,4 +1,5 @@
-import { ArrowRight, Clock, Code2, Compass, GraduationCap, Users } from "lucide-react";
+import { ArrowRight, Clock, Compass, GraduationCap, Users } from "lucide-react";
+import { OFFERS, WORKSHOP_DATE, WORKSHOP_SEATS } from "@/lib/offers";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -28,34 +29,29 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  // The three current offers. Facts come from offers.ts so dates and seats stay in sync;
+  // prices stay off this page, as on the offer pages (shown after the short form).
   const services = [
     {
       num: "01",
-      title: "AI Workshops",
-      description: "Three hours in a Brisbane room. Bring your laptop, leave using Claude Code to actually do your work — not just chat with it. $399 + GST a seat.",
+      title: "AI Workshop",
+      description: `${WORKSHOP_DATE}, 4.5 hours, Brisbane, ${WORKSHOP_SEATS} seats. ${OFFERS.workshop.lede}`,
       icon: Users,
-      href: "/workshops",
+      href: OFFERS.workshop.path,
     },
     {
       num: "02",
-      title: "1:1 AI Upskilling",
-      description: "Eight-week block, one-on-one, on your own business. Four working sessions, an agent running from day one, a system you own at the end. $2,000 + GST.",
+      title: "1:1 Setup Day",
+      description: `${OFFERS["one-on-one"].subhead} One day in your office, built together, and you keep everything.`,
       icon: Compass,
-      href: "/coaching",
+      href: OFFERS["one-on-one"].path,
     },
     {
       num: "03",
-      title: "AI Training",
-      description: "Your team's AI workspace set up, assistants installed, everyone trained on the work they already do — and one person owning it internally.",
+      title: "Team AI Training",
+      description: `Up to 12 people. ${OFFERS.team.lede}`,
       icon: GraduationCap,
-      href: "/training",
-    },
-    {
-      num: "04",
-      title: "Custom Development",
-      description: "Done-with-you dev days at your office, or scoped builds from $5,000. Built on your stack, handed over running, owned by you.",
-      icon: Code2,
-      href: "/coaching#dev-day",
+      href: OFFERS.team.path,
     },
   ];
 
@@ -204,7 +200,7 @@ export default function Home() {
                     transition={{ duration: 1.5, repeat: Infinity }}
                     className="inline-block w-2 h-2 bg-primary"
                   />
-                  [001] AI WORKSHOPS · COACHING · CUSTOM DEV
+                  [001] AI WORKSHOPS · 1:1 SETUP DAYS · TEAM TRAINING
                 </motion.div>
 
                 {/* Main Headline with staggered letter animation */}
@@ -269,9 +265,9 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  Hands-on AI workshops in Brisbane, plus 1:1 coaching and
-                  custom development. Automating the busy-work is step one —
-                  then you build things you couldn't before. Either way, you
+                  Hands-on AI workshops in Brisbane, plus 1:1 setup days and
+                  team training in your office. Automating the busy-work is step
+                  one, then you build things you couldn't before. Either way, you
                   own the system.
                 </motion.p>
 
@@ -358,7 +354,7 @@ export default function Home() {
             <div className="marquee-content">
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-12 px-6">
-                  {["AI COACHING", "AI TRAINING", "WORKSHOPS", "DEV DAYS", "CLAUDE CODE", "AUTOMATION", "AI AGENTS", "BRISBANE BASED"].map((text, j) => (
+                  {["WORKSHOPS", "1:1 SETUP DAYS", "TEAM TRAINING", "CLAUDE CODE", "CODEX", "AUTOMATION", "AI AGENTS", "BRISBANE BASED"].map((text, j) => (
                     <span key={j} className="flex items-center gap-6 font-mono text-sm uppercase tracking-wider whitespace-nowrap">
                       {text}
                       <span className="h-2 w-2 bg-primary" />
@@ -425,11 +421,11 @@ export default function Home() {
               <div className="section-tag mb-4">[005] WHAT WE DO</div>
               <h2 className="text-4xl md:text-5xl max-w-xl leading-tight">
                 LEARN IT.{" "}
-                <span className="text-primary">OR HAVE IT BUILT.</span>
+                <span className="text-primary">OR BUILD IT WITH US.</span>
               </h2>
             </div>
 
-            <div className="stats-grid md:grid-cols-2">
+            <div className="stats-grid md:grid-cols-3">
               {services.map((service, i) => (
                 <motion.a
                   key={i}

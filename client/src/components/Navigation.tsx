@@ -23,7 +23,7 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
 
   const navLinks = [
     { label: "Workshops", href: "/workshops", type: "route" as const },
-    { label: "Coaching", href: "/coaching", type: "route" as const },
+    { label: "1:1 Setup Day", href: "/one-on-one", type: "route" as const },
     { label: "Training", href: "/training", type: "route" as const },
     { label: "About", href: "/about", type: "route" as const },
   ];
