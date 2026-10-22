@@ -21,7 +21,7 @@ export function DictationNote() {
   const onWorkshopPage = location.startsWith("/workshops") && !onBookedPage;
   // The offer pages carry their own sticky bar on phones; two bars collide.
   const onOfferPage =
-    location.startsWith("/workshops") || location === "/one-on-one" || location === "/team-training";
+    location.startsWith("/workshops") || location.startsWith("/one-on-one") || location === "/team-training";
 
   useEffect(() => {
     if (onBookedPage || onOfferPage) return;
