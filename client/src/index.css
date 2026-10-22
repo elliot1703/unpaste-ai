@@ -1597,6 +1597,42 @@ select,
 .apply-cal { margin-top: 0.9rem; height: 680px; border: 2px solid var(--offer-rule); border-radius: 12px; overflow: hidden; background: #fff; }
 .apply-cal iframe { display: block; width: 100%; height: 100%; }
 .apply-note a { color: var(--offer-ink); font-weight: 600; text-decoration: underline; }
+/* The Hand-Over Day (/one-on-one/hand-over, 22 Oct 2026): problem list, cost calculator, price, bonuses, guarantee, room loop */
+.gso-problems { margin-top: 1.5rem; max-width: 40rem; list-style: none; padding: 0; border-top: 2px solid var(--offer-rule); }
+.gso-problems li { display: flex; gap: 0.75rem; padding: 0.95rem 0; border-bottom: 2px solid var(--offer-rule); font-size: 1.05rem; line-height: 1.5; }
+.gso-problems svg { flex: none; width: 20px; height: 20px; margin-top: 4px; color: var(--offer-red); }
+.gso-turn { margin-top: 1.25rem; max-width: 40rem; font-size: 1.1rem; font-weight: 600; line-height: 1.5; }
+.gso-calc { margin-top: 1.5rem; max-width: 36rem; padding: 1.25rem; border: 2px solid var(--offer-ink); border-radius: 16px; background: #fff; display: grid; gap: 1.1rem; }
+.gso-calc label { display: grid; gap: 0.5rem; }
+.gso-calc label > span { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--offer-muted); }
+.gso-calc label > span b { color: var(--offer-ink); white-space: nowrap; }
+.gso-calc input[type="range"] { width: 100%; accent-color: var(--offer-red); }
+.gso-calc-out { padding-top: 1rem; border-top: 2px solid var(--offer-rule); }
+.gso-calc-out strong { display: block; font-family: var(--font-mono); font-size: clamp(1.6rem, 6vw, 2.2rem); line-height: 1.1; letter-spacing: -0.02em; }
+.gso-calc-out p { margin-top: 0.6rem; line-height: 1.5; color: var(--offer-muted); }
+.gso-calc-out .gso-payback { color: var(--offer-ink); font-weight: 600; }
+.gso-fine { font-size: 0.85rem; color: var(--offer-muted); }
+.gso-price { margin-top: 1.5rem; max-width: 36rem; padding: 1.4rem 1.25rem; border-radius: 16px; background: var(--offer-ink); color: #fff; }
+.gso-price .offer-kicker { margin-bottom: 0.5rem; }
+.gso-price strong { display: block; font-family: var(--font-sans); font-weight: 800; font-size: clamp(2.4rem, 9vw, 3.4rem); line-height: 1; letter-spacing: -0.03em; }
+.gso-price-note { display: block; margin-top: 0.4rem; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: #a3a3a3; }
+.gso-price p { margin-top: 0.9rem; line-height: 1.5; color: #d4d4d4; }
+.gso-price .offer-button { margin-top: 1.2rem; }
+.gso-bonuses { margin-top: 1.5rem; display: grid; gap: 1rem; }
+.gso-bonuses article { min-width: 0; padding: 1.2rem; border: 2px solid var(--offer-rule); border-radius: 14px; }
+.gso-bonuses .offer-kicker { margin-bottom: 0; }
+.gso-bonuses h3 { margin-top: 0.5rem; }
+.gso-bonuses p + h3 { margin-top: 0.5rem; }
+.gso-bonuses h3 + p { margin-top: 0.5rem; line-height: 1.5; color: var(--offer-muted); }
+.gso-guarantee { margin-top: 0.25rem; max-width: 40rem; padding: 1.5rem 1.25rem; border: 3px solid var(--offer-red); border-radius: 16px; }
+.gso-guarantee p + h2 { margin-top: 0; }
+.gso-guarantee h2 + p { margin-top: 1rem; line-height: 1.55; }
+.gso-reel-wrap { margin-top: 1.5rem; display: grid; gap: 1.25rem; align-items: start; }
+.gso-reel { display: block; width: 100%; max-width: 320px; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 18px; border: 2px solid var(--offer-ink); background: #111; }
+@media (min-width: 760px) {
+  .gso-bonuses { grid-template-columns: repeat(3, 1fr); }
+  .gso-reel-wrap { grid-template-columns: 320px 1fr; }
+}
 @media (max-width: 560px) { .apply-cal { margin-left: -1.25rem; margin-right: -1.25rem; border-left: 0; border-right: 0; border-radius: 0; height: 720px; } }
 
 /* Sticky bar, phones only */

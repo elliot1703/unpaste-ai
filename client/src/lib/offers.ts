@@ -209,3 +209,22 @@ export const OFFERS: Record<OfferSlug, Offer> = {
 };
 
 export const OFFER_LIST = Object.values(OFFERS);
+
+// The Hand-Over Day: the 1:1 offer rebuilt on the $100M Offers frameworks for
+// /one-on-one/hand-over (22 Oct 2026). Every number here is one Elliot has said
+// out loud. null means not decided yet, and the page leaves that line out
+// rather than inventing it.
+export const HAND_OVER = {
+  name: "The Hand-Over Day",
+  hours: 6,
+  // Quoted to a client on 19 Oct 2026: "fifteen hundred for a day, so it's six hours".
+  // TODO(elliot): confirm GST. The other offers are quoted + GST, so this follows them.
+  price: "A$1,500",
+  priceNote: "+ GST",
+  priceAmount: 1500,
+  whatsappWeeks: 6,
+  /** Days Elliot will run in a month. null hides the number; the page still says one business at a time. */
+  daysPerMonth: null as number | null,
+  /** A real deadline sentence, e.g. "Book by 31 October for a November day." null hides it. */
+  deadline: null as string | null,
+};

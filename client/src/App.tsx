@@ -19,6 +19,7 @@ import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
 import WorkshopBooked from "./pages/WorkshopBooked";
 import OfferPage from "./pages/OfferPage";
+import HandOverPage from "./pages/HandOverPage";
 import { OFFERS } from "@/lib/offers";
 import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
 import QuickWins from "./pages/QuickWins";
@@ -59,6 +60,8 @@ function AppRoutes() {
           <OfferPage offer={OFFERS.workshop} variant={v} canonical={false} />
         </Route>
       ))}
+      {/* 1:1 rebuilt on the $100M Offers frameworks (22 Oct 2026). Noindex, ads only, compared against /one-on-one. */}
+      <Route path={"/one-on-one/hand-over"} component={HandOverPage} />
       <Route path={"/one-on-one"}>
         <OfferPage offer={OFFERS["one-on-one"]} />
       </Route>
