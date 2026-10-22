@@ -108,10 +108,11 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     path: "/one-on-one",
     name: "1:1 Setup Day",
     kicker: "1:1 setup · In person · Brisbane",
-    headline: { main: "Set up properly,", accent: "in one day." },
-    subhead: "Claude Code or Codex, on your machine, built around how your business runs.",
+    // Outcome first (22 Oct 2026): the job handed over, not the setup.
+    headline: { main: "Hand over the job that eats your week.", accent: "In one day." },
+    subhead: "Your quoting, your follow-ups or Monday's numbers, done by an agent on your machine. Set up in your office, with me beside you.",
     lede:
-      "Before the day, we write down what AI should be doing for you. Then I come to you and we build it, together, until it's done.",
+      "Pick the job below and I'll show you what it looks like handed over. Then a 20-minute call, and we book the day.",
     facts: ["One day", "In your office", "Claude Code or Codex", "Brisbane"],
     pills: ["1:1 setup", "In your office", "Brisbane", "One day"],
     steps: [
@@ -130,7 +131,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
       "A general AI talk.",
     ],
     askTeamSize: false,
-    cta: "Check availability",
+    cta: "Pick the job",
     guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "The 1:1 day",
@@ -151,7 +152,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     seo: {
       title: "1:1 Claude Code Setup Day, Brisbane — Unpaste",
       description:
-        "One day, in your office. We write down what AI should do for your business, then build it on your machine until it's done.",
+        "Hand over the job that eats your week: quoting, follow-ups or Monday's numbers, done by an agent on your machine. One day in your office, Brisbane. Book a 20-minute call.",
     },
   },
 

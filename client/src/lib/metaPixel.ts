@@ -63,7 +63,7 @@ export function initMetaPixel(): void {
  * mark intent and conversion.
  */
 export function trackMeta(
-  event: "PageView" | "ViewContent" | "InitiateCheckout" | "Purchase" | "Lead",
+  event: "PageView" | "ViewContent" | "InitiateCheckout" | "Purchase" | "Lead" | "Schedule",
   params?: Record<string, unknown>
 ): void {
   if (!canRun()) return;

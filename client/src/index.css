@@ -1588,6 +1588,16 @@ select,
 .apply-includes svg { flex: none; width: 18px; height: 18px; margin-top: 3px; color: var(--offer-red); }
 .apply-reveal .apply-submit { margin-top: 1.25rem; }
 .apply-fallback { margin-top: 1.25rem; padding: 0.9rem 1rem; border-radius: 12px; background: #fef2f2; line-height: 1.5; }
+/* 1:1 booking flow (22 Oct 2026): outcome screen with the calendar inline */
+.apply-outcome { max-width: 44rem; }
+.apply-intro { margin-top: 0.9rem; font-size: 1rem; line-height: 1.55; color: var(--offer-ink); }
+.apply-points { margin-top: 1rem; list-style: none; padding: 0; counter-reset: pt; }
+.apply-points li { font-size: 1rem; }
+.apply-cal-kicker { margin-top: 1.75rem; padding-top: 1.25rem; border-top: 2px solid var(--offer-ink); }
+.apply-cal { margin-top: 0.9rem; min-height: 680px; border: 2px solid var(--offer-rule); border-radius: 12px; overflow: hidden; background: #fff; }
+.apply-cal iframe { display: block; }
+.apply-note a { color: var(--offer-ink); font-weight: 600; text-decoration: underline; }
+@media (max-width: 560px) { .apply-cal { margin-left: -1.25rem; margin-right: -1.25rem; border-left: 0; border-right: 0; border-radius: 0; min-height: 720px; } }
 
 /* Sticky bar, phones only */
 .offer-sticky {

@@ -6,6 +6,7 @@ import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ApplyForm } from "@/components/ApplyForm";
+import { BookingFlow } from "@/components/BookingFlow";
 import type { Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
@@ -61,7 +62,16 @@ export default function OfferPage({
 
       <main>
         <section className="offer-hero">
-          <img className="offer-hero-bg" src={`${P}/team-wide.webp`} alt="" width={2000} height={1124} fetchPriority="high" />
+          <img
+            className="offer-hero-bg"
+            src={`${P}/team-wide-1000.webp`}
+            srcSet={`${P}/team-wide-640.webp 640w, ${P}/team-wide-1000.webp 1000w, ${P}/team-wide-1400.webp 1400w, ${P}/team-wide.webp 2000w`}
+            sizes="100vw"
+            alt=""
+            width={2000}
+            height={1124}
+            fetchPriority="high"
+          />
           <div className="offer-hero-copy">
             <ul className="offer-pills">
               {offer.pills.map((f) => <li key={f}>{f}</li>)}
@@ -93,6 +103,15 @@ export default function OfferPage({
             ))}
           </div>
         </section>
+
+        {offer.slug === "one-on-one" && (
+          <section className="offer-section offer-apply" id="apply">
+            <p className="offer-kicker">Two taps, then your email</p>
+            <h2>Pick the job. See it handed over.</h2>
+            <p className="offer-lede">Then book a 20-minute call with Elliot, right here. The price for the day is on the call.</p>
+            <BookingFlow offer={offer} variant={variant?.slug} />
+          </section>
+        )}
 
         <section className="offer-section">
           <p className="offer-kicker">How it runs</p>
@@ -180,12 +199,14 @@ export default function OfferPage({
           </div>
         </section>
 
-        <section className="offer-section offer-apply" id="apply">
-          <p className="offer-kicker">{offer.cta}</p>
-          <h2>A few quick questions.</h2>
-          <p className="offer-lede">So Elliot knows what you want to work on. The price is on the next screen.</p>
-          <ApplyForm offer={offer} variant={variant?.slug} />
-        </section>
+        {offer.slug !== "one-on-one" && (
+          <section className="offer-section offer-apply" id="apply">
+            <p className="offer-kicker">{offer.cta}</p>
+            <h2>A few quick questions.</h2>
+            <p className="offer-lede">So Elliot knows what you want to work on. The price is on the next screen.</p>
+            <ApplyForm offer={offer} variant={variant?.slug} />
+          </section>
+        )}
       </main>
 
       <Footer />
