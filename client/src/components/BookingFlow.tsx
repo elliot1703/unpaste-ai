@@ -173,7 +173,7 @@ export function BookingFlow({ offer, variant }: { offer: Offer; variant?: string
             {state !== "submitting" && <ArrowRight className="h-4 w-4" />}
           </button>
           {error && <p className="apply-error" role="alert">{error}</p>}
-          <p className="apply-note">One email from Elliot, then the call if you want it. No list, no spam.</p>
+          <p className="apply-note">Elliot emails you what you asked for, and the call is yours to book if you want it. Unsubscribe any time.</p>
         </form>
       )}
 
