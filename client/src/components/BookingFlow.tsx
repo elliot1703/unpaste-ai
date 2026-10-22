@@ -19,14 +19,14 @@ type Question = { key: "automate" | "stage"; title: string; hint: string; option
 const QUESTIONS: Question[] = [
   {
     key: "automate",
-    title: "What would you hand to AI first?",
-    hint: "The day is built around it.",
+    title: "If you could automate one thing tomorrow, what would it be?",
+    hint: "What would be the first thing you'd tick off?",
     options: ["Quoting or proposals", "Emails and follow-ups", "Admin, invoicing or reports", "Content and marketing", "Not sure yet"],
   },
   {
     key: "stage",
-    title: "Where are you at with AI?",
-    hint: "No wrong answer. It tells me where to start you.",
+    title: "How far have you got with it so far?",
+    hint: "Claude, ChatGPT, whatever you've tried. No wrong answer.",
     options: ["I use ChatGPT or Claude daily", "Tried a few things, nothing stuck", "Built something that half works", "Haven't started"],
   },
 ];
@@ -165,11 +165,11 @@ export function BookingFlow({ offer, variant }: { offer: Offer; variant?: string
       ) : (
         <form className="apply-step apply-details" onSubmit={submit}>
           <h3>Where should I send it?</h3>
-          <p>What {answers.automate && answers.automate !== "Not sure yet" ? answers.automate.toLowerCase() : "the job"} looks like handed over, in writing, plus the calendar to book a 20-minute call.</p>
+          <p>What {answers.automate && answers.automate !== "Not sure yet" ? answers.automate.toLowerCase() : "the job"} looks like set up, in writing, and we can find a time to talk.</p>
           <label><span>First name</span><input name="name" autoComplete="given-name" required maxLength={60} /></label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>
           <button className="apply-submit" disabled={state === "submitting"}>
-            {state === "submitting" ? "One moment…" : "Show me"}
+            {state === "submitting" ? "One moment…" : "Send it"}
             {state !== "submitting" && <ArrowRight className="h-4 w-4" />}
           </button>
           {error && <p className="apply-error" role="alert">{error}</p>}

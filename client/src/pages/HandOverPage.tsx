@@ -299,8 +299,8 @@ export default function HandOverPage() {
 
         <section className="offer-section offer-apply" id="apply">
           <p className="offer-kicker">Two taps, then your email</p>
-          <h2>If you could automate one thing tomorrow, what would it be?</h2>
-          <p className="offer-lede">Tell me that and your email. I'll flick you what it looks like set up, and we can find a time to talk.</p>
+          <h2>Tell me the one thing you'd automate tomorrow, and I'll flick you what it looks like set up.</h2>
+          <p className="offer-lede">Two taps and your email. Then we can find a time to talk.</p>
           <BookingFlow offer={offer} variant={VARIANT} />
         </section>
 
