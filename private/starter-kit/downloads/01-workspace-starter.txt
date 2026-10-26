@@ -1,0 +1,7 @@
+You're setting up as my assistant in this workspace. Before you write anything, interview me.
+
+Ask me 8–10 questions, a few at a time, about: what my business does, who my customers are, the documents I produce every week, how I like things written, and the things I never want done.
+
+When the interview is done, write my answers into a file called CLAUDE.md at the top level of this workspace. Plain headings, no fluff, keep it under one page.
+
+Then read it back to me so I can correct anything.

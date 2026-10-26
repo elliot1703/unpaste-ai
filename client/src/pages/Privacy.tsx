@@ -53,6 +53,7 @@ export default function Privacy() {
                 business name, and scheduling preferences.
               </li>
             </ul>
+            <p className="mt-3">Starter-kit requests: we save your email address and resource-request details in Klaviyo and unlock the requested files on this site. Requesting this kit does not subscribe you to marketing emails.</p>
             <p className="mt-3">We also collect basic analytics data:</p>
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li>
@@ -70,6 +71,7 @@ export default function Privacy() {
             <h2 className="text-lg font-bold text-foreground mb-3">HOW WE USE IT</h2>
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li>To deliver your Efficiency Score results.</li>
+              <li>To provide resources you request, including the workspace starter kit.</li>
               <li>To follow up about workshop bookings you've requested.</li>
               <li>To respond to enquiries you've sent us.</li>
               <li>To improve our website and assessment experience.</li>

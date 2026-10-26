@@ -1,0 +1,18 @@
+Help me set up a shared GitHub repository for this project so another person and their agent can work with me.
+
+Before changing anything, inspect the workspace and tell me whether it is already a Git repository, what remotes it has and whether there are uncommitted changes. Read the existing workspace rules. Don't overwrite them or create a nested repository.
+
+Ask me for the GitHub owner or organisation, repository name, the collaborator's GitHub username and the access they need. Default to a private repository. If I already have a repository, use that one.
+
+Check the current GitHub documentation and the tools available here. Explain any setup or sign-in I need to complete. Never ask me to paste a password or token into the chat or a project file.
+
+Prepare the local setup for review:
+- Check .gitignore for secrets, .env files, private client material, dependencies and generated files. Show exactly which files would be shared. A private repository is still shared with its members.
+- Add a short README with how to run the project, check changes and find the current task.
+- Add or update the agent instructions using this workspace's existing convention. Include: read the rules first, use a branch for changes, don't overwrite someone else's work, check changes and use a pull request for review.
+- Explain how we will keep separate local checkouts, pull the latest changes, review a pull request and handle a conflict. Use the repository's actual default branch name.
+
+Show me the repository owner, name, visibility, files and proposed collaborator permissions before creating anything remotely, pushing files or sending an invite. Wait for my approval for those actions.
+
+After the approved setup, verify the remote URL, visibility and access. Give me the clone instructions to share with my collaborator. If an invitation still needs accepting, say so. Don't call it finished until the checks pass.
+
