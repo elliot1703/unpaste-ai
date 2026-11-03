@@ -6,6 +6,9 @@ export const GOOGLE_RATING = { score: "5.0", count: 5, updated: "6 Oct 2026" } a
 
 export const GOOGLE_REVIEW_URL = "https://www.google.com/maps?cid=5179529895289794045";
 
+/** Same listing as GOOGLE_REVIEW_URL, as the short link Elliot shares (LinkedIn Featured, /reviews). */
+export const GOOGLE_LISTING_URL = "https://maps.app.goo.gl/PXTpq8XLRBMTZtCd7";
+
 export type Review = {
   name: string;
   business?: string;
