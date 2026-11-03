@@ -24,6 +24,7 @@ import { WORKSHOP_VARIANTS } from "@/lib/workshopVariants";
 import QuickWins from "./pages/QuickWins";
 import Resources from "./pages/Resources";
 import ClaudeAndCoffee from "./pages/ClaudeAndCoffee";
+import Reviews from "./pages/Reviews";
 
 function CoachingRedirect() {
   // The coaching page was retired 17 Oct 2026; its nearest current offer is the 1:1 setup day.
@@ -69,6 +70,7 @@ function AppRoutes() {
       <Route path={"/quick-wins"} component={QuickWins} />
       <Route path={"/resources"} component={Resources} />
       <Route path={"/claude-and-coffee"} component={ClaudeAndCoffee} />
+      <Route path={"/reviews"} component={Reviews} />
       <Route path={"/styles"} component={StyleExplorer} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}

@@ -20,6 +20,7 @@ const routes = [
   "/quick-wins",
   "/resources",
   "/claude-and-coffee",
+  "/reviews",
   "/pricing",
   "/styles",
   "/privacy",
