@@ -36,6 +36,7 @@ export default function Book() {
         title="Book a Consultation"
         description="Schedule a free 30-minute consultation with unpaste.ai. Discover how AI automation can transform your business operations."
         url="https://unpaste.ai/book"
+        noIndex
       />
 
       {/* Fixed Grid Background */}

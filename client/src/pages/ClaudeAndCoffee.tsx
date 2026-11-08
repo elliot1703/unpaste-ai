@@ -118,7 +118,22 @@ const details: { value: string; label: string }[] = [
   { value: "Optional", label: "LAPTOP" },
 ];
 
-const eventSchema = {
+// Google's event results need a startDate on each occurrence and ignore
+// eventSchedule, so the schema lists the next four Tuesdays, computed at render
+// (prerender refreshes them on every deploy). Brisbane has no daylight saving.
+function nextTuesdays(count: number) {
+  const now = new Date(Date.now() + 10 * 3600 * 1000); // Brisbane wall clock as UTC
+  const d = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const ahead = (2 - d.getUTCDay() + 7) % 7;
+  if (ahead === 0 && now.getUTCHours() * 60 + now.getUTCMinutes() >= 8 * 60 + 30) d.setUTCDate(d.getUTCDate() + 7);
+  else d.setUTCDate(d.getUTCDate() + ahead);
+  return Array.from({ length: count }, (_, i) => {
+    const day = new Date(d.getTime() + i * 7 * 86400000).toISOString().slice(0, 10);
+    return { startDate: `${day}T07:00:00+10:00`, endDate: `${day}T08:30:00+10:00` };
+  });
+}
+
+const eventBase = {
   "@context": "https://schema.org",
   "@type": "Event",
   name: "Claude & Coffee",
@@ -161,6 +176,10 @@ const eventSchema = {
     name: "Unpaste",
     url: "https://unpaste.ai",
   },
+  performer: {
+    "@type": "Person",
+    name: "Elliot Stone",
+  },
 };
 
 export default function ClaudeAndCoffee() {
@@ -185,7 +204,7 @@ export default function ClaudeAndCoffee() {
         type="event"
       />
       <Helmet>
-        <script type="application/ld+json">{JSON.stringify(eventSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(nextTuesdays(4).map((dates) => ({ ...eventBase, ...dates })))}</script>
       </Helmet>
 
       <Navigation />

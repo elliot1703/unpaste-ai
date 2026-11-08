@@ -48,6 +48,7 @@ export default function About() {
         title="About Us"
         description="Meet Elliot Stone, the Brisbane-based AI consultant behind unpaste.ai. Hands-on AI workspace setup for small business teams across South East Queensland."
         url="https://unpaste.ai/about"
+        noIndex
       />
 
       {/* Fixed Grid Background */}

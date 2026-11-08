@@ -99,6 +99,7 @@ export default function Solutions() {
         title="Solutions | unpaste.ai"
         description="See the problems we solve for Brisbane businesses — from lead response and client onboarding to quoting, scheduling, and customer service automation."
         url="https://unpaste.ai/solutions"
+        noIndex
       />
 
       <div className="grid-background" />

@@ -338,6 +338,7 @@ export default function Pricing() {
         title="Pricing"
         description="Transparent pricing for branding, web design, and ongoing marketing. Brisbane-built packages for businesses that want results, not invoices full of surprises."
         url="https://unpaste.ai/pricing"
+        noIndex
       />
 
       <div className="grid-background" />
