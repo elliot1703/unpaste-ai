@@ -51,6 +51,8 @@ async function prerender() {
     resolve(root, "dist/server/entry-server.js")
   );
 
+  const indexable = [];
+
   for (const route of routes) {
     const { html, helmet } = render(route);
     let page = template;
@@ -68,6 +70,9 @@ async function prerender() {
       }
 
       const metaStr = helmet.meta?.toString() ?? "";
+      const canonical = (helmet.link?.toString() ?? "").match(/rel="canonical" href="([^"]+)"/)?.[1] ?? "";
+      const selfCanonical = canonical.replace(/\/$/, "") === `https://unpaste.ai${route}`.replace(/\/$/, "");
+      if (!/name="robots" content="noindex/.test(metaStr) && selfCanonical) indexable.push(route);
       if (metaStr) {
         page = page.replace("</head>", `  ${metaStr}\n</head>`);
       }
@@ -95,6 +100,16 @@ async function prerender() {
       `  Prerendered: ${route} → ${filePath.replace(root + "/", "")}`
     );
   }
+
+  // sitemap.xml lists only indexable routes (robots.txt points at it).
+  const urls = indexable
+    .map((r) => `  <url><loc>https://unpaste.ai${r === "/" ? "/" : r}</loc></url>`)
+    .join("\n");
+  writeFileSync(
+    resolve(root, "dist/public/sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  );
+  console.log(`  sitemap.xml: ${indexable.length} indexable routes`);
 
   console.log(`\n✓ Prerendered ${routes.length} routes`);
 }

@@ -164,8 +164,8 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     subhead: "Practical training built around your team's real work.",
     lede:
       "We come to you, find the tasks eating the team's time, build the first workflows together on the day, then keep the momentum with weekly catch-ups.",
-    facts: ["Up to 12 people", "In your office", "Brisbane", "2 spots left in October"],
-    pills: ["Team training", "Up to 12", "We come to you", "2 October dates left"],
+    facts: ["Up to 12 people", "In your office", "Brisbane", "Booked on request"],
+    pills: ["Team training", "Up to 12", "We come to you", "Booked on request"],
     steps: [
       { title: "Find the tasks eating the team's time.", body: "A short call before the day. We pick the two or three jobs worth automating first." },
       { title: "Build useful AI workflows together.", body: "Laptops open, everyone building on their own real work, Elliot moving between desks." },
@@ -182,7 +182,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
       "Teams outside South East Queensland, for now.",
     ],
     askTeamSize: true,
-    cta: "Check October dates",
+    cta: "Check availability",
     guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "Team training day",
