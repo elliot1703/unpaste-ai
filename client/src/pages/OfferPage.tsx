@@ -1,5 +1,6 @@
 import type React from "react";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { trackMetaCustom } from "@/lib/metaPixel";
 import { ArrowRight, Check, Star, X } from "lucide-react";
 import { SEO } from "@/components/SEO";
@@ -57,6 +58,20 @@ export default function OfferPage({
   return (
     <div className="min-h-screen offer-page">
       <SEO title={variant ? `${headline.main} ${headline.accent}` : offer.seo.title} description={offer.seo.description} url={url} noIndex={!canonical} />
+      {canonical && (
+        <Helmet>
+          <script type="application/ld+json">{JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Service",
+            // Only facts already on the page. No price: the page gates it behind the form.
+            name: offer.seo.title.split(" — ")[0],
+            description: `${offer.subhead} ${offer.lede}`,
+            url,
+            areaServed: { "@type": "City", name: "Brisbane" },
+            provider: { "@type": "Organization", name: "unpaste.ai", url: "https://unpaste.ai" },
+          })}</script>
+        </Helmet>
+      )}
       <Navigation />
 
       <main>
