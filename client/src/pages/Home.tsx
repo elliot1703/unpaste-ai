@@ -1,5 +1,5 @@
 import { ArrowRight, Clock, Compass, GraduationCap, Users } from "lucide-react";
-import { OFFERS, WORKSHOP_DATE, WORKSHOP_SEATS } from "@/lib/offers";
+import { OFFERS, WORKSHOP_WHEN } from "@/lib/offers";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -29,13 +29,13 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // The three current offers. Facts come from offers.ts so dates and seats stay in sync;
+  // The three current offers. Facts come from offers.ts so the workshop date stays in sync;
   // prices stay off this page, as on the offer pages (shown after the short form).
   const services = [
     {
       num: "01",
       title: "AI Workshop",
-      description: `${WORKSHOP_DATE}, 4.5 hours, Brisbane, ${WORKSHOP_SEATS} seats. ${OFFERS.workshop.lede}`,
+      description: `${WORKSHOP_WHEN}. 4.5 hours, Brisbane, small group. ${OFFERS.workshop.lede}`,
       icon: Users,
       href: OFFERS.workshop.path,
     },
@@ -284,7 +284,7 @@ export default function Home() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    Reserve a workshop seat
+                    See the workshop
                     <motion.span
                       animate={{ x: [0, 4, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}

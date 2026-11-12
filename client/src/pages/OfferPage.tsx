@@ -183,7 +183,7 @@ export default function OfferPage({
         <section className="offer-section offer-apply" id="apply">
           <p className="offer-kicker">{offer.cta}</p>
           <h2>A few quick questions.</h2>
-          <p className="offer-lede">So Elliot knows what you want to work on. The price is on the next screen.</p>
+          <p className="offer-lede">{offer.apply?.lede ?? "So Elliot knows what you want to work on. The price is on the next screen."}</p>
           <ApplyForm offer={offer} variant={variant?.slug} />
         </section>
       </main>
@@ -197,7 +197,7 @@ export default function OfferPage({
           <strong>{offer.facts[0]}</strong>
           <span>100% money-back guarantee</span>
         </div>
-        <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.cta}</a>
+        <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.ctaShort ?? offer.cta}</a>
       </div>
     </div>
   );
