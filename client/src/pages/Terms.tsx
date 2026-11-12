@@ -21,7 +21,7 @@ export default function Terms() {
             TERMS OF SERVICE
           </h1>
           <p className="font-mono text-xs text-muted-foreground mt-4">
-            Last updated: 12 February 2026
+            Last updated: 12 November 2026
           </p>
         </div>
 
@@ -32,16 +32,6 @@ export default function Terms() {
               These terms govern your use of the unpaste.ai website and any services provided
               by Unpaste (operated by Elliot Stone, Brisbane, Australia). By using this site,
               you agree to these terms.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-bold text-foreground mb-3">THE ASSESSMENT</h2>
-            <p>
-              The Efficiency Score assessment is a free tool that provides a general indication
-              of potential automation opportunities in your business. Results are indicative,
-              not guaranteed. Your actual outcomes from implementing automation will depend on
-              your specific business context, tools, and processes.
             </p>
           </section>
 
@@ -81,9 +71,9 @@ export default function Terms() {
           <section>
             <h2 className="text-lg font-bold text-foreground mb-3">LIMITATION OF LIABILITY</h2>
             <p>
-              Unpaste provides this website and the assessment tool "as is." We make no
-              warranties about the accuracy of assessment results or the suitability of
-              suggested automations for your business. Our liability for any claim related to
+              Unpaste provides this website "as is." We make no warranties about the
+              suitability of suggested automations for your business. Our liability for any
+              claim related to
               this website is limited to the amount you have paid us (if any) in the 12 months
               preceding the claim.
             </p>
@@ -93,7 +83,7 @@ export default function Terms() {
             <h2 className="text-lg font-bold text-foreground mb-3">USE OF THE SITE</h2>
             <p>You agree not to:</p>
             <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>Submit false information through the assessment or contact forms.</li>
+              <li>Submit false information through the contact forms.</li>
               <li>Attempt to interfere with the site's operation or security.</li>
               <li>Scrape or harvest data from the site without permission.</li>
               <li>Use the site for any unlawful purpose.</li>

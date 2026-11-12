@@ -7,7 +7,6 @@ const root = resolve(__dirname, "..");
 
 const routes = [
   "/",
-  "/assessment",
   "/solutions",
   "/about",
   "/book",

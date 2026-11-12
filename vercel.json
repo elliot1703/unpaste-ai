@@ -9,6 +9,11 @@
       "source": "/coaching",
       "destination": "/one-on-one",
       "permanent": true
+    },
+    {
+      "source": "/assessment",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "rewrites": [

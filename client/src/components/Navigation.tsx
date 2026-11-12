@@ -4,13 +4,8 @@ import { Link, useLocation } from "wouter";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
-interface NavigationProps {
-  onAssessmentOpen?: () => void;
-}
-
-export function Navigation({ onAssessmentOpen }: NavigationProps) {
-  const [location, navigate] = useLocation();
-  const handleAssessmentOpen = onAssessmentOpen ?? (() => navigate("/assessment"));
+export function Navigation() {
+  const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const navBg = useTransform(scrollYProgress, [0, 0.02], ["rgba(250, 250, 250, 0)", "rgba(250, 250, 250, 0.95)"]);
@@ -69,12 +64,6 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
           >
             Book Call
           </Link>
-          <button
-            onClick={handleAssessmentOpen}
-            className="font-mono text-xs font-bold uppercase tracking-wider bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
-          >
-            Start Audit
-          </button>
         </div>
 
         {/* Mobile Menu */}
@@ -118,12 +107,6 @@ export function Navigation({ onAssessmentOpen }: NavigationProps) {
               >
                 Book Call
               </Link>
-              <button
-                onClick={() => { handleAssessmentOpen(); setMobileMenuOpen(false); }}
-                className="brutalist-button w-full"
-              >
-                Start Audit
-              </button>
             </div>
           </SheetContent>
         </Sheet>

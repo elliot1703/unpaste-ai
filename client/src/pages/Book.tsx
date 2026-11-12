@@ -71,13 +71,6 @@ export default function Book() {
                 Book Call
               </Link>
             </div>
-
-            <Link
-              href="/"
-              className="font-mono text-xs font-bold uppercase tracking-wider bg-foreground text-background px-6 py-3 hover:bg-foreground/90 transition-colors"
-            >
-              Take Assessment
-            </Link>
           </div>
         </nav>
 
