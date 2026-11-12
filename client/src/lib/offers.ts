@@ -33,6 +33,8 @@ export type Offer = {
    * out and the form keeps its default "the price is on the next screen" wording.
    */
   apply?: { lede: string; detailsNote: string; submitLabel: string };
+  /** Who the form says will be in touch. Leave it out and the form says Elliot. See IN_TOUCH. */
+  inTouch?: keyof typeof IN_TOUCH;
   /** Shown under every CTA and on the end screen. Elliot, 6 Oct: 100% money back if unsatisfied. */
   guarantee: string;
   /** Shown only after the form is submitted. */
@@ -55,6 +57,24 @@ export type Offer = {
   };
   seo: { title: string; description: string };
 };
+
+// The four lines on the form that say who will be in touch after an application.
+// They live together so they cannot disagree. "elliot" is the default. "we" is for
+// an offer where someone other than Elliot may phone the applicant.
+export const IN_TOUCH = {
+  elliot: {
+    lede: "So Elliot knows what you want to work on. The price is on the next screen.",
+    detailsNote: "So Elliot can get in touch. The price is on the next screen.",
+    note: (offerName: string) => `Elliot will be in touch by email or phone about ${offerName}. Unsubscribe any time.`,
+    done: (email: string) => `Elliot has your details and will be in touch at ${email}.`,
+  },
+  we: {
+    lede: "So we know what you want to work on. The price is on the next screen.",
+    detailsNote: "So we can get in touch. The price is on the next screen.",
+    note: (offerName: string) => `We'll be in touch by phone or email about ${offerName}. Unsubscribe any time.`,
+    done: (_email: string) => "We have your details and will be in touch by phone or email.",
+  },
+} as const;
 
 // No next workshop date is confirmed (checked 12 Nov 2026, after the 11 November session date passed).
 // While that is the case every workshop surface says so and the form registers
@@ -148,6 +168,8 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: false,
     cta: "Check availability",
+    // From 13 Nov 2026 someone other than Elliot may phone 1:1 applicants.
+    inTouch: "we",
     guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
       title: "The 1:1 day",

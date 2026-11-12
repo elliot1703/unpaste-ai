@@ -1,7 +1,7 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { trackMeta, trackMetaCustom } from "@/lib/metaPixel";
-import type { Offer } from "@/lib/offers";
+import { IN_TOUCH, type Offer } from "@/lib/offers";
 
 // The gate. Three quick questions, then details, then the price. Every answer
 // lands on the Klaviyo profile so Elliot can call with context, and the Lead
@@ -79,6 +79,7 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
 
   const total = questions.length + 1;
   const detailsStep = questions.length;
+  const inTouch = IN_TOUCH[offer.inTouch ?? "elliot"];
 
   // Funnel steps for the pixel, one event per offer so the dashboard can split them.
   const ev = (name: string) => trackMetaCustom(`${name}_${offer.slug.replace(/-/g, "")}`, { variant });
@@ -163,7 +164,7 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
       ) : (
         <form className="apply-step apply-details" onSubmit={submit}>
           <h3>Your details.</h3>
-          <p>{offer.apply?.detailsNote ?? "So Elliot can get in touch. The price is on the next screen."}</p>
+          <p>{offer.apply?.detailsNote ?? inTouch.detailsNote}</p>
           <label><span>Your name</span><input name="name" autoComplete="name" required /></label>
           <label><span>Business name</span><input name="business" autoComplete="organization" required /></label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>
@@ -173,7 +174,7 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
             {state !== "submitting" && <ArrowRight className="h-4 w-4" />}
           </button>
           {error && <p className="apply-error" role="alert">{error}</p>}
-          <p className="apply-note">Elliot will be in touch by email or phone about {offer.name}. Unsubscribe any time.</p>
+          <p className="apply-note">{inTouch.note(offer.name)}</p>
         </form>
       )}
 
@@ -226,7 +227,7 @@ function Reveal({ offer, email, variant }: { offer: Offer; email: string; varian
       ) : (
         <p className="apply-fallback">{r.fallback}</p>
       )}
-      <p className="apply-note">Elliot has your details and will be in touch at {email}.</p>
+      <p className="apply-note">{IN_TOUCH[offer.inTouch ?? "elliot"].done(email)}</p>
     </div>
   );
 }

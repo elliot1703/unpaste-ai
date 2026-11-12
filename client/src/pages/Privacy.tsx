@@ -21,7 +21,7 @@ export default function Privacy() {
             PRIVACY POLICY
           </h1>
           <p className="font-mono text-xs text-muted-foreground mt-4">
-            Last updated: 12 February 2026
+            Last updated: 13 November 2026
           </p>
         </div>
 
@@ -52,6 +52,11 @@ export default function Privacy() {
                 <strong className="text-foreground">Workshop bookings:</strong> Name, email,
                 business name, and scheduling preferences.
               </li>
+              <li>
+                <strong className="text-foreground">Training applications:</strong> Name,
+                business name, email, phone number, and your answers to the questions on
+                the application form.
+              </li>
             </ul>
             <p className="mt-3">Starter-kit requests: we save your email address and resource-request details in Klaviyo and unlock the requested files on this site. Requesting this kit does not subscribe you to marketing emails.</p>
             <p className="mt-3">We also collect basic analytics data:</p>
@@ -73,6 +78,10 @@ export default function Privacy() {
               <li>To deliver your Efficiency Score results.</li>
               <li>To provide resources you request, including the workspace starter kit.</li>
               <li>To follow up about workshop bookings you've requested.</li>
+              <li>
+                To phone or email you about a training application you've sent us. The call
+                may come from someone working with Unpaste on our behalf.
+              </li>
               <li>To respond to enquiries you've sent us.</li>
               <li>To improve our website and assessment experience.</li>
             </ul>
@@ -85,9 +94,10 @@ export default function Privacy() {
           <section>
             <h2 className="text-lg font-bold text-foreground mb-3">DATA STORAGE</h2>
             <p>
-              Your data is stored on secure servers provided by Vercel (hosting) and any
-              connected services we use to manage leads (e.g., Google Sheets, n8n automation
-              workflows). All data is transmitted over HTTPS.
+              Your data is stored on secure servers provided by Vercel (hosting) and the
+              connected services we use to manage enquiries: Klaviyo (applications and email),
+              Calendly (call bookings) and Google Sheets (the list we phone applicants from).
+              All data is transmitted over HTTPS.
             </p>
           </section>
 
@@ -144,7 +154,9 @@ export default function Privacy() {
             <p>We use the following services that may process your data:</p>
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li><strong className="text-foreground">Vercel:</strong> Website hosting.</li>
-              <li><strong className="text-foreground">Google Workspace:</strong> Email communication.</li>
+              <li><strong className="text-foreground">Google Workspace:</strong> Email, and the spreadsheet we phone applicants from.</li>
+              <li><strong className="text-foreground">Klaviyo:</strong> Stores applications and resource requests, and sends our emails.</li>
+              <li><strong className="text-foreground">Calendly:</strong> Call bookings.</li>
               <li><strong className="text-foreground">Vercel Web Analytics:</strong> Aggregated page-view analytics (no personal data collected).</li>
               <li><strong className="text-foreground">Meta Platforms:</strong> Advertising pixel used for retargeting and to measure ad performance. Meta may combine this with data it already holds about you.</li>
               <li><strong className="text-foreground">Stripe:</strong> Payment processing for workshop bookings. Card details go directly to Stripe and never reach our servers.</li>

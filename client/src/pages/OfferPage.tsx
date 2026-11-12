@@ -6,7 +6,7 @@ import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ApplyForm } from "@/components/ApplyForm";
-import type { Offer } from "@/lib/offers";
+import { IN_TOUCH, type Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
 import { TOOLS } from "@/lib/integrations";
@@ -183,7 +183,7 @@ export default function OfferPage({
         <section className="offer-section offer-apply" id="apply">
           <p className="offer-kicker">{offer.cta}</p>
           <h2>A few quick questions.</h2>
-          <p className="offer-lede">{offer.apply?.lede ?? "So Elliot knows what you want to work on. The price is on the next screen."}</p>
+          <p className="offer-lede">{offer.apply?.lede ?? IN_TOUCH[offer.inTouch ?? "elliot"].lede}</p>
           <ApplyForm offer={offer} variant={variant?.slug} />
         </section>
       </main>
