@@ -173,7 +173,7 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
             {state !== "submitting" && <ArrowRight className="h-4 w-4" />}
           </button>
           {error && <p className="apply-error" role="alert">{error}</p>}
-          <p className="apply-note">Elliot will be in touch by email or phone about {offer.name}. No list, no spam.</p>
+          <p className="apply-note">Elliot will be in touch by email or phone about {offer.name}. Unsubscribe any time.</p>
         </form>
       )}
 
