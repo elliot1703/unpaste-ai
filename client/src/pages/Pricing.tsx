@@ -469,26 +469,6 @@ export default function Pricing() {
                   <div className="flex items-center gap-3 mb-3">
                     <Star className="h-4 w-4 text-primary" />
                     <span className="font-mono text-xs font-bold uppercase tracking-wider">
-                      Free Efficiency Assessment
-                    </span>
-                  </div>
-                  <p className="font-mono text-xs text-muted-foreground leading-relaxed mb-4">
-                    Not sure where to start? Take our 5-minute assessment to find out exactly
-                    where your business is losing time — and what to fix first.
-                  </p>
-                  <Link
-                    href="/assessment"
-                    className="brutalist-button inline-block"
-                  >
-                    Take the Assessment
-                    <ArrowRight className="inline-block ml-2 h-3 w-3" />
-                  </Link>
-                </div>
-
-                <div className="border border-border p-6">
-                  <div className="flex items-center gap-3 mb-3">
-                    <Star className="h-4 w-4 text-primary" />
-                    <span className="font-mono text-xs font-bold uppercase tracking-wider">
                       Book a Free Call
                     </span>
                   </div>

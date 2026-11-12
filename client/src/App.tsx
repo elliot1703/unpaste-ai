@@ -13,7 +13,6 @@ import About from "./pages/About";
 import Book from "./pages/Book";
 import Solutions from "./pages/Solutions";
 import StyleExplorer from "./pages/StyleExplorer";
-import AssessmentPage from "./pages/AssessmentPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Pricing from "./pages/Pricing";
@@ -42,7 +41,6 @@ function AppRoutes() {
   return (
     <Switch>
       <Route path={"/"} component={Home} />
-      <Route path={"/assessment"} component={AssessmentPage} />
       <Route path={"/solutions"} component={Solutions} />
       <Route path={"/about"} component={About} />
       <Route path={"/book"} component={Book} />

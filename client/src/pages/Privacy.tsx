@@ -21,7 +21,7 @@ export default function Privacy() {
             PRIVACY POLICY
           </h1>
           <p className="font-mono text-xs text-muted-foreground mt-4">
-            Last updated: 12 February 2026
+            Last updated: 12 November 2026
           </p>
         </div>
 
@@ -39,11 +39,6 @@ export default function Privacy() {
             <h2 className="text-lg font-bold text-foreground mb-3">WHAT WE COLLECT</h2>
             <p className="mb-3">We collect information you provide directly:</p>
             <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>
-                <strong className="text-foreground">Assessment responses:</strong> Your answers
-                to the Efficiency Score assessment, including your name, email address, and
-                optional business name.
-              </li>
               <li>
                 <strong className="text-foreground">Contact form submissions:</strong> Name,
                 email, and any message you send via our contact or booking forms.
@@ -70,11 +65,10 @@ export default function Privacy() {
           <section>
             <h2 className="text-lg font-bold text-foreground mb-3">HOW WE USE IT</h2>
             <ul className="list-disc list-inside space-y-2 ml-2">
-              <li>To deliver your Efficiency Score results.</li>
               <li>To provide resources you request, including the workspace starter kit.</li>
               <li>To follow up about workshop bookings you've requested.</li>
               <li>To respond to enquiries you've sent us.</li>
-              <li>To improve our website and assessment experience.</li>
+              <li>To improve our website.</li>
             </ul>
             <p className="mt-3">
               We do not sell, rent, or share your personal information with third parties for

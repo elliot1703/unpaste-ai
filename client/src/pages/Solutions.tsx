@@ -256,16 +256,6 @@ export default function Solutions() {
               FIND OUT WHERE YOUR{" "}
               <span className="text-primary">TIME IS GOING.</span>
             </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="font-mono text-sm text-background/70 max-w-md mx-auto mb-10"
-            >
-              Take our free 5-minute assessment. Get your Efficiency Score and a clear
-              picture of what to fix first.
-            </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -274,17 +264,11 @@ export default function Solutions() {
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
               <Link
-                href="/assessment"
+                href="/book"
                 className="inline-flex items-center justify-center gap-3 bg-primary text-background font-mono text-sm font-bold uppercase tracking-wider px-8 py-4 hover:bg-primary/90 transition-colors"
               >
-                Take Free Assessment
+                Book a Call
                 <ArrowRight className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/book"
-                className="inline-flex items-center justify-center gap-3 border border-background/30 text-background font-mono text-sm font-bold uppercase tracking-wider px-8 py-4 hover:bg-background/10 transition-colors"
-              >
-                Book a Call Instead
               </Link>
             </motion.div>
           </div>
