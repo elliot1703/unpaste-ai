@@ -378,7 +378,7 @@ export default function Home() {
                 <a
                   key={service.href}
                   href={service.href}
-                  className={`${i === 0 ? "brutalist-button" : "brutalist-button-outline"} inline-flex items-center gap-3`}
+                  className={`${i === 0 ? "brutalist-button" : "brutalist-button-outline"} inline-flex items-center justify-center gap-3 w-full max-w-xs sm:w-auto`}
                 >
                   {service.title}
                   <ArrowRight className="h-4 w-4" />
