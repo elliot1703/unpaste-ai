@@ -163,13 +163,13 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
       ) : (
         <form className="apply-step apply-details" onSubmit={submit}>
           <h3>Your details.</h3>
-          <p>So Elliot can get in touch. The price is on the next screen.</p>
+          <p>{offer.apply?.detailsNote ?? "So Elliot can get in touch. The price is on the next screen."}</p>
           <label><span>Your name</span><input name="name" autoComplete="name" required /></label>
           <label><span>Business name</span><input name="business" autoComplete="organization" required /></label>
           <label><span>Email</span><input name="email" type="email" autoComplete="email" required /></label>
           <label><span>Phone</span><input name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="0412 345 678" required minLength={8} /></label>
           <button className="apply-submit" disabled={state === "submitting"}>
-            {state === "submitting" ? "One moment…" : "See the price"}
+            {state === "submitting" ? "One moment…" : (offer.apply?.submitLabel ?? "See the price")}
             {state !== "submitting" && <ArrowRight className="h-4 w-4" />}
           </button>
           {error && <p className="apply-error" role="alert">{error}</p>}
@@ -194,15 +194,19 @@ function Reveal({ offer, email, variant }: { offer: Offer; email: string; varian
       ? r.action.link
         ? `${r.action.link}?client_reference_id=${encodeURIComponent(ref)}&prefilled_email=${encodeURIComponent(email)}`
         : undefined
-      : r.action.url;
+      : r.action.kind === "calendly"
+        ? r.action.url
+        : undefined;
 
   return (
     <div className="apply apply-reveal" role="status">
       <p className="apply-kicker">Next step</p>
       <h3>{r.title}</h3>
-      <p className="apply-price">
-        <strong>{r.price}</strong> <span>{r.priceNote}</span>
-      </p>
+      {r.price && (
+        <p className="apply-price">
+          <strong>{r.price}</strong> <span>{r.priceNote}</span>
+        </p>
+      )}
       <ul className="apply-includes">
         {r.includes.map((line) => (
           <li key={line}><Check /> {line}</li>

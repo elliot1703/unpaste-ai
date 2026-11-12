@@ -26,43 +26,57 @@ export type Offer = {
   askTeamSize: boolean;
   /** Button label used on every CTA on the page. */
   cta: string;
+  /** Shorter label for the phone sticky bar, when the full one would cut off the text beside it. Falls back to cta. */
+  ctaShort?: string;
+  /**
+   * Form copy for an offer with no price to show on the end screen. Leave it
+   * out and the form keeps its default "the price is on the next screen" wording.
+   */
+  apply?: { lede: string; detailsNote: string; submitLabel: string };
   /** Shown under every CTA and on the end screen. Elliot, 6 Oct: 100% money back if unsatisfied. */
   guarantee: string;
   /** Shown only after the form is submitted. */
   reveal: {
     title: string;
-    price: string;
-    priceNote: string;
+    /** Leave price and priceNote out when there is no confirmed price; the end screen then shows none. */
+    price?: string;
+    priceNote?: string;
     was?: string;
     includes: string[];
-    buttonLabel: string;
-    /** Stripe link comes from env so the page can ship before it exists. */
-    action: { kind: "stripe"; link?: string } | { kind: "calendly"; url: string };
-    /** Shown when the Stripe link isn't configured yet. Must be true. */
+    /** Only used when the action has a link to send people to. */
+    buttonLabel?: string;
+    /**
+     * Stripe link comes from env so the page can ship before it exists.
+     * "none" means there is nothing to pay for or book yet: no button, the fallback line shows.
+     */
+    action: { kind: "stripe"; link?: string } | { kind: "calendly"; url: string } | { kind: "none" };
+    /** Shown when there is no button (no Stripe link yet, or nothing to book). Must be true. */
     fallback: string;
   };
   seo: { title: string; description: string };
 };
 
-// Confirmed by Elliot 6 Oct 2026.
-export const WORKSHOP_DATE = "Wed 11 November";
-export const WORKSHOP_EARLY_BIRD_ENDS = "4 November";
-export const WORKSHOP_SEATS = 10;
-
-const STRIPE_LINK_WORKSHOP = import.meta.env.VITE_STRIPE_LINK_WORKSHOP as string | undefined;
+// No next workshop date is confirmed (checked 12 Nov 2026, after the 11 November session date passed).
+// While that is the case every workshop surface says so and the form registers
+// interest only: no date, no seat count, no price, no payment link.
+//
+// When Elliot confirms the next session, put the dated copy back in the workshop
+// offer below (date, seats, price and any early bird, the Stripe link) and update
+// the workshop facts in api/ask.ts to match. Commit 38e87b8 is the last dated version.
+export const WORKSHOP_WHEN = "Next date to be announced";
 
 export const OFFERS: Record<OfferSlug, Offer> = {
   workshop: {
     slug: "workshop",
     path: "/workshops",
     name: "The Unpaste Workshop",
-    kicker: `AI workshop · Brisbane · ${WORKSHOP_DATE}`,
+    kicker: `AI workshop · Brisbane · ${WORKSHOP_WHEN}`,
     headline: { main: "Put AI to work", accent: "in your business." },
     subhead: "A hands-on workshop for Brisbane business owners.",
     lede:
       "Bring your laptop and a real job from your business. Build it with Elliot beside you, and leave with it running.",
-    facts: [WORKSHOP_DATE, "4.5 hours", `${WORKSHOP_SEATS} seats`, "Brisbane"],
-    pills: ["AI workshop", "Brisbane", `Wednesday 11 November`, `${WORKSHOP_SEATS} seats`],
+    facts: [WORKSHOP_WHEN, "4.5 hours", "Small group", "Brisbane"],
+    pills: ["AI workshop", "Brisbane", WORKSHOP_WHEN, "Small group"],
     steps: [
       { title: "Bring your laptop and one real job.", body: "The quote you rewrite every week. The inbox nobody owns. The report you build by hand." },
       { title: "Build it with Elliot beside you.", body: "Small room, laptops open. When you get stuck, he's at your shoulder, not on a slide." },
@@ -79,27 +93,30 @@ export const OFFERS: Record<OfferSlug, Offer> = {
       "A done-for-you implementation day.",
     ],
     askTeamSize: false,
-    cta: "Apply for a seat",
+    cta: "Register your interest",
+    ctaShort: "Register",
+    apply: {
+      lede: "So Elliot knows what you want to work on. He'll email you when the next date is set.",
+      detailsNote: "So Elliot can email you when the next date is set.",
+      submitLabel: "Register your interest",
+    },
     guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
     reveal: {
-      title: "The workshop seat",
-      price: "$499",
-      priceNote: `+ GST · early bird until ${WORKSHOP_EARLY_BIRD_ENDS}, then $699`,
+      title: "Your interest is registered",
       includes: [
-        `${WORKSHOP_DATE}, 4.5 hours, Brisbane`,
-        `${WORKSHOP_SEATS} seats, so everyone gets help`,
+        `${WORKSHOP_WHEN}, 4.5 hours, Brisbane`,
+        "A small group, so everyone gets help",
         "One real job from your business, running by the end",
         "You keep everything built on the day",
         "100% money-back guarantee if you're not satisfied",
       ],
-      buttonLabel: "Pay now, lock the seat",
-      action: { kind: "stripe", link: STRIPE_LINK_WORKSHOP },
-      fallback: "Booking opens in the next few days. Elliot will email you the link first, before it goes public.",
+      action: { kind: "none" },
+      fallback: "Nothing to book or pay today. Elliot will email you the next date and the price first, before it goes public.",
     },
     seo: {
       title: "Hands-on AI Workshop Brisbane — Unpaste",
       description:
-        "Wednesday 11 November, Brisbane. Bring your laptop and one real job. Build it with Elliot beside you and leave with it running. 10 seats.",
+        `Hands-on AI workshop in Brisbane. Bring your laptop and one real job. Build it with Elliot beside you and leave with it running. ${WORKSHOP_WHEN}.`,
     },
   },
 

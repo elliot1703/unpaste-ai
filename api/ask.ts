@@ -22,9 +22,9 @@ type Turn = { role: "user" | "assistant"; content: string };
 
 const FACTS: Record<Slug, string> = {
   workshop: `THE UNPASTE WORKSHOP
-- Wednesday 11 November 2026, 4.5 hours, Brisbane. Venue is confirmed on booking (not decided yet; say "Brisbane, venue confirmed on booking").
-- 10 seats.
-- Price: $499 + GST early bird until 4 November, then $699 + GST. The page shows the price only after the short apply form, so when price comes up say the number AND "apply on this page and it's on the next screen".
+- Date: the next date is not set yet. Say "the next date is to be announced". Never give or guess a date, a month or a venue. The form on this page registers interest, and Elliot emails those people the next date first, before it goes public.
+- 4.5 hours, in person, Brisbane, a small group. No seat number is set for the next date; do not give one.
+- Price: not set for the next date. Never quote a number. Say the price comes with the date, by email, to people who register their interest on this page. Nothing is booked or paid for today.
 - 100% money-back guarantee: not satisfied with the day, full refund.
 - Bring a laptop and one real job from your business (the quote you rewrite every week, the inbox nobody owns, the report you build by hand).
 - How the day runs: bring your laptop and one real job; build it with Elliot beside you (small room, laptops open, he's at your shoulder, not on a slide); leave with it running on your machine, in your accounts. You keep everything.
@@ -39,12 +39,20 @@ const FACTS: Record<Slug, string> = {
 - For: the owner or someone who can sign off; people who've tried AI tools and want it set up properly once; people who'd rather one focused day than a course.
 - Not for: someone who wants it built without being in the room; teams of more than two (that's team training); a general AI talk.`,
   team: `TEAM AI TRAINING
-- Up to 12 people, in your office, Brisbane and South East Queensland. Two dates left in October 2026.
+- Up to 12 people, in your office, Brisbane and South East Queensland. Booked on request.
 - $2,500 + GST for the day, up to 12 people. Includes a planning call before, a full day built around the team's real work, weekly catch-up calls after. Everything built stays with the team.
 - 100% money-back guarantee: not satisfied with the day, full refund.
 - Booking: a 20-minute call first; apply on this page to book it.
 - For: teams of two to twelve who already use ChatGPT or Claude; you want the team building, not watching.
 - Not: a keynote for a hundred people; a done-for-you build with nobody from the team in the room; teams outside South East Queensland for now.`,
+};
+
+// What the agent says when price or booking comes up. The workshop has no price
+// or booking while its next date is unannounced, so it gets its own line.
+const PRICE_LINE: Record<Slug, string> = {
+  workshop: "Register your interest on this page and Elliot will email you the next date and the price first.",
+  "one-on-one": "Apply on this page and the price is on the next screen.",
+  team: "Apply on this page and the price is on the next screen.",
 };
 
 const ELLIOT = `ELLIOT STONE: founder of Unpaste (unpaste.ai), Brisbane. Runs his own business on the same tools he teaches and works beside people on the day when something gets stuck. Google rating 5.0 from 5 reviews. Reviewers say it cut their admin time, that he explains what an agent actually does and then sets one up so it works, and that the team upskilled.`;
@@ -57,7 +65,7 @@ function systemPrompt(slug: Slug): string {
 Rules:
 1. Only answer about the offer below, Elliot, Unpaste, and how this page was built. For anything else say you only know about the workshop and training, and point them to the apply form on this page.
 2. Never invent a price, date, venue, seat count, guarantee or inclusion. If it isn't in the facts, say you don't know and that Elliot will answer after they apply.
-3. When price or booking comes up, end with: "Apply on this page and the price is on the next screen."
+3. When price or booking comes up, end with: "${PRICE_LINE[slug]}"
 4. Don't collect personal details. Don't promise outcomes.
 
 ${FACTS[slug]}
