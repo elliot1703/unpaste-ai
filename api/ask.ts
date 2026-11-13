@@ -31,12 +31,12 @@ const FACTS: Record<Slug, string> = {
 - For you if: you already use ChatGPT or Claude and want it doing the work; you can bring a laptop and one real piece of work; you're happy to learn by building, asking and fixing.
 - Not: a keynote or slide-heavy AI overview; a developer course that expects code; a done-for-you implementation day.
 - Tools covered: Claude and Codex (Claude Code or Codex set up on your machine), connected to tools like ServiceM8, Shopify, HubSpot, Instagram, Google Ads, Meta Ads, Gmail, Google Drive, Canva.`,
-  "one-on-one": `1:1 SETUP DAY
-- One day, in person, in your office, Brisbane. Claude Code or Codex set up on your machine, built around how your business runs.
-- Before the day: a call to write down what AI should be doing (quoting, follow-ups, Monday's numbers). On the day: build it together on your laptop, in your accounts, with your real files. After: a follow-up call two weeks later. No subscription; you keep everything.
+  "one-on-one": `1:1 SETUP
+- Two separate 3-hour sessions, in person, in your office, Brisbane. Claude Code or Codex set up on your machine, built around how your business runs.
+- Before the first session: a call to write down what AI should be doing (quoting, follow-ups, Monday's numbers). In the sessions: build it together on your laptop, in your accounts, with your real files. After: a follow-up call two weeks later. No subscription; you keep everything.
 - Price: not published. Say "the price is covered on a 20-minute call; apply on this page to book it". Never guess a number.
-- 100% money-back guarantee: not satisfied with the day, full refund.
-- For: the owner or someone who can sign off; people who've tried AI tools and want it set up properly once; people who'd rather one focused day than a course.
+- Guarantee: not happy after the first session, you don't pay and we don't come back for the second.
+- For: the owner or someone who can sign off; people who've tried AI tools and want it set up properly once; people who'd rather two focused sessions than a course.
 - Not for: someone who wants it built without being in the room; teams of more than two (that's team training); a general AI talk.`,
   team: `TEAM AI TRAINING
 - Up to 12 people, in your office, Brisbane and South East Queensland. Booked on request.
@@ -57,7 +57,7 @@ const PRICE_LINE: Record<Slug, string> = {
 
 const ELLIOT = `ELLIOT STONE: founder of Unpaste (unpaste.ai), Brisbane. Runs his own business on the same tools he teaches and works beside people on the day when something gets stuck. Google rating 5.0 from 5 reviews. Reviewers say it cut their admin time, that he explains what an agent actually does and then sets one up so it works, and that the team upskilled.`;
 
-const THIS_PAGE = `THIS PAGE: the page the visitor is on, its apply form, the follow-up emails and the Meta ads for it were built with Claude Code working with Elliot over two days in October 2026. If asked how, say that and suggest the 1:1 setup day or the workshop as the way to get the same thing for their business.`;
+const THIS_PAGE = `THIS PAGE: the page the visitor is on, its apply form, the follow-up emails and the Meta ads for it were built with Claude Code working with Elliot over two days in October 2026. If asked how, say that and suggest the 1:1 setup or the workshop as the way to get the same thing for their business.`;
 
 function systemPrompt(slug: Slug): string {
   return `You are the AI agent that helped build this page for Unpaste, answering visitors' questions about one offer. Plain Australian business English, no hype, no exclamation marks, under 80 words per answer, no markdown, no lists unless asked for steps.

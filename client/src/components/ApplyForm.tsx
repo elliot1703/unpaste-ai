@@ -145,7 +145,7 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
         <fieldset className="apply-step" key={q.key}>
           <legend>
             <h3>{q.title}</h3>
-            <p>{q.hint}</p>
+            <p>{q.key === "automate" ? (offer.notOneDay?.shapeHint ?? q.hint) : q.hint}</p>
           </legend>
           <div className="apply-options">
             {q.options.map((opt) => (

@@ -240,7 +240,7 @@ export function AskAgent({ offer }: { offer: Offer }) {
             type="text"
             value={input}
             maxLength={MAX_INPUT}
-            placeholder={offer.slug === "workshop" ? "Ask about the workshop" : "Ask about the day"}
+            placeholder={offer.slug === "workshop" ? "Ask about the workshop" : offer.notOneDay ? "Ask about the sessions" : "Ask about the day"}
             onChange={(e) => { setInput(e.target.value); setLook({ x: -0.6, y: 0.9 }); }}
             onFocus={() => setLook({ x: -0.6, y: 0.9 })}
             disabled={busy}

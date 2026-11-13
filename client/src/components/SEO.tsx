@@ -19,7 +19,7 @@ interface SEOProps {
 const defaultSEO = {
   title: "unpaste.ai | Stop Copy-Pasting. Start Scaling.",
   description:
-    "Hands-on AI workshops, 1:1 setup days and team training for Brisbane businesses. Claude Code or Codex set up around your real work, and you own the system.",
+    "Hands-on AI workshops, 1:1 setup and team training for Brisbane businesses. Claude Code or Codex set up around your real work, and you own the system.",
   keywords:
     "AI workshops Brisbane, AI training, team AI training, Claude Code setup, Codex, AI automation, workflow automation, Brisbane AI, business automation, AI agents",
   image: "https://unpaste.ai/images/og-image.png",
@@ -52,7 +52,7 @@ export function SEO({
     name: "unpaste.ai",
     url: "https://unpaste.ai",
     logo: "https://unpaste.ai/images/og-image.png",
-    description: "Hands-on AI workshops, 1:1 setup days and team training for Brisbane businesses",
+    description: "Hands-on AI workshops, 1:1 setup and team training for Brisbane businesses",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Brisbane",
@@ -88,7 +88,7 @@ export function SEO({
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "unpaste.ai",
-    description: "Hands-on AI workshops, 1:1 setup days and team training for small to medium businesses",
+    description: "Hands-on AI workshops, 1:1 setup and team training for small to medium businesses",
     url: "https://unpaste.ai",
     address: {
       "@type": "PostalAddress",

@@ -41,8 +41,8 @@ export default function Home() {
     },
     {
       num: "02",
-      title: "1:1 Setup Day",
-      description: `${OFFERS["one-on-one"].subhead} One day in your office, built together, and you keep everything.`,
+      title: "1:1 Setup",
+      description: `${OFFERS["one-on-one"].subhead} Two 3-hour sessions in your office, built together, and you keep everything.`,
       icon: Compass,
       href: OFFERS["one-on-one"].path,
     },
@@ -200,7 +200,7 @@ export default function Home() {
                     transition={{ duration: 1.5, repeat: Infinity }}
                     className="inline-block w-2 h-2 bg-primary"
                   />
-                  [001] AI WORKSHOPS · 1:1 SETUP DAYS · TEAM TRAINING
+                  [001] AI WORKSHOPS · 1:1 SETUP · TEAM TRAINING
                 </motion.div>
 
                 {/* Main Headline with staggered letter animation */}
@@ -265,7 +265,7 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   className="font-mono text-sm md:text-base text-muted-foreground max-w-md mb-10 leading-relaxed"
                 >
-                  Hands-on AI workshops in Brisbane, plus 1:1 setup days and
+                  Hands-on AI workshops in Brisbane, plus 1:1 setup and
                   team training in your office. Automating the busy-work is step
                   one, then you build things you couldn't before. Either way, you
                   own the system.
@@ -354,7 +354,7 @@ export default function Home() {
             <div className="marquee-content">
               {[...Array(2)].map((_, i) => (
                 <div key={i} className="flex items-center gap-12 px-6">
-                  {["WORKSHOPS", "1:1 SETUP DAYS", "TEAM TRAINING", "CLAUDE CODE", "CODEX", "AUTOMATION", "AI AGENTS", "BRISBANE BASED"].map((text, j) => (
+                  {["WORKSHOPS", "1:1 SETUP", "TEAM TRAINING", "CLAUDE CODE", "CODEX", "AUTOMATION", "AI AGENTS", "BRISBANE BASED"].map((text, j) => (
                     <span key={j} className="flex items-center gap-6 font-mono text-sm uppercase tracking-wider whitespace-nowrap">
                       {text}
                       <span className="h-2 w-2 bg-primary" />

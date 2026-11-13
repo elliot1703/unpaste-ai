@@ -12,7 +12,7 @@ export function Footer() {
               <span className="font-mono text-sm font-bold">UNPASTE</span>
             </Link>
             <p className="font-mono text-xs text-muted-foreground max-w-sm leading-relaxed">
-              Hands-on AI workshops, 1:1 setup days and team training for Brisbane businesses. Built on your real work, and you own the system.
+              Hands-on AI workshops, 1:1 setup and team training for Brisbane businesses. Built on your real work, and you own the system.
             </p>
           </div>
           <div>
@@ -20,7 +20,7 @@ export function Footer() {
             <ul className="space-y-3 font-mono text-xs text-muted-foreground">
               <li><Link href="/workshops" className="hover:text-foreground transition-colors">WORKSHOPS</Link></li>
               <li><Link href="/claude-and-coffee" className="hover:text-foreground transition-colors">CLAUDE &amp; COFFEE</Link></li>
-              <li><Link href="/one-on-one" className="hover:text-foreground transition-colors">1:1 SETUP DAY</Link></li>
+              <li><Link href="/one-on-one" className="hover:text-foreground transition-colors">1:1 SETUP</Link></li>
               <li><Link href="/team-training" className="hover:text-foreground transition-colors">TEAM TRAINING</Link></li>
               <li><Link href="/resources" className="hover:text-foreground transition-colors">FREE RESOURCES</Link></li>
               <li><Link href="/solutions" className="hover:text-foreground transition-colors">SOLUTIONS</Link></li>
