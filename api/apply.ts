@@ -9,6 +9,11 @@
 // If LEAD_SHEET_URL is set (a Google Apps Script web app), 1:1 applications
 // are also added to the call sheet as a row. That runs after the reply has
 // gone, so it can neither slow the applicant down nor change what they see.
+//
+// If GHL_PRIVATE_TOKEN and GHL_LOCATION_ID are both set, 1:1 applications also
+// create a GoHighLevel contact and a card in the "1:1 Setup" pipeline, in the
+// same after-the-reply way. The ids below are not secrets: nothing can be read
+// or written with them without the token, which lives only in Vercel.
 
 export const config = { runtime: "edge" };
 
@@ -18,6 +23,27 @@ const KLAVIYO_REVISION = "2024-10-15";
 
 // Offers whose applications go to the call sheet.
 const SHEET_OFFERS = new Set(["one-on-one"]);
+
+// GoHighLevel (the CRM). Offers whose applications go there, and where.
+const GHL_OFFERS = new Set(["one-on-one"]);
+const GHL_API = "https://services.leadconnectorhq.com";
+const GHL_PIPELINE_ID = "Hjc5cVjo6Isg7Fmg3gKs"; // "1:1 Setup"
+const GHL_STAGE_APPLIED = "24d3d810-0fa2-4c3b-9a3f-8421e71f42a9";
+const GHL_FIELDS = {
+  automate: "0g4agGJ8OaLvPw63pKIR", // First job for AI
+  stage: "qlKMnTnlMKhVVQqeN7oT", // AI stage
+  role: "6eezM0qu26oHwSzhPcUe", // Role
+  offer: "Z6ZOerMn39ifdE0i7kXF", // Offer
+  utmSource: "ufq8CflHIpJ3JTml6ZNC", // UTM source
+  utmCampaign: "XLHxaNTRw0ZFAgWgDpL6", // UTM campaign
+  utmContent: "i5Mf8bgAm1WWPvKjTSvN", // UTM content
+  appliedAt: "plvk0O1uRcOVvIgMVlpA", // Applied at
+  consentBasis: "yMeDVbZmBaUzqPVggQYi", // Consent basis
+};
+// What the form told the applicant. Update it when the line under the 1:1
+// form changes (client/src/lib/offers.ts, IN_TOUCH).
+const GHL_CONSENT_BASIS =
+  "1:1 form, live from 13 Nov 2026: \"We'll be in touch by phone or email about 1:1 Setup. Unsubscribe any time.\"";
 
 type Lead = {
   offer: string;
@@ -183,6 +209,7 @@ export default async function handler(req: Request, ctx: RequestContext): Promis
   }
 
   ctx.waitUntil(sendToSheet(lead));
+  ctx.waitUntil(sendToGhl(lead, firstName, rest.join(" "), properties.applied_at));
 
   return json({ ok: true }, 202);
 }
@@ -217,6 +244,73 @@ async function sendToSheet(lead: Lead): Promise<void> {
     if (!res.ok || body !== "ok") console.error("[apply] lead sheet failed", res.status, body.slice(0, 200));
   } catch (err) {
     console.error("[apply] lead sheet failed", err);
+  }
+}
+
+// One GHL contact and one card per 1:1 applicant. Off unless both variables
+// are set. The contact is upserted by email (no tags: tags sent on an upsert
+// replace the contact's existing ones). The card is created, never upserted,
+// so someone who has moved on is not dragged back to "Applied"; GHL refuses a
+// second card for the same contact in this pipeline, and that is fine. No
+// retries: Klaviyo stays the record. Logs carry a status code, never the person.
+async function sendToGhl(lead: Lead, firstName: string, lastName: string, appliedAt: string): Promise<void> {
+  const token = process.env.GHL_PRIVATE_TOKEN;
+  const locationId = process.env.GHL_LOCATION_ID;
+  if (!token || !locationId || !GHL_OFFERS.has(lead.offer)) return;
+  const signal = AbortSignal.timeout(5_000); // one cap for both calls
+  const post = (path: string, body: unknown) =>
+    fetch(`${GHL_API}${path}`, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
+        version: "v3",
+        "content-type": "application/json",
+        accept: "application/json",
+      },
+      body: JSON.stringify(body),
+      signal,
+    });
+  const field = (id: string, value: string | undefined) => (value ? [{ id, fieldValue: value }] : []);
+
+  try {
+    const c = await post("/contacts/upsert", {
+      locationId,
+      firstName,
+      lastName,
+      email: lead.email.trim().toLowerCase(),
+      phone: `+61${(lead.phone ?? "").slice(1)}`,
+      companyName: lead.business?.trim(),
+      country: "AU",
+      source: "unpaste.ai application",
+      customFields: [
+        ...field(GHL_FIELDS.automate, lead.automate),
+        ...field(GHL_FIELDS.stage, lead.stage),
+        ...field(GHL_FIELDS.role, lead.role),
+        ...field(GHL_FIELDS.offer, lead.offer),
+        ...field(GHL_FIELDS.utmSource, lead.utmSource),
+        ...field(GHL_FIELDS.utmCampaign, lead.utmCampaign),
+        ...field(GHL_FIELDS.utmContent, lead.utmContent),
+        ...field(GHL_FIELDS.appliedAt, appliedAt),
+        ...field(GHL_FIELDS.consentBasis, GHL_CONSENT_BASIS),
+      ],
+    });
+    if (!c.ok) return void console.error("[apply] ghl contact failed", c.status);
+    const contactId = ((await c.json()) as { contact?: { id?: string } }).contact?.id;
+    if (!contactId) return void console.error("[apply] ghl contact failed", "no id");
+
+    const o = await post("/opportunities/", {
+      locationId,
+      contactId,
+      pipelineId: GHL_PIPELINE_ID,
+      pipelineStageId: GHL_STAGE_APPLIED,
+      status: "open",
+      name: `${lead.name.trim()}, ${lead.business?.trim()}`,
+    });
+    if (o.ok) return;
+    const code = o.status === 400 ? ((await o.json().catch(() => ({}))) as { code?: string }).code : undefined;
+    if (code !== "OPPORTUNITY_NO_DUPLICATE") console.error("[apply] ghl card failed", o.status);
+  } catch (err) {
+    console.error("[apply] ghl failed", err instanceof Error ? err.name : "error");
   }
 }
 
