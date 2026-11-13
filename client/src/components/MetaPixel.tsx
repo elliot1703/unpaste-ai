@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
 import { initMetaPixel, trackMeta } from "@/lib/metaPixel";
+import { initPostHog } from "@/lib/posthog";
 
 /**
  * Fires a Meta PageView on first load and on every client-side route change.
@@ -15,6 +16,8 @@ export function MetaPixel() {
 
   useEffect(() => {
     initMetaPixel();
+    // PostHog tracks its own page views; it only needs starting once.
+    initPostHog();
   }, []);
 
   useEffect(() => {

@@ -21,7 +21,7 @@ export default function Privacy() {
             PRIVACY POLICY
           </h1>
           <p className="font-mono text-xs text-muted-foreground mt-4">
-            Last updated: 13 November 2026
+            Last updated: 14 November 2026
           </p>
         </div>
 
@@ -69,6 +69,11 @@ export default function Privacy() {
                 Advertising and retargeting data via the Meta (Facebook) pixel — see Cookies
                 and Advertising below.
               </li>
+              <li>
+                How visitors use our pages, via PostHog: pages viewed, clicks, how far you
+                scroll, which form steps you reach, and screen recordings of visits. What you
+                type into forms is hidden in these recordings and never sent to PostHog.
+              </li>
             </ul>
           </section>
 
@@ -112,6 +117,13 @@ export default function Privacy() {
             <p className="mt-3">
               Our own website analytics (Vercel Web Analytics) is aggregated and does not
               identify you individually.
+            </p>
+            <p className="mt-3">
+              We also use PostHog to see how people use our pages, including recordings of
+              visits. PostHog sets a cookie on unpaste.ai only, so it can recognise a return
+              visit and the ad you first came from. It does not track you on other websites.
+              We do not send PostHog your name, email address, phone number or form answers.
+              PostHog stores this data in the United States.
             </p>
             <p className="mt-3">
               <strong className="text-foreground">How to opt out:</strong> you can turn off
@@ -158,6 +170,7 @@ export default function Privacy() {
               <li><strong className="text-foreground">Klaviyo:</strong> Stores applications and resource requests, and sends our emails.</li>
               <li><strong className="text-foreground">Calendly:</strong> Call bookings.</li>
               <li><strong className="text-foreground">Vercel Web Analytics:</strong> Aggregated page-view analytics (no personal data collected).</li>
+              <li><strong className="text-foreground">PostHog:</strong> Website analytics and visit recordings, with form entries hidden. Data stored in the United States.</li>
               <li><strong className="text-foreground">Meta Platforms:</strong> Advertising pixel used for retargeting and to measure ad performance. Meta may combine this with data it already holds about you.</li>
               <li><strong className="text-foreground">Stripe:</strong> Payment processing for workshop bookings. Card details go directly to Stripe and never reach our servers.</li>
             </ul>
