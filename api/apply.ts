@@ -5,12 +5,19 @@
 // then record an "Applied" event. If LEAD_WEBHOOK_URL is set (a Slack incoming
 // webhook), a one-line notification goes there too. Klaviyo is the record;
 // the webhook is a convenience and its failure never fails the request.
+//
+// If LEAD_SHEET_URL is set (a Google Apps Script web app), 1:1 applications
+// are also added to the call sheet as a row. That runs after the reply has
+// gone, so it can neither slow the applicant down nor change what they see.
 
 export const config = { runtime: "edge" };
 
 const KLAVIYO_COMPANY_ID = "XwRedj";
 const KLAVIYO_LIST_ID = "T6SpEC"; // "Email List"
 const KLAVIYO_REVISION = "2024-10-15";
+
+// Offers whose applications go to the call sheet.
+const SHEET_OFFERS = new Set(["one-on-one"]);
 
 type Lead = {
   offer: string;
@@ -30,7 +37,9 @@ type Lead = {
   page?: string;
 };
 
-export default async function handler(req: Request): Promise<Response> {
+type RequestContext = { waitUntil: (promise: Promise<unknown>) => void };
+
+export default async function handler(req: Request, ctx: RequestContext): Promise<Response> {
   if (req.method !== "POST") return json({ ok: false }, 405);
 
   let lead: Lead;
@@ -173,7 +182,42 @@ export default async function handler(req: Request): Promise<Response> {
     }).catch(() => undefined);
   }
 
+  ctx.waitUntil(sendToSheet(lead));
+
   return json({ ok: true }, 202);
+}
+
+// One row per application in the call sheet. No retries: Klaviyo stays the
+// record, and a missed row shows in the logs.
+async function sendToSheet(lead: Lead): Promise<void> {
+  const url = process.env.LEAD_SHEET_URL;
+  if (!url || !SHEET_OFFERS.has(lead.offer)) return;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        offer: lead.offer,
+        name: lead.name.trim(),
+        business: lead.business,
+        email: lead.email.trim(),
+        phone: lead.phone,
+        automate: lead.automate,
+        stage: lead.stage,
+        role: lead.role,
+        utmSource: lead.utmSource,
+        utmCampaign: lead.utmCampaign,
+        utmContent: lead.utmContent,
+      }),
+      signal: AbortSignal.timeout(10_000),
+    });
+    // The script answers "ok" once the row is in. A sign-in or error page can
+    // come back as a 200, so the status alone is not enough.
+    const body = (await res.text()).trim();
+    if (!res.ok || body !== "ok") console.error("[apply] lead sheet failed", res.status, body.slice(0, 200));
+  } catch (err) {
+    console.error("[apply] lead sheet failed", err);
+  }
 }
 
 function json(body: unknown, status: number): Response {
