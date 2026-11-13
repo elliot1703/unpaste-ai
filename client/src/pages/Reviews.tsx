@@ -36,7 +36,7 @@ export default function Reviews() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="What people said after the sessions"
-        description={`Unpaste on Google: ${GOOGLE_RATING.score} from ${GOOGLE_RATING.count} reviews, every one of them public. Hands-on AI workshops, 1:1 setup days and team training for Brisbane businesses.`}
+        description={`Unpaste on Google: ${GOOGLE_RATING.score} from ${GOOGLE_RATING.count} reviews, every one of them public. Hands-on AI workshops, 1:1 setup and team training for Brisbane businesses.`}
         keywords="Unpaste reviews, Google reviews, AI workshop Brisbane reviews, AI training Brisbane, Claude Code workshop"
         url={PAGE_URL}
         image={OG_IMAGE}

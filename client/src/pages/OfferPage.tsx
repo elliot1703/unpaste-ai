@@ -6,7 +6,7 @@ import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { ApplyForm } from "@/components/ApplyForm";
-import type { Offer } from "@/lib/offers";
+import { IN_TOUCH, type Offer } from "@/lib/offers";
 import type { WorkshopVariant } from "@/lib/workshopVariants";
 import { GOOGLE_RATING, GOOGLE_REVIEW_URL, reviewsFor } from "@/lib/reviews";
 import { TOOLS } from "@/lib/integrations";
@@ -96,7 +96,7 @@ export default function OfferPage({
 
         <section className="offer-section">
           <p className="offer-kicker">How it runs</p>
-          <h2>How the day runs.</h2>
+          <h2>{offer.notOneDay?.runs ?? "How the day runs."}</h2>
           <ol className="offer-steps">
             {offer.steps.map((s, i) => (
               <li key={s.title}>
@@ -113,7 +113,7 @@ export default function OfferPage({
         <section className="offer-section offer-tools">
           <p className="offer-kicker">What it connects to</p>
           <h2>Your agent, in the tools you already use.</h2>
-          <p className="offer-lede">We show you how to connect an agent to the apps your business runs on, and the way we set them up ourselves: which connections are worth making first, what to give the agent access to, what to keep it away from, and the habits that keep it useful after the day.</p>
+          <p className="offer-lede">We show you how to connect an agent to the apps your business runs on, and the way we set them up ourselves: which connections are worth making first, what to give the agent access to, what to keep it away from, and the habits that keep it useful {offer.notOneDay?.after ?? "after the day"}.</p>
           <ul className="offer-logos">
             {TOOLS.map((t) => (
               <li key={t.key}><img src={t.logo} alt="" width={28} height={28} loading="lazy" /><span>{t.name}</span></li>
@@ -176,14 +176,14 @@ export default function OfferPage({
           <div>
             <p className="offer-kicker">Who's teaching</p>
             <h2>Elliot Stone.</h2>
-            <p>Founder of Unpaste. Runs his own business on the same tools he teaches, and works beside you on the day when something gets stuck.</p>
+            <p>Founder of Unpaste. Runs his own business on the same tools he teaches, and {offer.notOneDay?.beside ?? "works beside you on the day when something gets stuck"}.</p>
           </div>
         </section>
 
         <section className="offer-section offer-apply" id="apply">
           <p className="offer-kicker">{offer.cta}</p>
           <h2>A few quick questions.</h2>
-          <p className="offer-lede">{offer.apply?.lede ?? "So Elliot knows what you want to work on. The price is on the next screen."}</p>
+          <p className="offer-lede">{offer.apply?.lede ?? IN_TOUCH[offer.inTouch ?? "elliot"].lede}</p>
           <ApplyForm offer={offer} variant={variant?.slug} />
         </section>
       </main>
@@ -195,7 +195,7 @@ export default function OfferPage({
       <div className="offer-sticky">
         <div>
           <strong>{offer.facts[0]}</strong>
-          <span>100% money-back guarantee</span>
+          <span>{offer.notOneDay?.sticky ?? "100% money-back guarantee"}</span>
         </div>
         <a href="#apply" onClick={scrollToApply} className="offer-button">{offer.ctaShort ?? offer.cta}</a>
       </div>

@@ -33,6 +33,25 @@ export type Offer = {
    * out and the form keeps its default "the price is on the next screen" wording.
    */
   apply?: { lede: string; detailsNote: string; submitLabel: string };
+  /** Who the form says will be in touch. Leave it out and the form says Elliot. See IN_TOUCH. */
+  inTouch?: keyof typeof IN_TOUCH;
+  /**
+   * The page and form have five lines written for an offer that runs as one day.
+   * An offer that does not run as one day sets its own here. Leave it out and
+   * the page keeps the one-day wording.
+   */
+  notOneDay?: {
+    /** Heading over the three steps. Default "How the day runs." */
+    runs: string;
+    /** Ends the tools paragraph: "...the habits that keep it useful ___." Default "after the day". */
+    after: string;
+    /** Ends the line about Elliot: "...the same tools he teaches, and ___." Default "works beside you on the day when something gets stuck". */
+    beside: string;
+    /** Small line in the phone sticky bar. Default "100% money-back guarantee". Keep it under 24 characters. */
+    sticky: string;
+    /** Hint under the first form question. Default "We shape the day around it." */
+    shapeHint: string;
+  };
   /** Shown under every CTA and on the end screen. Elliot, 6 Oct: 100% money back if unsatisfied. */
   guarantee: string;
   /** Shown only after the form is submitted. */
@@ -55,6 +74,24 @@ export type Offer = {
   };
   seo: { title: string; description: string };
 };
+
+// The four lines on the form that say who will be in touch after an application.
+// They live together so they cannot disagree. "elliot" is the default. "we" is for
+// an offer where someone other than Elliot may phone the applicant.
+export const IN_TOUCH = {
+  elliot: {
+    lede: "So Elliot knows what you want to work on. The price is on the next screen.",
+    detailsNote: "So Elliot can get in touch. The price is on the next screen.",
+    note: (offerName: string) => `Elliot will be in touch by email or phone about ${offerName}. Unsubscribe any time.`,
+    done: (email: string) => `Elliot has your details and will be in touch at ${email}.`,
+  },
+  we: {
+    lede: "So we know what you want to work on. The price is on the next screen.",
+    detailsNote: "So we can get in touch. The price is on the next screen.",
+    note: (offerName: string) => `We'll be in touch by phone or email about ${offerName}. Unsubscribe any time.`,
+    done: (_email: string) => "We have your details and will be in touch by phone or email.",
+  },
+} as const;
 
 // No next workshop date is confirmed (checked 12 Nov 2026, after the 11 November session date passed).
 // While that is the case every workshop surface says so and the form registers
@@ -123,23 +160,25 @@ export const OFFERS: Record<OfferSlug, Offer> = {
   "one-on-one": {
     slug: "one-on-one",
     path: "/one-on-one",
-    name: "1:1 Setup Day",
+    // 13 Nov 2026, Elliot: the 1:1 is now two separate 3-hour sessions. Not happy
+    // after the first, they don't pay and we don't come back for the second.
+    name: "1:1 Setup",
     kicker: "1:1 setup · In person · Brisbane",
-    headline: { main: "Set up properly,", accent: "in one day." },
+    headline: { main: "Set up properly,", accent: "in two sessions." },
     subhead: "Claude Code or Codex, on your machine, built around how your business runs.",
     lede:
-      "Before the day, we write down what AI should be doing for you. Then I come to you and we build it, together, until it's done.",
-    facts: ["One day", "In your office", "Claude Code or Codex", "Brisbane"],
-    pills: ["1:1 setup", "In your office", "Brisbane", "One day"],
+      "Before the first session, we write down what AI should be doing for you. Then I come to you and we build it, together.",
+    facts: ["Two 3-hour sessions", "In your office", "Claude Code or Codex", "Brisbane"],
+    pills: ["1:1 setup", "In your office", "Brisbane", "Two 3-hour sessions"],
     steps: [
-      { title: "Before the day, we write the list.", body: "The quoting. The follow-ups. Monday's numbers. Whatever is actually eating your week." },
+      { title: "Before the first session, we write the list.", body: "The quoting. The follow-ups. Monday's numbers. Whatever is actually eating your week." },
       { title: "We build it in your office, together.", body: "On your laptop, in your accounts, with your real files. Not a demo environment." },
       { title: "You keep everything, and know how to extend it.", body: "No subscription to us. The workspace, the instructions and the habits stay with you." },
     ],
     forYou: [
       "You run the business, or you can sign off on this.",
       "You've tried AI tools and want it set up properly, once.",
-      "You'd rather one focused day than a course you never finish.",
+      "You'd rather two focused sessions than a course you never finish.",
     ],
     notFor: [
       "Someone who wants it built without being in the room.",
@@ -148,27 +187,46 @@ export const OFFERS: Record<OfferSlug, Offer> = {
     ],
     askTeamSize: false,
     cta: "Check availability",
-    guarantee: "100% money-back guarantee. Not satisfied with the day, you get a full refund.",
+    // "Two 3-hour sessions" is wider than "One day" was, so the phone bar needs a shorter button.
+    ctaShort: "Apply",
+    // The end screen has no price to show (it says "Price on the call"), so the
+    // form must not promise one. If a price goes on the end screen, take this out
+    // and the form goes back to "The price is on the next screen" and "See the price".
+    apply: {
+      lede: "So we know what you want to work on.",
+      detailsNote: "So we can get in touch.",
+      submitLabel: "Check availability",
+    },
+    // From 13 Nov 2026 someone other than Elliot may phone 1:1 applicants.
+    inTouch: "we",
+    notOneDay: {
+      runs: "How the two sessions run.",
+      after: "after the sessions",
+      beside: "works beside you when something gets stuck",
+      sticky: "First session guarantee",
+      shapeHint: "We shape the sessions around it.",
+    },
+    guarantee: "Not happy after the first session? You don't pay and we don't come back.",
     reveal: {
-      title: "The 1:1 day",
-      // TODO(elliot): price and length to confirm.
+      title: "The 1:1 setup",
+      // TODO(elliot): price to confirm.
       price: "Price on the call",
-      priceNote: "one day, in person, Brisbane",
+      priceNote: "two 3-hour sessions, in person, Brisbane",
       includes: [
-        "A pre-day call to write the list",
-        "A full day in your office, Elliot beside you",
+        "A call before the first session to write the list",
+        "Two 3-hour sessions in your office, Elliot beside you",
         "Everything built stays yours",
         "A follow-up call two weeks later",
-        "100% money-back guarantee if you're not satisfied",
+        "Not happy after the first session, you don't pay",
       ],
       buttonLabel: "Book a 20-minute call",
       action: { kind: "calendly", url: calendlyUrl("one-on-one") },
       fallback: "",
     },
     seo: {
-      title: "1:1 Claude Code Setup Day, Brisbane — Unpaste",
+      title: "1:1 Claude Code Setup, Brisbane — Unpaste",
       description:
-        "One day, in your office. We write down what AI should do for your business, then build it on your machine until it's done.",
+        "Two 3-hour sessions, in your office. We write down what AI should do for your business, then build it on your machine.",
     },
   },
 
