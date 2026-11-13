@@ -1,6 +1,7 @@
 import { useMemo, useState, type FormEvent } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { trackMeta, trackMetaCustom } from "@/lib/metaPixel";
+import { trackPostHog } from "@/lib/posthog";
 import { IN_TOUCH, type Offer } from "@/lib/offers";
 
 // The gate. Three quick questions, then details, then the price. Every answer
@@ -82,7 +83,12 @@ export function ApplyForm({ offer, variant }: { offer: Offer; variant?: string }
   const inTouch = IN_TOUCH[offer.inTouch ?? "elliot"];
 
   // Funnel steps for the pixel, one event per offer so the dashboard can split them.
-  const ev = (name: string) => trackMetaCustom(`${name}_${offer.slug.replace(/-/g, "")}`, { variant });
+  // PostHog gets the same event names.
+  const ev = (name: string) => {
+    const event = `${name}_${offer.slug.replace(/-/g, "")}`;
+    trackMetaCustom(event, { variant });
+    trackPostHog(event, { offer: offer.slug, variant: variant ?? "" });
+  };
 
   function choose(key: Question["key"], value: string) {
     if (step === 0) ev("ApplyStart");
@@ -220,6 +226,7 @@ function Reveal({ offer, email, variant }: { offer: Offer; email: string; varian
           onClick={() => {
             trackMeta("InitiateCheckout", { content_name: offer.name, content_category: offer.slug, variant });
             trackMetaCustom(`RevealClick_${offer.slug.replace(/-/g, "")}`, { kind: r.action.kind, variant });
+            trackPostHog(`RevealClick_${offer.slug.replace(/-/g, "")}`, { offer: offer.slug, kind: r.action.kind, variant: variant ?? "" });
           }}
         >
           {r.buttonLabel} <ArrowRight className="h-4 w-4" />
