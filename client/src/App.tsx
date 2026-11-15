@@ -16,7 +16,6 @@ import StyleExplorer from "./pages/StyleExplorer";
 import AssessmentPage from "./pages/AssessmentPage";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
-import Pricing from "./pages/Pricing";
 import WorkshopBooked from "./pages/WorkshopBooked";
 import OfferPage from "./pages/OfferPage";
 import { OFFERS } from "@/lib/offers";
@@ -48,7 +47,6 @@ function AppRoutes() {
       <Route path={"/book"} component={Book} />
       <Route path={"/privacy"} component={Privacy} />
       <Route path={"/terms"} component={Terms} />
-      <Route path={"/pricing"} component={Pricing} />
       <Route path={"/training"} component={TrainingRedirect} />
       {/* Gated-pricing offer pages. /workshops is indexed; the H1 variants are noindex, ads only. */}
       <Route path={"/workshops"}>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import { useLocation } from "wouter";
+import { calendlyUrl } from "@/lib/booking";
 
 const DISMISS_KEY = "dictation-note-dismissed";
 /** Past the hero on every page — fires on reading intent, not on load. */
@@ -14,11 +15,10 @@ const SCROLL_TRIGGER = 600;
  * and stays dismissed once closed.
  */
 export function DictationNote() {
-  const [location, navigate] = useLocation();
+  const [location] = useLocation();
   const [visible, setVisible] = useState(false);
 
   const onBookedPage = location === "/workshops/booked";
-  const onWorkshopPage = location.startsWith("/workshops") && !onBookedPage;
   // The offer pages carry their own sticky bar on phones; two bars collide.
   const onOfferPage =
     location.startsWith("/workshops") || location === "/one-on-one" || location === "/team-training";
@@ -42,15 +42,6 @@ export function DictationNote() {
     setVisible(false);
   };
 
-  const onLearnHow = () => {
-    dismiss();
-    if (onWorkshopPage) {
-      document.getElementById("sessions")?.scrollIntoView({ block: "start" });
-    } else {
-      navigate("/workshops");
-    }
-  };
-
   return (
     <AnimatePresence>
       {visible && !onBookedPage && (
@@ -70,14 +61,16 @@ export function DictationNote() {
               Spoken, not typed.
             </p>
             <span className="ml-auto inline-flex items-center gap-2">
-              <button
-                type="button"
-                onClick={onLearnHow}
+              <a
+                href={calendlyUrl("dictation_note")}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={dismiss}
                 className="inline-flex items-center gap-2 border border-foreground px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider transition-colors hover:bg-foreground hover:text-background"
               >
                 Learn how
                 <ArrowRight className="h-3.5 w-3.5" />
-              </button>
+              </a>
               <button
                 type="button"
                 onClick={dismiss}

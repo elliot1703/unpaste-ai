@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/pricing",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/training",
       "destination": "/team-training",
       "permanent": true

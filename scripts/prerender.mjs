@@ -22,7 +22,6 @@ const routes = [
   "/resources",
   "/claude-and-coffee",
   "/reviews",
-  "/pricing",
   "/styles",
   "/privacy",
   "/terms",
