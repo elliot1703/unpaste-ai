@@ -705,7 +705,7 @@ export default function QuickWins() {
                       </div>
                     </div>
                     <Link
-                      href="/training"
+                      href="/team-training"
                       className="font-mono text-xs font-bold uppercase tracking-wider bg-primary text-white px-6 py-3 hover:bg-primary/90 transition-colors inline-flex items-center gap-2 flex-shrink-0"
                     >
                       See packages
@@ -735,7 +735,7 @@ export default function QuickWins() {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/training"
+                  href="/team-training"
                   className="brutalist-button inline-flex items-center justify-center gap-2"
                 >
                   See training packages
