@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/one-on-one",
+      "destination": "https://apply.unpaste.ai/apply",
+      "permanent": false
+    },
+    {
       "source": "/pricing",
       "destination": "/",
       "permanent": true
