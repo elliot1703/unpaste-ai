@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Assessment } from "@/components/Assessment";
-import { calendlyUrl } from "@/lib/booking";
+import { bookingUrl } from "@/lib/booking";
 import { RoiCalculator } from "@/components/RoiCalculator";
 import { AgentsSection } from "@/components/AgentsSection";
 import { SEO } from "@/components/SEO";
@@ -482,7 +482,7 @@ export default function Home() {
               <div className="space-y-0">
                 {/* Each step row is clickable and leads to its gateway
                     action: the assessment modal for [01]/[03] (the roadmap
-                    starts there), Calendly for the free call in [02]. */}
+                    starts there), /book for the free call in [02]. */}
                 {[
                   {
                     step: "[01]",
@@ -496,7 +496,7 @@ export default function Home() {
                     title: "BOOK YOUR WORKSHOP",
                     description: "In a free 30-minute call, we'll review your results, identify your biggest bottleneck, and show you what's possible.",
                     time: "30 MIN",
-                    href: calendlyUrl("home_method")
+                    href: bookingUrl("home_method")
                   },
                   {
                     step: "[03]",

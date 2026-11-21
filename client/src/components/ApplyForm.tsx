@@ -201,7 +201,7 @@ function Reveal({ offer, email, variant }: { offer: Offer; email: string; varian
       ? r.action.link
         ? `${r.action.link}?client_reference_id=${encodeURIComponent(ref)}&prefilled_email=${encodeURIComponent(email)}`
         : undefined
-      : r.action.kind === "calendly"
+      : r.action.kind === "book"
         ? r.action.url
         : undefined;
 

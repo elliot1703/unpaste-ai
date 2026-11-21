@@ -15,6 +15,7 @@ import { Link } from "wouter";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { bookingUrl } from "@/lib/booking";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -742,7 +743,7 @@ export default function QuickWins() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href="https://calendly.com/elliot-unpaste/30min?utm_source=quick_wins"
+                  href={bookingUrl("quick_wins")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="brutalist-button-outline inline-flex items-center justify-center gap-2"

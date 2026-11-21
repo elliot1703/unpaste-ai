@@ -15,7 +15,7 @@ import { useState } from "react";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
+import { bookingUrl as baseBookingUrl, CONTACT_EMAIL } from "@/lib/booking";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -26,7 +26,7 @@ const fadeUp = {
   }),
 };
 
-const calendlyUrl = (source: string) => baseCalendlyUrl(`training_${source}`);
+const bookingUrl = (source: string) => baseBookingUrl(`training_${source}`);
 
 interface IncludeItem {
   lead: string;
@@ -387,7 +387,7 @@ export default function Training() {
                   <ArrowRight className="h-4 w-4" />
                 </a>
                 <a
-                  href={calendlyUrl("hero")}
+                  href={bookingUrl("hero")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="brutalist-button-outline inline-flex items-center justify-center gap-2"
@@ -1154,7 +1154,7 @@ export default function Training() {
 
                     {/* CTA */}
                     <a
-                      href={pkg.href ?? calendlyUrl(pkg.name.toLowerCase().replace(/ /g, "_"))}
+                      href={pkg.href ?? bookingUrl(pkg.name.toLowerCase().replace(/ /g, "_"))}
                       target={pkg.href ? undefined : "_blank"}
                       rel={pkg.href ? undefined : "noopener noreferrer"}
                       className={`mt-auto inline-flex items-center justify-center gap-2 font-mono text-xs font-bold uppercase tracking-wider px-6 py-3 transition-colors ${
@@ -1232,7 +1232,7 @@ export default function Training() {
                     Pricing depends on scope.
                   </p>
                   <a
-                    href={calendlyUrl("custom_training")}
+                    href={bookingUrl("custom_training")}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-primary hover:underline self-start"
@@ -1692,7 +1692,7 @@ export default function Training() {
                 </p>
 
                 <a
-                  href={calendlyUrl("final")}
+                  href={bookingUrl("final")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-primary text-white font-bold text-base md:text-lg tracking-tight px-8 py-4 hover:bg-primary/90 transition-colors mb-4"
