@@ -16,7 +16,7 @@ const GHL_BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/axS9G1Lv
 const meetingDetails = [
   { icon: Clock, label: "Duration", value: "20 minutes" },
   { icon: Video, label: "Format", value: "Video call (Google Meet)" },
-  { icon: Calendar, label: "Availability", value: "Mon-Fri, 9am-5pm AEST" },
+  { icon: Calendar, label: "Availability", value: "Mon-Thu, 9am-4pm AEST" },
 ];
 
 export default function Book() {
