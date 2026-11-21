@@ -21,7 +21,7 @@ export default function Privacy() {
             PRIVACY POLICY
           </h1>
           <p className="font-mono text-xs text-muted-foreground mt-4">
-            Last updated: 14 November 2026
+            Last updated: 21 November 2026
           </p>
         </div>
 
@@ -100,8 +100,9 @@ export default function Privacy() {
             <h2 className="text-lg font-bold text-foreground mb-3">DATA STORAGE</h2>
             <p>
               Your data is stored on secure servers provided by Vercel (hosting) and the
-              connected services we use to manage enquiries: Klaviyo (applications and email),
-              Calendly (call bookings) and Google Sheets (the list we phone applicants from).
+              connected services we use to manage enquiries: GoHighLevel (applications, call
+              bookings and booking emails), Klaviyo (resource requests and email), Calendly (earlier
+              call bookings) and Google Sheets (the list we phone applicants from).
               All data is transmitted over HTTPS.
             </p>
           </section>
@@ -167,11 +168,12 @@ export default function Privacy() {
             <ul className="list-disc list-inside space-y-2 ml-2">
               <li><strong className="text-foreground">Vercel:</strong> Website hosting.</li>
               <li><strong className="text-foreground">Google Workspace:</strong> Email, and the spreadsheet we phone applicants from.</li>
+              <li><strong className="text-foreground">GoHighLevel:</strong> Our CRM. Stores applications and call bookings, and sends booking confirmations and reminders. Data stored in the United States.</li>
               <li><strong className="text-foreground">Klaviyo:</strong> Stores applications and resource requests, and sends our emails.</li>
-              <li><strong className="text-foreground">Calendly:</strong> Call bookings.</li>
+              <li><strong className="text-foreground">Calendly:</strong> Earlier call bookings.</li>
               <li><strong className="text-foreground">Vercel Web Analytics:</strong> Aggregated page-view analytics (no personal data collected).</li>
               <li><strong className="text-foreground">PostHog:</strong> Website analytics and visit recordings, with form entries hidden. Data stored in the United States.</li>
-              <li><strong className="text-foreground">Meta Platforms:</strong> Advertising pixel used for retargeting and to measure ad performance. Meta may combine this with data it already holds about you.</li>
+              <li><strong className="text-foreground">Meta Platforms:</strong> Advertising pixel used for retargeting and to measure ad performance. When you apply or book a call, we also send Meta a record of it, with your contact details in hashed (scrambled) form, so we can measure which ads work. Meta may combine this with data it already holds about you.</li>
               <li><strong className="text-foreground">Stripe:</strong> Payment processing for workshop bookings. Card details go directly to Stripe and never reach our servers.</li>
             </ul>
           </section>
