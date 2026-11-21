@@ -10,9 +10,9 @@
 // are also added to the call sheet as a row. That runs after the reply has
 // gone, so it can neither slow the applicant down nor change what they see.
 //
-// If GHL_PRIVATE_TOKEN and GHL_LOCATION_ID are both set, 1:1 applications also
-// create a GoHighLevel contact and a card in the "1:1 Setup" pipeline, in the
-// same after-the-reply way. The ids below are not secrets: nothing can be read
+// If GHL_PRIVATE_TOKEN and GHL_LOCATION_ID are both set, every application also
+// creates or updates a GoHighLevel contact (the CRM), and 1:1 applications get a
+// card in the "1:1 Setup" pipeline, in the same after-the-reply way. The ids below are not secrets: nothing can be read
 // or written with them without the token, which lives only in Vercel.
 
 export const config = { runtime: "edge" };
@@ -24,8 +24,9 @@ const KLAVIYO_REVISION = "2024-10-15";
 // Offers whose applications go to the call sheet.
 const SHEET_OFFERS = new Set(["one-on-one"]);
 
-// GoHighLevel (the CRM). Offers whose applications go there, and where.
-const GHL_OFFERS = new Set(["one-on-one"]);
+// GoHighLevel (the CRM). Every offer's applications become a contact there;
+// only these get a card (the "1:1 Setup" pipeline is the only one).
+const GHL_CARD_OFFERS = new Set(["one-on-one"]);
 const GHL_API = "https://services.leadconnectorhq.com";
 const GHL_PIPELINE_ID = "Hjc5cVjo6Isg7Fmg3gKs"; // "1:1 Setup"
 const GHL_STAGE_APPLIED = "24d3d810-0fa2-4c3b-9a3f-8421e71f42a9";
@@ -40,10 +41,15 @@ const GHL_FIELDS = {
   appliedAt: "plvk0O1uRcOVvIgMVlpA", // Applied at
   consentBasis: "yMeDVbZmBaUzqPVggQYi", // Consent basis
 };
-// What the form told the applicant. Update it when the line under the 1:1
-// form changes (client/src/lib/offers.ts, IN_TOUCH).
-const GHL_CONSENT_BASIS =
-  "1:1 form, live from 13 Nov 2026: \"We'll be in touch by phone or email about 1:1 Setup. Unsubscribe any time.\"";
+// What each form told the applicant. Update it when the line under a form
+// changes (client/src/lib/offers.ts, IN_TOUCH).
+const GHL_CONSENT_BASIS: Record<string, string> = {
+  "one-on-one":
+    "1:1 form, live from 13 Nov 2026: \"We'll be in touch by phone or email about 1:1 Setup. Unsubscribe any time.\"",
+  workshop:
+    "Workshop form: \"Elliot will be in touch by email or phone about The Unpaste Workshop. Unsubscribe any time.\"",
+  team: "Team training form: \"Elliot will be in touch by email or phone about Team AI Training. Unsubscribe any time.\"",
+};
 
 type Lead = {
   offer: string;
@@ -247,7 +253,7 @@ async function sendToSheet(lead: Lead): Promise<void> {
   }
 }
 
-// One GHL contact and one card per 1:1 applicant. Off unless both variables
+// One GHL contact per applicant, and one card per 1:1 applicant. Off unless both variables
 // are set. The contact is upserted by email (no tags: tags sent on an upsert
 // replace the contact's existing ones). The card is created, never upserted,
 // so someone who has moved on is not dragged back to "Applied"; GHL refuses a
@@ -256,7 +262,7 @@ async function sendToSheet(lead: Lead): Promise<void> {
 async function sendToGhl(lead: Lead, firstName: string, lastName: string, appliedAt: string): Promise<void> {
   const token = process.env.GHL_PRIVATE_TOKEN;
   const locationId = process.env.GHL_LOCATION_ID;
-  if (!token || !locationId || !GHL_OFFERS.has(lead.offer)) return;
+  if (!token || !locationId) return;
   const signal = AbortSignal.timeout(5_000); // one cap for both calls
   const post = (path: string, body: unknown) =>
     fetch(`${GHL_API}${path}`, {
@@ -281,7 +287,7 @@ async function sendToGhl(lead: Lead, firstName: string, lastName: string, applie
       phone: `+61${(lead.phone ?? "").slice(1)}`,
       companyName: lead.business?.trim(),
       country: "AU",
-      source: "unpaste.ai application",
+      source: `unpaste.ai application (${lead.offer})`,
       customFields: [
         ...field(GHL_FIELDS.automate, lead.automate),
         ...field(GHL_FIELDS.stage, lead.stage),
@@ -291,12 +297,13 @@ async function sendToGhl(lead: Lead, firstName: string, lastName: string, applie
         ...field(GHL_FIELDS.utmCampaign, lead.utmCampaign),
         ...field(GHL_FIELDS.utmContent, lead.utmContent),
         ...field(GHL_FIELDS.appliedAt, appliedAt),
-        ...field(GHL_FIELDS.consentBasis, GHL_CONSENT_BASIS),
+        ...field(GHL_FIELDS.consentBasis, GHL_CONSENT_BASIS[lead.offer]),
       ],
     });
     if (!c.ok) return void console.error("[apply] ghl contact failed", c.status);
     const contactId = ((await c.json()) as { contact?: { id?: string } }).contact?.id;
     if (!contactId) return void console.error("[apply] ghl contact failed", "no id");
+    if (!GHL_CARD_OFFERS.has(lead.offer)) return;
 
     const o = await post("/opportunities/", {
       locationId,

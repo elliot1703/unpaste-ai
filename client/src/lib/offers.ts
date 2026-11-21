@@ -2,7 +2,7 @@
 // Price never renders on the page itself; it appears on the form's end screen.
 // Change a date, price or seat count here and every page follows.
 
-import { calendlyUrl } from "./booking";
+import { bookingUrl } from "./booking";
 
 export type OfferSlug = "workshop" | "one-on-one" | "team";
 
@@ -68,7 +68,7 @@ export type Offer = {
      * Stripe link comes from env so the page can ship before it exists.
      * "none" means there is nothing to pay for or book yet: no button, the fallback line shows.
      */
-    action: { kind: "stripe"; link?: string } | { kind: "calendly"; url: string } | { kind: "none" };
+    action: { kind: "stripe"; link?: string } | { kind: "book"; url: string } | { kind: "none" };
     /** Shown when there is no button (no Stripe link yet, or nothing to book). Must be true. */
     fallback: string;
   };
@@ -220,7 +220,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         "Not happy after the first session, you don't pay",
       ],
       buttonLabel: "Book a 20-minute call",
-      action: { kind: "calendly", url: calendlyUrl("one-on-one") },
+      action: { kind: "book", url: bookingUrl("one-on-one") },
       fallback: "",
     },
     seo: {
@@ -271,7 +271,7 @@ export const OFFERS: Record<OfferSlug, Offer> = {
         "100% money-back guarantee if you're not satisfied",
       ],
       buttonLabel: "Book a 20-minute call",
-      action: { kind: "calendly", url: calendlyUrl("team-training") },
+      action: { kind: "book", url: bookingUrl("team-training") },
       fallback: "",
     },
     seo: {

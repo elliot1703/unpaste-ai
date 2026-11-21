@@ -22,13 +22,13 @@ import {
   TikTokIcon,
   XIcon,
 } from "@/components/BrandIcons";
-import { calendlyUrl as baseCalendlyUrl, CONTACT_EMAIL } from "@/lib/booking";
+import { bookingUrl as baseBookingUrl, CONTACT_EMAIL } from "@/lib/booking";
 import { VenueBand } from "@/components/VenueBand";
 import { SessionsSection } from "@/components/SessionsSection";
 import { useSeats } from "@/hooks/useSeats";
 import { SESSIONS, VENUES, WORKSHOP_PRICE, nextSessionLabel } from "@/lib/workshops";
 
-const calendlyUrl = (source: string) => baseCalendlyUrl(`workshop_${source}`);
+const bookingUrl = (source: string) => baseBookingUrl(`workshop_${source}`);
 
 // Per-module "register interest" mailto for the [007] coming-next cards.
 const moduleInterestHref = (moduleTitle: string) =>
@@ -449,7 +449,7 @@ export default function Workshop() {
               </div>
               <div className="flex lg:justify-end">
                 <a
-                  href={calendlyUrl("coaching_sideoffer")}
+                  href={bookingUrl("coaching_sideoffer")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 font-mono text-xs font-bold uppercase tracking-wider px-8 py-4 bg-foreground text-background hover:bg-foreground/90 transition-colors"

@@ -11,17 +11,19 @@ const benefits = [
   "No sales pressure - just honest advice",
 ];
 
+const GHL_BOOKING_URL = "https://api.leadconnectorhq.com/widget/booking/axS9G1Lvgslql5vu7gWR";
+
 const meetingDetails = [
-  { icon: Clock, label: "Duration", value: "30 minutes" },
-  { icon: Video, label: "Format", value: "Video call (Zoom/Meet)" },
+  { icon: Clock, label: "Duration", value: "20 minutes" },
+  { icon: Video, label: "Format", value: "Video call (Google Meet)" },
   { icon: Calendar, label: "Availability", value: "Mon-Fri, 9am-5pm AEST" },
 ];
 
 export default function Book() {
-  // Load Calendly widget script
+  // GoHighLevel's embed script: sizes the booking iframe to its content.
   useEffect(() => {
     const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.src = "https://link.msgsndr.com/js/form_embed.js";
     script.async = true;
     document.body.appendChild(script);
 
@@ -34,7 +36,7 @@ export default function Book() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="Book a Consultation"
-        description="Schedule a free 30-minute consultation with unpaste.ai. Discover how AI automation can transform your business operations."
+        description="Schedule a free 20-minute consultation with unpaste.ai. Discover how AI automation can transform your business operations."
         url="https://unpaste.ai/book"
         noIndex
       />
@@ -110,7 +112,7 @@ export default function Book() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="font-mono text-sm text-muted-foreground leading-relaxed"
               >
-                Book a free 30-minute consultation. We'll review your operations,
+                Book a free 20-minute consultation. We'll review your operations,
                 identify opportunities, and show you what's possible.
               </motion.p>
             </div>
@@ -177,7 +179,7 @@ export default function Book() {
                 </div>
               </motion.div>
 
-              {/* Right Column - Calendly Widget */}
+              {/* Right Column - booking calendar (GoHighLevel "Discovery call") */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -194,11 +196,14 @@ export default function Book() {
                     </div>
                   </div>
 
-                  {/* Calendly Inline Widget */}
-                  <div
-                    className="calendly-inline-widget"
-                    data-url="https://calendly.com/elliot-unpaste/30min?hide_gdpr_banner=1&primary_color=dc2626"
-                    style={{ minWidth: "320px", height: "700px" }}
+                  {/* GoHighLevel round robin "Discovery call" calendar. Bookings land in
+                      GHL and run its booking emails and workflows. */}
+                  <iframe
+                    src={GHL_BOOKING_URL}
+                    id="ghl-discovery-call"
+                    title="Book a discovery call"
+                    scrolling="no"
+                    style={{ width: "100%", minWidth: "320px", minHeight: "700px", border: "none", overflow: "hidden" }}
                   />
 
                   {/* Fallback/Placeholder */}
@@ -208,12 +213,12 @@ export default function Book() {
                         Please enable JavaScript to use the booking calendar.
                       </p>
                       <a
-                        href="https://calendly.com/elliot-unpaste/30min"
+                        href={GHL_BOOKING_URL}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="brutalist-button inline-flex items-center gap-2"
                       >
-                        Book via Calendly
+                        Open the booking calendar
                         <ArrowRight className="h-4 w-4" />
                       </a>
                     </div>
@@ -231,7 +236,7 @@ export default function Book() {
               {[
                 { value: "50+", label: "Businesses Helped" },
                 { value: "100%", label: "Free Consultation" },
-                { value: "30min", label: "Your Time Investment" },
+                { value: "20min", label: "Your Time Investment" },
                 { value: "24hrs", label: "Response Time" },
               ].map((stat, i) => (
                 <motion.div

@@ -18,9 +18,9 @@ import { Link } from "wouter";
 import { SEO } from "@/components/SEO";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { calendlyUrl as baseCalendlyUrl } from "@/lib/booking";
+import { bookingUrl as baseBookingUrl } from "@/lib/booking";
 
-const calendlyUrl = baseCalendlyUrl("resources_coaching_cta");
+const bookingUrl = baseBookingUrl("resources_coaching_cta");
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -869,7 +869,7 @@ export default function Resources() {
                   TAKE A SEAT <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href={calendlyUrl}
+                  href={bookingUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="brutalist-button border border-foreground text-foreground px-8 py-4 inline-flex items-center gap-2 hover:bg-foreground hover:text-background transition-colors"

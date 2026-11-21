@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import { useLocation } from "wouter";
-import { calendlyUrl } from "@/lib/booking";
+import { bookingUrl } from "@/lib/booking";
 
 const DISMISS_KEY = "dictation-note-dismissed";
 /** Past the hero on every page — fires on reading intent, not on load. */
@@ -62,7 +62,7 @@ export function DictationNote() {
             </p>
             <span className="ml-auto inline-flex items-center gap-2">
               <a
-                href={calendlyUrl("dictation_note")}
+                href={bookingUrl("dictation_note")}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={dismiss}

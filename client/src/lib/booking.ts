@@ -1,7 +1,8 @@
 // Single source for booking + contact links across pages.
-export const CALENDLY_BASE = "https://calendly.com/elliot-unpaste/30min";
+// Calls are booked on /book, which embeds the GoHighLevel "Discovery call" calendar.
+export const BOOKING_PAGE = "/book";
 
-export const calendlyUrl = (source: string) =>
-  `${CALENDLY_BASE}?utm_source=${source}`;
+export const bookingUrl = (source: string) =>
+  `${BOOKING_PAGE}?utm_source=${source}`;
 
 export const CONTACT_EMAIL = "elliot@unpaste.co";
