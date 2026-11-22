@@ -52,6 +52,14 @@ async function prerender() {
 
   const indexable = [];
 
+  // Routes that vercel.json redirects never serve their prerendered page, so
+  // they stay out of the sitemap (a redirecting sitemap URL is a Search
+  // Console error). Lifting the redirect puts the route back automatically.
+  const redirected = new Set(
+    JSON.parse(readFileSync(resolve(root, "vercel.json"), "utf-8"))
+      .redirects?.map((r) => r.source) ?? []
+  );
+
   for (const route of routes) {
     const { html, helmet } = render(route);
     let page = template;
@@ -71,7 +79,7 @@ async function prerender() {
       const metaStr = helmet.meta?.toString() ?? "";
       const canonical = (helmet.link?.toString() ?? "").match(/rel="canonical" href="([^"]+)"/)?.[1] ?? "";
       const selfCanonical = canonical.replace(/\/$/, "") === `https://unpaste.ai${route}`.replace(/\/$/, "");
-      if (!/name="robots" content="noindex/.test(metaStr) && selfCanonical) indexable.push(route);
+      if (!/name="robots" content="noindex/.test(metaStr) && selfCanonical && !redirected.has(route)) indexable.push(route);
       if (metaStr) {
         page = page.replace("</head>", `  ${metaStr}\n</head>`);
       }
