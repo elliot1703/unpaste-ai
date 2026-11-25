@@ -6,6 +6,11 @@
       "permanent": false
     },
     {
+      "source": "/((?:[oO][nN][eE]-[oO][nN]-[oO][nN][eE])(?:/|/index\\.html)?)",
+      "destination": "https://apply.unpaste.ai/apply",
+      "permanent": false
+    },
+    {
       "source": "/pricing",
       "destination": "/",
       "permanent": true
